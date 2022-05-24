@@ -59,7 +59,7 @@
       width: 100%;
       padding: 66px 37px 26px;
       background: #FFFFFF;
-      box-shadow: 0px 4px 30px rgba(74, 93, 160, 0.15);
+      box-shadow: 0 4px 30px rgba(74, 93, 160, 0.15);
       border-radius: 25px;
       position: relative;
 
@@ -70,7 +70,7 @@
       }
 
       &:hover {
-        box-shadow: 0px 4px 30px rgba(74, 93, 160, 0.3);
+        box-shadow: 0 4px 30px rgba(74, 93, 160, 0.3);
       }
 
       .Name {
@@ -219,7 +219,6 @@
 
       &:hover:after {
         transform: translateX(10px);
-        -webkit-transform: translateX(10px);
       }
     }
   }

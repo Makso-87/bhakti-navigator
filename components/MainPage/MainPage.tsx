@@ -1,4 +1,3 @@
-import classes from './MainPage.module.scss';
 import { Layout } from '../Layout';
 import { MainScreen } from './MainScreen/MainScreen';
 import { SortOutScreen } from './SortOutScreen/SortOutScreen';
@@ -11,7 +10,7 @@ import { SubscribeScreen } from './SubscribeScreen/SubscribeScreen';
 export const MainPage = () => {
   return (
     <Layout>
-      <div className={classes.mainPage}>
+      <div>
         <MainScreen />
         <SortOutScreen />
         <FindScreen />

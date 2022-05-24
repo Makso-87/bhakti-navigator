@@ -7,7 +7,7 @@
   right: 0;
   left: 0;
   z-index: 10;
-  box-shadow: 0px 4px 20px rgba(52, 65, 96, 0.1);
+  box-shadow: 0 4px 20px rgba(52, 65, 96, 0.1);
 
   .CategoryName {
     font-weight: 600;
@@ -29,7 +29,7 @@
   .SiteWrap {
     display: flex;
     height: 102px;
-    max-width: 1440px;
+    //max-width: 1440px;
     width: 100%;
     max-width: none;
     justify-content: space-between;

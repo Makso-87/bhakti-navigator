@@ -24,7 +24,7 @@
         font-weight: 800;
         color: #718ED1;
         margin: 0 0 31px;
-        font-family: 'Montserrat';
+        font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
 
         span {
@@ -136,7 +136,7 @@
         color: #ffffff;
         background: #647DB7;
         border-radius: 30px;
-        box-shadow: 0px 8px 18px rgba(171, 182, 211, 0.75);
+        box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
         z-index: 2;
 
         &:hover {
@@ -160,16 +160,13 @@
 
     .LeftSide {
       .Button a {
-        -webkit-transition: all 0.2s ease-out;
         transition: all 0.2s ease-out;
       }
 
       .WayImg .WayMark a {
-        -webkit-transition: all 0.2s ease-out;
         transition: all 0.2s ease-out;
 
         &:after {
-          -webkit-transition: all 0.2s ease-out;
           transition: all 0.2s ease-out;
         }
       }
