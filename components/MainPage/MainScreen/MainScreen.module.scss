@@ -1,0 +1,204 @@
+@import '../../../css/styleVariables';
+
+.MainScreen {
+  position: relative;
+  margin: 0 0 170px;
+
+  .SiteWrap {
+    @include site-wrap;
+    position: static;
+  }
+
+  .Content {
+    display: flex;
+
+    .LeftSide {
+      width: 50%;
+      padding-top: 90px;
+      position: relative;
+      z-index: 1;
+
+      h1 {
+        font-size: 100px;
+        line-height: 80px;
+        font-weight: 800;
+        color: #718ED1;
+        margin: 0 0 31px;
+        font-family: 'Montserrat';
+        text-transform: uppercase;
+
+        span {
+          display: inline-block;
+          font-weight: 700;
+          font-size: 37px;
+          line-height: 68px;
+          color: #ffffff;
+          background: #404759;
+          text-transform: lowercase;
+          padding: 0 9px;
+        }
+      }
+
+      .WayImg {
+        width: 880px;
+        height: 543px;
+        background: url(../../../images/way-2.svg) no-repeat (center / contain);
+        margin: -219px 0 0;
+        position: relative;
+        z-index: 1;
+        transform: translateX(-30px);
+
+        .WayMark {
+          position: absolute;
+
+          a {
+            font-weight: 700;
+            font-size: 38px;
+            line-height: 46px;
+            letter-spacing: 0.01em;
+            color: #FF9776;
+            text-decoration: none;
+
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              width: 41px;
+              height: 41px;
+              border-radius: 50%;
+              box-sizing: border-box;
+              background: #404759;
+              border: 5px solid #C8D1E5;
+            }
+
+            &:hover {
+              text-shadow: 0 0 15px #FF9776;
+
+              &:after {
+                background: #FF9776;
+                box-shadow: 0 0 15px #FF9776;
+              }
+            }
+          }
+
+          &.WaySortOrder {
+            bottom: 162px;
+            left: 131px;
+
+            a:after {
+              bottom: -44px;
+              left: 87px;
+            }
+          }
+
+          &.WayFind {
+            right: 13px;
+            bottom: 103px;
+
+            a:after {
+              top: -51px;
+              left: 45px;
+            }
+          }
+
+          &.WaySelect {
+            right: 20px;
+            top: 179px;
+
+            a:after {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .Text {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #121212;
+        margin-bottom: 29px;
+        padding-right: 70px;
+      }
+
+      .Button a {
+        position: relative;
+        font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none;
+        width: 217px;
+        height: 67px;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: bold;
+        color: #ffffff;
+        background: #647DB7;
+        border-radius: 30px;
+        box-shadow: 0px 8px 18px rgba(171, 182, 211, 0.75);
+        z-index: 2;
+
+        &:hover {
+          background: #7D9EEA;
+        }
+      }
+    }
+
+    .RightSide {
+      width: 50%;
+
+      .Img {
+        position: absolute;
+        right: 0;
+        top: -47px;
+        background: no-repeat center / contain;
+        width: 621px;
+        height: 686px;
+      }
+    }
+
+    .LeftSide {
+      .Button a {
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+      }
+
+      .WayImg .WayMark a {
+        -webkit-transition: all 0.2s ease-out;
+        transition: all 0.2s ease-out;
+
+        &:after {
+          -webkit-transition: all 0.2s ease-out;
+          transition: all 0.2s ease-out;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1385px) {
+  .MainScreen .Content {
+    .LeftSide h1 span {
+      font-size: 34px;
+    }
+
+    .RightSide .Img {
+      width: 550px;
+      height: 655px;
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  .MainScreen .Content {
+    .LeftSide h1 span {
+      font-size: 30px;
+    }
+
+    .RightSide .Img {
+      width: 427px;
+      height: 530px;
+    }
+  }
+}

@@ -1,0 +1,122 @@
+@import '../../../css/styleVariables';
+
+.SubscribeScreen {
+  position: relative;
+  margin: 0 0 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: no-repeat center / cover;
+
+  .FormBox {
+    width: 780px;
+    position: relative;
+    z-index: 2;
+
+    Form {
+      background: #E0E7F9;
+      border-radius: 25px;
+      padding: 22px 27px 7px;
+
+      .Text {
+        font-size: 22px;
+        line-height: 27px;
+        text-align: center;
+        margin-bottom: 33px;
+      }
+
+      .InputsBox {
+        padding: 0 13px;
+
+        .InputContainer {
+          position: relative;
+
+          input {
+            &[type="text"] {
+              width: 100%;
+              height: 79px;
+              padding: 0 150px 0 42px;
+              background: #fff;
+              border-radius: 35px;
+              border: none;
+              font-weight: 500;
+              font-size: 22px;
+              line-height: 27px;
+            }
+
+            &[type="submit"] {
+              position: absolute;
+              right: 8px;
+              top: 50%;
+              transform: translateY(-50%);
+              -webkit-transform: translateY(-50%);
+              width: 135px;
+              height: 65px;
+              background: url(../../../images/icons/message-plane.svg) #88A8F4 no-repeat center;
+              border-radius: 30px;
+              border: none;
+
+              &:hover {
+                background-color: #b9ccf8;
+              }
+            }
+          }
+        }
+
+        .CheckboxContainer {
+          margin-top: 33px;
+
+          input {
+            display: none;
+
+            &:checked + label:after {
+              opacity: 1;
+            }
+          }
+
+          label {
+            display: inline-block;
+            padding-left: 44px;
+            font-size: 14px;
+            line-height: 24px;
+            position: relative;
+            cursor: pointer;
+
+            &:before {
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 25px;
+              height: 25px;
+              background: #FFFFFF;
+              border: 1px solid #121212;
+              box-sizing: border-box;
+              border-radius: 6px;
+            }
+
+            &:after {
+              opacity: 0;
+              content: '';
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 25px;
+              height: 25px;
+              background: url(../../../images/icons/tick-black.svg) no-repeat center;
+              box-sizing: border-box;
+            }
+
+            &:after {
+              @include transition;
+            }
+          }
+        }
+
+        .InputContainer input[type="submit"] {
+          @include transition;
+        }
+      }
+    }
+  }
+}

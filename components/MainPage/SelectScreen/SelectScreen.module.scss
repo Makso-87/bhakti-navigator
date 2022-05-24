@@ -1,0 +1,85 @@
+@import '../../../css/styleVariables';
+
+.SelectScreen {
+  margin-bottom: 224px;
+
+  h2 {
+    font-weight: 800;
+    font-size: 55px;
+    line-height: 67px;
+    color: #C8D1E5;
+    margin-bottom: 30px;
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    position: relative;
+  }
+
+  .Content {
+    display: flex;
+  }
+
+  .LeftSide {
+    width: 70%;
+    z-index: 1;
+
+    .AboutText {
+      font-size: 22px;
+      line-height: 30px;
+      color: #121212;
+      margin-bottom: 22px;
+      max-width: 909px;
+
+      a {
+        color: #f4c430;
+      }
+    }
+
+    .Note {
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      margin-bottom: 54px;
+      max-width: 540px;
+      color: #647DB7;
+    }
+
+    .Button a {
+      font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      width: 217px;
+      height: 67px;
+      font-size: 20px;
+      line-height: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      background: #647DB7;
+      border-radius: 30px;
+      box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
+
+      &:hover {
+        background: #7D9EEA;
+      }
+    }
+  }
+
+  .RightSide {
+    width: 30%;
+
+    .Img {
+      width: 850px;
+      height: 499px;
+      position: absolute;
+      right: 35px;
+      top: -60px;
+    }
+  }
+
+  .LeftSide .Button a {
+    @include transition;
+  }
+}

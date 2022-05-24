@@ -1,0 +1,12 @@
+@mixin site-wrap {
+  width: 100%;
+  min-width: 990px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+@mixin transition {
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}

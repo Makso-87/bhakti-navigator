@@ -1,0 +1,241 @@
+@import '../../css/styleVariables';
+
+.Footer {
+  border-top: 1px solid #C4C4C4;
+  margin: 0;
+
+  &.FunctionalPage {
+    margin: 0 0 0 114px;
+  }
+
+  .Top {
+    background: #fff;
+    padding: 14px 0 6px;
+
+    .SiteWrap {
+      @include site-wrap;
+      max-width: none;
+      width: 100%;
+    }
+  }
+
+  &.Main .Top .SiteWrap {
+    width: auto;
+    max-width: 1440px;
+  }
+
+  .Top {
+    .Row {
+      display: flex;
+      padding-right: 79px;
+
+      .Cell {
+
+        &.FirstCell {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          max-width: 600px;
+          margin: 0 16px 0 0;
+          width: 142px;
+
+          .Logo {
+            width: 100%;
+            display: flex;
+
+            a {
+              Text-decoration: none;
+              margin: 0 20px 0 0;
+
+              &:last-child {
+                margin: 0;
+              }
+            }
+
+            .Img {
+              width: 55px;
+              height: 55px;
+              background: no-repeat center / contain;
+            }
+          }
+
+          .Name {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+          }
+        }
+
+        &.SecondCell {
+          margin: 0 70px 0 0;
+          padding: 3px 0 94px;
+
+          .Text {
+            font-size: 18px;
+            line-height: 28px;
+            margin-Bottom: 24px;
+            max-width: 500px;
+          }
+
+          .Buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 18px 0 0;
+
+            .Social {
+              display: flex;
+
+              .SocialItem {
+                margin-right: 16px;
+
+                &:last-child {
+                  margin-right: 0;
+                }
+
+                a {
+                  text-decoration: none;
+                }
+
+                .Img {
+                  width: 44px;
+                  height: 44px;
+                  position: relative;
+                  opacity: 0.65;
+
+                  &:hover {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+
+            .Donation a {
+              text-decoration: none;
+              align-items: center;
+              height: 53px;
+              padding: 0 21px;
+              display: inline-flex;
+              background: #FFFFFF;
+              border-radius: 24px;
+              border: 3px solid #647DB7;
+              font-weight: bold;
+              font-size: 14px;
+              line-height: 17px;
+              color: #647DB7;
+
+              &:hover {
+                background: #647DB7;
+                color: #fff;
+              }
+            }
+          }
+        }
+
+        &.ThirdCell {
+          margin: 0 0 0 auto;
+          padding: 4px 0 0 0;
+
+          .Links {
+            display: flex;
+            height: 100%;
+
+            .LinksCell {
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              padding-right: 55px;
+
+              &:last-child {
+                padding-right: 0;
+              }
+
+              .List {
+                .Name {
+                  font-weight: 600;
+                  font-size: 18px;
+                  line-height: 24px;
+                  margin-bottom: 10px;
+                }
+
+                ul {
+                  margin: 0;
+
+                  li {
+                    margin-bottom: 5px;
+                    list-style-type: none;
+
+                    &:last-child {
+                      margin-bottom: 4px;
+                    }
+
+                    a {
+                      text-decoration: none;
+                      font-style: normal;
+                      font-weight: 300;
+                      font-size: 18px;
+                      line-height: 24px;
+
+                      &:hover {
+                        color: #ECE42F;
+                      }
+                    }
+                  }
+                }
+              }
+
+              .BottomInfo {
+                font-weight: 300;
+                font-size: 12px;
+                line-height: 15px;
+                color: #B0BECF;
+
+                a {
+                  text-decoration: none;
+                  color: #B0BECF;
+
+                  &:hover {
+                    color: #ECE42F;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .Bottom {
+    background: #000;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .Text {
+      font-size: 14px;
+      line-height: 17px;
+      color: #fff;
+      max-width: 1055px;
+    }
+  }
+
+  .Top {
+    .SecondCell .Buttons .Donation a {
+      @include transition;
+    }
+
+    .ThirdCell .Links .LinksCell {
+      .List ul li a, .BottomInfo a {
+        @include transition;
+      }
+    }
+
+    .SecondCell .Buttons .Social .SocialItem .Img {
+      @include transition;
+    }
+  }
+}
