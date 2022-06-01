@@ -59,7 +59,7 @@ body.site-lock {overflow: hidden;}
    ========================================================================== */
 
 body.site-lock {overflow: hidden;}
-main {min-height:100%; min-width:990px; position:relative; padding: 102px 0 0;}
+main {min-height:100%; min-width:990px; position:relative; /*padding: 102px 0 0*/;}
 main.auth-true {padding: 0; display: flex; align-items: stretch;}
 .clear.clear-footer {height:100px;}
 .site-wrap {width:100%; min-width:990px; max-width:1440px; margin:0 auto; padding:0 30px;}

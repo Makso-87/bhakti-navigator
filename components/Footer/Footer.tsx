@@ -5,14 +5,15 @@ import bhaktiNavigatorLogo from '../../images/icons/bhakti-navigator-logo.png';
 import logoCoskr from '../../images/icons/logo-coskr.png';
 import insta from '../../images/icons/insta.svg';
 import youtubeBlack from '../../images/icons/youtube-black.svg';
-
-const category = false;
-
-const classesFooter = cn(classes.Footer, {
-  FunctionalPage: category,
-});
+import pagesStore from '../../store/pagesStore';
 
 export const Footer = () => {
+  const { category } = pagesStore;
+
+  const classesFooter = cn(classes.Footer, {
+    [classes.FunctionalPage]: category !== '',
+  });
+
   return (
     <footer className={classesFooter}>
       <div className={classes.Top}>
@@ -105,12 +106,12 @@ export const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href='/navigator/blog_reading.php'>
+                        <Link href='/blog'>
                           <a>Блог</a>
                         </Link>
                       </li>
                       <li>
-                        <Link href='/navigator/page_of_test.php'>
+                        <Link href='/test'>
                           <a>Тест</a>
                         </Link>
                       </li>

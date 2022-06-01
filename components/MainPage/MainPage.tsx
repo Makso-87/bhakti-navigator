@@ -6,8 +6,11 @@ import { SelectScreen } from './SelectScreen/SelectScreen';
 import { HelpBanner } from '../Banners/HelpBanner/HelpBanner';
 import { ShrilaPrabhupadaBanner } from '../Banners/ShrilaPrabhupadaBanner/ShrilaPrabhupadaBanner';
 import { SubscribeScreen } from './SubscribeScreen/SubscribeScreen';
+import pagesStore from '../../store/pagesStore';
 
 export const MainPage = () => {
+  const { setCurrentPage } = pagesStore;
+  setCurrentPage('main');
   return (
     <Layout>
       <div>

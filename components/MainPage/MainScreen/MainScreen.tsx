@@ -1,8 +1,17 @@
 import Link from 'next/link';
 import classes from './MainScreen.module.scss';
+import { Media, Page } from '../../../interfaces/interfaces';
+import { observer } from 'mobx-react-lite';
+import dataStore from '../../../store/dataStore';
+import { getMediaData, getPageData } from '../../../helpers/helpers';
 import mainScreen from '../../../images/main-screen.png';
 
-export const MainScreen = (props) => {
+export const MainScreen = observer(() => {
+  // const { dataPages, dataMedia }: { dataPages: Page[]; dataMedia: Media[] } = dataStore;
+  // const mainPage: Page = getPageData(dataPages, 'main-page');
+  // const imgId = mainPage?.acf?.main_screen_image;
+  // const mainScreenImg: Media = getMediaData(dataMedia, imgId);
+
   return (
     <div className={classes.MainScreen}>
       <div className={classes.SiteWrap}>
@@ -13,6 +22,7 @@ export const MainScreen = (props) => {
               <br /> <span>по вайшнавскому образованию</span>
             </h1>
 
+            {/*<div className={classes.Text}>{mainPage?.acf?.main_screen_text}</div>*/}
             <div className={classes.Text}>
               Хотите понять, в какой точке «дорожной карты» духовного образования вы находитесь,
               получить индивидуальный маршрут и рекомендации, чему и где можно поучиться? Пройдите
@@ -20,7 +30,7 @@ export const MainScreen = (props) => {
             </div>
 
             <div className={classes.Button}>
-              <Link href={'/navigator/page_of_test.php'}>
+              <Link href={'/test'}>
                 <a>Пройти тест!</a>
               </Link>
             </div>
@@ -41,10 +51,14 @@ export const MainScreen = (props) => {
           </div>
 
           <div className={classes.RightSide}>
-            <div className={classes.Img} style={{ backgroundImage: `url(${mainScreen.src})` }} />
+            <div
+              className={classes.Img}
+              // style={{ backgroundImage: `url(${mainScreenImg?.source_url})` }}
+              style={{ backgroundImage: `url(${mainScreen.src})` }}
+            />
           </div>
         </div>
       </div>
     </div>
   );
-};
+});

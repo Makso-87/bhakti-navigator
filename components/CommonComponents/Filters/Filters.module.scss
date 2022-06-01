@@ -1,0 +1,164 @@
+@import '../../../css/styleVariables';
+
+.Filters {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: 27px 0 0;
+  width: 360px;
+  background: #F9FAFD;
+  box-shadow: 0 0 8px rgba(52, 65, 96, 0.1);
+
+  .Title {
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 27px;
+    margin: 0 0 24px;
+    padding: 0 22px;
+  }
+
+  .CategoriesList {
+    margin: 0;
+
+    .CategoriesItem {
+      list-style-type: none;
+      border-bottom: 1px solid #E2E7F1;
+
+      &:first-child {
+        border-top: 1px solid #E2E7F1;
+      }
+
+      a {
+        text-decoration: none;
+        padding: 18px 30px 17px 34px;
+        display: block;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        position: relative;
+
+        &:after {
+          content: '';
+          width: 14px;
+          height: 10px;
+          background: url(../../../images/icons/сhevron.svg) no-repeat (center / contain);
+          display: block;
+          position: absolute;
+          right: 27px;
+          top: 50%;
+          margin-top: -5px;
+        }
+      }
+
+      &.Active a:after {
+        transform: rotate(-180deg);
+      }
+
+      .ListContainer {
+        display: none;
+        padding: 0 30px 17px 34px;
+
+        ul {
+          margin: 0 0 12px;
+
+          /*padding: 20px 0 0*/
+
+          &:last-child {
+            margin: 0;
+          }
+
+          &.Additional {
+            display: none;
+            padding: 0;
+          }
+
+          li {
+            list-style-type: none;
+            margin: 0 0 12px;
+            padding: 0 0 0 2px;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      .InputItem {
+        input {
+          display: none;
+        }
+
+        label {
+          position: relative;
+          padding: 0 0 0 27px;
+          cursor: pointer;
+          font-size: 16px;
+          line-height: 20px;
+
+          &:before {
+            content: '';
+            display: block;
+            left: 0;
+            top: 3px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid #647DB7;
+            box-sizing: border-box;
+            position: absolute;
+          }
+
+          &:after {
+            opacity: 0;
+            content: '';
+            display: block;
+            left: 3px;
+            top: 6px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #647DB7;
+            box-sizing: border-box;
+            position: absolute;
+          }
+        }
+
+        input:checked + label:after {
+          opacity: 1;
+        }
+      }
+
+      .Location {
+        display: none;
+        padding: 0 0 0 27px;
+        margin: 14px 0 0;
+
+        &.Active {
+          display: block;
+        }
+
+        select {
+          padding: 7px 12px;
+          font-size: 14px;
+          border: none;
+          line-height: 24px;
+        }
+      }
+
+      .ShowMore {
+        margin: 20px 0 0;
+        padding: 0 0 0 3px;
+        text-decoration: none;
+        font-size: 16px;
+        line-height: 20px;
+        color: #647DB7;
+        cursor: pointer;
+      }
+
+      a:after, .InputItem label:after {
+        @include transition;
+      }
+    }
+  }
+}

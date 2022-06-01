@@ -1,155 +1,145 @@
 import Link from 'next/link';
 import cn from 'classnames';
 import classes from './Header.module.scss';
+import classesHeaderContent from './HeaderContent/HeaderContent.module.scss';
 import logo from '../../images/icons/bhakti-navigator-logo.png';
+import { observer } from 'mobx-react-lite';
+import pagesStore from '../../store/pagesStore';
+import topBannerMainLogo from '../../images/icons/top-banner-main-logo.png';
+import topBannerSecondaryLogo from '../../images/icons/top-banner-secondary-logo.png';
+import { HeaderContent } from './HeaderContent/HeaderContent';
+import { useEffect } from 'react';
 
-const category = false;
-const secondaryTabBar = false;
-const catalog = false;
-const blog = false;
+export const Header = observer(() => {
+  const { category } = pagesStore;
+  const logoUrl = logo.src;
 
-const classesHeader = cn(classes.Header, {
-  [classes.FunctionalPage]: category && false,
-});
+  const classesHeader = cn(classesHeaderContent.Header, {
+    [classesHeaderContent.FunctionalPage]: category !== '',
+  });
 
-export const Header = () => {
+  useEffect(() => {
+    window.onscroll = (event) => {
+      const headerElement: HTMLElement = document.querySelector(`.${classesHeaderContent.Header}`);
+      const headerPopupElement: HTMLElement = document.querySelector(
+        `.${classesHeaderContent.Header}.${classesHeaderContent.Popup}`
+      );
+      const topBannerElement: HTMLElement = document.querySelector(`.${classes.TopBanner}`);
+      const leftSideBarElement: HTMLElement = document.querySelector(`.${classes.LeftSideBar}`);
+      const element = event.target;
+      const scrollTop = element.scrollingElement.scrollTop;
+      const isFunctionalPage = headerElement.classList.contains(
+        `${classesHeaderContent.FunctionalPage}`
+      );
+
+      const bannerHeight = topBannerElement.clientHeight;
+      const headerHeight = headerElement.clientHeight;
+      const showTriggerValue = bannerHeight + headerHeight;
+
+      if (scrollTop > showTriggerValue) {
+        headerPopupElement.classList.add(`${classesHeaderContent.Show}`);
+      } else {
+        headerPopupElement.classList.remove(`${classesHeaderContent.Show}`);
+      }
+
+      if (scrollTop > bannerHeight) {
+        if (isFunctionalPage) {
+          leftSideBarElement.style.top = '0';
+        }
+      } else {
+        if (isFunctionalPage) {
+          leftSideBarElement.style.top = bannerHeight - scrollTop + 'px';
+        }
+      }
+    };
+  }, []);
+
   return (
-    <header className={classesHeader}>
-      <div className={classes.SiteWrap}>
-        {!category ? (
-          <div className={classes.Left}>
-            <div className={classes.Logo}>
-              <Link href='/'>
-                <a>
-                  <div className={classes.Img} style={{ backgroundImage: `url(${logo.src})` }} />
-                </a>
-              </Link>
-            </div>
+    <>
+      <div className={classes.TopBanner}>
+        <div className={classes.SiteWrap}>
+          <div
+            className={classes.MainLogo}
+            style={{ backgroundImage: `url(${topBannerMainLogo.src})` }}
+          />
+          <div
+            className={classes.SecondaryLogo}
+            style={{ backgroundImage: `url(${topBannerSecondaryLogo.src})` }}
+          />
 
-            <menu>
-              <li>
-                <Link href='/navigator/courses.php'>
-                  <a>Каталог</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/navigator/page_of_test.php'>
-                  <a>Пройти тест</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/navigator/faq.php'>
-                  <a>Вопросы и ответы</a>
-                </Link>
-              </li>
-              <li>
-                <Link href='/navigator/blog_reading.php'>
-                  <a>Блог</a>
-                </Link>
-              </li>
-            </menu>
-          </div>
-        ) : null}
-
-        {category ? <div className={classes.CategoryName}>{category}</div> : null}
-
-        <div className={classes.Right}>
-          <div className={classes.Controls}>
-            <div className={classes.Buttons}>
-              <div className={classes.SearchTrigger} />
-
-              <div className={classes.SignIn}>
-                <Link href='/navigator/authorization_page.php?auth=sign_in'>
-                  <a>Вход</a>
-                </Link>
-              </div>
-
-              <div className={classes.SignUp}>
-                <Link href='/navigator/authorization_page.php?auth=sign_up'>
-                  <a>Регистрация</a>
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className={classes.SearchContainer}>
-          <div className={classes.Search}>
-            <div className={classes.InputBox}>
-              <div className={classes.Icon} />
-              <input type='text' placeholder='Поиск' />
-            </div>
-
-            <div className={classes.Close}>×</div>
-          </div>
+          <div className={classes.BgMain} />
         </div>
       </div>
 
-      {secondaryTabBar && catalog ? (
-        <div className="secondary-pages-tab-container<?= $catalog_root ? ' catalog' : '' ?>">
-          <ul className='tab-bar'>
-            <li className='tab-bar-item'>
-              <Link href='/navigator/courses.php'>
-                <a className="<?= $catalog_page == 'courses' ? 'active' : '' ?>">Курсы</a>
+      <header className={classesHeader}>
+        <HeaderContent />
+      </header>
+
+      <div className={`${classesHeader} ${classesHeaderContent.Popup}`}>
+        <HeaderContent />
+      </div>
+
+      {category !== '' ? (
+        <div className={classes.LeftSideBar}>
+          <div className={classes.Logo}>
+            <Link href='/'>
+              <a>
+                <img src={logoUrl} alt='' />
+              </a>
+            </Link>
+          </div>
+
+          <menu>
+            <li>
+              <Link href='/catalog/'>
+                <a className="<?= $catalog ? 'active' : '' ?>">
+                  <div className={`${classes.Icon} ${classes.Catalog}`} />
+                  <span className='text'>Каталог</span>
+                </a>
               </Link>
             </li>
 
-            <li className='tab-bar-item'>
-              <Link href='/navigator/projects.php'>
-                <a className="<?= $catalog_page == 'projects'? 'active' : '' ?>">Проекты</a>
+            <li>
+              <Link href='/test/'>
+                <a className="<?= $test ? 'active' : '' ?>">
+                  <div className={`${classes.Icon} ${classes.Test}`} />
+                  <span className='text'>Тест</span>
+                </a>
               </Link>
             </li>
 
-            <li className='tab-bar-item'>
-              <Link href='/navigator/teachers.php'>
-                <a className="<?= $catalog_page == 'teachers' ? 'active' : '' ?>">Преподаватели</a>
+            <li>
+              <Link href='#'>
+                <a className="<?= $map ? 'active' : '' ?>">
+                  <div className={`${classes.Icon} ${classes.Map}`} />
+                  <span className='text'>Карта</span>
+                </a>
               </Link>
             </li>
 
-            <li className='tab-bar-item'>
-              <Link href='/navigator/materials.php'>
-                <a className="<?= $catalog_page == 'materials' ? 'active' : '' ?>">Материалы</a>
+            <li>
+              <Link href='/faq/'>
+                <a className="<?= $faq ? 'active' : '' ?>">
+                  <div className={`${classes.Icon} ${classes.Question}`} />
+                  <span className='text'>
+                    Вопросы
+                    <br /> и ответы
+                  </span>
+                </a>
               </Link>
             </li>
-          </ul>
+
+            <li>
+              <Link href='/blog/'>
+                <a className="<?= $blog ? 'active' : '' ?>">
+                  <div className={`${classes.Icon} ${classes.Blog}`} />
+                  <span className='text'>Блог</span>
+                </a>
+              </Link>
+            </li>
+          </menu>
         </div>
       ) : null}
-
-      {secondaryTabBar && blog ? (
-        <div className="secondary-pages-tab-container<?= $blog_root ? ' blog' : '' ?>">
-          <ul className='tab-bar'>
-            <li className='tab-bar-item'>
-              <Link href='/navigator/blog_reading.php'>
-                <a className="<?= $blog_page == 'reading' ? 'active' : '' ?>">Почитать</a>
-              </Link>
-            </li>
-
-            <li className='tab-bar-item'>
-              <Link href='/navigator/blog_sort_out.php'>
-                <a className="<?= $blog_page == 'sort_out' ? 'active' : '' ?>">Разобраться</a>
-              </Link>
-            </li>
-
-            <li className='tab-bar-item'>
-              <Link href='/navigator/blog_watching.php'>
-                <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">Посмотреть</a>
-              </Link>
-            </li>
-
-            <li className='tab-bar-item'>
-              <Link href='/navigator/blog_interview.php'>
-                <a className="<?= $blog_page == 'interview' ? 'active' : '' ?>">Интервью</a>
-              </Link>
-            </li>
-
-            <li className='tab-bar-item'>
-              <Link href='/navigator/blog_news.php'>
-                <a className="<?= $blog_page == 'news' ? 'active' : '' ?>">Новости</a>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      ) : null}
-    </header>
+    </>
   );
-};
+});

@@ -3,14 +3,17 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 0108",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "classnames": "^2.3.1",
+    "mobx": "^6.6.0",
+    "mobx-react-lite": "^3.4.0",
     "next": "12.1.6",
+    "nextjs-progressbar": "^0.0.14",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "sass": "^1.52.0"
