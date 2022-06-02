@@ -9,6 +9,7 @@ import topBannerMainLogo from '../../images/icons/top-banner-main-logo.png';
 import topBannerSecondaryLogo from '../../images/icons/top-banner-secondary-logo.png';
 import { HeaderContent } from './HeaderContent/HeaderContent';
 import { useEffect } from 'react';
+import { throttle } from '../../helpers/helpers';
 
 export const Header = observer(() => {
   const { category } = pagesStore;
@@ -19,19 +20,18 @@ export const Header = observer(() => {
   });
 
   useEffect(() => {
-    window.onscroll = (event) => {
-      const headerElement: HTMLElement = document.querySelector(`.${classesHeaderContent.Header}`);
-      const headerPopupElement: HTMLElement = document.querySelector(
-        `.${classesHeaderContent.Header}.${classesHeaderContent.Popup}`
-      );
-      const topBannerElement: HTMLElement = document.querySelector(`.${classes.TopBanner}`);
-      const leftSideBarElement: HTMLElement = document.querySelector(`.${classes.LeftSideBar}`);
-      const element = event.target;
-      const scrollTop = element.scrollingElement.scrollTop;
-      const isFunctionalPage = headerElement.classList.contains(
-        `${classesHeaderContent.FunctionalPage}`
-      );
+    const headerElement: HTMLElement = document.querySelector(`.${classesHeaderContent.Header}`);
+    const headerPopupElement: HTMLElement = document.querySelector(
+      `.${classesHeaderContent.Header}.${classesHeaderContent.Popup}`
+    );
+    const topBannerElement: HTMLElement = document.querySelector(`.${classes.TopBanner}`);
+    const leftSideBarElement: HTMLElement = document.querySelector(`.${classes.LeftSideBar}`);
+    const isFunctionalPage = headerElement.classList.contains(
+      `${classesHeaderContent.FunctionalPage}`
+    );
 
+    const scrollHandler = () => {
+      const scrollTop = window.scrollY;
       const bannerHeight = topBannerElement.clientHeight;
       const headerHeight = headerElement.clientHeight;
       const showTriggerValue = bannerHeight + headerHeight;
@@ -52,6 +52,8 @@ export const Header = observer(() => {
         }
       }
     };
+
+    window.onscroll = isFunctionalPage ? scrollHandler : throttle(scrollHandler, 250);
   }, []);
 
   return (
@@ -82,7 +84,7 @@ export const Header = observer(() => {
       {category !== '' ? (
         <div className={classes.LeftSideBar}>
           <div className={classes.Logo}>
-            <Link href='/'>
+            <Link href=''>
               <a>
                 <img src={logoUrl} alt='' />
               </a>
@@ -91,7 +93,7 @@ export const Header = observer(() => {
 
           <menu>
             <li>
-              <Link href='/catalog/'>
+              <Link href='/catalog'>
                 <a className="<?= $catalog ? 'active' : '' ?>">
                   <div className={`${classes.Icon} ${classes.Catalog}`} />
                   <span className='text'>Каталог</span>
@@ -100,7 +102,7 @@ export const Header = observer(() => {
             </li>
 
             <li>
-              <Link href='/test/'>
+              <Link href='/test'>
                 <a className="<?= $test ? 'active' : '' ?>">
                   <div className={`${classes.Icon} ${classes.Test}`} />
                   <span className='text'>Тест</span>
@@ -118,7 +120,7 @@ export const Header = observer(() => {
             </li>
 
             <li>
-              <Link href='/faq/'>
+              <Link href='/faq'>
                 <a className="<?= $faq ? 'active' : '' ?>">
                   <div className={`${classes.Icon} ${classes.Question}`} />
                   <span className='text'>
@@ -130,7 +132,7 @@ export const Header = observer(() => {
             </li>
 
             <li>
-              <Link href='/blog/'>
+              <Link href='/blog'>
                 <a className="<?= $blog ? 'active' : '' ?>">
                   <div className={`${classes.Icon} ${classes.Blog}`} />
                   <span className='text'>Блог</span>

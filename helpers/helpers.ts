@@ -50,3 +50,18 @@ export const getLink = (link: string) => {
   const url = new URL(link);
   return url.pathname.replace('/bhakti-navigator', '');
 };
+
+export const throttle = (callee, timeout) => {
+  let timer = null;
+
+  return function perform(...args) {
+    if (timer) return;
+
+    timer = setTimeout(() => {
+      callee(...args);
+
+      clearTimeout(timer);
+      timer = null;
+    }, timeout);
+  };
+};

@@ -15,9 +15,9 @@ export const CoursesList = (props) => {
   return (
     <div className={classes.Tile}>
       {courses.length
-        ? courses.map((course: Post) => {
+        ? courses.map((course: Post, index) => {
             const { title, acf, link } = course;
-            const { speaker, location, format, theme, bhakti_level, id } = acf;
+            const { speaker, location, format, theme, bhakti_level } = acf;
 
             const attrs = {
               title: title.rendered,
@@ -30,7 +30,7 @@ export const CoursesList = (props) => {
               columnsCount,
             };
 
-            return <CourseItem key={id} {...attrs} />;
+            return <CourseItem key={index} {...attrs} />;
           })
         : null}
     </div>

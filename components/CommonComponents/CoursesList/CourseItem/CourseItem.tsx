@@ -3,8 +3,7 @@ import Link from 'next/link';
 import cn from 'classnames';
 
 export const CourseItem = (props) => {
-  const { columnsCount = 3 } = props;
-  const { title, speaker, location, format, theme, bhakti_level, link } = props;
+  const { title, speaker, location, format, theme, bhakti_level, link, columnsCount = 3 } = props;
 
   const classesTileItem = cn(classes.TileItem, {
     [classes.BeforeShraddha]: bhakti_level === 'before_shraddha',
