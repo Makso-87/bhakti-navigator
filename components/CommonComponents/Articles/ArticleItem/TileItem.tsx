@@ -14,6 +14,7 @@ export const TileItem = (props) => {
             <div className={classes.ImgContainer}>
               <img
                 className={classes.Img}
+                crossOrigin='Anonymous'
                 // style={{ backgroundImage: `url(${imgUrl})` }}
                 src={`${imgUrl}`}
               />
