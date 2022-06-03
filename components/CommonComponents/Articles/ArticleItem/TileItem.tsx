@@ -6,8 +6,6 @@ export const TileItem = (props) => {
   const { index, link, imgUrl, title, note, readingTime } = props;
   const handledLink = getLink(link);
 
-  const handledUrl = imgUrl.replace('http', 'https');
-
   return (
     <div className={`${classes.TileItem} ${index % 2 === 0 ? classes.TypeOne : classes.TypeTwo}`}>
       <Link href={handledLink}>
@@ -18,7 +16,7 @@ export const TileItem = (props) => {
                 className={classes.Img}
                 // crossOrigin='anonymous'
                 // style={{ backgroundImage: `url(${imgUrl})` }}
-                src={`${handledUrl}`}
+                src={`${imgUrl}`}
               />
             </div>
 
