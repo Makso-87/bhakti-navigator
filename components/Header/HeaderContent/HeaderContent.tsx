@@ -4,7 +4,7 @@ import logo from '../../../images/icons/bhakti-navigator-logo.png';
 import pagesStore from '../../../store/pagesStore';
 const logoUrl = logo.src;
 
-export const HeaderContent = () => {
+export const HeaderContent = ({ logo = false }) => {
   const { category, secondaryTabBar, currentPage } = pagesStore;
 
   return (
@@ -13,11 +13,15 @@ export const HeaderContent = () => {
         {category === '' ? (
           <div className={classes.Left}>
             <div className={classes.Logo}>
-              <Link href='/'>
-                <a>
-                  <div className={classes.Img} style={{ backgroundImage: `url(${logoUrl})` }} />
-                </a>
-              </Link>
+              {logo ? (
+                <Link href='/'>
+                  <a>
+                    <div className={classes.Img} style={{ backgroundImage: `url(${logoUrl})` }} />
+                  </a>
+                </Link>
+              ) : (
+                <div className={classes.Img} />
+              )}
             </div>
 
             <menu>

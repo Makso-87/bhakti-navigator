@@ -5,8 +5,8 @@ import classesHeaderContent from './HeaderContent/HeaderContent.module.scss';
 import logo from '../../images/icons/bhakti-navigator-logo.png';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../../store/pagesStore';
-import topBannerMainLogo from '../../images/icons/top-banner-main-logo.png';
-import topBannerSecondaryLogo from '../../images/icons/top-banner-secondary-logo.png';
+import logoBnBanner from '../../images/icons/logo-bn-banner.png';
+import logoCoskrWhite from '../../images/icons/logo-coskr-white.png';
 import { HeaderContent } from './HeaderContent/HeaderContent';
 import { useEffect } from 'react';
 import { throttle } from '../../helpers/helpers';
@@ -62,12 +62,18 @@ export const Header = observer(() => {
         <div className={classes.SiteWrap}>
           <div
             className={classes.MainLogo}
-            style={{ backgroundImage: `url(${topBannerMainLogo.src})` }}
+            style={{ backgroundImage: `url(${logoBnBanner.src})` }}
           />
           <div
             className={classes.SecondaryLogo}
-            style={{ backgroundImage: `url(${topBannerSecondaryLogo.src})` }}
+            style={{ backgroundImage: `url(${logoCoskrWhite.src})` }}
           />
+
+          <div className={classes.Text}>
+            <span className={classes.Title}>ГИТА-НАГАРИ</span>
+            <span className={classes.Color}>в сотрудничестве</span>
+            <span className={classes.Note}>с отделом вайшнавского образования ЦОСКР</span>
+          </div>
 
           <div className={classes.BgMain} />
         </div>
@@ -78,13 +84,13 @@ export const Header = observer(() => {
       </header>
 
       <div className={`${classesHeader} ${classesHeaderContent.Popup}`}>
-        <HeaderContent />
+        <HeaderContent logo={true} />
       </div>
 
       {category !== '' ? (
         <div className={classes.LeftSideBar}>
           <div className={classes.Logo}>
-            <Link href=''>
+            <Link href='/'>
               <a>
                 <img src={logoUrl} alt='' />
               </a>

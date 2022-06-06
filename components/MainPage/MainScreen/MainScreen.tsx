@@ -17,9 +17,14 @@ export const MainScreen = observer(() => {
       <div className={classes.SiteWrap}>
         <div className={classes.Content}>
           <div className={classes.LeftSide}>
-            <h1>
-              Навигатор
-              <br /> <span>по вайшнавскому образованию</span>
+            {/*<h1 className={classes.TitleVar1}>*/}
+            {/*  Навигатор*/}
+            {/*  <br /> <span>по вайшнавскому образованию</span>*/}
+            {/*</h1>*/}
+
+            <h1 className={classes.TitleVar2}>
+              <div>Бхакти</div>
+              <div>навигатор</div>
             </h1>
 
             {/*<div className={classes.Text}>{mainPage?.acf?.main_screen_text}</div>*/}
