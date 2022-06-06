@@ -12,11 +12,11 @@ export const TileItem = (props) => {
         <a>
           <figure>
             <div className={classes.ImgContainer}>
-              <img
+              <div
                 className={classes.Img}
                 // crossOrigin='anonymous'
-                // style={{ backgroundImage: `url(${imgUrl})` }}
-                src={`${imgUrl}`}
+                style={{ backgroundImage: `url(${imgUrl})` }}
+                // src={`${imgUrl}`}
               />
             </div>
 
