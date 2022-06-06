@@ -1,5 +1,4 @@
 export default {
-  API_URL: 'https://bhaktinavigator.tw1.ru/bhakti-navigator-wp',
-  // API_URL: 'https://cp11466.tmweb.ru',
+  API_URL: 'https://bhaktinavigator.tmweb.ru/bhakti-navigator-wp',
   WP_API_JSON: '/wp-json/wp/v2',
 };
