@@ -41,6 +41,12 @@
       position: fixed;
       top: 0;
     }
+
+    //.Left {
+    //  .Logo {
+    //    display: block;
+    //  }
+    //}
   }
 
   .SiteWrap {
@@ -60,6 +66,7 @@
     display: flex;
 
     .Logo {
+      //display: none;
       margin: 0 174px 0 0;
 
       a {
@@ -82,7 +89,7 @@
 
         a {
           text-decoration: none;
-          font-size: 22px;
+          font-size: 20px;
           line-height: 25px;
           position: relative;
 

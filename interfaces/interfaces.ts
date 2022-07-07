@@ -1,3 +1,6 @@
+import { FormEventHandler, MouseEventHandler, ReactElement } from 'react';
+import { pairsFormattedPosts } from '../types/types';
+
 export interface Page {
   id: number;
   date: string;
@@ -47,13 +50,14 @@ export interface Article<Post> {
 }
 
 export interface ServerData {
-  dataPages: [Page];
-  dataMedia: [Media];
-  dataPosts: [Post];
-  dataCategories: [Category];
-  dataMenuBlog: Menu;
-  dataMenuHeader: Menu;
-  dataMenuCatalog: Menu;
+  postName?: string;
+  dataPages?: [Page];
+  dataMedia?: [Media];
+  dataPosts?: [Post];
+  dataCategories?: [Category];
+  dataMenuBlog?: Menu;
+  dataMenuHeader?: Menu;
+  dataMenuCatalog?: Menu;
 }
 
 export interface ServerSideProps {
@@ -61,7 +65,7 @@ export interface ServerSideProps {
 }
 
 export interface ArticlesProps {
-  posts: Post[];
+  list: pairsFormattedPosts;
   tileMaxCount: number;
 }
 
@@ -78,4 +82,43 @@ export interface Menu {
   slug: string;
   count: 5;
   items: [MenuItem];
+}
+
+export interface TopSearchProps {
+  placeholder?: string;
+  searchHandler?: FormEventHandler;
+}
+
+export interface FilterItemProps {
+  name?: string;
+  showMore?: string | boolean;
+  children?: ReactElement[] | [ReactElement];
+  elementsType?: 'radio' | 'checkbox';
+}
+
+export interface Location {
+  id: string;
+  name: string;
+  list: string[];
+}
+
+export interface FilterElementProps {
+  name: string;
+  id: string;
+  elementType?: 'radio' | 'checkbox';
+  location?: Location | false;
+  text: string;
+}
+
+export type QuestionVariants = {
+  text: string;
+  letter: string;
+  type: 'radio' | 'checkbox';
+};
+
+export interface QuestionProps {
+  clickHandler: MouseEventHandler;
+  variants: QuestionVariants[];
+  text: string;
+  number: number;
 }

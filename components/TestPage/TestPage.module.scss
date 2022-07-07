@@ -1,0 +1,202 @@
+@import '../../css/styleVariables';
+
+.TestPage {
+  padding: 60px 0 60px 114px;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  .Introduction {
+    display: block;
+    max-width: 960px;
+    margin: auto;
+
+    &.TestStarted {
+      display: none;
+    }
+
+    .Text {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 26px;
+      margin: 0 0 40px;
+
+      p {
+        margin: 20px 0;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .Video {
+      position: relative;
+      padding: 56% 0 0;
+
+      iframe {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .ButtonStartTest {
+      display: block;
+      margin: 60px auto 0;
+      width: 217px;
+      border: none;
+      height: 67px;
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      background: #647DB7;
+      box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
+      border-radius: 30px;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .TextForm {
+    width: 880px;
+    margin: auto;
+
+    &.TestStarted {
+      display: block;
+    }
+
+    .Question {
+      .Variants {
+        margin: 0 0 60px;
+        padding: 0 0 0 54px;
+
+        .InputContainer {
+          margin: 0 0 16px;
+
+          label {
+            position: relative;
+            padding: 0 0 0 35px;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            cursor: pointer;
+            display: inline-block;
+
+            &:after {
+              content: '';
+              display: block;
+              top: 0;
+              left: 0;
+              position: absolute;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              border: 2px solid #647DB7;
+              box-sizing: border-box;
+            }
+
+            &:before {
+              opacity: 0;
+              content: '';
+              display: block;
+              top: 5px;
+              left: 5px;
+              position: absolute;
+              width: 10px;
+              height: 10px;
+              border-radius: 50%;
+              background: #647DB7;
+              box-sizing: border-box;
+            }
+          }
+
+          input {
+            display: none;
+
+            &[type="checkbox"] + label:before {
+              width: 12px;
+              height: 12px;
+              top: 4px;
+              left: 4px;
+              background: url(../../images/icons/tick-blue.svg) no-repeat (center / contain);
+            }
+
+            &:checked + label:before {
+              opacity: 1;
+            }
+          }
+
+          label span {
+            display: none;
+          }
+        }
+      }
+
+      &.Show {
+        display: block;
+      }
+
+      .Text {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 27px;
+        margin: 0 0 25px;
+
+        span {
+          display: inline-block;
+          margin: 0 40px 0 0;
+        }
+      }
+
+      .Title {
+        font-size: 30px;
+        line-height: 33px;
+        margin: 0 0 30px;
+      }
+
+      .ButtonNext {
+        margin: 0 0 0 54px;
+        width: 217px;
+        border: none;
+        height: 67px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center;
+        background: #647DB7;
+        box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
+        border-radius: 30px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .Results {
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: bold;
+
+    .Result {
+      display: block;
+    }
+  }
+
+  .TextForm .Question .Variants .InputContainer label:before {
+    @include transition;
+  }
+}

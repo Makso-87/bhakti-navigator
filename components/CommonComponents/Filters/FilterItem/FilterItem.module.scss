@@ -1,0 +1,85 @@
+@import '../../../../css/styleVariables';
+
+.FilterItem {
+  list-style-type: none;
+  border-bottom: 1px solid #E2E7F1;
+
+  &:first-child {
+    border-top: 1px solid #E2E7F1;
+  }
+
+  a.Trigger {
+    text-decoration: none;
+    padding: 18px 30px 17px 34px;
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    position: relative;
+
+    &:after {
+      content: '';
+      width: 14px;
+      height: 10px;
+      background: url(../../../../images/icons/сhevron.svg) no-repeat (center / contain);
+      display: block;
+      position: absolute;
+      right: 27px;
+      top: 50%;
+      margin-top: -5px;
+    }
+  }
+
+  &.Active a:after {
+    transform: rotate(-180deg);
+  }
+
+  .ListContainer {
+    display: none;
+    padding: 0 30px 17px 34px;
+
+    ul {
+      margin: 0 0 12px;
+
+      /*padding: 20px 0 0*/
+
+      &:last-child {
+        margin: 0;
+      }
+
+      &.Additional {
+        display: none;
+        padding: 0;
+      }
+
+      li {
+        list-style-type: none;
+        margin: 0 0 12px;
+        padding: 0 0 0 2px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+
+      &.Additional {
+        padding: 0;
+      }
+    }
+  }
+
+  .ShowMore {
+    margin: 20px 0 0;
+    padding: 0 0 0 3px;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 20px;
+    color: #647DB7;
+    cursor: pointer;
+  }
+
+
+  a:after, .InputItem label:after {
+    @include transition;
+  }
+}

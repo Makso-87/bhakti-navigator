@@ -64,8 +64,19 @@ main.auth-true {padding: 0; display: flex; align-items: stretch;}
 .clear.clear-footer {height:100px;}
 .site-wrap {width:100%; min-width:990px; max-width:1440px; margin:0 auto; padding:0 30px;}
 .row:after {content:''; display:table; clear:both;}
+#__next {height: 100%;}
 
-
+/* ==========================================================================
+   Слайдер на странице курса
+   ========================================================================== */
+#courses-about-screen-slider {}
+#courses-about-screen-slider .swiper-pagination { bottom: -21px; }
+#courses-about-screen-slider .swiper-pagination .swiper-pagination-bullet { width: 8px; height: 8px; background: #7c7c7c; border: 1px solid #DFDFDF; }
+#courses-about-screen-slider .swiper-pagination .swiper-pagination-bullet.swiper-pagination-bullet-active { background: #A7A7A7; border-color: #DFDFDF; }
+#courses-about-screen-slider .swiper-button-prev { position: absolute; left: 16px; z-index: 1; width: 48px; height: 48px;margin-top: -24px; }
+#courses-about-screen-slider .swiper-button-next { position: absolute; right: 16px; z-index: 1; width: 48px; height: 48px; margin-top: -24px; }
+#courses-about-screen-slider .swiper-button-prev:after { content: ''; width: 15px; height: 24px; background: url(../images/icons/slider_arrow_left.svg);}
+#courses-about-screen-slider .swiper-button-next:after { content: ''; width: 15px; height: 24px; background: url(../images/icons/slider_arrow_right.svg); }
 
 /* ==========================================================================
    Вспомогательные стили

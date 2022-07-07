@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import classes from './HeaderContent.module.scss';
-import logo from '../../../images/icons/bhakti-navigator-logo.png';
+import mainLogo from '../../../images/icons/bhakti-navigator-logo.png';
 import pagesStore from '../../../store/pagesStore';
-const logoUrl = logo.src;
+const logoUrl = mainLogo.src;
 
 export const HeaderContent = ({ logo = false }) => {
   const { category, secondaryTabBar, currentPage } = pagesStore;
@@ -26,22 +26,22 @@ export const HeaderContent = ({ logo = false }) => {
 
             <menu>
               <li>
-                <Link href='/catalog/'>
+                <Link href='/catalog/courses'>
                   <a>Каталог</a>
                 </Link>
               </li>
               <li>
-                <Link href='/test/'>
+                <Link href='/test'>
                   <a>Пройти тест</a>
                 </Link>
               </li>
               <li>
-                <Link href='/faq/'>
+                <Link href='/faq'>
                   <a>Вопросы и ответы</a>
                 </Link>
               </li>
               <li>
-                <Link href='/blog/'>
+                <Link href='/blog'>
                   <a>Блог</a>
                 </Link>
               </li>
@@ -83,65 +83,65 @@ export const HeaderContent = ({ logo = false }) => {
         </div>
       </div>
 
-      {secondaryTabBar && currentPage === 'catalog' ? (
+      {secondaryTabBar && category === 'Каталог' ? (
         <div className={classes.SecondaryPagesTabContainer}>
           <ul className={classes.TabBar}>
             <li className={classes.TabBarItem}>
-              <Link href='/catalog/'>
-                <a className="<?= $catalog_page == 'courses' ? 'active' : '' ?>">Курсы</a>
+              <Link href='/catalog/courses'>
+                <a className={currentPage === 'courses' ? classes.Active : ''}>Курсы</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/catalog/projects/'>
-                <a className="<?= $catalog_page == 'projects'? 'active' : '' ?>">Проекты</a>
+              <Link href='/catalog/projects'>
+                <a className={currentPage === 'projects' ? classes.Active : ''}>Проекты</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/catalog/teachers/'>
-                <a className="<?= $catalog_page == 'teachers' ? 'active' : '' ?>">Преподаватели</a>
+              <Link href='/catalog/teachers'>
+                <a className={currentPage === 'teachers' ? classes.Active : ''}>Преподаватели</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/catalog/materials/'>
-                <a className="<?= $catalog_page == 'materials' ? 'active' : '' ?>">Материалы</a>
+              <Link href='/catalog/materials'>
+                <a className={currentPage === 'materials' ? classes.Active : ''}>Материалы</a>
               </Link>
             </li>
           </ul>
         </div>
       ) : null}
 
-      {secondaryTabBar && currentPage === 'blog' ? (
+      {secondaryTabBar && category === 'Блог' ? (
         <div className={classes.SecondaryPagesTabContainer}>
           <ul className={classes.TabBar}>
             <li className={classes.TabBarItem}>
-              <Link href='/blog/'>
-                <a className="<?= $blog_page == 'reading' ? 'active' : '' ?>">Почитать</a>
+              <Link href='/blog'>
+                <a className={currentPage === 'articles' ? classes.Active : ''}>Почитать</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/sort_out/'>
+              <Link href='/blog/sort_out'>
                 <a className="<?= $blog_page == 'sort_out' ? 'active' : '' ?>">Разобраться</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/watching/'>
+              <Link href='/blog/watching'>
                 <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">Посмотреть</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/interview/'>
+              <Link href='/blog/interview'>
                 <a className="<?= $blog_page == 'interview' ? 'active' : '' ?>">Интервью</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/news/'>
+              <Link href='/blog/news'>
                 <a className="<?= $blog_page == 'news' ? 'active' : '' ?>">Новости</a>
               </Link>
             </li>

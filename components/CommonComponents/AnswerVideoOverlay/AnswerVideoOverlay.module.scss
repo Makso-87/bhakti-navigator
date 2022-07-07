@@ -1,0 +1,63 @@
+.AnswerVideoOverlay {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+
+  .VideoContainer {
+    width: 928px;
+    padding: 29.1% 0 0;
+    position: relative;
+    background: #3c3c3c;
+
+    .Close {
+      width: 25px;
+      height: 25px;
+      top: -25px;
+      right: -25px;
+      position: absolute;
+      cursor: pointer;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 2px;
+        background: #fff;
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+
+    iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}

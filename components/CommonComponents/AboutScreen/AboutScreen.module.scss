@@ -1,0 +1,77 @@
+@import '../../../css/styleVariables';
+
+.AboutScreen {
+  position: relative;
+  padding: 0 0 54px;
+
+  h2 {
+    font-weight: 800;
+    font-size: 55px;
+    line-height: 67px;
+    color: #C8D1E5;
+    margin: 0 0 40px;
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .Media {
+    position: relative;
+    padding: 25% 0 0;
+    width: 700px;
+    margin: 108px auto 0;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  }
+
+  .Content {
+    display: flex;
+    margin: 0 -30px;
+
+    .Text {
+      margin: 0 0 26px;
+      font-size: 18px;
+      line-height: 26px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+
+    .LeftSide, .RightSide {
+      width: 50%;
+      padding: 0 30px;
+    }
+
+    .Slider {
+      margin: 0 51px 0 0;
+      padding: 11px 64px 0 64px;
+      position: relative;
+
+      .Swiper {
+        width: 100%;
+      }
+
+      .SwiperSlide {
+        background: no-repeat center / cover;
+        padding: 100% 0 0;
+      }
+    }
+
+    .StrongText {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 33px;
+      margin: 0 0 38px;
+    }
+  }
+}

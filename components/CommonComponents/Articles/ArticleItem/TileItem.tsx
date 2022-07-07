@@ -4,20 +4,14 @@ import { getLink } from '../../../../helpers/helpers';
 
 export const TileItem = (props) => {
   const { index, link, imgUrl, title, note, readingTime } = props;
-  const handledLink = getLink(link);
 
   return (
     <div className={`${classes.TileItem} ${index % 2 === 0 ? classes.TypeOne : classes.TypeTwo}`}>
-      <Link href={handledLink}>
+      <Link href={getLink(link)}>
         <a>
           <figure>
             <div className={classes.ImgContainer}>
-              <div
-                className={classes.Img}
-                // crossOrigin='anonymous'
-                style={{ backgroundImage: `url(${imgUrl})` }}
-                // src={`${imgUrl}`}
-              />
+              <div className={classes.Img} style={{ backgroundImage: `url(${imgUrl})` }} />
             </div>
 
             <figcaption>

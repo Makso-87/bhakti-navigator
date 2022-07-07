@@ -1,0 +1,71 @@
+@import '../../../../css/styleVariables';
+
+.TileImageItem {
+  border-radius: 25px;
+  box-shadow: 0 4px 30px rgba(74, 93, 160, 0.2);
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 4px 30px rgba(74, 93, 160, 0.5);
+
+    figure figcaption {
+      opacity: 1;
+    }
+  }
+
+  figure {
+    background: #FFFFFF;
+    margin: 0;
+    border-radius: 25px;
+    overflow: hidden;
+    position: relative;
+
+    .ImgContainer {
+      position: relative;
+      padding: 65% 0 0;
+
+      .Img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: no-repeat center / cover;
+        border-radius: 25px;
+      }
+    }
+
+    figcaption {
+      opacity: 0;
+      padding: 20px 30px 10px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.7);
+
+      .Title {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 20px;
+        min-height: 40px;
+        margin: 0 0 4px;
+        color: #fff;
+      }
+
+      .Info .InfoItem {
+        font-size: 14px;
+        line-height: 24px;
+        color: #fff;
+
+        .Name, .Value {
+        }
+      }
+
+      @include transition;
+    }
+  }
+
+  @include transition;
+}

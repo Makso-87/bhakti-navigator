@@ -1,0 +1,137 @@
+@import '../../../css/styleVariables';
+
+.MaterialData {
+  display: flex;
+  align-items: flex-start;
+  margin: 76px 0 0;
+
+  .DownloadData {
+    position: relative;
+    flex-shrink: 0;
+    background: #FFFFFF;
+    margin: 0 35px 0 0;
+    width: 594px;
+    border: 2px solid #FF9776;
+    padding: 40px 50px 40px 128px;
+    border-radius: 8px;
+
+    .Icon {
+      position: absolute;
+      left: 48px;
+      top: 50%;
+      margin-top: -30px;
+      width: 60px;
+      height: 60px;
+      background: #E9EEFA;
+      box-shadow: 0 4px 20px rgba(52, 65, 96, 0.1);
+      border-radius: 8px;
+
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 38px;
+        height: 38px;
+        background: no-repeat center / contain;
+      }
+    }
+  }
+
+  &.Audio .DownloadData .Icon:before {
+    background-image: url(../../../images/icons/audio.svg);
+  }
+
+  &.Video {
+    .DownloadData .Icon:before {
+      background-image: url(../../../images/icons/video.svg);
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &.Book .DownloadData .Icon:before {
+    background-image: url(../../../images/icons/book.svg);
+  }
+
+  &.File .DownloadData .Icon:before {
+    background-image: url(../../../images/icons/file.svg);
+  }
+
+  .DownloadData {
+    .Name {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+      margin: 0 0 10px;
+    }
+
+    .FileInfo {
+      font-size: 14px;
+      line-height: 24px;
+      color: #6B6B6B;
+
+      .material-duration {
+        display: inline-block;
+        margin: 0 0 0 15px;
+      }
+    }
+
+    .DownloadButton {
+      position: absolute;
+      right: 30px;
+      bottom: 15px;
+
+      a {
+        display: block;
+        width: 24px;
+        height: 24px;
+        text-decoration: none;
+        position: relative;
+
+        &:before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          background: url(../../../images/icons/download-icon.svg) no-repeat (center / contain);
+        }
+      }
+    }
+  }
+
+  .MaterialDescription {
+    font-size: 18px;
+    line-height: 26px;
+    max-width: 960px;
+  }
+
+  .VideoBox {
+    max-width: 960px;
+    width: 100%;
+    margin: 24px 0 0;
+
+    .VideoContainer {
+      width: 100%;
+      position: relative;
+      padding: 56.3% 0 0;
+
+      iframe {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: none;
+      }
+    }
+  }
+}

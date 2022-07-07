@@ -1,0 +1,9 @@
+@import '../../css/styleVariables';
+.BlogPage {
+  padding: 74px 0 0 114px;
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+}

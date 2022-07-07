@@ -14,7 +14,7 @@
 
     .LeftSide {
       width: 50%;
-      padding-top: 90px;
+      padding-top: 60px;
       position: relative;
       z-index: 1;
 
@@ -43,6 +43,8 @@
         text-transform: uppercase;
         font-weight: 800;
         margin: 0 0 31px;
+        position: relative;
+        right: 7px;
 
         div:nth-child(1) {
           font-size: 135px;
@@ -134,12 +136,12 @@
       }
 
       .Text {
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20px;
+        font-size: 18px;
+        line-height: 24px;
         color: #121212;
         margin-bottom: 29px;
-        padding-right: 70px;
+        padding-right: 84px;
+        text-align: justify;
       }
 
       .Button a {

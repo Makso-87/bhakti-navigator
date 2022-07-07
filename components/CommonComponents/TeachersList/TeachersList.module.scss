@@ -1,0 +1,122 @@
+@import '../../../css/styleVariables';
+
+.Row {
+  display: flex;
+  margin: 0 -17.5px;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+  .Cell {
+    display: flex;
+    width: 33.333333%;
+    padding: 0 17.5px;
+    flex-shrink: 0;
+
+    &:nth-child(n+4) {
+      margin: 35px 0 0;
+    }
+
+    a {
+      text-decoration: none;
+      display: flex;
+      width: 100%;
+    }
+  }
+
+  .Item {
+    display: flex;
+    border-radius: 25px;
+    background: #fff;
+    box-shadow: 0 4px 30px rgba(74, 93, 160, 0.2);
+    width: 100%;
+    align-self: stretch;
+    height: auto;
+
+    &:hover {
+      box-shadow: 0 4px 30px rgba(74, 93, 160, 0.4);
+    }
+
+    figure {
+      margin: 0;
+      padding: 42px 0 23px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+
+      .ImgContainer {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 22px;
+
+        .Img {
+          width: 128px;
+          height: 128px;
+          border-radius: 50%;
+          background: no-repeat center / cover;
+        }
+      }
+
+      figcaption {
+        padding: 0 40px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+        .Address {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          color: #647DB7;
+        }
+
+        .More {
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 24px;
+          color: #647DB7;
+          position: absolute;
+          right: 24px;
+          bottom: 0;
+        }
+
+        .Name {
+          font-weight: 800;
+          font-size: 22px;
+          line-height: 27px;
+          text-align: center;
+          margin: 0 0 35px;
+        }
+
+        .Info .InfoItem {
+          display: flex;
+
+          .Key {
+            font-size: 14px;
+            line-height: 24px;
+            color: #6B6B6B;
+            margin: 0 7px 0 0;
+          }
+
+          .Value {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 24px;
+            color: #000000;
+
+            &.Blue {
+              color: #647DB7;
+            }
+
+            &.Violet {
+              color: #411799;
+            }
+          }
+        }
+      }
+    }
+
+    @include transition;
+  }
+}

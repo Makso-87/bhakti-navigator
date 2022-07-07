@@ -5,15 +5,16 @@ import classesHeaderContent from './HeaderContent/HeaderContent.module.scss';
 import logo from '../../images/icons/bhakti-navigator-logo.png';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../../store/pagesStore';
-import logoBnBanner from '../../images/icons/logo-bn-banner.png';
+import logoGitaNagari from '../../images/icons/logo-gita-nagari-white.png';
 import logoCoskrWhite from '../../images/icons/logo-coskr-white.png';
 import { HeaderContent } from './HeaderContent/HeaderContent';
 import { useEffect } from 'react';
 import { throttle } from '../../helpers/helpers';
 
 export const Header = observer(() => {
-  const { category } = pagesStore;
+  const { category, currentPage } = pagesStore;
   const logoUrl = logo.src;
+  console.log(currentPage);
 
   const classesHeader = cn(classesHeaderContent.Header, {
     [classesHeaderContent.FunctionalPage]: category !== '',
@@ -62,7 +63,7 @@ export const Header = observer(() => {
         <div className={classes.SiteWrap}>
           <div
             className={classes.MainLogo}
-            style={{ backgroundImage: `url(${logoBnBanner.src})` }}
+            style={{ backgroundImage: `url(${logoGitaNagari.src})` }}
           />
           <div
             className={classes.SecondaryLogo}
@@ -99,37 +100,37 @@ export const Header = observer(() => {
 
           <menu>
             <li>
-              <Link href='/catalog'>
-                <a className="<?= $catalog ? 'active' : '' ?>">
+              <Link href='/catalog/courses'>
+                <a className={category === 'Каталог' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Catalog}`} />
-                  <span className='text'>Каталог</span>
+                  <span className={classes.Text}>Каталог</span>
                 </a>
               </Link>
             </li>
 
             <li>
               <Link href='/test'>
-                <a className="<?= $test ? 'active' : '' ?>">
+                <a className={category === 'Тест' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Test}`} />
-                  <span className='text'>Тест</span>
+                  <span className={classes.Text}>Тест</span>
                 </a>
               </Link>
             </li>
 
             <li>
               <Link href='#'>
-                <a className="<?= $map ? 'active' : '' ?>">
+                <a className={category === 'Карта' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Map}`} />
-                  <span className='text'>Карта</span>
+                  <span className={classes.Text}>Карта</span>
                 </a>
               </Link>
             </li>
 
             <li>
               <Link href='/faq'>
-                <a className="<?= $faq ? 'active' : '' ?>">
+                <a className={category === 'Вопросы и ответы' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Question}`} />
-                  <span className='text'>
+                  <span className={classes.Text}>
                     Вопросы
                     <br /> и ответы
                   </span>
@@ -139,9 +140,9 @@ export const Header = observer(() => {
 
             <li>
               <Link href='/blog'>
-                <a className="<?= $blog ? 'active' : '' ?>">
+                <a className={category === 'Блог' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Blog}`} />
-                  <span className='text'>Блог</span>
+                  <span className={classes.Text}>Блог</span>
                 </a>
               </Link>
             </li>

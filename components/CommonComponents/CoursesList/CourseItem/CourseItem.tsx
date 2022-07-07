@@ -6,11 +6,11 @@ export const CourseItem = (props) => {
   const { title, speaker, location, format, theme, bhakti_level, link, columnsCount = 3 } = props;
 
   const classesTileItem = cn(classes.TileItem, {
-    [classes.BeforeShraddha]: bhakti_level === 'before_shraddha',
-    [classes.Shradha]: bhakti_level === 'shraddha',
-    [classes.Sadhusanga]: bhakti_level === 'sadhu_sanga',
-    [classes.BhadjanaKriya]: bhakti_level.includes('bhadjana_kriya'),
-    [classes.AnarthaNivritti]: bhakti_level === 'anartha_nivritti',
+    [classes.BeforeShraddha]: bhakti_level.value === 'before_shraddha',
+    [classes.Shraddha]: bhakti_level.value === 'shraddha',
+    [classes.Sadhusanga]: bhakti_level.value === 'sadhu_sanga',
+    [classes.BhadjanaKriya]: bhakti_level.value.includes('bhadjana_kriya'),
+    [classes.AnarthaNivritti]: bhakti_level.value === 'anartha_nivritti',
   });
 
   const classesCell = cn(classes.Cell, {
@@ -20,7 +20,7 @@ export const CourseItem = (props) => {
 
   return (
     <div className={classesCell}>
-      <Link href={link}>
+      <Link href={'/catalog/courses/[name]'} as={link}>
         <a>
           <div className={classesTileItem}>
             <div className={classes.Name}>{title}</div>
@@ -34,7 +34,7 @@ export const CourseItem = (props) => {
             <div className={classes.Info}>
               <div className={classes.InfoItem}>
                 <div className={classes.InfoItemName}>Формат:</div>
-                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{format}</div>
+                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{format.label}</div>
               </div>
 
               <div className={classes.InfoItem}>

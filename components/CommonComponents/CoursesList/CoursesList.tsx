@@ -1,26 +1,17 @@
 import classes from './CoursesList.module.scss';
 import { CourseItem } from './CourseItem/CourseItem';
-import { Category, Post } from '../../../interfaces/interfaces';
-import dataStore from '../../../store/dataStore';
-import { getCategoryData, getPostsList } from '../../../helpers/helpers';
 
 export const CoursesList = (props) => {
-  const { columnsCount } = props;
-  const { dataPosts, dataCategories }: { dataPosts: Post[]; dataCategories: Category[] } =
-    dataStore;
-
-  const coursesCategory = getCategoryData(dataCategories, 'courses');
-  const courses = getPostsList(dataPosts, coursesCategory?.id);
+  const { columnsCount, list = [] } = props;
 
   return (
     <div className={classes.Tile}>
-      {courses.length
-        ? courses.map((course: Post, index) => {
-            const { title, acf, link } = course;
-            const { speaker, location, format, theme, bhakti_level } = acf;
+      {list.length
+        ? list.map((course, index) => {
+            const { title, speaker, location, format, theme, bhakti_level, link } = course;
 
             const attrs = {
-              title: title.rendered,
+              title,
               speaker,
               location,
               format,

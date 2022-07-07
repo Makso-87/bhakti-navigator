@@ -1,0 +1,106 @@
+@import '../../css/styleVariables';
+
+.MaterialItemPage {
+  padding: 112px 0 0 114px;
+
+  .MainScreen {
+    position: relative;
+    padding: 22px 0 0;
+    margin: 0 0 120px;
+
+    .BgSmallCircle {
+      position: absolute;
+      bottom: 31px;
+      right: 0;
+      width: 75px;
+      height: 230px;
+      background: url(../../images/bg-small-circle-main-screen-course-item.svg) no-repeat (center / contain);
+    }
+
+    .SiteWrap {
+      @include site-wrap;
+      position: relative;
+      max-width: none;
+    }
+
+    .Content {
+      display: flex;
+
+      .LeftSide {
+        width: 60%;
+
+        h1 {
+          font-weight: 600;
+          font-size: 36px;
+          line-height: 44px;
+          margin: 0 0 17px;
+        }
+
+        .MaterialInfoBlitz {
+          .MaterialAuthor {
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 27px;
+            margin: 0 0 30px;
+          }
+
+          .Tags {
+            display: flex;
+            margin: 0 0 24px;
+
+            .TagItem {
+              font-weight: 600;
+              font-size: 16px;
+              line-height: 20px;
+              color: #647DB7;
+              padding: 3px 6px 1px;
+              border: 2px solid #647DB7;
+              margin: 0 20px 0 0;
+
+              &:last-child {
+                margin: 0;
+              }
+            }
+          }
+
+          .Theme {
+            font-size: 14px;
+            line-height: 24px;
+
+            .Name {
+              color: #6B6B6B;
+            }
+          }
+        }
+      }
+    }
+
+
+
+    .Content .RightSide {
+      width: 40%;
+      padding: 0 68px 0 0;
+      display: flex;
+      justify-content: flex-end;
+
+      .MaterialInfoExtended {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        max-width: 300px;
+
+        .Icon {
+          height: 166px;
+          width: 300px;
+          background: no-repeat right center / contain;
+          transform: translateX(54px);
+          margin: 0 0 40px;
+
+          &.Sadhusanga {
+            background-image: url(../../images/icons/sadhusanga.svg);
+          }
+        }
+      }
+    }
+  }
+}

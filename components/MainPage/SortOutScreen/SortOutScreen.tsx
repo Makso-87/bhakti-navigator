@@ -1,30 +1,31 @@
 import classes from './SortOutScreen.module.scss';
 import Link from 'next/link';
 import { Articles } from '../../CommonComponents/Articles/Articles';
-import { Category, Media, Page, Post } from '../../../interfaces/interfaces';
-import { getCategoryData, getPageData, getPostsList } from '../../../helpers/helpers';
-import dataStore from '../../../store/dataStore';
+import { Category, Page, Post, ServerData } from '../../../interfaces/interfaces';
+import {
+  getCategoryData,
+  getFormattedPosts,
+  getPageData,
+  getPostsList,
+} from '../../../helpers/helpers';
 import { observer } from 'mobx-react-lite';
+import { pairsFormattedPosts } from '../../../types/types';
 
-export const SortOutScreen = observer(() => {
-  const {
-    dataPages,
-    dataPosts,
-    dataCategories,
-  }: { dataPages: Page[]; dataMedia: Media[]; dataPosts: Post[]; dataCategories: Category[] } =
-    dataStore;
+export const SortOutScreen = observer((props) => {
+  const { dataPages, dataPosts, dataCategories }: ServerData = props;
 
   const mainPage: Page = getPageData(dataPages, 'main-page');
   const category: Category = getCategoryData(dataCategories, 'articles');
-  const posts = getPostsList(dataPosts, category?.id);
+  const posts: Post[] = getPostsList(dataPosts, category?.id);
   const { sort_out_screen_title = '', sort_out_screen_articles_number = 2 } = mainPage?.acf || {};
-  console.log('Страницы', JSON.parse(JSON.stringify(dataPages)));
-  console.log('Посты', JSON.parse(JSON.stringify(dataPosts)));
-  console.log('Категории', JSON.parse(JSON.stringify(dataCategories)));
-  console.log('Посты по категории', JSON.parse(JSON.stringify(posts)));
+  const list = getPostsList(posts, category?.id);
+  const formattedList: pairsFormattedPosts = getFormattedPosts(list);
+  const allowedPostsList = formattedList.filter(
+    (postPair, index) => index < sort_out_screen_articles_number
+  );
 
   const attrs = {
-    posts,
+    list: allowedPostsList,
     tileMaxCount: sort_out_screen_articles_number,
   };
 

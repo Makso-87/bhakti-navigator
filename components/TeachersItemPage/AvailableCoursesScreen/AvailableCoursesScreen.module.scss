@@ -1,0 +1,28 @@
+@import '../../../css/styleVariables';
+
+.AvailableCoursesScreen {
+  padding: 54px 0 54px;
+  position: relative;
+
+  h2 {
+    font-weight: 800;
+    font-size: 55px;
+    line-height: 67px;
+    color: rgba(100, 125, 183, 0.35);
+    margin: 0 0 40px;
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .BgBigCircle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 714px;
+    height: 812px;
+    background: url(../../../images/bg-small-circle-main-screen-available-courses.svg) no-repeat (center / contain);
+  }
+}

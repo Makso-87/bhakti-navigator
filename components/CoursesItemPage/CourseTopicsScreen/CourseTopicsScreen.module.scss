@@ -1,0 +1,118 @@
+@import '../../../css/styleVariables';
+
+.CourseTopicsScreen {
+  padding: 54px 0 54px;
+  position: relative;
+  overflow: hidden;
+
+  .BgCircle {
+    position: absolute;
+    max-height: 1936px;
+    max-width: 1136px;
+    width: 100%;
+    top: 0;
+    bottom: -200px;
+    right: 0;
+    background: url(../../../images/bg-big-circle-course-topics.svg) no-repeat center (right / contain);
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .Content {
+    position: relative;
+    z-index: 1;
+
+    h3 {
+      font-size: 36px;
+      line-height: 44px;
+      margin: 0 0 44px;
+    }
+
+    .TopicsList {
+      width: 1038px;
+      counter-reset: number 0;
+
+      .TopicsItem {
+        background: #FFFFFF;
+        box-shadow: 0 6px 35px rgba(74, 93, 160, 0.06);
+        border-radius: 25px;
+        margin: 0 0 24px;
+
+        &:last-child {
+          margin: 0;
+        }
+
+        .TopicBar {
+          position: relative;
+          padding: 35px 250px 35px 114px;
+          border-radius: 25px;
+          cursor: pointer;
+
+          .Text {
+            display: block;
+          }
+
+          &:after {
+            content: '';
+            width: 26px;
+            height: 17px;
+            background: url(../../../images/icons/black-arrow-bar.svg) no-repeat (center / contain);
+            display: block;
+            position: absolute;
+            right: 42px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+
+          &.Opened:after {
+            transform: rotate(180deg);
+          }
+
+          .Number {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            &:before {
+              counter-increment: number 1;
+              content: "0" counter(number);
+              font-weight: 800;
+              font-size: 55px;
+              line-height: 67px;
+              color: #FF9776;
+            }
+          }
+
+          .Name {
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 27px;
+          }
+
+          .BlitzDescription {
+            font-size: 18px;
+            line-height: 26px;
+          }
+        }
+
+        .TopicContent {
+          display: none;
+          padding: 20px 42px 20px 20px;
+
+          p {
+            font-size: 18px;
+            line-height: 26px;
+          }
+        }
+
+        .TopicBar:after {
+          @include transition;
+        }
+      }
+    }
+  }
+}

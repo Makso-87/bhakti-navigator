@@ -1,0 +1,135 @@
+@import '../../../css/styleVariables';
+
+.MainScreen {
+  padding: 53px 0 0;
+  position: relative;
+  margin: 0 0 108px;
+
+  .BgBigCircle {
+    display: none;
+    width: 1041px;
+    height: 481px;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url(../../../images/bg-big-circle-main-screen-teacher-page.svg) no-repeat (center / cover);
+  }
+
+  .BgSmallCircle {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 112px;
+    height: 229px;
+    background: url(../../../images/bg-small-circle-main-screen-teacher-page.svg) no-repeat (center / contain);
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .Content {
+    display: flex;
+    justify-content: space-between;
+
+    figure {
+      display: flex;
+      margin: 0;
+      align-items: center;
+
+      .ImgContainer {
+        margin: 0 60px 0 0;
+
+        .Img {
+          border-radius: 50%;
+          width: 268px;
+          height: 268px;
+          background: no-repeat center / contain;
+        }
+      }
+
+      figcaption {
+        max-width: 600px;
+
+        .ProjectInfoBlitz {
+        }
+
+        h1 {
+          font-size: 36px;
+          line-height: 44px;
+          color: #492613;
+          margin: 0 0 12px;
+        }
+
+        .Info .InfoItem {
+          display: flex;
+          font-weight: 500;
+          font-size: 22px;
+          line-height: 27px;
+          margin: 0 0 15px;
+
+          &:last-child {
+            margin: 0;
+          }
+
+          .Key {
+            margin: 0 5px 0 0;
+          }
+
+          .Value.Purple {
+            color: #411799;
+          }
+        }
+
+        .Seniority {
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          color: #6B6B6B;
+
+          span {
+          }
+        }
+
+        .Courses {
+          margin: 21px 0 0;
+
+          a {
+            position: relative;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 20px;
+            color: #647DB7;
+            padding: 0 16px 0 0;
+
+            &:after {
+              @include transition;
+              content: '';
+              display: block;
+              position: absolute;
+              right: 0;
+              top: 50%;
+              margin: 1px 0 0;
+              transform: translateY(-50%);
+              width: 10px;
+              height: 9px;
+              background: url(../../../images/icons/arrows-right.svg) no-repeat (center / contain);
+            }
+
+            &:hover:after {
+              right: -3px;
+            }
+          }
+
+          span {
+          }
+        }
+      }
+    }
+  }
+}

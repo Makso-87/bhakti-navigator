@@ -1,6 +1,10 @@
 import '../css/fonts.css';
 import '../css/normalize.css';
 import '../css/globals.css';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 import NextNProgress from 'nextjs-progressbar';
 import { PopupState } from '../context/popupState';
 

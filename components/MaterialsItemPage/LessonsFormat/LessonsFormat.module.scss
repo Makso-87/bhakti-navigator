@@ -1,0 +1,46 @@
+@import '../../../css/styleVariables';
+
+.LessonsFormat {
+  margin: 0 0 160px;
+
+  h2 {
+    font-size: 36px;
+    line-height: 44px;
+    color: #121212;
+    margin: 0 0 44px;
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .FormatsList {
+    margin: 0;
+    padding: 0 0 0 11px;
+
+    li {
+      list-style-type: none;
+      position: relative;
+      font-size: 18px;
+      line-height: 26px;
+      color: #000000;
+      margin: 0 0 24px;
+      padding: 0 0 0 44px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 0;
+        width: 16px;
+        height: 23px;
+        background: url(../../../images/icons/crop_inverted.svg) no-repeat (center / contain);
+      }
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}

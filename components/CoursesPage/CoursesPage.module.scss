@@ -10,53 +10,6 @@
     position: relative;
   }
 
-  .TabBar {
-    position: absolute;
-    display: flex;
-    margin: 0;
-    left: 147px;
-    top: 43px;
-    z-index: 1;
-  }
-}
-
-.CatalogPageTabBar .TabBarItem {
-  list-style-type: none;
-  margin: 0 64px 0 0;
-
-  &:last-child {
-    margin: 0;
-  }
-
-  a {
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-    line-height: 26px;
-    color: #647DB7;
-    position: relative;
-
-    &:hover, &.active {
-      color: #121212;
-    }
-
-    &:before {
-      content: '';
-      height: 2px;
-      width: 0;
-      background: #121212;
-      position: absolute;
-      left: 0;
-      bottom: -2px;
-    }
-
-    &.active:before {
-      width: 100%;
-    }
-  }
-}
-
-.CatalogPage {
   .Container {
     display: flex;
 
@@ -103,6 +56,7 @@
         display: flex;
         margin: 0 -17px;
         flex-wrap: wrap;
+        width: 100%;
 
         .Cell {
           padding: 0 17px;
@@ -172,10 +126,6 @@
           }
         }
       }
-    }
-
-    &.Materials .LeftSide .Grid .GridItem .Author {
-      margin-bottom: 18px;
     }
 
     .LeftSide .Grid .GridItem {
@@ -251,10 +201,6 @@
       }
     }
 
-    &.Materials .LeftSide .Grid .GridItem .LocationLogo {
-      bottom: 40px;
-    }
-
     .LeftSide .Grid .GridItem {
       .LocationLogo .Logo {
         background: no-repeat center / contain;
@@ -315,43 +261,6 @@
     padding: 40px 0 0;
   }
 
-  .Top {
-    display: flex;
-    margin: 0 0 60px;
-
-    .Search {
-      position: relative;
-
-      input {
-        border: none;
-        width: 522px;
-        height: 54px;
-        background: rgba(100, 125, 183, 0.07);
-        border-radius: 29px;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20px;
-        padding: 0 70px 0 31px;
-
-        &::-webkit-input-placeholder, &::-moz-placeholder, &:-moz-placeholder, &:-ms-input-placeholder {
-          color: #C5C5C5;
-        }
-      }
-
-      button {
-        position: absolute;
-        right: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-        -webkit-transform: translateY(-50%);
-        width: 29px;
-        height: 29px;
-        background: url(../../images/icons/search-blue.svg) no-repeat (center / contain);
-        border: none;
-      }
-    }
-  }
-
   .ItemsList {
     .Row {
       display: flex;
@@ -402,7 +311,7 @@
           justify-content: center;
           margin: 0 0 22px;
 
-          .img {
+          .Img {
             width: 128px;
             height: 128px;
             border-radius: 50%;
@@ -419,14 +328,6 @@
           height: 100%;
         }
       }
-    }
-  }
-
-  &.Projects .ItemsList .Item figure {
-    padding: 42px 0 23px;
-
-    figcaption {
-      padding: 0 19px;
     }
   }
 
@@ -484,7 +385,7 @@
       }
     }
 
-    .bottom {
+    .Bottom {
       display: flex;
       justify-content: center;
       padding: 40px 0 120px;
@@ -507,14 +408,6 @@
           background: url(../../images/icons/reload.svg) no-repeat (center / contain);
         }
       }
-    }
-  }
-
-  .TabBar .TabBarItem a {
-    @include transition;
-
-    &:before {
-      @include transition;
     }
   }
 

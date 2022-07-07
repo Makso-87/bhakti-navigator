@@ -3,7 +3,7 @@ import dataStore from '../store/dataStore';
 import { ServerData, ServerSideProps } from '../interfaces/interfaces';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../store/pagesStore';
-import config from '../config/config';
+import { getCategories, getMedia, getPages, getPosts } from '../helpers/helpers';
 
 const Index = observer(({ serverData }: ServerSideProps) => {
   const { dataPages, dataMedia, dataPosts, dataCategories }: ServerData = serverData;
@@ -18,7 +18,14 @@ const Index = observer(({ serverData }: ServerSideProps) => {
   setCategory('');
   setSecondaryTabBar(false);
 
-  return <MainPage />;
+  const attrs = {
+    dataPages,
+    dataMedia,
+    dataPosts,
+    dataCategories,
+  };
+
+  return <MainPage {...attrs} />;
 });
 
 export const getServerSideProps = async ({ query, req }) => {
@@ -30,12 +37,10 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePages = await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?per_page=100`);
-    const responseMedia = await fetch(`${config.API_URL}${config.WP_API_JSON}/media?per_page=100`);
-    const responsePosts = await fetch(`${config.API_URL}${config.WP_API_JSON}/posts?per_page=100`);
-    const responseCategories = await fetch(
-      `${config.API_URL}${config.WP_API_JSON}/categories?per_page=100`
-    );
+    const responsePages = await getPages();
+    const responseMedia = await getMedia();
+    const responsePosts = await getPosts();
+    const responseCategories = await getCategories();
 
     serverData.dataPages = await responsePages.json();
     serverData.dataMedia = await responseMedia.json();

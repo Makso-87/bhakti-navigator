@@ -1,0 +1,88 @@
+@import '../../../css/styleVariables';
+
+.MainScreen {
+  position: relative;
+  margin: 0 0 80px;
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .BgBigCircle {
+    display: none;
+    position: absolute;
+  }
+
+  .Content figure {
+    margin: 0;
+    display: flex;
+    align-items: center;
+
+    .ImgContainer {
+      margin: 0 60px 0 0;
+
+      .Img {
+        width: 268px;
+        height: 268px;
+        background: no-repeat center / contain;
+      }
+    }
+
+    figcaption {
+      max-width: 600px;
+
+      .ProjectInfoBlitz {
+      }
+
+      h1 {
+        font-size: 36px;
+        line-height: 44px;
+        color: #492613;
+        margin: 0 0 12px;
+      }
+
+      .Location {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: #6B6B6B;
+      }
+
+      .Link {
+        margin: 21px 0 0;
+
+        a {
+          position: relative;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 20px;
+          color: #647DB7;
+          padding: 0 16px 0 0;
+
+          &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            margin: 1px 0 0;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 9px;
+            background: url(../../../images/icons/arrows-right.svg) no-repeat (center / contain);
+          }
+
+          &:hover:after {
+            right: -3px;
+          }
+        }
+      }
+    }
+  }
+
+  .Content figure figcaption .Link a:after {
+    @include transition;
+  }
+}
