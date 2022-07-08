@@ -19,10 +19,10 @@ export const TestPage = () => {
     event.preventDefault();
     const element = event.currentTarget;
     const parent = element.closest(`.${classesQuestion.Question}`);
-    const variants = parent.querySelectorAll(
+    const variants: HTMLCollection = parent.querySelectorAll(
       `.${classesQuestion.Variants} .${classesQuestion.InputContainer}`
     );
-    const selectedVariants = Array.from(variants).filter((item: HTMLElement) => {
+    const selectedVariants: Element[] = Array.from(variants).filter((item: HTMLElement) => {
       const input = item.querySelectorAll('input:checked');
       return input.length;
     });
@@ -37,7 +37,7 @@ export const TestPage = () => {
         return item.querySelector('input').value;
       });
     } else {
-      const [selectedVariant]: HTMLElement = selectedVariants;
+      const [selectedVariant]: Element[] = selectedVariants;
       const selectedInput = selectedVariant.querySelector('input');
       questionAnswer = selectedInput.value;
     }
