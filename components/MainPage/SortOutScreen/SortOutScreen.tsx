@@ -47,7 +47,7 @@ export const SortOutScreen = observer((props) => {
         <Articles {...attrs} />
 
         <div className={classes.GoToBlog}>
-          <Link href='/blog'>
+          <Link href='/blog/articles'>
             <a>Перейти в Блог</a>
           </Link>
         </div>

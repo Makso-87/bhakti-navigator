@@ -25,7 +25,7 @@ export const Layout = (props) => {
       <Footer />
 
       <CSSTransition
-        in={popupContextData.popupVideo.state}
+        in={popupContextData?.popupVideo.state}
         timeout={400}
         mountOnEnter={true}
         unmountOnExit={true}

@@ -106,7 +106,7 @@ export const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href='/blog'>
+                        <Link href='/blog/articles'>
                           <a>Блог</a>
                         </Link>
                       </li>

@@ -41,7 +41,7 @@ export const HeaderContent = ({ logo = false }) => {
                 </Link>
               </li>
               <li>
-                <Link href='/blog'>
+                <Link href='/blog/articles'>
                   <a>Блог</a>
                 </Link>
               </li>
@@ -117,7 +117,7 @@ export const HeaderContent = ({ logo = false }) => {
         <div className={classes.SecondaryPagesTabContainer}>
           <ul className={classes.TabBar}>
             <li className={classes.TabBarItem}>
-              <Link href='/blog'>
+              <Link href='/blog/articles'>
                 <a className={currentPage === 'articles' ? classes.Active : ''}>Почитать</a>
               </Link>
             </li>

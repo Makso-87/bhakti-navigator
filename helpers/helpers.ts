@@ -66,11 +66,11 @@ export const throttle = (callee, timeout) => {
 };
 
 export const getPages = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?filter[posts_per_page]=-1`);
+  return await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?per_page=100`);
 };
 
 export const getPosts = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/posts?filter[posts_per_page]=-1`);
+  return await fetch(`${config.API_URL}${config.WP_API_JSON}/posts?per_page=900000`);
 };
 
 export const getPost = async (name: string) => {
@@ -78,11 +78,11 @@ export const getPost = async (name: string) => {
 };
 
 export const getMedia = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/media?filter[posts_per_page]=-1`);
+  return await fetch(`${config.API_URL}${config.WP_API_JSON}/media?per_page=100`);
 };
 
 export const getCategories = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/categories?filter[posts_per_page]=-1`);
+  return await fetch(`${config.API_URL}${config.WP_API_JSON}/categories?per_page=100`);
 };
 
 export const getPostData = (posts: Post[], name: string) => {

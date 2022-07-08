@@ -139,7 +139,7 @@ export const Header = observer(() => {
             </li>
 
             <li>
-              <Link href='/blog'>
+              <Link href='/blog/articles'>
                 <a className={category === 'Блог' ? classes.Active : ''}>
                   <div className={`${classes.Icon} ${classes.Blog}`} />
                   <span className={classes.Text}>Блог</span>

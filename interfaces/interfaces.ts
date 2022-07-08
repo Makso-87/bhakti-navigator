@@ -122,3 +122,13 @@ export interface QuestionProps {
   text: string;
   number: number;
 }
+
+export interface PopupVideo {
+  state: boolean;
+  link: string;
+}
+
+export interface PopupContextProps {
+  popupVideo: PopupVideo;
+  setPopupVideo: () => void;
+}

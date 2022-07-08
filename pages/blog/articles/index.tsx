@@ -1,8 +1,8 @@
-import { BlogPage } from '../../components/BlogPage/BlogPage';
+import { BlogPage } from '../../../components/BlogPage/BlogPage';
 import { observer } from 'mobx-react-lite';
-import { ServerData, ServerSideProps } from '../../interfaces/interfaces';
-import pagesStore from '../../store/pagesStore';
-import { getCategories, getPosts } from '../../helpers/helpers';
+import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
+import pagesStore from '../../../store/pagesStore';
+import { getCategories, getPosts } from '../../../helpers/helpers';
 
 const Blog = observer(({ serverData }: ServerSideProps) => {
   const { dataPosts, dataCategories }: ServerData = serverData;
