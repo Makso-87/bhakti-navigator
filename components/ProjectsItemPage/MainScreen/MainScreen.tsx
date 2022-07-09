@@ -20,7 +20,7 @@ export const MainScreen = (props) => {
                 <div className={classes.Location}>Москва</div>
 
                 <div className={classes.Link}>
-                  <a href='https://vk.com/bvpracticum' target='_blank'>
+                  <a href='https://vk.com/bvpracticum' target='_blank' rel='noreferrer'>
                     Перейти на сайт проекта
                   </a>
                 </div>

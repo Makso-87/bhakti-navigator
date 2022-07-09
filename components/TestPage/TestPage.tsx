@@ -578,37 +578,37 @@ export const TestPage = () => {
           <div className={classes.Results}>
             {testResult === 'before-sraddha' ? (
               <div className={`${classes.Result} ${classes.BeforeSraddha}`}>
-                Вы находитесь на уровне "Знакомство"
+                Вы находитесь на уровне &quot;Знакомство&quot;
               </div>
             ) : null}
 
             {testResult === 'sraddha' ? (
               <div className={`${classes.Result} ${classes.Sraddha}`}>
-                Вы находитесь на уровне "Шраддха"
+                Вы находитесь на уровне &quot;Шраддха&quot;
               </div>
             ) : null}
 
             {testResult === 'sadhu-sanga' ? (
               <div className={`${classes.Result} ${classes.SadhuSanga}`}>
-                Вы находитесь на уровне "Садху-санга"
+                Вы находитесь на уровне &quot;Садху-санга&quot;
               </div>
             ) : null}
 
             {testResult === 'bhajana-kriya-1' ? (
               <div className={`${classes.Result} ${classes.BhajanaKriya1}`}>
-                Вы находитесь на уровне "Бхаджана-крия (начало)"
+                Вы находитесь на уровне &quot;Бхаджана-крия (начало)&quot;
               </div>
             ) : null}
 
             {testResult === 'bhajana-kriya-2' ? (
               <div className={`${classes.Result} ${classes.BhajanaKriya2}`}>
-                Вы находитесь на уровне "Бхаджана-крия (продолжение)"
+                Вы находитесь на уровне &quot;Бхаджана-крия (продолжение)&quot;
               </div>
             ) : null}
 
             {testResult === 'anartha-nivritti' ? (
               <div className={`${classes.Result} ${classes.AnarthaNivritti}`}>
-                Вы находитесь на уровне "Анартха-нивритти"
+                Вы находитесь на уровне &quot;Анартха-нивритти&quot;
               </div>
             ) : null}
           </div>

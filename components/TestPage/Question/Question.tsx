@@ -21,9 +21,9 @@ export const Question = (props: QuestionProps) => {
 
       <div className={classes.Variants}>
         {variants.length
-          ? variants.map((item) => {
+          ? variants.map((item, index) => {
               return (
-                <div className={classes.InputContainer}>
+                <div key={index} className={classes.InputContainer}>
                   <input
                     type={item.type}
                     onChange={activeTestButton}

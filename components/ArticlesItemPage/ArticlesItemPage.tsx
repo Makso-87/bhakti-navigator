@@ -1,6 +1,7 @@
 import classes from './ArticlesItemPage.module.scss';
 import { Layout } from '../Layout';
 import articlePageMain from '../../images/article-page-main.jpg';
+import veda from '../../images/veda.jpg';
 
 export const ArticlesItemPage = (props) => {
   return (
@@ -58,13 +59,14 @@ export const ArticlesItemPage = (props) => {
                     больше переходить в формат, где каждый преданный, включая наиболее старших,
                     начнет делать акцент на непосредственном ведении по жизни небольшой группы
                     преданных, где у каждого будет своя такая же группа и т.д. При этом, наверняка,
-                    возникнут "школы мысли", то есть в рамках наследия Шрилы Прабхупады станут
-                    проявлены разные настроения, которые будут через эту систему распространяться.
+                    возникнут &quot;школы мысли&quot;, то есть в рамках наследия Шрилы Прабхупады
+                    станут проявлены разные настроения, которые будут через эту систему
+                    распространяться.
                   </p>
                 </li>
 
                 <li>
-                  <img src='./images/veda.jpg' alt='' />
+                  <img src={veda.src} alt='' />
                 </li>
 
                 <li>
@@ -146,16 +148,16 @@ export const ArticlesItemPage = (props) => {
                 </li>
 
                 {/*<li>*/}
-                {/*    <div className="other-article">*/}
-                {/*        <a href="#">*/}
+                {/*    <div className=&quot;other-article&quot;>*/}
+                {/*        <a href=&quot;#&quot;>*/}
                 {/*            <figure>*/}
-                {/*                <div className="img-container">*/}
-                {/*                    <div className="img" style="background-image: url(./images/veda.jpg)"></div>*/}
+                {/*                <div className=&quot;img-container&quot;>*/}
+                {/*                    <div className=&quot;img&quot; style=&quot;background-image: url(./images/veda.jpg)&quot;></div>*/}
                 {/*                </div>*/}
 
                 {/*                <figcaption>*/}
-                {/*                    <div className="name">Читать также:</div>*/}
-                {/*                    <div className="title">Другая тема</div>*/}
+                {/*                    <div className=&quot;name&quot;>Читать также:</div>*/}
+                {/*                    <div className=&quot;title&quot;>Другая тема</div>*/}
                 {/*                </figcaption>*/}
                 {/*            </figure>*/}
                 {/*        </a>*/}

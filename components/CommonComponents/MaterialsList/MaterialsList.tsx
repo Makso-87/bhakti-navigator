@@ -18,7 +18,7 @@ export const MaterialsList = (props) => {
               bhakti_level,
             };
 
-            return <MaterialItem {...attrs} />;
+            return <MaterialItem key={id} {...attrs} />;
           })
         : null}
     </div>

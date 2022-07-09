@@ -10,6 +10,7 @@ import logoCoskrWhite from '../../images/icons/logo-coskr-white.png';
 import { HeaderContent } from './HeaderContent/HeaderContent';
 import { useEffect } from 'react';
 import { throttle } from '../../helpers/helpers';
+import Image from 'next/image';
 
 export const Header = observer(() => {
   const { category, currentPage } = pagesStore;
@@ -93,7 +94,7 @@ export const Header = observer(() => {
           <div className={classes.Logo}>
             <Link href='/'>
               <a>
-                <img src={logoUrl} alt='' />
+                <Image src={logoUrl} alt='' width='60px' height='60px' />
               </a>
             </Link>
           </div>
