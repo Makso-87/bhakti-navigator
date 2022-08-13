@@ -1,4 +1,3 @@
-import { getCategories, getPosts } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { ArticlesItemPage } from '../../../components/ArticlesItemPage/ArticlesItemPage';
@@ -31,11 +30,11 @@ export const getServerSideProps = async ({ query }) => {
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    // const responsePosts = await getPosts();
+    // const responseCategories = await getCategories();
+    //
+    // serverData.dataPosts = await responsePosts.json();
+    // serverData.dataCategories = await responseCategories.json();
 
     return {
       props: {
