@@ -1,6 +1,7 @@
 import { Category, Media, Page, Post } from '../interfaces/interfaces';
 import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
+import urlDecoding from './urlDecoding';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -20,12 +21,10 @@ export const getCategoryData = (categories: Category[], categoryName): Category 
 
 export const getPostsList = (postsData: Post[], categoryId): Post[] => {
   return postsData.filter((item: Post) => {
-    const {
-      title: { rendered },
-      slug,
-      categories,
-    } = item;
-    return item.categories.includes(categoryId);
+    const { categories } = item;
+    const categoriesIds = categories.map((categoryItem) => categoryItem.id);
+
+    return categoriesIds.includes(categoryId);
   });
 };
 
@@ -65,16 +64,28 @@ export const throttle = (callee, timeout) => {
   };
 };
 
+export const convertServerDataObjectToArray = (obj: any) => {
+  return Object.entries(obj).map(([, value]) => value);
+};
+
 export const getPages = async () => {
   return await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?per_page=100`);
 };
 
-export const getPosts = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/posts?per_page=900000`);
+export const getALlPosts = async () => {
+  const response = await fetch(`${config.API_URL}${config.BN_API_JSON}/posts`);
+  return await response.json();
+};
+
+export const getPostsByCategory = async (category: string) => {
+  const response = await fetch(`${config.API_URL}${config.BN_API_JSON}/posts/${category}`);
+  const data = await response.json();
+  return convertServerDataObjectToArray(data);
 };
 
 export const getPost = async (name: string) => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/posts?slug=${name}`);
+  const response = await fetch(`${config.API_URL}${config.BN_API_JSON}/post/${name}`);
+  return await response.json();
 };
 
 export const getMedia = async () => {
@@ -85,9 +96,45 @@ export const getCategories = async () => {
   return await fetch(`${config.API_URL}${config.WP_API_JSON}/categories?per_page=100`);
 };
 
+export const getAllServerData = async () => {
+  const response = await fetch(`${config.API_URL}${config.BN_API_JSON}/data`);
+  const data = await response.json();
+  return {
+    pages: convertServerDataObjectToArray(data.pages),
+    posts: convertServerDataObjectToArray(data.posts),
+    categories: convertServerDataObjectToArray(data.categories),
+  };
+};
+
 export const getPostData = (posts: Post[], name: string) => {
   const [post] = posts.filter((item: Post) => item.slug === name);
   return post;
+};
+
+// const decoded = Object.entries(urlDecoding).map(([code, value]) => url.replaceAll(code, value));
+export const decodeUrl = (url) => {
+  const codeKeys = Object.keys(urlDecoding);
+  const encodedSymbols = codeKeys.filter((item) => url.includes(item));
+
+  if (encodedSymbols.length === 0) {
+    return url;
+  }
+
+  const decoded = Object.entries(urlDecoding).reduce((acc, [code, value]) => {
+    return acc.replaceAll(code, value);
+  }, url);
+  return decoded;
+};
+
+export const getLinksList = (string: string) => {
+  const trimmedString = string.replaceAll(' ', '');
+  const spacedString = trimmedString.replaceAll('http', ' http');
+  const list = spacedString
+    .split(' ')
+    .filter((item) => item !== '')
+    .map((item) => decodeUrl(item));
+
+  return list;
 };
 
 export const slideDown = (element, speed = 400) => {

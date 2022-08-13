@@ -3,24 +3,23 @@ import dataStore from '../store/dataStore';
 import { ServerData, ServerSideProps } from '../interfaces/interfaces';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../store/pagesStore';
-import { getCategories, getMedia, getPages, getPosts } from '../helpers/helpers';
+import { getAllServerData, getCategories, getMedia, getPages } from '../helpers/helpers';
 
 const Index = observer(({ serverData }: ServerSideProps) => {
-  const { dataPages, dataMedia, dataPosts, dataCategories }: ServerData = serverData;
+  const { dataPages, dataPosts, dataCategories }: ServerData = serverData;
   const { setCurrentPage, setCategory, setSecondaryTabBar } = pagesStore;
   const { setDataPages, setDataPosts, setDataMedia, setDataCategories } = dataStore;
 
-  setDataPages(dataPages);
-  setDataPosts(dataPosts);
-  setDataMedia(dataMedia);
-  setDataCategories(dataCategories);
+  // setDataPages(dataPages);
+  // setDataPosts(dataPosts);
+  // setDataMedia(dataMedia);
+  // setDataCategories(dataCategories);
   setCurrentPage('main');
   setCategory('');
   setSecondaryTabBar(false);
 
   const attrs = {
     dataPages,
-    dataMedia,
     dataPosts,
     dataCategories,
   };
@@ -37,15 +36,11 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePages = await getPages();
-    const responseMedia = await getMedia();
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
+    const data = await getAllServerData();
 
-    serverData.dataPages = await responsePages.json();
-    serverData.dataMedia = await responseMedia.json();
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPages = data.pages;
+    serverData.dataPosts = data.posts;
+    serverData.dataCategories = data.categories;
 
     return {
       props: {

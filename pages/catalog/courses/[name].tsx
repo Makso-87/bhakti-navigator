@@ -1,19 +1,19 @@
 import { CoursesItemPage } from '../../../components/CoursesItemPage/CoursesItemPage';
-import { getCategories, getPosts } from '../../../helpers/helpers';
+import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 
 const CoursesItem = ({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories, postName }: ServerData = serverData;
+  const { dataPost }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('courses');
   setSecondaryTabBar(true);
   setCategory('Каталог');
 
+  console.log(dataPost);
+
   const attrs = {
-    postName,
-    dataPosts,
-    dataCategories,
+    dataPost,
   };
 
   return <CoursesItemPage {...attrs} />;
@@ -26,16 +26,12 @@ export const getServerSideProps = async ({ query, req }) => {
     postName: query.name,
     dataPages: [],
     dataMedia: [],
-    dataPosts: [],
+    dataPost: {},
     dataCategories: [],
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPost = await getPost(query.name);
 
     return {
       props: {

@@ -1,5 +1,6 @@
 import classes from './CoursesList.module.scss';
 import { CourseItem } from './CourseItem/CourseItem';
+import { getLink } from '../../../helpers/helpers';
 
 export const CoursesList = (props) => {
   const { columnsCount, list = [] } = props;
@@ -8,16 +9,17 @@ export const CoursesList = (props) => {
     <div className={classes.Tile}>
       {list.length
         ? list.map((course, index) => {
-            const { title, speaker, location, format, theme, bhakti_level, link } = course;
+            const { title, acf, link } = course;
+            const { speaker, location, format, theme, bhakti_level } = acf;
 
             const attrs = {
               title,
-              speaker,
+              speaker: speaker?.title || '',
               location,
               format,
               theme,
               bhakti_level,
-              link,
+              link: getLink(link),
               columnsCount,
             };
 

@@ -7,15 +7,17 @@ import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { Recommendations } from '../CommonComponents/Recommendations/Recommendations';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
 import { MainScreen } from './MainScreen/MainScreen';
+import { Post } from '../../interfaces/interfaces';
 
-export const TeachersItemPage = (props) => {
+export const TeachersItemPage = ({ post }: { post: Post }) => {
+  const { courses } = post.acf;
   return (
     <Layout>
       <div className={classes.TeacherItemPage}>
-        <MainScreen />
-        <AboutScreen />
-        <AvailableCoursesScreen />
-        <TeacherNote />
+        <MainScreen post={post} />
+        <AboutScreen post={post} />
+        {courses.length ? <AvailableCoursesScreen post={post} /> : null}
+        <TeacherNote post={post} />
         <Feedback />
         <Recommendations />
         <BannerNote />

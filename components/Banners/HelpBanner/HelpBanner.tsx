@@ -1,9 +1,15 @@
 import classes from './HelpBanner.module.scss';
 import testtostart from '../../../images/testtostart.png';
+import cn from 'classnames';
 
-export const HelpBanner = () => {
+export const HelpBanner = (props) => {
+  const { marginBottomNone = false } = props;
+  const classesHelpBanner = cn(classes.HelpBanner, {
+    [classes.MarginBottomNone]: marginBottomNone,
+  });
+
   return (
-    <div className={classes.HelpBanner}>
+    <div className={classesHelpBanner}>
       <div className={classes.SiteWrap}>
         <div className={classes.Content}>
           <div className={classes.LeftSide}>
@@ -13,7 +19,7 @@ export const HelpBanner = () => {
             </div>
 
             <div className={classes.Button}>
-              <a href='/navigator/page_of_test.php'>Пройти тест!</a>
+              <a href='/navigator/page_of_test.php'>Пройти тест</a>
             </div>
           </div>
 

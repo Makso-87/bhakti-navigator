@@ -1,44 +1,45 @@
 import classes from './Teachers.module.scss';
-import pramanandaPuri from '../../../images/teachers/pramananda_puri.png';
+import Link from 'next/link';
+import { Post } from '../../../interfaces/interfaces';
+import { getLink } from '../../../helpers/helpers';
 
 export const Teachers = (props) => {
+  const { teachers = [] } = props;
+  const headerText = teachers.length > 1 ? 'Преподаватели' : 'Преподаватель';
   return (
     <div className={classes.TeachersScreen}>
-      <h2>Преподаватели</h2>
+      <h2>{headerText}</h2>
 
       <div className={classes.SiteWrap}>
         <div className={classes.TeachersList}>
-          <div className={classes.TeachersItem}>
-            <figure>
-              <div className={classes.ImgContainer}>
-                <div
-                  className={classes.Img}
-                  style={{ backgroundImage: `url(${pramanandaPuri.src})` }}
-                ></div>
-              </div>
+          {teachers.length
+            ? teachers.map((item: Post) => {
+                const { title, id, link, acf } = item;
+                const { teacher_photo } = acf;
 
-              <figcaption>
-                <div className={classes.Name}>Парамананда Пури дас</div>
-                <div className={classes.Role}>Руководитель Бхакти центра</div>
-              </figcaption>
-            </figure>
-          </div>
+                return (
+                  <div key={id} className={classes.TeachersItem}>
+                    <Link href={getLink(link)}>
+                      <a>
+                        <figure>
+                          <div className={classes.ImgContainer}>
+                            <div
+                              className={classes.Img}
+                              style={{ backgroundImage: `url(${teacher_photo})` }}
+                            ></div>
+                          </div>
 
-          <div className={classes.TeachersItem}>
-            <figure>
-              <div className={classes.ImgContainer}>
-                <div
-                  className={classes.Img}
-                  style={{ backgroundImage: `url(${pramanandaPuri.src})` }}
-                ></div>
-              </div>
-
-              <figcaption>
-                <div className={classes.Name}>Парамананда Пури дас</div>
-                <div className={classes.Role}>Руководитель Бхакти центра</div>
-              </figcaption>
-            </figure>
-          </div>
+                          <figcaption>
+                            <div className={classes.Name}>{title}</div>
+                            <div className={classes.Role}>преподаватель</div>
+                          </figcaption>
+                        </figure>
+                      </a>
+                    </Link>
+                  </div>
+                );
+              })
+            : null}
         </div>
       </div>
     </div>

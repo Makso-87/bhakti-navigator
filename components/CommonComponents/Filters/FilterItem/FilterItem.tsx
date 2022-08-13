@@ -32,7 +32,7 @@ export const FilterItem = (props: FilterItemProps) => {
       <div className={classes.ListContainer}>
         <ul>
           {children.map((child, index) => {
-            return index !== children.length - 1 ? child : null;
+            return index !== children.length ? child : null;
           })}
         </ul>
 

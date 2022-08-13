@@ -5,6 +5,10 @@
   margin: 0 0 89px;
   background: #F7F5EF;
 
+  &.MarginBottomNone {
+    margin-bottom: 0;
+  }
+
 	.SiteWrap {
 		@include site-wrap;
 	}

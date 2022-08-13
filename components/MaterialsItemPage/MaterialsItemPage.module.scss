@@ -42,6 +42,15 @@
             font-size: 22px;
             line-height: 27px;
             margin: 0 0 30px;
+
+            a {
+              text-decoration: none;
+              @include transition;
+
+              &:hover {
+                color: #FF9776;
+              }
+            }
           }
 
           .Tags {
@@ -74,7 +83,7 @@
         }
       }
     }
-    
+
     .Content .RightSide {
       width: 40%;
       padding: 0 68px 0 0;
@@ -98,6 +107,33 @@
             background-image: url(../../images/icons/sadhusanga.svg);
           }
         }
+      }
+    }
+  }
+
+  .MaterialOnline {
+    margin: 0 0 50px;
+
+    .Title {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+      margin: 0 0 30px;
+    }
+
+    .VideoContainer {
+      position: relative;
+      padding: 25% 0 0;
+      width: 700px;
+      margin: 108px auto 0;
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
       }
     }
   }

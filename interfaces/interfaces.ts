@@ -3,6 +3,7 @@ import { pairsFormattedPosts } from '../types/types';
 
 export interface Page {
   id: number;
+  title: string;
   date: string;
   slug: string;
   acf: any;
@@ -12,9 +13,7 @@ export interface Media {
   id: number;
   date: string;
   slug: string;
-  title: {
-    rendered: string;
-  };
+  title: string;
   alt_text: string;
   caption: object;
   source_url: string;
@@ -34,11 +33,9 @@ export interface Post {
   date: string;
   slug: string;
   link: string;
-  title: {
-    rendered: string;
-  };
+  title: string;
   acf: any;
-  categories: [number];
+  categories: Category[];
 }
 
 export interface Article<Post> {
@@ -54,6 +51,7 @@ export interface ServerData {
   dataPages?: [Page];
   dataMedia?: [Media];
   dataPosts?: [Post];
+  dataPost?: Post;
   dataCategories?: [Category];
   dataMenuBlog?: Menu;
   dataMenuHeader?: Menu;
@@ -130,5 +128,5 @@ export interface PopupVideo {
 
 export interface PopupContextProps {
   popupVideo: PopupVideo;
-  setPopupVideo: () => void;
+  setPopupVideo: ({ state, link, ref }: { state: any; link: string; ref: any }) => void;
 }

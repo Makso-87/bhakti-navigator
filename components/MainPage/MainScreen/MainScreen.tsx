@@ -36,13 +36,13 @@ export const MainScreen = observer(() => {
 
             <div className={classes.Button}>
               <Link href={'/test'}>
-                <a>Пройти тест!</a>
+                <a>Пройти тест</a>
               </Link>
             </div>
 
             <div className={classes.WayImg}>
               <div className={`${classes.WayMark} ${classes.WaySortOrder}`}>
-                <a href='#sort-order'>Разобраться</a>
+                <a href='#sort-out'>Разобраться</a>
               </div>
 
               <div className={`${classes.WayMark} ${classes.WayFind}`}>

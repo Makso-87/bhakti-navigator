@@ -2,7 +2,7 @@ import { BlogPage } from '../../../components/BlogPage/BlogPage';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
-import { getCategories, getPosts } from '../../../helpers/helpers';
+import { getPostsByCategory } from '../../../helpers/helpers';
 
 const Blog = observer(({ serverData }: ServerSideProps) => {
   const { dataPosts, dataCategories }: ServerData = serverData;
@@ -17,8 +17,6 @@ const Blog = observer(({ serverData }: ServerSideProps) => {
     categories: dataCategories,
   };
 
-  console.log(serverData);
-
   return <BlogPage {...attrs} />;
 });
 
@@ -30,11 +28,7 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPosts = await getPostsByCategory('articles');
 
     return {
       props: {

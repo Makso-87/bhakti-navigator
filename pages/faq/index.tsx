@@ -1,22 +1,20 @@
 import { FAQPage } from '../../components/FAQPage/FAQPage';
-import { getCategories, getCategoryData, getPosts, getPostsList } from '../../helpers/helpers';
+import { getPostsByCategory } from '../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../interfaces/interfaces';
 import pagesStore from '../../store/pagesStore';
 
 const Faq = ({ serverData }: ServerSideProps) => {
   const { dataPosts, dataCategories }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  const coursesCategory = getCategoryData(dataCategories, 'faq');
-  const faqs = getPostsList(dataPosts, coursesCategory?.id);
   setSecondaryTabBar(true);
   setCurrentPage('faq');
   setCategory('Вопросы и ответы');
 
-  const list = faqs.map((item) => {
+  const list = dataPosts.map((item) => {
     const { title, acf } = item;
     const { author, video_url, video_duration, preview_image } = acf;
     return {
-      title: title.rendered,
+      title,
       author,
       video_url,
       video_duration,
@@ -38,11 +36,7 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPosts = await getPostsByCategory('faq');
 
     return {
       props: {

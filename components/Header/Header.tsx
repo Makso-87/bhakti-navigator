@@ -15,7 +15,6 @@ import Image from 'next/image';
 export const Header = observer(() => {
   const { category, currentPage } = pagesStore;
   const logoUrl = logo.src;
-  console.log(currentPage);
 
   const classesHeader = cn(classesHeaderContent.Header, {
     [classesHeaderContent.FunctionalPage]: category !== '',

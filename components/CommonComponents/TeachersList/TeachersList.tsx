@@ -5,7 +5,8 @@ export const TeachersList = ({ list }) => {
     <div className={classes.Row}>
       {list.length
         ? list.map((item) => {
-            const { id, title, link, city, teacher_photo } = item;
+            const { id, title, link, city, teacher_photo, courses } = item;
+
             return (
               <div key={id} className={classes.Cell}>
                 <a href={link}>
@@ -32,7 +33,9 @@ export const TeachersList = ({ list }) => {
 
                             <div className={classes.InfoItem}>
                               <div className={classes.Key}>Доступно:</div>
-                              <div className={`${classes.Value} ${classes.Blue}`}>3 курса</div>
+                              <div className={`${classes.Value} ${classes.Blue}`}>
+                                {courses.length} курса
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -36,6 +36,11 @@ export const HeaderContent = ({ logo = false }) => {
                 </Link>
               </li>
               <li>
+                <Link href='#'>
+                  <a>Карта</a>
+                </Link>
+              </li>
+              <li>
                 <Link href='/faq'>
                   <a>Вопросы и ответы</a>
                 </Link>
@@ -57,13 +62,13 @@ export const HeaderContent = ({ logo = false }) => {
               <div className={classes.SearchTrigger} />
 
               <div className={classes.SignIn}>
-                <Link href='/authorization_page?auth=sign_in'>
+                <Link href='/authorization?auth=sign_in'>
                   <a>Вход</a>
                 </Link>
               </div>
 
               <div className={classes.SignUp}>
-                <Link href='/authorization_page?auth=sign_up'>
+                <Link href='/authorization?auth=sign_up'>
                   <a>Регистрация</a>
                 </Link>
               </div>
@@ -107,6 +112,12 @@ export const HeaderContent = ({ logo = false }) => {
             <li className={classes.TabBarItem}>
               <Link href='/catalog/materials'>
                 <a className={currentPage === 'materials' ? classes.Active : ''}>Материалы</a>
+              </Link>
+            </li>
+
+            <li className={classes.TabBarItem}>
+              <Link href='/catalog/records'>
+                <a className={currentPage === 'records' ? classes.Active : ''}>Курсы в записи</a>
               </Link>
             </li>
           </ul>

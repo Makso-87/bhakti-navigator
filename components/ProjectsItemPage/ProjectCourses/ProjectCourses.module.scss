@@ -1,0 +1,40 @@
+@import '../../../css/styleVariables';
+
+.ProjectCourses {
+  padding: 50px 0 50px;
+  margin: 0 0 50px;
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: none;
+  }
+
+  .Title {
+    font-weight: 800;
+    font-size: 55px;
+    line-height: 67px;
+    color: #C8D1E5;
+    margin: 0 0 40px;
+  }
+
+  .CoursesList {
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+      margin: 0 0 20px;
+
+      a {
+        text-decoration: none;
+        font-size: 26px;
+        line-height: 26px;
+        @include transition;
+
+        &:hover {
+          color: #FF9776;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 import { ProjectsItemPage } from '../../../components/ProjectsItemPage/ProjectsItemPage';
 import { useRouter } from 'next/router';
-import { getCategories, getPosts } from '../../../helpers/helpers';
+import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 
 const ProjectItem = ({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories, postName }: ServerData = serverData;
+  const { dataPost }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('projects');
   setSecondaryTabBar(true);
@@ -13,10 +13,7 @@ const ProjectItem = ({ serverData }: ServerSideProps) => {
   const router = useRouter();
 
   const attrs = {
-    postName,
-    dataPosts,
-    dataCategories,
-    name: router.query.name,
+    dataPost,
   };
 
   return <ProjectsItemPage {...attrs} />;
@@ -30,15 +27,12 @@ export const getServerSideProps = async ({ query, req }) => {
     dataPages: [],
     dataMedia: [],
     dataPosts: [],
+    dataPost: {},
     dataCategories: [],
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPost = await getPost(query.name);
 
     return {
       props: {

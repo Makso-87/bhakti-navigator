@@ -9,10 +9,11 @@ export const MaterialItem = (props) => {
     [classes.Shraddha]: bhakti_level.value === 'shraddha',
     [classes.Sadhusanga]: bhakti_level.value === 'sadhu_sanga',
     [classes.BhadjanaKriya]: bhakti_level.value.includes('bhadjana_kriya'),
-    [classes.Book]: type.value === 'text',
-    [classes.File]: type.value === 'file',
-    [classes.Audio]: type.value === 'audio',
-    [classes.Video]: type.value === 'video',
+    [classes.Book]: type?.value === 'text',
+    [classes.File]: type?.value === 'file',
+    [classes.Audio]: type?.value === 'audio',
+    [classes.Video]: type?.value === 'video',
+    [classes.AudioAndVideo]: type?.value === 'audio_and_video',
   });
 
   return (
@@ -23,7 +24,7 @@ export const MaterialItem = (props) => {
 
           <div className={classes.Author}>
             <span className={classes.AuthorName}>Автор: </span>
-            <span className={classes.AuthorValue}>{author}</span>
+            <span className={classes.AuthorValue}>{author?.title}</span>
           </div>
 
           <div className={classes.Info}>

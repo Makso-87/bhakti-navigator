@@ -4,6 +4,7 @@ import classes from './Footer.module.scss';
 import bhaktiNavigatorLogo from '../../images/icons/bhakti-navigator-logo.png';
 import logoCoskr from '../../images/icons/logo-coskr.png';
 import insta from '../../images/icons/insta.svg';
+import telegram from '../../images/icons/telegram.png';
 import youtubeBlack from '../../images/icons/youtube-black.svg';
 import pagesStore from '../../store/pagesStore';
 
@@ -53,26 +54,37 @@ export const Footer = () => {
               <div className={classes.Buttons}>
                 <div className={classes.Social}>
                   <div className={classes.SocialItem}>
-                    <Link href='#'>
-                      <a>
+                    <Link href='https://t.me/bhaktinavigator'>
+                      <a target='_blank'>
                         <div
                           className={classes.Img}
-                          style={{ backgroundImage: `url(${insta.src})` }}
+                          style={{ backgroundImage: `url(${telegram.src})` }}
                         />
                       </a>
                     </Link>
                   </div>
 
-                  <div className={classes.SocialItem}>
-                    <Link href='#'>
-                      <a>
-                        <div
-                          className={classes.Img}
-                          style={{ backgroundImage: ` url(${youtubeBlack.src})` }}
-                        />
-                      </a>
-                    </Link>
-                  </div>
+                  {/*<div className={classes.SocialItem}>*/}
+                  {/*  <Link href='#'>*/}
+                  {/*    <a>*/}
+                  {/*      <div*/}
+                  {/*        className={classes.Img}*/}
+                  {/*        style={{ backgroundImage: `url(${insta.src})` }}*/}
+                  {/*      />*/}
+                  {/*    </a>*/}
+                  {/*  </Link>*/}
+                  {/*</div>*/}
+
+                  {/*<div className={classes.SocialItem}>*/}
+                  {/*  <Link href='#'>*/}
+                  {/*    <a>*/}
+                  {/*      <div*/}
+                  {/*        className={classes.Img}*/}
+                  {/*        style={{ backgroundImage: ` url(${youtubeBlack.src})` }}*/}
+                  {/*      />*/}
+                  {/*    </a>*/}
+                  {/*  </Link>*/}
+                  {/*</div>*/}
                 </div>
 
                 <div className={classes.Donation}>
@@ -91,7 +103,7 @@ export const Footer = () => {
 
                     <ul>
                       <li>
-                        <Link href='#'>
+                        <Link href='/catalog/courses'>
                           <a>Каталог</a>
                         </Link>
                       </li>
@@ -101,8 +113,8 @@ export const Footer = () => {
                         </Link>
                       </li>
                       <li>
-                        <Link href='#'>
-                          <a>Медиа</a>
+                        <Link href='/faq'>
+                          <a>Вопросы и ответы</a>
                         </Link>
                       </li>
                       <li>
@@ -119,7 +131,7 @@ export const Footer = () => {
                   </div>
 
                   <div className={`${classes.BottomInfo} ${classes.Rights}`}>
-                    Все права защищены
+                    {/*Все права защищены*/}
                   </div>
                 </div>
 

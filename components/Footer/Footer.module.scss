@@ -10,7 +10,7 @@
 
   .Top {
     background: #fff;
-    padding: 14px 0 6px;
+    padding: 30px 0 6px;
 
     .SiteWrap {
       @include site-wrap;
@@ -103,6 +103,7 @@
                   height: 44px;
                   position: relative;
                   opacity: 0.65;
+                  background: center center / cover;
 
                   &:hover {
                     opacity: 1;
@@ -186,14 +187,14 @@
               }
 
               .BottomInfo {
-                font-weight: 300;
+                font-weight: 500;
                 font-size: 12px;
                 line-height: 15px;
-                color: #B0BECF;
+                color: #3c3c3c;
 
                 a {
                   text-decoration: none;
-                  color: #B0BECF;
+                  color: #3c3c3c;
 
                   &:hover {
                     color: #ECE42F;
@@ -209,7 +210,7 @@
   }
 
   .Bottom {
-    background: #000;
+    background: #E2E7F1;
     height: 52px;
     display: flex;
     align-items: center;
@@ -218,7 +219,7 @@
     .Text {
       font-size: 14px;
       line-height: 17px;
-      color: #fff;
+      color: #3c3c3c;
       max-width: 1055px;
     }
   }

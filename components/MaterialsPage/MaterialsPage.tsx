@@ -5,6 +5,7 @@ import { MaterialsList } from '../CommonComponents/MaterialsList/MaterialsList';
 import { Filters } from '../CommonComponents/Filters/Filters';
 import { FilterItem } from '../CommonComponents/Filters/FilterItem/FilterItem';
 import { FilterElement } from '../CommonComponents/Filters/FilterElement/FilterElement';
+import { HelpBanner } from '../Banners/HelpBanner/HelpBanner';
 
 export const MaterialsPage = (props) => {
   const { list } = props;
@@ -85,6 +86,8 @@ export const MaterialsPage = (props) => {
             </div>
           </div>
         </div>
+
+        <HelpBanner marginBottomNone={true} />
       </div>
     </Layout>
   );

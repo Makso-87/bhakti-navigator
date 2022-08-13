@@ -5,6 +5,7 @@ import { Filters } from '../CommonComponents/Filters/Filters';
 import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import { FilterItem } from '../CommonComponents/Filters/FilterItem/FilterItem';
 import { FilterElement } from '../CommonComponents/Filters/FilterElement/FilterElement';
+import { HelpBanner } from '../Banners/HelpBanner/HelpBanner';
 
 export const CoursesPage = (props) => {
   const { list } = props;
@@ -109,6 +110,8 @@ export const CoursesPage = (props) => {
             </div>
           </div>
         </div>
+
+        <HelpBanner marginBottomNone={true} />
       </div>
     </Layout>
   );

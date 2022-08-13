@@ -1,7 +1,10 @@
 import classes from './MainScreen.module.scss';
-import bhaktiVigyanaGosvami from '../../../images/teachers/bhakti-vigyana-gosvami.png';
+import { Post } from '../../../interfaces/interfaces';
 
-export const MainScreen = (props) => {
+export const MainScreen = ({ post }: { post: Post }) => {
+  const { title, acf } = post;
+  const { teacher_photo = '#', in_iskcon_since = '', courses = [] } = acf || {};
+
   return (
     <div className={classes.MainScreen}>
       <div className={classes.BgBigCircle} />
@@ -13,20 +16,20 @@ export const MainScreen = (props) => {
             <div className={classes.ImgContainer}>
               <div
                 className={classes.Img}
-                style={{ backgroundImage: `url(${bhaktiVigyanaGosvami.src})` }}
+                style={{ backgroundImage: `url(${teacher_photo})` }}
               ></div>
             </div>
 
             <figcaption>
-              <h1 className={classes.Name}>Бхакти Вигьяна Госвами</h1>
+              <h1 className={classes.Name}>{title}</h1>
 
               <div className={classes.Seniority}>
-                В ИСККОН <span className={classes.Value}>с 1978-го года</span>
+                В ИСККОН <span className={classes.Value}>{in_iskcon_since}</span>
               </div>
 
               <div className={classes.Courses}>
-                <a href='#'>
-                  Доступно курсов: <span className={classes.Value}>3</span>
+                <a href='#available-courses'>
+                  Доступно курсов: <span className={classes.Value}>{courses.length}</span>
                 </a>
               </div>
             </figcaption>

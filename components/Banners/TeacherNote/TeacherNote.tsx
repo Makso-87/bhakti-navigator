@@ -1,6 +1,6 @@
 import classes from './TeacherNote.module.scss';
 
-export const TeacherNote = () => {
+export const TeacherNote = (props) => {
   return (
     <div className={classes.TeacherNote}>
       <div className={classes.Text}>

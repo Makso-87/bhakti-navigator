@@ -7,7 +7,7 @@ export const CourseTopicsScreen = (props) => {
 
       <div className={classes.SiteWrap}>
         <div className={classes.Content}>
-          <h3>Темы курса</h3>
+          <h2>Темы курса</h2>
 
           <div className={classes.TopicsList}>
             <div className={classes.TopicsItem}>

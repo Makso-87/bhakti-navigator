@@ -2,19 +2,23 @@ import { Layout } from '../Layout';
 import classes from './ProjectsItemPage.module.scss';
 import { MainScreen } from './MainScreen/MainScreen';
 import { AboutScreen } from '../CommonComponents/AboutScreen/AboutScreen';
-import { LessonsFormat } from '../MaterialsItemPage/LessonsFormat/LessonsFormat';
 import { ForWhom } from '../CommonComponents/ForWhom/ForWhom';
 import { Teachers } from '../CommonComponents/Teachers/Teachers';
 import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
+import { ServerData } from '../../interfaces/interfaces';
+import { ProjectCourses } from './ProjectCourses/ProjectCourses';
 
-export const ProjectsItemPage = (props) => {
+export const ProjectsItemPage = ({ dataPost }: ServerData) => {
+  const { acf } = dataPost;
+  const { courses = [] } = acf;
+
   return (
     <Layout>
       <div className={classes.ProjectItemPage}>
         <MainScreen />
         <AboutScreen />
-        <LessonsFormat />
+        <ProjectCourses list={courses} />
         <ForWhom />
         <Teachers />
         <Feedback />

@@ -6,6 +6,7 @@
   overflow: hidden;
 
   .BgCircle {
+    display: none;
     position: absolute;
     max-height: 1936px;
     max-width: 1136px;
@@ -25,10 +26,12 @@
     position: relative;
     z-index: 1;
 
-    h3 {
-      font-size: 36px;
-      line-height: 44px;
-      margin: 0 0 44px;
+    h2 {
+      font-weight: 800;
+      font-size: 55px;
+      line-height: 67px;
+      color: #C8D1E5;
+      margin: 0 0 40px;
     }
 
     .TopicsList {

@@ -1,17 +1,13 @@
 import { Layout } from '../Layout';
 import { Articles } from '../CommonComponents/Articles/Articles';
-import { Category } from '../../interfaces/interfaces';
-import { getCategoryData, getFormattedPosts, getPostsList } from '../../helpers/helpers';
+import { getFormattedPosts } from '../../helpers/helpers';
 import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import classes from './BlogPage.module.scss';
 import { pairsFormattedPosts } from '../../types/types';
 
 export const BlogPage = ({ posts, categories }) => {
-  const category: Category = getCategoryData(categories, 'articles');
-  const list = getPostsList(posts, category?.id);
   const tileMaxCount = 3;
-
-  const formattedList: pairsFormattedPosts = getFormattedPosts(list);
+  const formattedList: pairsFormattedPosts = getFormattedPosts(posts);
   const allowedPostsList = formattedList.filter((postPair, index) => index < tileMaxCount);
 
   const attrs = {

@@ -9,24 +9,26 @@ import { ForWhom } from '../CommonComponents/ForWhom/ForWhom';
 import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { Recommendations } from '../CommonComponents/Recommendations/Recommendations';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
-import { ServerData } from '../../interfaces/interfaces';
-import { getPostData } from '../../helpers/helpers';
+import { Post, ServerData } from '../../interfaces/interfaces';
 
 export const CoursesItemPage = (props: ServerData) => {
-  const { dataPosts, dataCategories, postName } = props;
-  const course = getPostData(dataPosts, postName);
+  const { dataPost } = props;
+  const course: Post = { ...dataPost };
+  const { acf } = course;
+  const { teachers = [] } = acf || {};
+
   return (
     <Layout>
       <div className={classes.CourseItemPage}>
-        <MainScreen />
+        <MainScreen course={course} />
         <AboutScreen />
         <CourseTopicsScreen />
-        <Teachers />
         <ForWhom />
+        {teachers.length ? <Teachers teachers={teachers} /> : null}
+        <BannerNote />
         <Feedback />
         <InfoScreen />
         <Recommendations />
-        <BannerNote />
       </div>
     </Layout>
   );

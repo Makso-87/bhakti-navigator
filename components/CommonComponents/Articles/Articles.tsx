@@ -20,7 +20,7 @@ export const Articles = observer(({ list = [] }: ArticlesProps) => {
                         index,
                         link,
                         imgUrl: article_main_image,
-                        title: title.rendered,
+                        title,
                         note: title_additional_text,
                         readingTime: reading_time,
                       };

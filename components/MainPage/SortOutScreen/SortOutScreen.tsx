@@ -1,5 +1,7 @@
 import classes from './SortOutScreen.module.scss';
 import Link from 'next/link';
+import ScrollableAnchor from 'react-scrollable-anchor';
+import { configureAnchors } from 'react-scrollable-anchor';
 import { Articles } from '../../CommonComponents/Articles/Articles';
 import { Category, Page, Post, ServerData } from '../../../interfaces/interfaces';
 import {
@@ -11,6 +13,8 @@ import {
 import { observer } from 'mobx-react-lite';
 import { pairsFormattedPosts } from '../../../types/types';
 
+configureAnchors({ offset: -100, scrollDuration: 400 });
+
 export const SortOutScreen = observer((props) => {
   const { dataPages, dataPosts, dataCategories }: ServerData = props;
 
@@ -21,7 +25,7 @@ export const SortOutScreen = observer((props) => {
   const list = getPostsList(posts, category?.id);
   const formattedList: pairsFormattedPosts = getFormattedPosts(list);
   const allowedPostsList = formattedList.filter(
-    (postPair, index) => index < sort_out_screen_articles_number
+    (postPair, index) => index < Number(sort_out_screen_articles_number)
   );
 
   const attrs = {
@@ -30,28 +34,30 @@ export const SortOutScreen = observer((props) => {
   };
 
   return (
-    <div className={classes.SortOutScreen} id='sort-order'>
-      <div className={classes.SiteWrap}>
-        <h2>{sort_out_screen_title}</h2>
+    <ScrollableAnchor id={'sort-out'}>
+      <div className={classes.SortOutScreen}>
+        <div className={classes.SiteWrap}>
+          <h2>{sort_out_screen_title}</h2>
 
-        <div className={classes.AboutText}>
-          В{' '}
-          <Link href={'/blog'}>
-            <a>Блоге</a>
-          </Link>{' '}
-          вместе со старшими вайшнавами и духовными учителями мы пытаемся разобраться в тонкостях
-          духовного образования, чтобы обрести правильное понимание, настроение и продвигаться по
-          пути бхакти так, как этому учит Шрила Прабхупада.
-        </div>
+          <div className={classes.AboutText}>
+            В{' '}
+            <Link href={'/blog'}>
+              <a>Блоге</a>
+            </Link>{' '}
+            вместе со старшими вайшнавами и духовными учителями мы пытаемся разобраться в тонкостях
+            духовного образования, чтобы обрести правильное понимание, настроение и продвигаться по
+            пути бхакти так, как этому учит Шрила Прабхупада.
+          </div>
 
-        <Articles {...attrs} />
+          <Articles {...attrs} />
 
-        <div className={classes.GoToBlog}>
-          <Link href='/blog/articles'>
-            <a>Перейти в Блог</a>
-          </Link>
+          <div className={classes.GoToBlog}>
+            <Link href='/blog/articles'>
+              <a>Перейти в Блог</a>
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+    </ScrollableAnchor>
   );
 });

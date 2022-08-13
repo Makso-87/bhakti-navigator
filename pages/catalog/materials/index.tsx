@@ -1,12 +1,6 @@
 import { MaterialsPage } from '../../../components/MaterialsPage/MaterialsPage';
 import pagesStore from '../../../store/pagesStore';
-import {
-  getCategories,
-  getCategoryData,
-  getLink,
-  getPosts,
-  getPostsList,
-} from '../../../helpers/helpers';
+import { getLink, getPostsByCategory } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 
 const Materials = ({ serverData }: ServerSideProps) => {
@@ -16,16 +10,13 @@ const Materials = ({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const materialsCategory = getCategoryData(dataCategories, 'materials');
-  const materials = getPostsList(dataPosts, materialsCategory?.id) || [];
-
-  const list = materials.map((item) => {
+  const list = dataPosts.map((item) => {
     const { title, link, acf, id } = item;
     const { author, theme, type, bhakti_level } = acf;
 
     return {
       id,
-      title: title.rendered,
+      title,
       link: getLink(link),
       author,
       theme,
@@ -47,11 +38,7 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPosts = await getPostsByCategory('materials');
 
     return {
       props: {

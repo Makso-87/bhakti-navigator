@@ -1,34 +1,26 @@
 import { TeachersPages } from '../../../components/TeachersPages/TeachersPages';
 import pagesStore from '../../../store/pagesStore';
-import {
-  getCategories,
-  getCategoryData,
-  getLink,
-  getPosts,
-  getPostsList,
-} from '../../../helpers/helpers';
+import { getLink, getPostsByCategory } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 
 const Teachers = ({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories }: ServerData = serverData;
+  const { dataPosts }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('teachers');
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const teachersCategory = getCategoryData(dataCategories, 'teachers');
-  const teachers = getPostsList(dataPosts, teachersCategory?.id) || [];
-
-  const list = teachers.map((item) => {
+  const list = dataPosts.map((item) => {
     const { link, acf, title, id } = item;
-    const { city, teacher_photo } = acf;
+    const { city, teacher_photo, courses = [] } = acf;
 
     return {
       id,
-      title: title.rendered,
+      title,
       link: getLink(link),
       city,
       teacher_photo,
+      courses,
     };
   });
 
@@ -46,11 +38,7 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const responsePosts = await getPosts();
-    const responseCategories = await getCategories();
-
-    serverData.dataPosts = await responsePosts.json();
-    serverData.dataCategories = await responseCategories.json();
+    serverData.dataPosts = await getPostsByCategory('teachers');
 
     return {
       props: {

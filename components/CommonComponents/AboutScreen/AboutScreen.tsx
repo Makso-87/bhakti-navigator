@@ -54,8 +54,6 @@ export const AboutScreen = (props) => {
                   prevEl: '.swiper-button-prev',
                 }}
                 pagination={{ el: '.swiper-pagination', type: 'bullets', clickable: true }}
-                onSwiper={(swiper) => console.log(swiper)}
-                onSlideChange={() => console.log('slide change')}
                 className={classes.Swiper}
               >
                 <SwiperSlide
