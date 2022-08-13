@@ -101,8 +101,8 @@ export const MaterialData = (props) => {
         />
 
         {linksList?.length
-          ? linksList.map((item) => (
-              <div className={`${classes.VideoBox} ${classes.Item}`}>
+          ? linksList.map((item, index) => (
+              <div className={`${classes.VideoBox} ${classes.Item}`} key={index}>
                 <div className={classes.VideoContainer}>
                   <iframe
                     src={formatVideoUrl(item)}
