@@ -13,7 +13,7 @@ export const ProjectCourses = (props) => {
             const { title, link } = item;
 
             return (
-              <li>
+              <li key={index}>
                 <Link href={getLink(link)}>
                   <a>{`${index + 1}. ${title}`}</a>
                 </Link>

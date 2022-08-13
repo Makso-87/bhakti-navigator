@@ -32,7 +32,7 @@ export const Footer = () => {
                 </Link>
 
                 <Link href='https://xn--j1ahhcx.xn--p1ai/'>
-                  <a target='_blank'>
+                  <a target='_blank' rel='noreferrer'>
                     <div
                       className={classes.Img}
                       style={{ backgroundImage: `url(${logoCoskr.src})` }}
@@ -55,7 +55,7 @@ export const Footer = () => {
                 <div className={classes.Social}>
                   <div className={classes.SocialItem}>
                     <Link href='https://t.me/bhaktinavigator'>
-                      <a target='_blank'>
+                      <a target='_blank' rel='noreferrer'>
                         <div
                           className={classes.Img}
                           style={{ backgroundImage: `url(${telegram.src})` }}

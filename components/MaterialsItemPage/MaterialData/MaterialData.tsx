@@ -33,7 +33,7 @@ export const MaterialData = (props) => {
           </div>
 
           <div className={classes.DownloadButton}>
-            <a href={download_link} target='_blank' />
+            <a href={download_link} target='_blank' rel='noreferrer' />
           </div>
         </div>
 
@@ -48,6 +48,7 @@ export const MaterialData = (props) => {
         <a
           href={download_link}
           target='_blank'
+          rel='noreferrer'
           className={`${classes.DownloadData} ${classes.Link}`}
         >
           <div className={classes.Icon} />
@@ -67,7 +68,12 @@ export const MaterialData = (props) => {
     ),
     audio: () => (
       <>
-        <a href={audio_link} target='_blank' className={`${classes.DownloadData} ${classes.Link}`}>
+        <a
+          href={audio_link}
+          target='_blank'
+          rel='noreferrer'
+          className={`${classes.DownloadData} ${classes.Link}`}
+        >
           <div className={classes.Icon} />
           <div className={classes.Name}>{name}</div>
           <div className={classes.FileInfo}>
