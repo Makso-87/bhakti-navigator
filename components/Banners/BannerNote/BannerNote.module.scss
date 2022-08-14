@@ -5,6 +5,10 @@
   margin: 0 0 100px;
   padding: 40px 0;
 
+  &.MarginNone {
+    margin: 0;
+  }
+
   .SiteWrap {
     @include site-wrap;
   }

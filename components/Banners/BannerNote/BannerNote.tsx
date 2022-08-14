@@ -1,9 +1,13 @@
 import classes from './BannerNote.module.scss';
 import bannerSm from '../../../images/banner-sm.png';
+import cn from 'classnames';
 
-export const BannerNote = () => {
+export const BannerNote = ({ marginNone = false }) => {
+  const classesBannerNote = cn(classes.BannerNote, {
+    [classes.MarginNone]: marginNone,
+  });
   return (
-    <div className={classes.BannerNote}>
+    <div className={classesBannerNote}>
       <div className={classes.SiteWrap}>
         <div className={classes.Content}>
           <div className={classes.Image} style={{ backgroundImage: `url(${bannerSm.src})` }} />

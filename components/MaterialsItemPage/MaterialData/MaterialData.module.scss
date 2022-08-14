@@ -213,6 +213,28 @@
     font-size: 18px;
     line-height: 26px;
     max-width: 960px;
+
+    p {
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      margin: 25px 0 25px 17px;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .VideoBox {

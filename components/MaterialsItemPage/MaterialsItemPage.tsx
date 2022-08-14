@@ -18,10 +18,16 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
     download_link,
   } = acf || {};
 
+  const videoAttrs = {
+    materialType: 'video',
+    url: formatVideoUrl(online_link),
+    description: audio_link || online_link ? '' : description,
+  };
+
   const audioAttrs = {
     materialType: 'audio',
     audio_link,
-    description: 'Слушайте онлайн на Яндекс музыке',
+    description,
     name: title,
     author: author?.title,
   };
@@ -31,15 +37,13 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
     name: title,
     download_link,
     author: author?.title,
-    description: 'Скачайте на своё устройство, чтобы не зависеть от интернета',
+    description: audio_link ? '' : description,
   };
 
   return (
     <Layout>
       <div className={classes.MaterialItemPage}>
         <div className={classes.MainScreen}>
-          <div className={classes.BgSmallCircle} />
-
           <div className={classes.SiteWrap}>
             <div className={classes.Content}>
               <div className={classes.LeftSide}>
@@ -75,21 +79,14 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
               </div>
             </div>
 
-            {online_link ? (
-              <MaterialData
-                materialType='video'
-                url={formatVideoUrl(online_link)}
-                description={description}
-              />
-            ) : null}
-
             {audio_link ? <MaterialData {...audioAttrs} /> : null}
             {download_link ? <MaterialData {...downloadAttrs} /> : null}
+            {online_link ? <MaterialData {...videoAttrs} /> : null}
           </div>
         </div>
 
         <Recommendations />
-        <BannerNote />
+        <BannerNote marginNone={true} />
       </div>
     </Layout>
   );
