@@ -14,13 +14,53 @@
       right: 0;
       width: 75px;
       height: 230px;
-      background: url(../../images/bg-small-circle-main-screen-course-item.svg) no-repeat (center / contain);
+      background: url(../../images/bg-small-circle-main-screen-course-item.svg) no-repeat
+        (center / contain);
     }
 
     .SiteWrap {
       @include site-wrap;
       position: relative;
       max-width: none;
+    }
+
+    .MaterialsContainer {
+      margin: 76px 0 0;
+
+      .MaterialsContainerTop {
+        display: flex;
+
+        .Materials {
+        }
+
+        .Description {
+          font-size: 18px;
+          line-height: 26px;
+          max-width: 960px;
+
+          p {
+            &:first-child {
+              margin-top: 0;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+
+          ul {
+            margin: 25px 0 25px 17px;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
     }
 
     .Content {
@@ -48,7 +88,7 @@
               @include transition;
 
               &:hover {
-                color: #FF9776;
+                color: #ff9776;
               }
             }
           }
@@ -61,9 +101,9 @@
               font-weight: 600;
               font-size: 16px;
               line-height: 20px;
-              color: #647DB7;
+              color: #647db7;
               padding: 3px 6px 1px;
-              border: 2px solid #647DB7;
+              border: 2px solid #647db7;
               margin: 0 20px 0 0;
 
               &:last-child {
@@ -77,7 +117,7 @@
             line-height: 24px;
 
             .Name {
-              color: #6B6B6B;
+              color: #6b6b6b;
             }
           }
         }

@@ -32,9 +32,7 @@ export const MaterialData = (props) => {
             <span className={classes.Filename}>{author}</span>
           </div>
 
-          <div className={classes.DownloadButton}>
-            <a href={download_link} target='_blank' rel='noreferrer' />
-          </div>
+          <div className={classes.DownloadButton} />
         </div>
 
         <div
@@ -57,7 +55,8 @@ export const MaterialData = (props) => {
             <span className={classes.Filename}>{author}</span>
           </div>
 
-          <div className={classes.DownloadButton} />
+          <div className={classes.Label}>Скачайте с Яндекс Диске</div>
+          <div className={classes.DownloadButton}></div>
         </a>
 
         <div
@@ -85,6 +84,9 @@ export const MaterialData = (props) => {
             {/*  </span>*/}
             {/*) : null}*/}
           </div>
+
+          <div className={classes.Label}>Слушайте на Яндекс Музыке</div>
+          <div className={classes.DownloadButton}></div>
         </a>
 
         <div
@@ -100,8 +102,9 @@ export const MaterialData = (props) => {
           dangerouslySetInnerHTML={{ __html: description }}
         />
 
-        {linksList?.length
-          ? linksList.map((item, index) => (
+        {linksList?.length ? (
+          <div className={classes.VideoItemsContainer}>
+            {linksList.map((item, index) => (
               <div className={`${classes.VideoBox} ${classes.Item}`} key={index}>
                 <div className={classes.VideoContainer}>
                   <iframe
@@ -112,8 +115,9 @@ export const MaterialData = (props) => {
                   />
                 </div>
               </div>
-            ))
-          : null}
+            ))}
+          </div>
+        ) : null}
       </>
     ),
   };

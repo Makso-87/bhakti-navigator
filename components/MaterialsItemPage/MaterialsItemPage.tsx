@@ -12,22 +12,21 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
   const {
     author = {},
     theme,
-    audio_link,
-    online_link,
+    audio_link = '',
+    online_link = '',
     description = '',
-    download_link,
+    download_link = '',
   } = acf || {};
 
   const videoAttrs = {
     materialType: 'video',
-    url: formatVideoUrl(online_link),
-    description: audio_link || online_link ? '' : description,
+    url: online_link !== '' ? formatVideoUrl(online_link) : '#',
+    description: audio_link !== '' || download_link !== '' ? '' : description,
   };
 
   const audioAttrs = {
     materialType: 'audio',
     audio_link,
-    description,
     name: title,
     author: author?.title,
   };
@@ -37,7 +36,6 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
     name: title,
     download_link,
     author: author?.title,
-    description: audio_link ? '' : description,
   };
 
   return (
@@ -79,8 +77,22 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
               </div>
             </div>
 
-            {audio_link ? <MaterialData {...audioAttrs} /> : null}
-            {download_link ? <MaterialData {...downloadAttrs} /> : null}
+            {audio_link || download_link ? (
+              <div className={classes.MaterialsContainer}>
+                <div className={classes.MaterialsContainerTop}>
+                  <div className={classes.Materials}>
+                    {audio_link ? <MaterialData {...audioAttrs} /> : null}
+                    {download_link ? <MaterialData {...downloadAttrs} /> : null}
+                  </div>
+
+                  <div
+                    className={classes.Description}
+                    dangerouslySetInnerHTML={{ __html: description }}
+                  />
+                </div>
+              </div>
+            ) : null}
+
             {online_link ? <MaterialData {...videoAttrs} /> : null}
           </div>
         </div>
