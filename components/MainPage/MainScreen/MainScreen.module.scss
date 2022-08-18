@@ -22,7 +22,7 @@
         font-size: 100px;
         line-height: 80px;
         font-weight: 800;
-        color: #718ED1;
+        color: #718ed1;
         margin: 0 0 31px;
         font-family: 'Montserrat', sans-serif;
         text-transform: uppercase;
@@ -79,7 +79,7 @@
             font-size: 38px;
             line-height: 46px;
             letter-spacing: 0.01em;
-            color: #FF9776;
+            color: #ff9776;
             text-decoration: none;
 
             &:after {
@@ -91,15 +91,15 @@
               border-radius: 50%;
               box-sizing: border-box;
               background: #404759;
-              border: 5px solid #C8D1E5;
+              border: 5px solid #c8d1e5;
             }
 
             &:hover {
-              text-shadow: 0 0 15px #FF9776;
+              text-shadow: 0 0 15px #ff9776;
 
               &:after {
-                background: #FF9776;
-                box-shadow: 0 0 15px #FF9776;
+                background: #ff9776;
+                box-shadow: 0 0 15px #ff9776;
               }
             }
           }
@@ -143,29 +143,6 @@
         padding-right: 84px;
         text-align: justify;
       }
-
-      .Button a {
-        position: relative;
-        font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none;
-        width: 217px;
-        height: 67px;
-        font-size: 20px;
-        line-height: 24px;
-        font-weight: bold;
-        color: #ffffff;
-        background: #647DB7;
-        border-radius: 30px;
-        box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
-        z-index: 2;
-
-        &:hover {
-          background: #7D9EEA;
-        }
-      }
     }
 
     .RightSide {
@@ -182,10 +159,6 @@
     }
 
     .LeftSide {
-      .Button a {
-        transition: all 0.2s ease-out;
-      }
-
       .WayImg .WayMark a {
         transition: all 0.2s ease-out;
 

@@ -1,0 +1,25 @@
+@import '../../../css/styleVariables';
+
+.Button a {
+  position: relative;
+  font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 67px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  background: #647db7;
+  border-radius: 30px;
+  padding: 0 46px;
+  box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
+  z-index: 2;
+  @include transition;
+
+  &:hover {
+    background: #7d9eea;
+  }
+}

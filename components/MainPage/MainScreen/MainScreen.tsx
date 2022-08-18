@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import dataStore from '../../../store/dataStore';
 import { getMediaData, getPageData } from '../../../helpers/helpers';
 import mainScreen from '../../../images/main-screen.png';
+import { Button } from '../../CommonComponents/Button/Button';
 
 export const MainScreen = observer(() => {
   // const { dataPages, dataMedia }: { dataPages: Page[]; dataMedia: Media[] } = dataStore;
@@ -34,11 +35,7 @@ export const MainScreen = observer(() => {
               тест!
             </div>
 
-            <div className={classes.Button}>
-              <Link href={'/test'}>
-                <a>Пройти тест</a>
-              </Link>
-            </div>
+            <Button text='Пройти тест' link='/test' />
 
             <div className={classes.WayImg}>
               <div className={`${classes.WayMark} ${classes.WaySortOrder}`}>

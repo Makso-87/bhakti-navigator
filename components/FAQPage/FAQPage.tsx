@@ -6,6 +6,7 @@ import { FilterElement } from '../CommonComponents/Filters/FilterElement/FilterE
 import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import { FAQList } from '../CommonComponents/FAQList/FAQList';
 import { QuestionForm } from '../CommonComponents/QuestionForm/QuestionForm';
+import { Button } from '../CommonComponents/Button/Button';
 
 export const FAQPage = ({ list }) => {
   return (
@@ -24,11 +25,14 @@ export const FAQPage = ({ list }) => {
                   серьезно практиковать духовную жизнь, следуя наставлениям А.Ч. Бхактиведанты Свами
                   Прабхупады.
                 </p>
-
-                <p>
-                  Вы также можете <a href='#question-form'>задать свой вопрос</a>
-                </p>
               </div>
+
+              <Button
+                text='Задайте ваш вопрос'
+                link='#question-form'
+                margin='0 0 80px'
+                simpleLink={true}
+              />
 
               <FAQList list={list} />
 
