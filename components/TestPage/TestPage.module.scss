@@ -21,6 +21,19 @@
       font-size: 18px;
       line-height: 26px;
       margin: 0 0 40px;
+      padding: 0 0 0 230px;
+      position: relative;
+
+      &:before {
+        content: '';
+        display: block;
+        width: 177px;
+        height: 164px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: url('../../images/icons/info-icon.svg') no-repeat center / contain;
+      }
 
       p {
         margin: 20px 0;

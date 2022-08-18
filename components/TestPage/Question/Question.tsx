@@ -32,7 +32,7 @@ export const Question = (props: QuestionProps) => {
                     id={`question-${number}-${item.letter}`}
                   />
                   <label htmlFor={`question-${number}-${item.letter}`}>
-                    <span>{item.letter})</span> {item.text}
+                    {/* <span>{item.letter})</span>*/} {item.text}
                   </label>
                 </div>
               );
