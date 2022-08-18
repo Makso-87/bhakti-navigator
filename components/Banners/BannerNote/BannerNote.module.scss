@@ -1,7 +1,8 @@
 @import '../../../css/styleVariables';
 
 .BannerNote {
-  background: #F7F5EF;
+  //background: #f7f5ef;
+  background: #e6eaf1;
   margin: 0 0 100px;
   padding: 40px 0;
 
@@ -43,7 +44,7 @@
       .Text {
         font-size: 20px;
         line-height: 28px;
-        color: #343F55;
+        color: #343f55;
         font-weight: 500;
 
         p {
@@ -58,7 +59,7 @@
 
         a {
           font-weight: bold;
-          color: #343F55;
+          color: #343f55;
         }
       }
     }

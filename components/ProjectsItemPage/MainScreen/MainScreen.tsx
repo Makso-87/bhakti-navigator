@@ -1,7 +1,7 @@
 import bvp from '../../../images/icons/bvp.png';
 import classes from './MainScreen.module.scss';
 
-export const MainScreen = (props) => {
+export const MainScreen = ({ title, format, city, site, logo }) => {
   return (
     <div className={classes.MainScreen}>
       <div className={classes.BgBigCircle} />
@@ -10,17 +10,17 @@ export const MainScreen = (props) => {
         <div className={classes.Content}>
           <figure>
             <div className={classes.ImgContainer}>
-              <div className={classes.Img} style={{ backgroundImage: `url(${bvp.src})` }}></div>
+              <div className={classes.Img} style={{ backgroundImage: `url(${logo})` }}></div>
             </div>
 
             <figcaption>
               <div className={classes.ProjectInfoBlitz}>
-                <h1>Большой Ведический Практикум</h1>
+                <h1>{title}</h1>
 
-                <div className={classes.Location}>Москва</div>
+                <div className={classes.Location}>{city}</div>
 
                 <div className={classes.Link}>
-                  <a href='https://vk.com/bvpracticum' target='_blank' rel='noreferrer'>
+                  <a href={site} target='_blank' rel='noreferrer'>
                     Перейти на сайт проекта
                   </a>
                 </div>

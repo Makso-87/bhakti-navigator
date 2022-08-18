@@ -8,7 +8,7 @@
     font-weight: 800;
     font-size: 55px;
     line-height: 67px;
-    color: #C8D1E5;
+    color: #c8d1e5;
     margin: 0 0 40px;
   }
 
@@ -17,19 +17,30 @@
     max-width: none;
   }
 
-  .Media {
-    position: relative;
-    padding: 25% 0 0;
-    width: 700px;
-    margin: 108px auto 0;
+  .MediaContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 
-    iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .MediaBox {
       width: 100%;
-      height: 100%;
-      border: none;
+      max-width: 960px;
+      margin: 108px 0 0;
+
+      .Media {
+        width: 100%;
+        position: relative;
+        padding: 33.4% 0 0;
+
+        iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+        }
+      }
     }
   }
 
@@ -47,7 +58,8 @@
       }
     }
 
-    .LeftSide, .RightSide {
+    .LeftSide,
+    .RightSide {
       width: 50%;
       padding: 0 30px;
     }

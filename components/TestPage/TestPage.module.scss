@@ -45,6 +45,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
+        border: none;
       }
     }
 
@@ -60,7 +61,7 @@
       font-size: 20px;
       line-height: 24px;
       text-align: center;
-      background: #647DB7;
+      background: #647db7;
       box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
       border-radius: 30px;
       color: #fff;
@@ -102,7 +103,7 @@
               width: 20px;
               height: 20px;
               border-radius: 50%;
-              border: 2px solid #647DB7;
+              border: 2px solid #647db7;
               box-sizing: border-box;
             }
 
@@ -116,7 +117,7 @@
               width: 10px;
               height: 10px;
               border-radius: 50%;
-              background: #647DB7;
+              background: #647db7;
               box-sizing: border-box;
             }
           }
@@ -124,7 +125,7 @@
           input {
             display: none;
 
-            &[type="checkbox"] + label:before {
+            &[type='checkbox'] + label:before {
               width: 12px;
               height: 12px;
               top: 4px;
@@ -177,7 +178,7 @@
         font-size: 20px;
         line-height: 24px;
         text-align: center;
-        background: #647DB7;
+        background: #647db7;
         box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
         border-radius: 30px;
         color: #fff;

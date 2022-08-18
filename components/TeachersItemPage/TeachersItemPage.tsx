@@ -18,9 +18,9 @@ export const TeachersItemPage = ({ post }: { post: Post }) => {
         <AboutScreen post={post} />
         {courses.length ? <AvailableCoursesScreen post={post} /> : null}
         <TeacherNote post={post} />
-        <Feedback />
         <Recommendations />
         <BannerNote />
+        <Feedback title='Контакты преподавателя' name={post.title} />
       </div>
     </Layout>
   );

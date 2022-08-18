@@ -85,13 +85,17 @@ export const AboutScreen = (props) => {
           </div>
         </div>
 
-        <div className={`${classes.Media} ${classes.Video}`}>
-          <iframe
-            src='https://www.youtube.com/embed/28XbF-Qdkko'
-            title='YouTube video player'
-            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-            allowFullScreen={true}
-          ></iframe>
+        <div className={classes.MediaContainer}>
+          <div className={classes.MediaBox}>
+            <div className={`${classes.Media} ${classes.Video}`}>
+              <iframe
+                src='https://www.youtube.com/embed/28XbF-Qdkko'
+                title='YouTube video player'
+                allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                allowFullScreen={true}
+              ></iframe>
+            </div>
+          </div>
         </div>
       </div>
     </div>

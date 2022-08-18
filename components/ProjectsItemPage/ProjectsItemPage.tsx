@@ -8,21 +8,30 @@ import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
 import { ServerData } from '../../interfaces/interfaces';
 import { ProjectCourses } from './ProjectCourses/ProjectCourses';
+import { CoursesList } from '../CommonComponents/CoursesList/CoursesList';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
-  const { acf } = dataPost;
-  const { courses = [] } = acf;
+  const { acf, title } = dataPost;
+  const { courses = [], teachers = [], format, city, site, logo } = acf;
+
+  const mainScreenAttrs = {
+    title,
+    format,
+    city,
+    site,
+    logo,
+  };
 
   return (
     <Layout>
       <div className={classes.ProjectItemPage}>
-        <MainScreen />
+        <MainScreen {...mainScreenAttrs} />
         <AboutScreen />
         <ProjectCourses list={courses} />
         <ForWhom />
-        <Teachers />
-        <Feedback />
+        <Teachers teachers={teachers} />
         <BannerNote />
+        <Feedback title='Контакты организатора' name='Бхакти-центр' />
         {/*<? require_once($_SERVER["DOCUMENT_ROOT"] . '/navigator/include/for_whom_screen.php'); ?>*/}
 
         {/*<? require_once($_SERVER["DOCUMENT_ROOT"] . '/navigator/include/teachers_screen.php'); ?>*/}

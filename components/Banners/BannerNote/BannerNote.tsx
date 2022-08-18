@@ -1,6 +1,6 @@
+import cn from 'classnames';
 import classes from './BannerNote.module.scss';
 import bannerSm from '../../../images/banner-sm.png';
-import cn from 'classnames';
 
 export const BannerNote = ({ marginNone = false }) => {
   const classesBannerNote = cn(classes.BannerNote, {
@@ -17,11 +17,15 @@ export const BannerNote = ({ marginNone = false }) => {
 
             <div className={classes.Text}>
               <p>
-                Портал <a href='#'>bhakti-navigator.ru</a> не является организатором представленных
-                программ, а также представителем конкретных преподавателей или наставников.
-                Материалы каталога отбираются по согласованию с местным руководством ИСККОН, однако
-                носят информационный характер. Обо всех подробностях участия в той или иной
-                программе уточняйте непосредственно у их организаторов.
+                Портал{' '}
+                <a href='https://bhakti-navigator.ru' rel='noreferrer'>
+                  bhakti-navigator.ru
+                </a>{' '}
+                не является организатором представленных программ, а также представителем конкретных
+                преподавателей или наставников. Материалы каталога отбираются по согласованию с
+                местным руководством ИСККОН, однако носят информационный характер. Обо всех
+                подробностях участия в той или иной программе уточняйте непосредственно у их
+                организаторов.
               </p>
             </div>
           </div>
