@@ -3,6 +3,7 @@ import classes from './Articles.module.scss';
 import { TileItem } from './ArticleItem/TileItem';
 import { ArticlesProps, Post } from '../../../interfaces/interfaces';
 import { postPair } from '../../../types/types';
+import { ShowMore } from '../ShowMore/ShowMore';
 
 export const Articles = observer(({ list = [] }: ArticlesProps) => {
   return (
@@ -31,6 +32,8 @@ export const Articles = observer(({ list = [] }: ArticlesProps) => {
             );
           })
         : null}
+
+      {list.length ? <ShowMore text='Показать еще' /> : null}
     </div>
   );
 });

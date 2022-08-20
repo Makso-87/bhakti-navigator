@@ -2,6 +2,7 @@ import { Category, Media, Page, Post } from '../interfaces/interfaces';
 import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
 import urlDecoding from './urlDecoding';
+import { string } from 'prop-types';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -42,6 +43,10 @@ export const getFormattedPosts = (posts: Post[]): pairsFormattedPosts => {
   }
 
   return formatted;
+};
+
+export const removeAllSpaces = (string: string) => {
+  return string.replaceAll(' ', '');
 };
 
 export const getLink = (link: string) => {
@@ -111,7 +116,6 @@ export const getPostData = (posts: Post[], name: string) => {
   return post;
 };
 
-// const decoded = Object.entries(urlDecoding).map(([code, value]) => url.replaceAll(code, value));
 export const decodeUrl = (url) => {
   const codeKeys = Object.keys(urlDecoding);
   const encodedSymbols = codeKeys.filter((item) => url.includes(item));
@@ -120,21 +124,28 @@ export const decodeUrl = (url) => {
     return url;
   }
 
-  const decoded = Object.entries(urlDecoding).reduce((acc, [code, value]) => {
+  return Object.entries(urlDecoding).reduce((acc, [code, value]) => {
     return acc.replaceAll(code, value);
   }, url);
-  return decoded;
+};
+
+export const formatTelegramLink = (string: string) => {
+  return string.replace('https://t.me/', '');
+};
+
+export const formatWhatsappLink = (string: string) => {
+  return string.replace('https://wa.me/', '');
 };
 
 export const getLinksList = (string: string) => {
   const trimmedString = string.replaceAll(' ', '');
   const spacedString = trimmedString.replaceAll('http', ' http');
-  const list = spacedString
+  const d = spacedString
     .split(' ')
     .filter((item) => item !== '')
     .map((item) => decodeUrl(item));
 
-  return list;
+  return d;
 };
 
 export const slideDown = (element, speed = 400) => {

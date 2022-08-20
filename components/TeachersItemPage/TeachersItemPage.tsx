@@ -8,19 +8,45 @@ import { Recommendations } from '../CommonComponents/Recommendations/Recommendat
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
 import { MainScreen } from './MainScreen/MainScreen';
 import { Post } from '../../interfaces/interfaces';
+import { removeAllSpaces } from '../../helpers/helpers';
 
 export const TeachersItemPage = ({ post }: { post: Post }) => {
-  const { courses } = post.acf;
+  const { acf, title = 'Имя преподавателя' } = post;
+  const {
+    courses,
+    email,
+    twitter,
+    facebook,
+    instagram,
+    telegram,
+    vkontakte,
+    odnoklassniki,
+    whatsapp,
+    can_arrive,
+  } = acf;
+
+  const feedbackAttrs = {
+    name: title,
+    email: removeAllSpaces(email),
+    twitter: removeAllSpaces(twitter),
+    facebook: removeAllSpaces(facebook),
+    instagram: removeAllSpaces(instagram),
+    telegram: removeAllSpaces(telegram),
+    vkontakte: removeAllSpaces(vkontakte),
+    odnoklassniki: removeAllSpaces(odnoklassniki),
+    whatsapp: removeAllSpaces(whatsapp),
+  };
+
   return (
     <Layout>
       <div className={classes.TeacherItemPage}>
         <MainScreen post={post} />
         <AboutScreen post={post} />
         {courses.length ? <AvailableCoursesScreen post={post} /> : null}
-        <TeacherNote post={post} />
+        {can_arrive?.value === 'yes' ? <TeacherNote /> : null}
         <Recommendations />
         <BannerNote />
-        <Feedback title='Контакты преподавателя' name={post.title} />
+        <Feedback title='Контакты преподавателя' {...feedbackAttrs} />
       </div>
     </Layout>
   );

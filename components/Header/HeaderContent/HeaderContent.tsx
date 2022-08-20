@@ -129,24 +129,12 @@ export const HeaderContent = ({ logo = false }) => {
           <ul className={classes.TabBar}>
             <li className={classes.TabBarItem}>
               <Link href='/blog/articles'>
-                <a className={currentPage === 'articles' ? classes.Active : ''}>Почитать</a>
+                <a className={currentPage === 'articles' ? classes.Active : ''}>Статьи</a>
               </Link>
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/sort_out'>
-                <a className="<?= $blog_page == 'sort_out' ? 'active' : '' ?>">Разобраться</a>
-              </Link>
-            </li>
-
-            <li className={classes.TabBarItem}>
-              <Link href='/blog/watching'>
-                <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">Посмотреть</a>
-              </Link>
-            </li>
-
-            <li className={classes.TabBarItem}>
-              <Link href='/blog/interview'>
+              <Link href='/blog/interviews'>
                 <a className="<?= $blog_page == 'interview' ? 'active' : '' ?>">Интервью</a>
               </Link>
             </li>
@@ -154,6 +142,14 @@ export const HeaderContent = ({ logo = false }) => {
             <li className={classes.TabBarItem}>
               <Link href='/blog/news'>
                 <a className="<?= $blog_page == 'news' ? 'active' : '' ?>">Новости</a>
+              </Link>
+            </li>
+
+            <li className={classes.TabBarItem}>
+              <Link href='/blog/points_above_i'>
+                <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">
+                  Точки над &laquo;i&raquo;
+                </a>
               </Link>
             </li>
           </ul>

@@ -26,7 +26,7 @@
   .Bottom {
     display: flex;
     justify-content: center;
-    max-width: 750px;
+    max-width: 960px;
 
     .Text {
       margin: 0 20px;
@@ -98,6 +98,42 @@
 
           &:before {
             background-image: url(../../../images/icons/instagram-icon.svg);
+          }
+        }
+
+        &.Telegram {
+          width: 25px;
+          height: 25px;
+
+          &:before {
+            background-image: url(../../../images/icons/telegram_custom_color.svg);
+          }
+        }
+
+        &.Vkontakte {
+          width: 30px;
+          height: 30px;
+
+          &:before {
+            background-image: url(../../../images/icons/vk.svg);
+          }
+        }
+
+        &.Whatsapp {
+          width: 25px;
+          height: 25px;
+
+          &:before {
+            background-image: url(../../../images/icons/whatsapp_custom_color.svg);
+          }
+        }
+
+        &.Odnoklassniki {
+          width: 25px;
+          height: 25px;
+
+          &:before {
+            background-image: url(../../../images/icons/odnoklassniki.svg);
           }
         }
       }
