@@ -8,7 +8,6 @@ import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
 import { ServerData } from '../../interfaces/interfaces';
 import { ProjectCourses } from './ProjectCourses/ProjectCourses';
-import { CoursesList } from '../CommonComponents/CoursesList/CoursesList';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
   const { acf, title } = dataPost;
@@ -26,7 +25,7 @@ export const ProjectsItemPage = ({ dataPost }: ServerData) => {
     <Layout>
       <div className={classes.ProjectItemPage}>
         <MainScreen {...mainScreenAttrs} />
-        <AboutScreen />
+        <AboutScreen post={dataPost} />
         <ProjectCourses list={courses} />
         <ForWhom />
         <Teachers teachers={teachers} />

@@ -21,7 +21,7 @@ export const CoursesItemPage = (props: ServerData) => {
     <Layout>
       <div className={classes.CourseItemPage}>
         <MainScreen course={course} />
-        <AboutScreen />
+        <AboutScreen post={course} />
         <CourseTopicsScreen />
         <ForWhom />
         {teachers.length ? <Teachers teachers={teachers} /> : null}
