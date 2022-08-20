@@ -10,7 +10,7 @@ export const CoursesList = (props) => {
       {list.length
         ? list.map((course, index) => {
             const { title, acf, link } = course;
-            const { speaker, location, format, theme, bhakti_level } = acf;
+            const { speaker = {}, location, format, theme, bhakti_level = {} } = acf || {};
 
             const attrs = {
               title,
