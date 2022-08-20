@@ -55,10 +55,10 @@ export const AboutScreen = ({ post }: { post: Post }) => {
 
         {video ? (
           <div className={classes.MediaContainer}>
-            {videoList.map((item) => {
+            {videoList.map((item, index) => {
               const link = formatVideoUrl(item);
               return (
-                <div className={classes.MediaBox}>
+                <div key={index} className={classes.MediaBox}>
                   <div className={`${classes.Media} ${classes.Video}`}>
                     <iframe
                       src={link}
