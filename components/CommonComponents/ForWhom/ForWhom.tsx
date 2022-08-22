@@ -11,9 +11,9 @@ export const ForWhom = ({ text = '' }: { text: string }) => {
 
         <ul className={classes.List}>
           {forWhomList.length
-            ? forWhomList.map((item) => {
+            ? forWhomList.map((item, index) => {
                 return (
-                  <li>
+                  <li key={index}>
                     <div className={classes.Content}>
                       <span className={classes.StrongText}>{item}</span>
                       {/*<span className={classes.Text}>*/}

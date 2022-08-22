@@ -55,7 +55,11 @@ export const MainScreen = (props) => {
               <div className={classes.Tags}>
                 {themes.length
                   ? themes.map((item) => {
-                      return <div className={classes.TagItem}>{item?.title}</div>;
+                      return (
+                        <div key={item.id} className={classes.TagItem}>
+                          {item?.title}
+                        </div>
+                      );
                     })
                   : null}
               </div>
