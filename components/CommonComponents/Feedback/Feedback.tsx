@@ -2,7 +2,7 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 import classes from './Feedback.module.scss';
 import pagesStore from '../../../store/pagesStore';
-import { formatTelegramLink, formatWhatsappLink } from '../../../helpers/helpers';
+import { formatTelegramLink, formatWhatsappLink, getWebsiteName } from '../../../helpers/helpers';
 
 configureAnchors({ offset: -100, scrollDuration: 400 });
 
@@ -17,6 +17,7 @@ export const Feedback = ({
   vkontakte = '',
   odnoklassniki = '',
   whatsapp = '',
+  siteLink = '',
 }: {
   title?: string;
   name?: string;
@@ -28,6 +29,7 @@ export const Feedback = ({
   vkontakte?: string;
   odnoklassniki?: string;
   whatsapp?: string;
+  siteLink?: string;
 }) => {
   const { currentPage } = pagesStore;
 
@@ -111,6 +113,17 @@ export const Feedback = ({
                   target='_blank'
                   rel='noreferrer'
                 />
+              ) : null}
+
+              {siteLink !== '' ? (
+                <a
+                  href={siteLink}
+                  className={`${classes.SocialItem} ${classes.WebSite}`}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {getWebsiteName(siteLink)}
+                </a>
               ) : null}
             </div>
           </div>

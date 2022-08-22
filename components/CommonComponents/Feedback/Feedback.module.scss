@@ -136,6 +136,19 @@
             background-image: url(../../../images/icons/odnoklassniki.svg);
           }
         }
+
+        &.WebSite {
+          font-size: 16px;
+          line-height: 26px;
+          text-decoration: none;
+          font-weight: bold;
+          color: #647db7;
+          @include transition;
+
+          &:hover {
+            color: #ff9776;
+          }
+        }
       }
     }
   }

@@ -1,6 +1,6 @@
 @import '../../../css/styleVariables';
 
-.CourseTopicsScreen {
+.CourseProgramScreen {
   padding: 54px 0 54px;
   position: relative;
   overflow: hidden;
@@ -14,7 +14,8 @@
     top: 0;
     bottom: -200px;
     right: 0;
-    background: url(../../../images/bg-big-circle-course-topics.svg) no-repeat center (right / contain);
+    background: url(../../../images/bg-big-circle-course-topics.svg) no-repeat center
+      (right / contain);
   }
 
   .SiteWrap {
@@ -30,22 +31,32 @@
       font-weight: 800;
       font-size: 55px;
       line-height: 67px;
-      color: #C8D1E5;
+      color: #c8d1e5;
       margin: 0 0 40px;
     }
 
-    .TopicsList {
+    .ProgramList {
       width: 1038px;
       counter-reset: number 0;
 
-      .TopicsItem {
-        background: #FFFFFF;
+      .ProgramItem {
+        background: #ffffff;
         box-shadow: 0 6px 35px rgba(74, 93, 160, 0.06);
         border-radius: 25px;
         margin: 0 0 24px;
 
         &:last-child {
           margin: 0;
+        }
+
+        &.NoDescription {
+          .TopicBar {
+            cursor: default;
+
+            &:after {
+              display: none;
+            }
+          }
         }
 
         .TopicBar {
@@ -82,11 +93,11 @@
 
             &:before {
               counter-increment: number 1;
-              content: "0" counter(number);
+              content: '0' counter(number);
               font-weight: 800;
               font-size: 55px;
               line-height: 67px;
-              color: #FF9776;
+              color: #ff9776;
             }
           }
 
@@ -99,6 +110,7 @@
           .BlitzDescription {
             font-size: 18px;
             line-height: 26px;
+            margin: 0 0 0 8px;
           }
         }
 

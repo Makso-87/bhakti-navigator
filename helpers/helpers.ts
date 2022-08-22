@@ -213,6 +213,16 @@ export const formatVideoUrl = (link) => {
   return `${origin}/embed/${video}?${searchParams.toString()}`;
 };
 
+export const forWhomToArray = (string: string) => {
+  return string.split('<br />');
+};
+
+export const getWebsiteName = (string: string) => {
+  const url = new URL(string);
+  const { hostname } = url;
+  return hostname;
+};
+
 export const slideUp = (element, speed = 400) => {
   element.style.overflow = 'hidden';
   element.style.display = 'block';

@@ -7,7 +7,7 @@ import { formatVideoUrl, getLinksList } from '../../../helpers/helpers';
 
 export const AboutScreen = ({ post }: { post: Post }) => {
   const { acf } = post;
-  const { about, video = '', slide_1, slide_2, slide_3, slide_4, slide_5 } = acf;
+  const { about = '', video = '', slide_1, slide_2, slide_3, slide_4, slide_5 } = acf || {};
 
   const gallery = [slide_1, slide_2, slide_3, slide_4, slide_5];
   const videoList = getLinksList(video);

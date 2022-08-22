@@ -11,7 +11,8 @@
     left: 0;
     width: 1261px;
     height: 1254px;
-    background: url(../../../images/bg-big-circle-main-screen-course-item.svg) no-repeat (center / cover);
+    background: url(../../../images/bg-big-circle-main-screen-course-item.svg) no-repeat
+      (center / cover);
   }
 
   .BgSmallCircle {
@@ -21,7 +22,8 @@
     right: 0;
     width: 75px;
     height: 230px;
-    background: url(../../../images/bg-small-circle-main-screen-course-item.svg) no-repeat (center / contain);
+    background: url(../../../images/bg-small-circle-main-screen-course-item.svg) no-repeat
+      (center / contain);
   }
 
   .SiteWrap {
@@ -55,7 +57,7 @@
             @include transition;
 
             &:hover {
-              color: #FF9776;
+              color: #ff9776;
             }
           }
         }
@@ -68,9 +70,9 @@
             font-weight: 600;
             font-size: 16px;
             line-height: 20px;
-            color: #647DB7;
+            color: #647db7;
             padding: 3px 6px 1px;
-            border: 2px solid #647DB7;
+            border: 2px solid #647db7;
             margin: 0 20px 0 0;
 
             &:last-child {
@@ -140,57 +142,75 @@
         align-items: flex-end;
         max-width: 300px;
 
-        .Icon {
-          height: 166px;
-          width: 300px;
-          background: no-repeat right center / contain;
+        .Icons {
+          display: flex;
+          width: 600px;
+          flex-wrap: wrap;
+          justify-content: flex-end;
           transform: translateX(54px);
-          margin: 0 0 40px;
+          margin: 0 0 20px;
 
-          &.Sadhusanga {
-            background-image: url(../../../images/icons/sadhusanga.svg);
-          }
+          .Icon {
+            height: 166px;
+            width: 300px;
+            background: no-repeat right center / contain;
+            margin: 0 0 20px;
 
-          &.BeforeShraddha {
-            //width: 157px;
-            //height: 115px;
-            background-image: url(../../../images/icons/before_shraddha.svg);
-          }
+            &.Medium {
+              height: 115px;
+              width: 217px;
+            }
 
-          &.Shraddha {
-            //width: 125px;
-            //height: 115px;
-            background-image: url(../../../images/icons/shradha.svg);
-          }
+            &.Small {
+              height: 90px;
+              width: 170px;
+            }
 
-          &.Sadhusanga {
-            //width: 155px;
-            //height: 115px;
-            background-image: url(../../../images/icons/sadhusanga.svg);
-          }
+            &.Sadhusanga {
+              background-image: url(../../../images/icons/sadhusanga.svg);
+            }
 
-          &.BhadjanaKriya {
-            //width: 186px;
-            //height: 115px;
-            background-image: url(../../../images/icons/bhadjana-kriya.svg);
-          }
+            &.BeforeShraddha {
+              //width: 157px;
+              //height: 115px;
+              background-image: url(../../../images/icons/before_shraddha.svg);
+            }
 
-          &.AnarthaNivritti {
-            //width: 217px;
-            //height: 115px;
-            background-image: url(../../../images/icons/anartha-nivritti.svg);
-          }
+            &.Shraddha {
+              //width: 125px;
+              //height: 115px;
+              background-image: url(../../../images/icons/shradha.svg);
+            }
 
-          &.Nishtha {
-            //width: 125px;
-            //height: 115px;
-            background-image: url(../../../images/icons/nishtha.svg);
-          }
+            &.Sadhusanga {
+              //width: 155px;
+              //height: 115px;
+              background-image: url(../../../images/icons/sadhusanga.svg);
+            }
 
-          &.AnyStage {
-            //width: 186px;
-            //height: 115px;
-            background-image: url(../../../images/icons/any-stage.svg);
+            &.BhadjanaKriya {
+              //width: 186px;
+              //height: 115px;
+              background-image: url(../../../images/icons/bhadjana-kriya.svg);
+            }
+
+            &.AnarthaNivritti {
+              //width: 217px;
+              //height: 115px;
+              background-image: url(../../../images/icons/anartha-nivritti.svg);
+            }
+
+            &.Nishtha {
+              //width: 125px;
+              //height: 115px;
+              background-image: url(../../../images/icons/nishtha.svg);
+            }
+
+            &.AnyStage {
+              //width: 186px;
+              //height: 115px;
+              background-image: url(../../../images/icons/any-stage.svg);
+            }
           }
         }
 
@@ -199,7 +219,7 @@
           font-size: 22px;
           line-height: 27px;
           text-align: right;
-          color: #6B6B6B;
+          color: #6b6b6b;
           margin: 0 0 15px;
         }
 
@@ -215,7 +235,7 @@
           font-size: 18px;
           line-height: 26px;
           text-align: right;
-          color: #6B6B6B;
+          color: #6b6b6b;
         }
       }
     }
