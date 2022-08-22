@@ -1,8 +1,8 @@
 import classes from './ForWhom.module.scss';
 import { forWhomToArray } from '../../../helpers/helpers';
 
-export const ForWhom = ({ test = '' }: { test: string }) => {
-  const forWhomList = forWhomToArray(test);
+export const ForWhom = ({ text = '' }: { text: string }) => {
+  const forWhomList = forWhomToArray(text);
 
   return (
     <div className={classes.ForWhomScreen}>

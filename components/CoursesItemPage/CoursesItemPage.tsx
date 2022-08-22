@@ -45,7 +45,7 @@ export const CoursesItemPage = (props: ServerData) => {
         <MainScreen course={course} />
         <AboutScreen post={course} />
         {course_program.length ? <CourseProgramScreen program={course_program} /> : null}
-        <ForWhom test={for_whom} />
+        {for_whom ? <ForWhom text={for_whom} /> : null}
         {teachers.length ? <Teachers teachers={teachers} /> : null}
         <BannerNote />
         <Feedback {...feedBackAttrs} />

@@ -11,7 +11,7 @@ import { ProjectCourses } from './ProjectCourses/ProjectCourses';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
   const { acf, title } = dataPost;
-  const { courses = [], teachers = [], format, city, site, logo } = acf;
+  const { courses = [], teachers = [], format, city, site, logo, for_whom } = acf;
 
   const mainScreenAttrs = {
     title,
@@ -19,6 +19,7 @@ export const ProjectsItemPage = ({ dataPost }: ServerData) => {
     city,
     site,
     logo,
+    for_whom,
   };
 
   return (
@@ -27,7 +28,7 @@ export const ProjectsItemPage = ({ dataPost }: ServerData) => {
         <MainScreen {...mainScreenAttrs} />
         <AboutScreen post={dataPost} />
         <ProjectCourses list={courses} />
-        <ForWhom />
+        {for_whom ? <ForWhom text={for_whom} /> : null}
         <Teachers teachers={teachers} />
         <BannerNote />
         <Feedback title='Контакты организатора' name='Бхакти-центр' />
