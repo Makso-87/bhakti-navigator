@@ -28,7 +28,7 @@ export const CoursesItemPage = (props: ServerData) => {
   const feedBackAttrs = {
     title: 'По всем вопросам свяжитесь с организатором курса',
     name: organizer_project?.title || organizer_external,
-    siteLink: organizer_project?.acf?.site || organizer_link,
+    siteLink: organizer_project?.acf?.web_site || organizer_link,
     email: organizer_project?.acf?.email || '',
     twitter: organizer_project?.acf?.twitter || '',
     facebook: organizer_project?.acf?.facebook || '',
@@ -38,6 +38,8 @@ export const CoursesItemPage = (props: ServerData) => {
     odnoklassniki: organizer_project?.acf?.odnoklassniki || '',
     whatsapp: organizer_project?.acf?.whatsapp || '',
   };
+
+  console.log('organizer_project', organizer_project);
 
   return (
     <Layout>

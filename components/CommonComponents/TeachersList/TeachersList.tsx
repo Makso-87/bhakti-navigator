@@ -1,4 +1,5 @@
 import classes from './TeachersList.module.scss';
+import photo_plug from '../../../images/icons/photo_plug.svg';
 
 export const TeachersList = ({ list }) => {
   return (
@@ -16,7 +17,7 @@ export const TeachersList = ({ list }) => {
                         <div
                           className={classes.Img}
                           style={{
-                            backgroundImage: `url(${teacher_photo})`,
+                            backgroundImage: `url(${teacher_photo || photo_plug.src})`,
                           }}
                         />
                       </div>

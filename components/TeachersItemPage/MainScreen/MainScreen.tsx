@@ -1,5 +1,6 @@
 import classes from './MainScreen.module.scss';
 import { Post } from '../../../interfaces/interfaces';
+import photo_plug from '../../../images/icons/photo_plug.svg';
 
 export const MainScreen = ({ post }: { post: Post }) => {
   const { title, acf } = post;
@@ -16,7 +17,7 @@ export const MainScreen = ({ post }: { post: Post }) => {
             <div className={classes.ImgContainer}>
               <div
                 className={classes.Img}
-                style={{ backgroundImage: `url(${teacher_photo})` }}
+                style={{ backgroundImage: `url(${teacher_photo || photo_plug.src})` }}
               ></div>
             </div>
 
