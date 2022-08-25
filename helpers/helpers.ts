@@ -223,6 +223,18 @@ export const getWebsiteName = (string: string) => {
   return hostname;
 };
 
+export const getUniqBhakyiLevels = (bhaktiLevels) => {
+  const bhaktiLevelsWithoutBhadjanaKriya = bhaktiLevels.filter(
+    (item) => !item?.acf?.value?.includes('bhadjana_kriya')
+  );
+
+  const [bhadjanaKriya] = bhaktiLevels.filter((item) =>
+    item?.acf?.value?.includes('bhadjana_kriya')
+  );
+
+  return [bhadjanaKriya, ...bhaktiLevelsWithoutBhadjanaKriya].filter((item) => item);
+};
+
 export const slideUp = (element, speed = 400) => {
   element.style.overflow = 'hidden';
   element.style.display = 'block';

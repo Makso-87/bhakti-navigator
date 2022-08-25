@@ -1,7 +1,7 @@
 import classes from './MainScreen.module.scss';
 import cn from 'classnames';
 import Link from 'next/link';
-import { getLink } from '../../../helpers/helpers';
+import { getLink, getUniqBhakyiLevels } from '../../../helpers/helpers';
 
 export const MainScreen = (props) => {
   const { course } = props;
@@ -23,17 +23,7 @@ export const MainScreen = (props) => {
     [classes.Live]: format?.value === 'live',
   });
 
-  const bhaktiLevelsWithoutBhadjanaKriya = bhakti_level.filter(
-    (item) => !item?.acf?.value?.includes('bhadjana_kriya')
-  );
-
-  const [bhadjanaKriya] = bhakti_level.filter((item) =>
-    item?.acf?.value?.includes('bhadjana_kriya')
-  );
-
-  const bhaktiLevelsUnique = [bhadjanaKriya, ...bhaktiLevelsWithoutBhadjanaKriya].filter(
-    (item) => item
-  );
+  const bhaktiLevelsUnique = getUniqBhakyiLevels(bhakti_level);
 
   return (
     <div className={classes.MainScreen}>
