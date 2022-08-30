@@ -3,6 +3,7 @@ import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
 import urlDecoding from './urlDecoding';
 import { string } from 'prop-types';
+import { DOMParser } from 'xmldom';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -233,6 +234,13 @@ export const getUniqBhakyiLevels = (bhaktiLevels) => {
   );
 
   return [bhadjanaKriya, ...bhaktiLevelsWithoutBhadjanaKriya].filter((item) => item);
+};
+
+export const clearContentFromAttrs = (content) => {
+  return content.replace(
+    /(style=")([^>]+)|(width=")([^\s]+)|(height=")([^\s]+)|(sizes=")([^/>]+)/g,
+    ''
+  );
 };
 
 export const slideUp = (element, speed = 400) => {

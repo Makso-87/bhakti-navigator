@@ -9,3 +9,13 @@
 @mixin transition {
   transition: all 0.2s ease-out;
 }
+
+@mixin first-and-last-margin-remove {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -10,8 +10,6 @@ const CoursesItem = ({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(true);
   setCategory('Каталог');
 
-  console.log(dataPost);
-
   const attrs = {
     dataPost,
   };

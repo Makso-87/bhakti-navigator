@@ -3,7 +3,7 @@ import classes from './TileItem.module.scss';
 import { getLink } from '../../../../helpers/helpers';
 
 export const TileItem = (props) => {
-  const { index, link, imgUrl, title, note, readingTime } = props;
+  const { index, link, imgUrl, title, article_lead, readingTime } = props;
 
   return (
     <div className={`${classes.TileItem} ${index % 2 === 0 ? classes.TypeOne : classes.TypeTwo}`}>
@@ -16,9 +16,8 @@ export const TileItem = (props) => {
 
             <figcaption>
               <div className={classes.Title}>
-                <span className={classes.Text}>{title}</span>
-                <br />
-                <span className={classes.Note}>{note}</span>
+                <div className={classes.Text}>{title}</div>
+                <div className={classes.Note} dangerouslySetInnerHTML={{ __html: article_lead }} />
               </div>
 
               <div className={classes.Time}>

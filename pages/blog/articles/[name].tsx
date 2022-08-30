@@ -1,18 +1,17 @@
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { ArticlesItemPage } from '../../../components/ArticlesItemPage/ArticlesItemPage';
+import { getPost } from '../../../helpers/helpers';
 
 const ArticlesItem = ({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories, postName }: ServerData = serverData;
+  const { dataPost }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('articles');
   setSecondaryTabBar(true);
   setCategory('Блог');
 
   const attrs = {
-    postName,
-    dataPosts,
-    dataCategories,
+    dataPost,
   };
 
   return <ArticlesItemPage {...attrs} />;
@@ -26,15 +25,12 @@ export const getServerSideProps = async ({ query }) => {
     dataPages: [],
     dataMedia: [],
     dataPosts: [],
+    dataPost: {},
     dataCategories: [],
   };
 
   try {
-    // const responsePosts = await getPosts();
-    // const responseCategories = await getCategories();
-    //
-    // serverData.dataPosts = await responsePosts.json();
-    // serverData.dataCategories = await responseCategories.json();
+    serverData.dataPost = await getPost(query.name);
 
     return {
       props: {

@@ -15,14 +15,15 @@ export const Articles = observer(({ list = [] }: ArticlesProps) => {
                 {formattedPostPair.length
                   ? formattedPostPair.map((post: Post, index) => {
                       const { link, title, acf, id } = post;
-                      const { article_main_image, title_additional_text, reading_time } = acf;
+                      const { article_main_image, article_lead, reading_time, themes } = acf;
 
                       const attrs = {
                         index,
                         link,
                         imgUrl: article_main_image,
                         title,
-                        note: title_additional_text,
+                        themes,
+                        article_lead,
                         readingTime: reading_time,
                       };
                       return <TileItem key={id} {...attrs} />;

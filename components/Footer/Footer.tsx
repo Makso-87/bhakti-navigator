@@ -54,7 +54,7 @@ export const Footer = () => {
               <div className={classes.Buttons}>
                 <div className={classes.Social}>
                   <div className={classes.SocialItem}>
-                    <Link href='https://t.me/bhaktinavigator'>
+                    <Link href='https://t.me/+m7n1EqDg9YwxMzRi'>
                       <a target='_blank' rel='noreferrer'>
                         <div
                           className={classes.Img}
@@ -63,28 +63,6 @@ export const Footer = () => {
                       </a>
                     </Link>
                   </div>
-
-                  {/*<div className={classes.SocialItem}>*/}
-                  {/*  <Link href='#'>*/}
-                  {/*    <a>*/}
-                  {/*      <div*/}
-                  {/*        className={classes.Img}*/}
-                  {/*        style={{ backgroundImage: `url(${insta.src})` }}*/}
-                  {/*      />*/}
-                  {/*    </a>*/}
-                  {/*  </Link>*/}
-                  {/*</div>*/}
-
-                  {/*<div className={classes.SocialItem}>*/}
-                  {/*  <Link href='#'>*/}
-                  {/*    <a>*/}
-                  {/*      <div*/}
-                  {/*        className={classes.Img}*/}
-                  {/*        style={{ backgroundImage: ` url(${youtubeBlack.src})` }}*/}
-                  {/*      />*/}
-                  {/*    </a>*/}
-                  {/*  </Link>*/}
-                  {/*</div>*/}
                 </div>
 
                 <div className={classes.Donation}>

@@ -1,0 +1,17 @@
+@import '../../../css/styleVariables';
+
+.Note {
+  margin: 20px 0 20px;
+  @include first-and-last-margin-remove;
+
+  .TextBlock {
+    padding: 30px 30px;
+    background: #e2e7f1;
+    border-radius: 12px;
+  }
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: 1196px;
+  }
+}

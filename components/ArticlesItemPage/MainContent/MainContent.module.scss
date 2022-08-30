@@ -1,0 +1,11 @@
+@import '../../../css/styleVariables';
+
+.MainContent {
+  margin: 20px 0 20px;
+  @include first-and-last-margin-remove;
+
+  .SiteWrap {
+    @include site-wrap;
+    max-width: 1196px;
+  }
+}

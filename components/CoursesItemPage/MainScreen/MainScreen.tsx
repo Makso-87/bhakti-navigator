@@ -2,6 +2,7 @@ import classes from './MainScreen.module.scss';
 import cn from 'classnames';
 import Link from 'next/link';
 import { getLink, getUniqBhakyiLevels } from '../../../helpers/helpers';
+import { Tags } from '../../CommonComponents/Tags/Tags';
 
 export const MainScreen = (props) => {
   const { course } = props;
@@ -42,17 +43,7 @@ export const MainScreen = (props) => {
                 </Link>
               </div>
 
-              <div className={classes.Tags}>
-                {themes.length
-                  ? themes.map((item) => {
-                      return (
-                        <div key={item.id} className={classes.TagItem}>
-                          {item?.title}
-                        </div>
-                      );
-                    })
-                  : null}
-              </div>
+              {themes ? <Tags tags={themes} /> : null}
 
               <div className={classes.TextWithIcons}>
                 <div className={`${classes.Item} ${classes.Donations}`}>{price?.label}</div>

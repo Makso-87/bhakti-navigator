@@ -4,254 +4,158 @@
   padding: 134px 0 120px 114px;
   counter-reset: number 0;
 
-  .Content {
+  .Top {
     margin: 30px 0 30px;
-
-    &:last-child {
-      margin: 0;
-    }
+    display: flex;
+    justify-content: space-between;
 
     .SiteWrap {
       @include site-wrap;
       max-width: 1196px;
     }
 
-    .Top {
-      display: flex;
-      justify-content: space-between;
-
-      .RightBlock {
-        flex-shrink: 0;
-        display: flex;
-        justify-items: flex-end;
-        justify-content: flex-end;
-        flex-direction: column;
-        padding: 0 0 10px;
-      }
-    }
-
     h1 {
       font-weight: 800;
       font-size: 36px;
       line-height: 53px;
-      max-width: 700px;
       text-transform: uppercase;
-
-      /*margin: 0 0 22px;*/
+      margin: 0 0 22px;
     }
 
-    .Expertise {
-      font-weight: 500;
-      font-size: 22px;
-      line-height: 27px;
-      color: #411799;
-      margin: 0 0 15px;
-      text-align: right;
-    }
-
-    .ReadingTime {
-      font-weight: 500;
-      font-size: 22px;
-      line-height: 27px;
-
-      /*margin: 0 0 40px;*/
-
-      text-align: right;
-    }
-
-    .MediaBlock {
-      margin: 40px 0 27px;
-      padding: 23px 0 35px;
-      border-top: 10px solid #C8D1E5;
-      border-bottom: 10px solid #C8D1E5;
-
-      figure {
-        margin: 0;
-        padding: 0;
+    .Info {
+      margin: 0 0 30px;
+      .InfoItem {
         display: flex;
-        flex-direction: row-reverse;
 
-        .ImgContainer {
-          width: 52%;
-
-          img {
-            width: 100%;
-          }
+        .Name {
+          font-weight: bold;
+          margin: 0 5px 0 0;
         }
-
-        figcaption {
-          width: 48%;
-          padding: 0 43px 0 0;
-
-          .Text {
-            font-size: 26px;
-            line-height: 42px;
-            color: #4D4D4D;
-            font-family: 'Kazimir-Medium';
-          }
-
-          .FirstCaption {
-            color: #121212;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 24px;
-            margin: 0 0 4px;
-
-            .Value {
-              color: #647DB7;
-            }
-          }
-
-          .SecondCaption {
-            color: #121212;
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 24px;
-          }
+        .Value {
         }
       }
     }
 
-    .StrongText {
-      margin: 27px 0 30px;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 40px;
+    .ImgContainer {
+      margin: 40px 0;
+
+      img {
+        width: 100%;
+      }
     }
+    .ArticleLead {
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 37px;
+      margin: 40px 0;
 
-    .ContentList {
-      display: flex;
-      justify-content: center;
-      margin: 30px 0;
+      p {
+        margin: 30px 0;
 
-      &:last-child {
-        margin: 0;
+        @include first-and-last-margin-remove;
       }
 
-      ul {
-        margin: 0;
-        padding: 0;
-        max-width: 752px;
+      @include first-and-last-margin-remove;
+    }
+  }
 
+  .Middle {
+    .SiteWrap {
+      @include site-wrap;
+      max-width: 1196px;
+    }
+
+    .Content {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 26px;
+
+      p {
+        margin: 20px 0 20px;
+
+        @include first-and-last-margin-remove;
+      }
+
+      img {
+        width: 100%;
+        margin: 50px 0;
+      }
+
+      ul,
+      ol {
+        margin: 25px 0 25px 35px;
         li {
-          list-style-type: none;
-          margin: 0 0 30px;
-
-          &:last-child {
-            margin: 0;
-          }
-
-          p {
-            counter-increment: number 1;
-            font-size: 18px;
-            line-height: 26px;
-            margin: 0;
-
-            &:before {
-              content: counter(number) ". ";
-              display: inline;
-            }
-          }
-
-          q {
-            font-weight: 300;
-            font-size: 28px;
-            line-height: 34px;
-            position: relative;
-
-            &:before {
-              content: '“';
-              position: absolute;
-              left: -65px;
-              top: 0;
-              font-weight: 500;
-              font-size: 132.949px;
-              line-height: 103px;
-            }
-          }
-
-          img {
-            width: 100%;
-          }
-
-          span {
-            font-size: 18px;
-            line-height: 26px;
-            margin: 0;
-          }
-
-          .Tags {
-            display: flex;
-            padding: 62px 0 0;
-
-            .TagItem {
-              font-weight: 600;
-              font-size: 16px;
-              line-height: 20px;
-              color: #647DB7;
-              padding: 3px 6px 1px;
-              border: 2px solid #647DB7;
-              margin: 0 20px 0 0;
-
-              &:last-child {
-                margin: 0;
-              }
-            }
-          }
-
-          .OtherArticle {
-            a {
-              text-decoration: none;
-              display: block;
-            }
-
-            figure {
-              display: flex;
-              margin: 0;
-              padding: 30px;
-              background: #FFFFFF;
-              box-shadow: 0 4px 30px rgba(74, 93, 160, 0.2);
-              border-radius: 25px;
-
-              &:hover {
-                box-shadow: 0 4px 30px rgba(74, 93, 160, 0.5);
-              }
-
-              .ImgContainer {
-                position: relative;
-                padding: 17% 30% 0 0;
-                margin: 0 21px 0 0;
-
-                .Img {
-                  position: absolute;
-                  top: 0;
-                  left: 0;
-                  width: 100%;
-                  height: 100%;
-                  background: no-repeat center / cover;
-                }
-              }
-
-              figcaption {
-                .Name {
-                  font-weight: 500;
-                  font-size: 14px;
-                  line-height: 24px;
-                  margin: 0 0 9px;
-                }
-
-                .Title {
-                  font-weight: 500;
-                  font-size: 22px;
-                  line-height: 27px;
-                  color: #647DB7;
-                }
-              }
-            }
-          }
         }
       }
     }
+  }
+
+  .Bottom {
+    margin: 60px 0 0;
+    .SiteWrap {
+      @include site-wrap;
+      max-width: 1196px;
+    }
+  }
+
+  .MediaBlock {
+    margin: 40px 0 27px;
+    padding: 23px 0 35px;
+    border-top: 10px solid #c8d1e5;
+    border-bottom: 10px solid #c8d1e5;
+
+    figure {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row-reverse;
+
+      .ImgContainer {
+        width: 52%;
+
+        img {
+          width: 100%;
+        }
+      }
+
+      figcaption {
+        width: 48%;
+        padding: 0 43px 0 0;
+
+        .Text {
+          font-size: 26px;
+          line-height: 42px;
+          color: #4d4d4d;
+          font-family: 'Kazimir-Medium';
+        }
+
+        .FirstCaption {
+          color: #121212;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+          margin: 0 0 4px;
+
+          .Value {
+            color: #647db7;
+          }
+        }
+
+        .SecondCaption {
+          color: #121212;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .StrongText {
+    margin: 27px 0 30px;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 40px;
   }
 
   .WideContent {
@@ -273,9 +177,5 @@
       @include site-wrap;
       max-width: 1196px;
     }
-  }
-
-  .Content .ContentList ul li .OtherArticle figure {
-    @include transition;
   }
 }
