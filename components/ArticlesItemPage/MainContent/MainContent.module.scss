@@ -1,7 +1,7 @@
 @import '../../../css/styleVariables';
 
 .MainContent {
-  margin: 20px 0 20px;
+  margin: 0 0 30px;
   @include first-and-last-margin-remove;
 
   .SiteWrap {
