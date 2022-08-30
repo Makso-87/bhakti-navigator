@@ -12,6 +12,7 @@
 
   .SiteWrap {
     @include site-wrap;
-    max-width: 1196px;
+    max-width: 750px;
+    min-width: 750px;
   }
 }

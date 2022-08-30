@@ -62,7 +62,7 @@ export const ArticlesItemPage = (props: ServerData) => {
 
             {article_author !== '' ? (
               <div className={classes.Author}>
-                <div className={classes.Name}>Автор</div>
+                <div className={classes.Name}>Автор: </div>
                 <div className={classes.Value}>{article_author}</div>
               </div>
             ) : null}
