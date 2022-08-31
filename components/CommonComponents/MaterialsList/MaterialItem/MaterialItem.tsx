@@ -1,14 +1,11 @@
 import classes from './MaterialItem.module.scss';
 import cn from 'classnames';
+import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const MaterialItem = (props) => {
   const { id, title, link, author, theme, type, bhakti_level } = props;
 
   const classesGridItem = cn(classes.GridItem, {
-    [classes.BeforeShraddha]: bhakti_level.value === 'before_shraddha',
-    [classes.Shraddha]: bhakti_level.value === 'shraddha',
-    [classes.Sadhusanga]: bhakti_level.value === 'sadhu_sanga',
-    [classes.BhadjanaKriya]: bhakti_level.value.includes('bhadjana_kriya'),
     [classes.Book]: type?.value === 'text',
     [classes.File]: type?.value === 'file',
     [classes.Audio]: type?.value === 'audio',
@@ -36,9 +33,7 @@ export const MaterialItem = (props) => {
 
           <div className={classes.MaterialType} />
 
-          <div className={classes.LocationLogo}>
-            <div className={classes.Logo} />
-          </div>
+          <Bookmarks bhaktiLevelsList={bhakti_level} />
         </div>
       </a>
     </div>

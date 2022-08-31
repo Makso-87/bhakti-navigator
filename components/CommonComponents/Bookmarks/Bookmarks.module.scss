@@ -1,0 +1,156 @@
+.BookmarksContainer {
+  position: absolute;
+  right: 0;
+  bottom: 27px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  .Bookmark {
+    position: relative;
+    width: auto;
+    padding: 3px 10px;
+    background: #e93636;
+    border-radius: 0 3px 0 0;
+    left: 10px;
+    margin: 0 0 10px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .Text {
+      color: #ffffff;
+      font-size: 14px;
+      line-height: 18px;
+    }
+
+    .TriangleTop {
+      position: absolute;
+      top: 0;
+      left: -15px;
+      width: 0;
+      height: 0;
+      border-top: 12px solid #e93636;
+      border-left: 15px solid transparent;
+    }
+
+    .TriangleBottom {
+      position: absolute;
+      bottom: 0;
+      left: -15px;
+      width: 0;
+      height: 0;
+      border-bottom: 12px solid #e93636;
+      border-left: 15px solid transparent;
+    }
+
+    &.BeforeShraddha {
+      .Text {
+        color: #3c3c3c;
+      }
+      background: #36e988;
+      .TriangleTop {
+        border-top-color: #36e988;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #36e988;
+      }
+
+      &:after {
+        border-top: 6px solid #005b28;
+      }
+    }
+
+    &.Shraddha {
+      .Text {
+        color: #3c3c3c;
+      }
+      background: #e5e936;
+      .TriangleTop {
+        border-top-color: #e5e936;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #e5e936;
+      }
+
+      &:after {
+        border-top: 6px solid #606400;
+      }
+    }
+
+    &.Sadhusanga {
+      background: #e98136;
+      .TriangleTop {
+        border-top-color: #e98136;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #e98136;
+      }
+
+      &:after {
+        border-top: 6px solid #7c3600;
+      }
+    }
+
+    &.BhadjanaKriya {
+      background: #e93636;
+      .TriangleTop {
+        border-top-color: #e93636;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #e93636;
+      }
+
+      &:after {
+        border-top: 6px solid #6e0000;
+      }
+    }
+
+    &.AnarthaNivritti {
+      background: #e936e2;
+      .TriangleTop {
+        border-top-color: #e936e2;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #e936e2;
+      }
+
+      &:after {
+        border-top: 6px solid #790073;
+      }
+    }
+
+    &.Nishtha {
+      background: #36d3e9;
+      .TriangleTop {
+        border-top-color: #36d3e9;
+      }
+
+      .TriangleBottom {
+        border-bottom-color: #36d3e9;
+      }
+
+      &:after {
+        border-top: 6px solid #36d3e9;
+      }
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      bottom: -6px;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-top: 6px solid #b20101;
+      border-right: 11px solid transparent;
+    }
+  }
+}

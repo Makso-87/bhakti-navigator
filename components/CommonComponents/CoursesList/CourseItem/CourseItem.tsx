@@ -2,6 +2,7 @@ import classes from './CourseItem.module.scss';
 import Link from 'next/link';
 import cn from 'classnames';
 import { getUniqBhakyiLevels } from '../../../../helpers/helpers';
+import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const CourseItem = (props) => {
   const { title, speaker, location, format, theme, bhakti_level, link, columnsCount = 3 } = props;
@@ -10,8 +11,6 @@ export const CourseItem = (props) => {
     [classes.Width50]: columnsCount === 2,
     [classes.Width33]: columnsCount === 3,
   });
-
-  const bhaktiLevelUniq = getUniqBhakyiLevels(bhakti_level);
 
   return (
     <div className={classesCell}>
@@ -42,31 +41,7 @@ export const CourseItem = (props) => {
               <div className={classes.Logo} />
             </div>
 
-            <div className={classes.BookmarksContainer}>
-              {bhaktiLevelUniq?.length
-                ? bhaktiLevelUniq.map((item) => {
-                    const { id, title, acf } = item;
-
-                    const classesBookmark = cn(classes.Bookmark, {
-                      [classes.BeforeShraddha]: acf?.value === 'before_shraddha',
-                      [classes.Shraddha]: acf?.value === 'shraddha',
-                      [classes.Sadhusanga]: acf?.value === 'sadhu_sanga',
-                      [classes.BhadjanaKriya]: acf?.value?.includes('bhadjana_kriya'),
-                      [classes.AnarthaNivritti]: acf?.value === 'anartha_nivritti',
-                    });
-
-                    return (
-                      <div key={id} className={classesBookmark}>
-                        <div className={classes.TriangleTop} />
-                        <div className={classes.TriangleBottom} />
-                        <div className={classes.Text}>
-                          {title.replace(/(\sначало|\sпродолжение)/g, '')}
-                        </div>
-                      </div>
-                    );
-                  })
-                : null}
-            </div>
+            <Bookmarks bhaktiLevelsList={bhakti_level} />
           </div>
         </a>
       </Link>
