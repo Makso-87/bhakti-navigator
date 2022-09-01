@@ -85,7 +85,8 @@ export const MaterialData = (props) => {
             {/*) : null}*/}
           </div>
 
-          <div className={classes.Label}>Слушайте на Яндекс Музыке</div>
+          {/*<div className={classes.Label}>Слушайте на Яндекс Музыке</div>*/}
+          <div className={classes.Label}>Слушайте на Sound Cloud</div>
           <div className={classes.DownloadButton}></div>
         </a>
 

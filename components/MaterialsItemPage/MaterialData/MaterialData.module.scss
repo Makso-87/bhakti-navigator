@@ -141,12 +141,19 @@
     .DownloadButton {
       bottom: 19px;
 
+      //&:before {
+      //  background: url(../../../images/icons/yandex-music.svg) no-repeat (center / contain);
+      //}
+      //
+      //&:after {
+      //  background: url(../../../images/icons/yandex-music.svg) no-repeat (center / contain);
+      //}
       &:before {
-        background: url(../../../images/icons/yandex-music.svg) no-repeat (center / contain);
+        background: url(../../../images/icons/soundcloud.svg) no-repeat (center / contain);
       }
 
       &:after {
-        background: url(../../../images/icons/yandex-music.svg) no-repeat (center / contain);
+        background: url(../../../images/icons/soundcloud.svg) no-repeat (center / contain);
       }
     }
 
