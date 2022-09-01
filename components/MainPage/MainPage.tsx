@@ -21,13 +21,13 @@ export const MainPage = (props) => {
   return (
     <Layout>
       <div>
-        {/*<MainScreen />*/}
-        {/*<SortOutScreen {...attrs} />*/}
-        {/*<FindScreen {...attrs} />*/}
-        {/*<SelectScreen />*/}
-        {/*<HelpBanner customBgColor='#E6EAF1' />*/}
-        {/*<ShrilaPrabhupadaBanner />*/}
-        {/*<SubscribeScreen />*/}
+        <MainScreen />
+        <SortOutScreen {...attrs} />
+        <FindScreen {...attrs} />
+        <SelectScreen />
+        <HelpBanner customBgColor='#E6EAF1' />
+        <ShrilaPrabhupadaBanner />
+        <SubscribeScreen />
       </div>
     </Layout>
   );

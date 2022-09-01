@@ -75,10 +75,11 @@ export const convertServerDataObjectToArray = (obj: any) => {
 };
 
 export const getPages = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?per_page=100`);
+  const response = await fetch(`${config.API_URL}${config.WP_API_JSON}/pages?per_page=100`);
+  return await response.json();
 };
 
-export const getALlPosts = async () => {
+export const getAllPosts = async () => {
   const response = await fetch(`${config.API_URL}${config.BN_API_JSON}/posts`);
   return await response.json();
 };
@@ -99,7 +100,8 @@ export const getMedia = async () => {
 };
 
 export const getCategories = async () => {
-  return await fetch(`${config.API_URL}${config.WP_API_JSON}/categories?per_page=100`);
+  const response = await fetch(`${config.API_URL}${config.WP_API_JSON}/categories?per_page=100`);
+  return await response.json();
 };
 
 export const getAllServerData = async () => {

@@ -3,7 +3,13 @@ import dataStore from '../store/dataStore';
 import { ServerData, ServerSideProps } from '../interfaces/interfaces';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../store/pagesStore';
-import { getAllServerData, getCategories, getMedia, getPages } from '../helpers/helpers';
+import {
+  getAllPosts,
+  getAllServerData,
+  getCategories,
+  getMedia,
+  getPages,
+} from '../helpers/helpers';
 
 const Index = observer(({ serverData }: ServerSideProps) => {
   const { dataPages, dataPosts, dataCategories }: ServerData = serverData;
@@ -36,11 +42,13 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    const data = await getAllServerData();
+    const posts = await getAllPosts();
+    const pages = await getPages();
+    const categories = await getCategories();
 
-    serverData.dataPages = data.pages;
-    serverData.dataPosts = data.posts;
-    serverData.dataCategories = data.categories;
+    serverData.dataPages = [...pages];
+    serverData.dataPosts = [...posts];
+    serverData.dataCategories = [...categories];
 
     return {
       props: {
