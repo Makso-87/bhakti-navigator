@@ -21,7 +21,7 @@ export const MainPage = (props) => {
   return (
     <Layout>
       <div>
-        <MainScreen />
+        {/*<MainScreen />*/}
         {/*<SortOutScreen {...attrs} />*/}
         {/*<FindScreen {...attrs} />*/}
         {/*<SelectScreen />*/}
