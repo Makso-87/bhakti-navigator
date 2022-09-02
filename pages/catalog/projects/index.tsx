@@ -15,7 +15,7 @@ const Projects = ({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const list = dataPosts.map((item) => {
+  const list = dataPosts.projects.map((item) => {
     const { link, acf, title, id } = item;
     const { format, city, site, logo } = acf;
 
@@ -37,14 +37,11 @@ export default Projects;
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('projects');
+    serverData.dataPosts = { projects: await getPostsByCategory('projects') };
 
     return {
       props: {

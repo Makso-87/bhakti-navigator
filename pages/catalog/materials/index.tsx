@@ -10,7 +10,7 @@ const Materials = ({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const list = dataPosts.map((item) => {
+  const list = dataPosts.materials.map((item) => {
     const { title, link, acf, id } = item;
     const { author, theme, type, bhakti_level } = acf;
 
@@ -32,13 +32,11 @@ export default Materials;
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('materials');
+    serverData.dataPosts = { materials: await getPostsByCategory('materials') };
 
     return {
       props: {

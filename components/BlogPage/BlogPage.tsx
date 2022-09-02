@@ -5,7 +5,7 @@ import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import classes from './BlogPage.module.scss';
 import { pairsFormattedPosts } from '../../types/types';
 
-export const BlogPage = ({ posts, categories }) => {
+export const BlogPage = ({ posts }) => {
   const tileMaxCount = 3;
   const formattedList: pairsFormattedPosts = getFormattedPosts(posts);
   const allowedPostsList = formattedList.filter((postPair, index) => index < tileMaxCount);

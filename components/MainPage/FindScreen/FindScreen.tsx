@@ -9,9 +9,8 @@ import { ServerData } from '../../../interfaces/interfaces';
 configureAnchors({ offset: -100, scrollDuration: 400 });
 
 export const FindScreen = (props) => {
-  const { dataPosts, dataCategories }: ServerData = props;
-  const coursesCategory = getCategoryData(dataCategories, 'courses');
-  const courses = getPostsList(dataPosts, coursesCategory?.id);
+  const { dataPosts }: ServerData = props;
+  const { courses = [] } = dataPosts;
 
   const attrs = {
     columnsCount: 3,

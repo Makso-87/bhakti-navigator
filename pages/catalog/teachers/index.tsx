@@ -10,7 +10,7 @@ const Teachers = ({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const list = dataPosts.map((item) => {
+  const list = dataPosts.teachers.map((item) => {
     const { link, acf, title, id } = item;
     const { city, teacher_photo, courses = [] } = acf;
 
@@ -31,14 +31,11 @@ export default Teachers;
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('teachers');
+    serverData.dataPosts = { teachers: await getPostsByCategory('teachers') };
 
     return {
       props: {

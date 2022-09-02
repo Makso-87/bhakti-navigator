@@ -5,7 +5,7 @@ import pagesStore from '../../../store/pagesStore';
 import { getPostsByCategory } from '../../../helpers/helpers';
 
 const Blog = observer(({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories }: ServerData = serverData;
+  const { dataPosts }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
 
   setCurrentPage('articles');
@@ -13,8 +13,7 @@ const Blog = observer(({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(true);
 
   const attrs = {
-    posts: dataPosts,
-    categories: dataCategories,
+    posts: dataPosts.articles,
   };
 
   return <BlogPage {...attrs} />;
@@ -22,13 +21,11 @@ const Blog = observer(({ serverData }: ServerSideProps) => {
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('articles');
+    serverData.dataPosts = { articles: await getPostsByCategory('articles') };
 
     return {
       props: {

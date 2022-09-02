@@ -10,12 +10,10 @@ import pagesStore from '../../store/pagesStore';
 import { ServerData } from '../../interfaces/interfaces';
 
 export const MainPage = (props) => {
-  const { dataPages, dataPosts, dataCategories }: ServerData = props;
+  const { dataPosts }: ServerData = props;
   pagesStore.setCurrentPage('main');
   const attrs = {
-    dataPages,
     dataPosts,
-    dataCategories,
   };
 
   return (

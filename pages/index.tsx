@@ -3,16 +3,10 @@ import dataStore from '../store/dataStore';
 import { ServerData, ServerSideProps } from '../interfaces/interfaces';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../store/pagesStore';
-import {
-  getAllPosts,
-  getAllServerData,
-  getCategories,
-  getMedia,
-  getPages,
-} from '../helpers/helpers';
+import { getAllPosts, getPostsByCategory } from '../helpers/helpers';
 
 const Index = observer(({ serverData }: ServerSideProps) => {
-  const { dataPages, dataPosts, dataCategories }: ServerData = serverData;
+  const { dataPosts }: ServerData = serverData;
   const { setCurrentPage, setCategory, setSecondaryTabBar } = pagesStore;
   const { setDataPages, setDataPosts, setDataMedia, setDataCategories } = dataStore;
 
@@ -25,9 +19,7 @@ const Index = observer(({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(false);
 
   const attrs = {
-    dataPages,
     dataPosts,
-    dataCategories,
   };
 
   return <MainPage {...attrs} />;
@@ -35,21 +27,14 @@ const Index = observer(({ serverData }: ServerSideProps) => {
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    const posts = await getAllPosts();
-    const pages = await getPages();
-    const categories = await getCategories();
-
-    serverData.dataPages = [...pages];
-    serverData.dataPosts = [...posts];
-    serverData.dataCategories = [...categories];
-
+    serverData.dataPosts = {
+      courses: await getPostsByCategory('courses'),
+      articles: await getPostsByCategory('articles'),
+    };
     return {
       props: {
         serverData,

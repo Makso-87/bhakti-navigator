@@ -11,7 +11,7 @@ const Records = observer(({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(true);
   setCategory('Каталог');
 
-  const list = dataPosts.map((item) => {
+  const list = dataPosts.records.map((item) => {
     const { title, acf, link, id } = item;
     const { theme, bhakti_level, type, author } = acf;
 
@@ -31,14 +31,11 @@ const Records = observer(({ serverData }: ServerSideProps) => {
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('records');
+    serverData.dataPosts = { records: await getPostsByCategory('records') };
 
     return {
       props: {

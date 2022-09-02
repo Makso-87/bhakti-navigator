@@ -48,11 +48,19 @@ export interface Article<Post> {
 
 export interface ServerData {
   postName?: string;
-  dataPages?: [Page];
-  dataMedia?: [Media];
-  dataPosts?: [Post];
+  dataPages?: Page[];
+  dataMedia?: Media[];
+  dataPosts?: {
+    faq?: Post[];
+    courses?: Post[];
+    records?: Post[];
+    teachers?: Post[];
+    projects?: Post[];
+    articles?: Post[];
+    materials?: Post[];
+  };
   dataPost?: Post;
-  dataCategories?: [Category];
+  dataCategories?: Category[];
   dataMenuBlog?: Menu;
   dataMenuHeader?: Menu;
   dataMenuCatalog?: Menu;

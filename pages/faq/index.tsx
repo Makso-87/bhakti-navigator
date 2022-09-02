@@ -10,7 +10,7 @@ const Faq = ({ serverData }: ServerSideProps) => {
   setCurrentPage('faq');
   setCategory('Вопросы и ответы');
 
-  const list = dataPosts.map((item) => {
+  const list = dataPosts.faq.map((item) => {
     const { title, acf } = item;
     const { author, video_url, video_duration, preview_image } = acf;
     return {
@@ -29,14 +29,11 @@ export default Faq;
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('faq');
+    serverData.dataPosts = { faq: await getPostsByCategory('faq') };
 
     return {
       props: {

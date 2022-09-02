@@ -11,19 +11,16 @@ const Courses = observer(({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(true);
   setCategory('Каталог');
 
-  return <CoursesPage list={dataPosts} />;
+  return <CoursesPage list={dataPosts.courses} />;
 });
 
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
-    dataCategories: [],
+    dataPosts: {},
   };
 
   try {
-    serverData.dataPosts = await getPostsByCategory('courses');
+    serverData.dataPosts = { courses: await getPostsByCategory('courses') };
 
     return {
       props: {

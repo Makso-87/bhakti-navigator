@@ -16,13 +16,10 @@ import { pairsFormattedPosts } from '../../../types/types';
 configureAnchors({ offset: -100, scrollDuration: 400 });
 
 export const SortOutScreen = observer((props) => {
-  const { dataPages, dataPosts, dataCategories }: ServerData = props;
+  const { dataPosts }: ServerData = props;
 
-  const mainPage: Page = getPageData(dataPages, 'main-page');
-  const category: Category = getCategoryData(dataCategories, 'articles');
-  const posts: Post[] = getPostsList(dataPosts, category?.id);
-  const { sort_out_screen_title = '', sort_out_screen_articles_number = 2 } = mainPage?.acf || {};
-  const list = getPostsList(posts, category?.id);
+  const sort_out_screen_articles_number = 2;
+  const list = dataPosts.articles || [];
   const formattedList: pairsFormattedPosts = getFormattedPosts(list);
   const allowedPostsList = formattedList.filter(
     (postPair, index) => index < Number(sort_out_screen_articles_number)
@@ -37,7 +34,7 @@ export const SortOutScreen = observer((props) => {
     <ScrollableAnchor id={'sort-out'}>
       <div className={classes.SortOutScreen}>
         <div className={classes.SiteWrap}>
-          <h2>{sort_out_screen_title}</h2>
+          <h2>Разобраться</h2>
 
           <div className={classes.AboutText}>
             В{' '}
