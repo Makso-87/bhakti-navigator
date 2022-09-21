@@ -113,7 +113,7 @@
 
     .RightSide {
       width: 40%;
-      padding: 0 68px 0 0;
+      padding: 25px 68px 0 0;
       display: flex;
       justify-content: flex-end;
 
@@ -121,7 +121,156 @@
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        max-width: 300px;
+        //max-width: 300px;
+
+        .Map {
+          width: 580px;
+          padding: 42% 0 0;
+          background: url('../../../images/way-simple.svg') no-repeat center / contain;
+          margin: 0 0 35px;
+          position: relative;
+
+          .Point {
+            position: absolute;
+            width: 41px;
+            height: 41px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            background: #404759;
+            border: 5px solid #c8d1e5;
+
+            &.Active {
+              background: #ff9776;
+            }
+
+            .Text {
+              position: absolute;
+              font-size: 20px;
+              line-height: 20px;
+              color: #ff9776;
+              font-weight: bold;
+              white-space: nowrap;
+              left: 50%;
+              transform: translateX(-50%);
+            }
+
+            &:after {
+              content: '';
+              width: 50px;
+              height: 50px;
+              position: absolute;
+              top: 0;
+              left: 0;
+            }
+
+            &.BeforeShraddha {
+              left: -20px;
+              bottom: -5px;
+
+              .Text {
+                //color: #36e988;
+                top: -30px;
+              }
+
+              &:after {
+                //background: url('../../../images/icons/before_shraddha.svg') no-repeat center /
+                //  contain;
+              }
+            }
+
+            &.Shraddha {
+              left: 95px;
+              bottom: 30px;
+
+              .Text {
+                //color: #e5e936;
+                top: -30px;
+              }
+            }
+
+            &.Sadhusanga {
+              left: 235px;
+              bottom: -10px;
+
+              .Text {
+                //color: #e98136;
+                top: -30px;
+              }
+            }
+
+            &.BhadjanaKriya {
+              left: 300px;
+              bottom: 70px;
+
+              .Text {
+                //color: #e93636;
+                top: -30px;
+              }
+            }
+
+            &.AnarthaNivritti {
+              left: 494px;
+              bottom: 56px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+
+            &.Nistha {
+              right: -10px;
+              top: 63px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+
+            &.Ruchi {
+              right: 130px;
+              top: 70px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+
+            &.Asakti {
+              right: 250px;
+              top: 40px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+
+            &.Bhava {
+              right: 150px;
+              top: -5px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+
+            &.Prema {
+              right: 12px;
+              top: -25px;
+              width: 60px;
+              height: 60px;
+
+              .Text {
+                //color: #e936e2;
+                top: -30px;
+              }
+            }
+          }
+        }
 
         .Icons {
           display: flex;
