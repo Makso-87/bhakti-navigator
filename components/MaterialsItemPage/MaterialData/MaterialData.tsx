@@ -9,8 +9,8 @@ export const MaterialData = (props) => {
     description = '',
     name = 'Духовные знания',
     author = 'Старший преданный',
-    audio_link = '#',
-    download_link = '#',
+    audioLink = '#',
+    downloadLink = '#',
   } = props;
 
   const classesMaterialData = cn(`${classes.MaterialData}`, {
@@ -44,7 +44,7 @@ export const MaterialData = (props) => {
     file: () => (
       <>
         <a
-          href={download_link}
+          href={downloadLink}
           target='_blank'
           rel='noreferrer'
           className={`${classes.DownloadData} ${classes.Link}`}
@@ -68,7 +68,7 @@ export const MaterialData = (props) => {
     audio: () => (
       <>
         <a
-          href={audio_link}
+          href={audioLink}
           target='_blank'
           rel='noreferrer'
           className={`${classes.DownloadData} ${classes.Link}`}

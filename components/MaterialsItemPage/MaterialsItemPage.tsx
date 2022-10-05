@@ -7,6 +7,7 @@ import { Post } from '../../interfaces/interfaces';
 import { formatVideoUrl, getLink } from '../../helpers/helpers';
 import Link from 'next/link';
 import { Tags } from '../CommonComponents/Tags/Tags';
+import { BhaktiLevelsMap } from '../CommonComponents/BhaktiLevelsMap/BhaktiLevelsMap';
 
 export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
   const { materialACF, recordACF, title = 'заголовок' } = dataPost;
@@ -18,6 +19,7 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
     onlineLink,
     description,
     downloadLink,
+    bhaktiLevel,
   } = materialACF ?? recordACF ?? {};
 
   const videoAttrs = {
@@ -60,13 +62,6 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
 
                   {themes ? <Tags tags={themes} /> : null}
 
-                  {/*<div className={classes.Tags}>*/}
-                  {/*  <div className={classes.TagItem}>шастры</div>*/}
-                  {/*  <div className={classes.TagItem}>бхагавад-гита</div>*/}
-                  {/*  <div className={classes.TagItem}>шри-ишопанишад</div>*/}
-                  {/*  <div className={classes.TagItem}>священные писания</div>*/}
-                  {/*</div>*/}
-
                   <div className={classes.Theme}>
                     <span className={classes.Name}>Тема: </span>
                     <span className={classes.Value}>{mainTheme?.title}</span>
@@ -76,7 +71,8 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
 
               <div className={classes.RightSide}>
                 <div className={classes.MaterialInfoExtended}>
-                  <div className={`${classes.Icon} ${classes.Sadhusanga}`} />
+                  <BhaktiLevelsMap bhaktiLevel={bhaktiLevel} />
+                  {/*<div className={`${classes.Icon} ${classes.Sadhusanga}`} />*/}
                 </div>
               </div>
             </div>
