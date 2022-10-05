@@ -34,7 +34,16 @@ export interface Post {
   slug: string;
   link: string;
   title: string;
-  acf: any;
+  faqACF?: any;
+  themeACF?: any;
+  recordACF?: any;
+  courseACF?: any;
+  articleACF?: any;
+  projectACF?: any;
+  teacherACF?: any;
+  materialACF?: any;
+  bhaktiLevelACF?: any;
+  courseProgramItemACF?: any;
   categories: Category[];
 }
 

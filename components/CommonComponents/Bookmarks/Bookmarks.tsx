@@ -9,7 +9,7 @@ export const Bookmarks = ({ bhaktiLevelsList }) => {
     <div className={classes.BookmarksContainer}>
       {bhaktiLevelUniq?.length
         ? bhaktiLevelUniq.map((item) => {
-            const { id, title, acf } = item;
+            const { id, title, bhaktiLevelACF: acf } = item;
 
             const classesBookmark = cn(classes.Bookmark, {
               [classes.BeforeShraddha]: acf?.value === 'before_shraddha',

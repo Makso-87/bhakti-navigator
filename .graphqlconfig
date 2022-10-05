@@ -1,0 +1,15 @@
+{
+  "name": "bhakti-navigator",
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "localhost": {
+        "url": "https://bhaktinavigator.tmweb.ru/bhakti-navigator-wp/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

@@ -14,17 +14,17 @@ export const Articles = observer(({ list = [] }: ArticlesProps) => {
               <div key={idx} className={`${classes.Tile} ${idx % 2 === 0 ? '' : classes.Reverse}`}>
                 {formattedPostPair.length
                   ? formattedPostPair.map((post: Post, index) => {
-                      const { link, title, acf, id } = post;
-                      const { article_main_image, article_lead, reading_time, themes } = acf;
+                      const { link, title, articleACF, id } = post;
+                      const { articleMainImage, articleLead, readingTime, themes } = articleACF;
 
                       const attrs = {
                         index,
                         link,
-                        imgUrl: article_main_image,
+                        imgUrl: articleMainImage.sourceUrl,
                         title,
                         themes,
-                        article_lead,
-                        readingTime: reading_time,
+                        articleLead,
+                        readingTime,
                       };
                       return <TileItem key={id} {...attrs} />;
                     })

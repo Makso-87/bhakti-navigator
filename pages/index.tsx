@@ -4,6 +4,9 @@ import { ServerData, ServerSideProps } from '../interfaces/interfaces';
 import { observer } from 'mobx-react-lite';
 import pagesStore from '../store/pagesStore';
 import { getAllPosts, getPostsByCategory } from '../helpers/helpers';
+import { graphQLClient } from '../helpers/graphQLClient';
+import { courses } from '../graphql/queries/courses';
+import { articles } from '../graphql/queries/articles';
 
 const Index = observer(({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
@@ -31,10 +34,14 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
+    const { posts } = await graphQLClient.request(courses);
+    const { posts: articlesList } = await graphQLClient.request(articles);
+
     serverData.dataPosts = {
-      courses: await getPostsByCategory('courses'),
-      articles: await getPostsByCategory('articles'),
+      courses: posts.nodes,
+      articles: articlesList.nodes,
     };
+
     return {
       props: {
         serverData,

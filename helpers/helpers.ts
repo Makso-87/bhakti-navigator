@@ -228,11 +228,11 @@ export const getWebsiteName = (string: string) => {
 
 export const getUniqBhakyiLevels = (bhaktiLevels) => {
   const bhaktiLevelsWithoutBhadjanaKriya = bhaktiLevels.filter(
-    (item) => !item?.acf?.value?.includes('bhadjana_kriya')
+    (item) => !item?.bhaktiLevelACF?.value?.includes('bhadjana_kriya')
   );
 
   const [bhadjanaKriya] = bhaktiLevels.filter((item) =>
-    item?.acf?.value?.includes('bhadjana_kriya')
+    item?.bhaktiLevelACF?.value?.includes('bhadjana_kriya')
   );
 
   return [bhadjanaKriya, ...bhaktiLevelsWithoutBhadjanaKriya].filter((item) => item);

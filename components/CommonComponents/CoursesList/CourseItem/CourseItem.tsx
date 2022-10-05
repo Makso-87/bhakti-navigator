@@ -5,7 +5,8 @@ import { getUniqBhakyiLevels } from '../../../../helpers/helpers';
 import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const CourseItem = (props) => {
-  const { title, speaker, location, format, theme, bhakti_level, link, columnsCount = 3 } = props;
+  const { title, speaker, location, format, theme, bhaktiLevel, link, columnsCount = 3 } = props;
+  const [, formatLabel] = format || [];
 
   const classesCell = cn(classes.Cell, {
     [classes.Width50]: columnsCount === 2,
@@ -28,7 +29,7 @@ export const CourseItem = (props) => {
             <div className={classes.Info}>
               <div className={classes.InfoItem}>
                 <div className={classes.InfoItemName}>Формат:</div>
-                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{format?.label}</div>
+                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{formatLabel}</div>
               </div>
 
               <div className={classes.InfoItem}>
@@ -41,7 +42,7 @@ export const CourseItem = (props) => {
               <div className={classes.Logo} />
             </div>
 
-            <Bookmarks bhaktiLevelsList={bhakti_level} />
+            <Bookmarks bhaktiLevelsList={bhaktiLevel} />
           </div>
         </a>
       </Link>
