@@ -34,6 +34,7 @@ export interface Post {
   slug: string;
   link: string;
   title: string;
+  acf?: any;
   faqACF?: any;
   themeACF?: any;
   recordACF?: any;
