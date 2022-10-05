@@ -444,6 +444,8 @@ union Post_Materialacf_Author = Post
 
 union Post_Materialacf_BhaktiLevel = Post
 
+union Post_Materialacf_MainTheme = Post
+
 union Post_Materialacf_Themes = Post
 
 union Post_Projectacf_Courses = Post
@@ -2532,12 +2534,20 @@ type Post_Faqacf implements AcfFieldGroup {
 
 "Field Group"
 type Post_Materialacf implements AcfFieldGroup {
+    audioLink: String
     "Выберите автора материала"
     author: Post_Materialacf_Author
     "Выберите уровени преданного служения, на которых преданным рекомендуется данный материал"
     bhaktiLevel: [Post_Materialacf_BhaktiLevel]
+    "Добавьте описание курса"
+    description: String
+    "Добавьте ссылку на скачивание курса"
+    downloadLink: String
     "The name of the ACF Field Group"
     fieldGroupName: String
+    mainTheme: Post_Materialacf_MainTheme
+    "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
+    onlineLink: String
     themes: [Post_Materialacf_Themes]
     type: [String]
 }

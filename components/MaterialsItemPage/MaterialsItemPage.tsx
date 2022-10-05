@@ -6,27 +6,29 @@ import { Layout } from '../Layout';
 import { Post } from '../../interfaces/interfaces';
 import { formatVideoUrl, getLink } from '../../helpers/helpers';
 import Link from 'next/link';
+import { Tags } from '../CommonComponents/Tags/Tags';
 
 export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
-  const { acf = {}, title = 'заголовок' } = dataPost;
+  const { materialACF, recordACF, title = 'заголовок' } = dataPost;
   const {
     author = {},
-    theme,
-    audio_link = '',
-    online_link = '',
-    description = '',
-    download_link = '',
-  } = acf || {};
+    themes,
+    mainTheme,
+    audioLink,
+    onlineLink,
+    description,
+    downloadLink,
+  } = materialACF ?? recordACF ?? {};
 
   const videoAttrs = {
     materialType: 'video',
-    url: online_link !== '' ? formatVideoUrl(online_link) : '#',
-    description: audio_link !== '' || download_link !== '' ? '' : description,
+    url: onlineLink ?? false ? formatVideoUrl(onlineLink) : '#',
+    description: audioLink ?? downloadLink ? '' : description,
   };
 
   const audioAttrs = {
     materialType: 'audio',
-    audio_link,
+    audioLink,
     name: title,
     author: author?.title,
   };
@@ -34,7 +36,7 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
   const downloadAttrs = {
     materialType: 'file',
     name: title,
-    download_link,
+    downloadLink,
     author: author?.title,
   };
 
@@ -56,16 +58,18 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
                     </div>
                   </div>
 
-                  <div className={classes.Tags}>
-                    <div className={classes.TagItem}>шастры</div>
-                    <div className={classes.TagItem}>бхагавад-гита</div>
-                    <div className={classes.TagItem}>шри-ишопанишад</div>
-                    <div className={classes.TagItem}>священные писания</div>
-                  </div>
+                  {themes ? <Tags tags={themes} /> : null}
+
+                  {/*<div className={classes.Tags}>*/}
+                  {/*  <div className={classes.TagItem}>шастры</div>*/}
+                  {/*  <div className={classes.TagItem}>бхагавад-гита</div>*/}
+                  {/*  <div className={classes.TagItem}>шри-ишопанишад</div>*/}
+                  {/*  <div className={classes.TagItem}>священные писания</div>*/}
+                  {/*</div>*/}
 
                   <div className={classes.Theme}>
                     <span className={classes.Name}>Тема: </span>
-                    <span className={classes.Value}>{theme}</span>
+                    <span className={classes.Value}>{mainTheme?.title}</span>
                   </div>
                 </div>
               </div>
@@ -77,12 +81,12 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
               </div>
             </div>
 
-            {audio_link || download_link ? (
+            {audioLink ?? downloadLink ? (
               <div className={classes.MaterialsContainer}>
                 <div className={classes.MaterialsContainerTop}>
                   <div className={classes.Materials}>
-                    {audio_link ? <MaterialData {...audioAttrs} /> : null}
-                    {download_link ? <MaterialData {...downloadAttrs} /> : null}
+                    {audioLink ? <MaterialData {...audioAttrs} /> : null}
+                    {downloadLink ? <MaterialData {...downloadAttrs} /> : null}
                   </div>
 
                   <div
@@ -93,7 +97,7 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
               </div>
             ) : null}
 
-            {online_link ? <MaterialData {...videoAttrs} /> : null}
+            {onlineLink ? <MaterialData {...videoAttrs} /> : null}
           </div>
         </div>
 

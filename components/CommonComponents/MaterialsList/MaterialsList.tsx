@@ -7,15 +7,15 @@ export const MaterialsList = (props) => {
     <div className={classes.Grid}>
       {list.length
         ? list.map((item) => {
-            const { id, title, link, author, theme, type, bhakti_level } = item;
+            const { id, title, link, author, mainTheme, type, bhaktiLevel } = item;
             const attrs = {
               id,
               title,
               link,
               author,
-              theme,
+              mainTheme,
               type,
-              bhakti_level,
+              bhaktiLevel,
             };
 
             return <MaterialItem key={id} {...attrs} />;

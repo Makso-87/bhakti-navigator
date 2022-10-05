@@ -3,14 +3,15 @@ import cn from 'classnames';
 import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const MaterialItem = (props) => {
-  const { id, title, link, author, theme, type, bhakti_level } = props;
+  const { id, title, link, author, mainTheme, type, bhaktiLevel } = props;
+  const [typeValue] = type;
 
   const classesGridItem = cn(classes.GridItem, {
-    [classes.Book]: type?.value === 'text',
-    [classes.File]: type?.value === 'file',
-    [classes.Audio]: type?.value === 'audio',
-    [classes.Video]: type?.value === 'video',
-    [classes.AudioAndVideo]: type?.value === 'audio_and_video',
+    [classes.Book]: typeValue === 'text',
+    [classes.File]: typeValue === 'file',
+    [classes.Audio]: typeValue === 'audio',
+    [classes.Video]: typeValue === 'video',
+    [classes.AudioAndVideo]: typeValue === 'audio_and_video',
   });
 
   return (
@@ -21,19 +22,21 @@ export const MaterialItem = (props) => {
 
           <div className={classes.Author}>
             <span className={classes.AuthorName}>Автор: </span>
-            <span className={classes.AuthorValue}>{author?.title}</span>
+            <span className={classes.AuthorValue}>{author !== null ? author?.title : ''}</span>
           </div>
 
           <div className={classes.Info}>
             <div className={classes.InfoItem}>
               <div className={classes.InfoItemName}>Тема: </div>
-              <div className={classes.InfoItemValue}>{theme}</div>
+              <div className={classes.InfoItemValue}>
+                {mainTheme !== null ? mainTheme?.title : ''}
+              </div>
             </div>
           </div>
 
           <div className={classes.MaterialType} />
 
-          <Bookmarks bhaktiLevelsList={bhakti_level} />
+          <Bookmarks bhaktiLevelsList={bhaktiLevel} />
         </div>
       </a>
     </div>

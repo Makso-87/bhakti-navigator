@@ -2,26 +2,28 @@ import { MaterialsPage } from '../../../components/MaterialsPage/MaterialsPage';
 import pagesStore from '../../../store/pagesStore';
 import { getLink, getPostsByCategory } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
+import { graphQLClient } from '../../../helpers/graphQLClient';
+import { materials } from '../../../graphql/queries/materials';
 
 const Materials = ({ serverData }: ServerSideProps) => {
-  const { dataPosts, dataCategories }: ServerData = serverData;
+  const { dataPosts }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('materials');
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
   const list = dataPosts.materials.map((item) => {
-    const { title, link, acf, id } = item;
-    const { author, theme, type, bhakti_level } = acf;
+    const { title, link, materialACF, id } = item;
+    const { author, mainTheme, type, bhaktiLevel } = materialACF;
 
     return {
       id,
       title,
       link: getLink(link),
       author,
-      theme,
+      mainTheme,
       type,
-      bhakti_level,
+      bhaktiLevel,
     };
   });
 
@@ -37,7 +39,9 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    serverData.dataPosts = { materials: await getPostsByCategory('materials') };
+    // serverData.dataPosts = { materials: await getPostsByCategory('materials') };
+    const { posts } = await graphQLClient.request(materials);
+    serverData.dataPosts = { materials: posts.nodes };
 
     return {
       props: {
