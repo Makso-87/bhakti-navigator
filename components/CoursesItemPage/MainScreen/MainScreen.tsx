@@ -6,30 +6,32 @@ import { Tags } from '../../CommonComponents/Tags/Tags';
 
 export const MainScreen = (props) => {
   const { course } = props;
-  const { title, acf } = course;
+  const { title, courseACF } = course;
   const {
     speaker,
-    bhakti_level,
+    bhaktiLevel = [],
     duration,
-    format,
-    format_briefing,
+    format = [],
+    formatBriefing,
     location,
     price,
     themes = [],
-  } = acf || {};
+  } = courseACF || {};
   const linkToSpeakerPage = speaker ? getLink(speaker.link) : '#';
+  const [formatValue, formatLabel] = format;
+  const [, priceLabel] = price;
 
   const formatClasses = cn(classes.Item, {
-    [classes.Online]: format?.value === 'online',
-    [classes.Live]: format?.value === 'live',
+    [classes.Online]: formatValue === 'online',
+    [classes.Live]: formatValue === 'live',
   });
 
-  const bhaktiLevelsUnique = getUniqBhakyiLevels(bhakti_level);
+  const bhaktiLevelsUnique = getUniqBhakyiLevels(bhaktiLevel);
 
   const getBhaktiLevel = (name) => {
     return bhaktiLevelsUnique.filter((item) => {
-      const ddd = item?.acf?.value.includes(name);
-      return item?.acf?.value === name || ddd;
+      const ddd = item?.bhaktiLevelACF?.value.includes(name);
+      return item?.bhaktiLevelACF?.value === name || ddd;
     });
   };
 
@@ -73,12 +75,12 @@ export const MainScreen = (props) => {
               {themes ? <Tags tags={themes} /> : null}
 
               <div className={classes.TextWithIcons}>
-                <div className={`${classes.Item} ${classes.Donations}`}>{price?.label}</div>
+                <div className={`${classes.Item} ${classes.Donations}`}>{priceLabel}</div>
                 <div className={`${classes.Item} ${classes.Calendar}`}>
                   Длительность обучения {duration}
                 </div>
 
-                <div className={formatClasses}>{format?.label}</div>
+                <div className={formatClasses}>{formatLabel}</div>
               </div>
             </div>
           </div>
@@ -146,7 +148,7 @@ export const MainScreen = (props) => {
               {/*</div>*/}
 
               <div className={classes.Place}>{location}</div>
-              <div className={classes.BriefDescription}>{format_briefing}</div>
+              <div className={classes.BriefDescription}>{formatBriefing}</div>
             </div>
           </div>
         </div>

@@ -3,8 +3,8 @@ import { Post } from '../../../interfaces/interfaces';
 import photo_plug from '../../../images/icons/photo_plug.svg';
 
 export const MainScreen = ({ post }: { post: Post }) => {
-  const { title, acf } = post;
-  const { teacher_photo = '#', in_iskcon_since = '', courses = [] } = acf || {};
+  const { title, teacherACF } = post;
+  const { teacherPhoto = {}, inIskconSince = '', courses = [] } = teacherACF || {};
 
   return (
     <div className={classes.MainScreen}>
@@ -17,7 +17,7 @@ export const MainScreen = ({ post }: { post: Post }) => {
             <div className={classes.ImgContainer}>
               <div
                 className={classes.Img}
-                style={{ backgroundImage: `url(${teacher_photo || photo_plug.src})` }}
+                style={{ backgroundImage: `url(${teacherPhoto?.sourceUrl || photo_plug.src})` }}
               ></div>
             </div>
 
@@ -25,12 +25,12 @@ export const MainScreen = ({ post }: { post: Post }) => {
               <h1 className={classes.Name}>{title}</h1>
 
               <div className={classes.Seniority}>
-                В ИСККОН <span className={classes.Value}>{in_iskcon_since}</span>
+                В ИСККОН <span className={classes.Value}>{inIskconSince}</span>
               </div>
 
               <div className={classes.Courses}>
                 <a href='#available-courses'>
-                  Доступно курсов: <span className={classes.Value}>{courses.length}</span>
+                  Доступно курсов: <span className={classes.Value}>{courses?.length}</span>
                 </a>
               </div>
             </figcaption>

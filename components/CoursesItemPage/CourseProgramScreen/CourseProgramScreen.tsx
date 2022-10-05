@@ -13,10 +13,10 @@ export const CourseProgramScreen = ({ program }: { program: [] }) => {
           <div className={classes.ProgramList}>
             {program.length
               ? program.map((item) => {
-                  const { id, title, acf } = item;
-                  const { description = '', blitz_description = '' } = acf || {};
+                  const { id, title, courseProgramItemACF } = item;
+                  const { description = '', blitzDescription = '' } = courseProgramItemACF || {};
                   const classesProgramItem = cn(classes.ProgramItem, {
-                    [classes.NoDescription]: description === '',
+                    [classes.NoDescription]: description === '' || description === null,
                   });
 
                   return (
@@ -27,13 +27,13 @@ export const CourseProgramScreen = ({ program }: { program: [] }) => {
                         <div className={classes.Text}>
                           <span className={classes.Name}>{title}</span>
 
-                          {blitz_description !== '' ? (
-                            <span className={classes.BlitzDescription}>{blitz_description}</span>
+                          {blitzDescription && blitzDescription !== '' ? (
+                            <span className={classes.BlitzDescription}>{blitzDescription}</span>
                           ) : null}
                         </div>
                       </div>
 
-                      {description !== '' ? (
+                      {description && description !== '' ? (
                         <div
                           className={classes.TopicContent}
                           dangerouslySetInnerHTML={{ __html: description }}

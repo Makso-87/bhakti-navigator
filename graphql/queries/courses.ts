@@ -11,6 +11,11 @@ export const courses = gql`
           speaker {
             ... on Post {
               title
+              teacherACF {
+                teacherPhoto {
+                  sourceUrl
+                }
+              }
             }
           }
           location

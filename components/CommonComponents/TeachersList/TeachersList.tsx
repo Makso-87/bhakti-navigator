@@ -1,12 +1,12 @@
 import classes from './TeachersList.module.scss';
 import photo_plug from '../../../images/icons/photo_plug.svg';
 
-export const TeachersList = ({ list }) => {
+export const TeachersList = ({ list = [] }) => {
   return (
     <div className={classes.Row}>
-      {list.length
+      {!!list && list?.length
         ? list.map((item) => {
-            const { id, title, link, city, teacher_photo, courses } = item;
+            const { id, title, link, city, teacherPhoto, courses } = item;
 
             return (
               <div key={id} className={classes.Cell}>
@@ -17,7 +17,7 @@ export const TeachersList = ({ list }) => {
                         <div
                           className={classes.Img}
                           style={{
-                            backgroundImage: `url(${teacher_photo || photo_plug.src})`,
+                            backgroundImage: `url(${teacherPhoto || photo_plug.src})`,
                           }}
                         />
                       </div>
@@ -35,7 +35,7 @@ export const TeachersList = ({ list }) => {
                             <div className={classes.InfoItem}>
                               <div className={classes.Key}>Доступно:</div>
                               <div className={`${classes.Value} ${classes.Blue}`}>
-                                {courses.length} курса
+                                {courses?.length || 0} курса
                               </div>
                             </div>
                           </div>

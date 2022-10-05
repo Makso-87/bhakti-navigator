@@ -47,12 +47,16 @@ export const getFormattedPosts = (posts: Post[]): pairsFormattedPosts => {
 };
 
 export const removeAllSpaces = (string: string) => {
-  return string.replaceAll(' ', '');
+  return string ? string.replaceAll(' ', '') : '';
 };
 
 export const getLink = (link: string) => {
-  const url = new URL(link);
-  return url.pathname.replace('/bhakti-navigator-wp', '');
+  if (link) {
+    const url = new URL(link);
+    return url.pathname.replace('/bhakti-navigator-wp', '');
+  }
+
+  return '#';
 };
 
 export const throttle = (callee, timeout) => {
@@ -141,14 +145,16 @@ export const formatWhatsappLink = (string: string) => {
 };
 
 export const getLinksList = (string: string) => {
-  const trimmedString = string.replaceAll(' ', '');
-  const spacedString = trimmedString.replaceAll('http', ' http');
-  const d = spacedString
-    .split(' ')
-    .filter((item) => item !== '')
-    .map((item) => decodeUrl(item));
+  if (!!string) {
+    const trimmedString = string.replaceAll(' ', '');
+    const spacedString = trimmedString.replaceAll('http', ' http');
+    return spacedString
+      .split(' ')
+      .filter((item) => item !== '')
+      .map((item) => decodeUrl(item));
+  }
 
-  return d;
+  return '';
 };
 
 export const slideDown = (element, speed = 400) => {

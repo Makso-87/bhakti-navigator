@@ -11,7 +11,7 @@ import { Post } from '../../interfaces/interfaces';
 import { removeAllSpaces } from '../../helpers/helpers';
 
 export const TeachersItemPage = ({ post }: { post: Post }) => {
-  const { acf, title = 'Имя преподавателя' } = post;
+  const { teacherACF, title = 'Имя преподавателя' } = post;
   const {
     courses,
     email,
@@ -22,8 +22,10 @@ export const TeachersItemPage = ({ post }: { post: Post }) => {
     vkontakte,
     odnoklassniki,
     whatsapp,
-    can_arrive,
-  } = acf;
+    canArrive,
+  } = teacherACF;
+
+  const [canArriveValue] = canArrive || [];
 
   const feedbackAttrs = {
     name: title,
@@ -42,8 +44,8 @@ export const TeachersItemPage = ({ post }: { post: Post }) => {
       <div className={classes.TeacherItemPage}>
         <MainScreen post={post} />
         <AboutScreen post={post} />
-        {courses.length ? <AvailableCoursesScreen post={post} /> : null}
-        {can_arrive?.value === 'yes' ? <TeacherNote /> : null}
+        {courses?.length ? <AvailableCoursesScreen post={post} /> : null}
+        {canArriveValue === 'yes' ? <TeacherNote /> : null}
         <Recommendations />
         <BannerNote />
         <Feedback title='Контакты преподавателя' {...feedbackAttrs} />

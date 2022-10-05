@@ -6,10 +6,18 @@ import { Post } from '../../../interfaces/interfaces';
 import { formatVideoUrl, getLinksList } from '../../../helpers/helpers';
 
 export const AboutScreen = ({ post }: { post: Post }) => {
-  const { projectACF } = post;
-  const { about = '', video = '', slide_1, slide_2, slide_3, slide_4, slide_5 } = projectACF || {};
+  const { projectACF, teacherACF, courseACF } = post;
+  const {
+    about = '',
+    video = '',
+    slide1,
+    slide2,
+    slide3,
+    slide4,
+    slide5,
+  } = projectACF || teacherACF || courseACF || {};
 
-  const gallery = [slide_1, slide_2, slide_3, slide_4, slide_5];
+  const gallery = [slide1, slide2, slide3, slide4, slide5];
   const videoList = getLinksList(video);
 
   return (
@@ -39,7 +47,7 @@ export const AboutScreen = ({ post }: { post: Post }) => {
                         <SwiperSlide
                           key={item.id}
                           className={classes.SwiperSlide}
-                          style={{ backgroundImage: `url(${item.url})` }}
+                          style={{ backgroundImage: `url(${item.sourceUrl})` }}
                         />
                       ) : null;
                     })

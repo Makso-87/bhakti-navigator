@@ -2,6 +2,8 @@ import { TeachersItemPage } from '../../../components/TeachersItemPage/TeachersI
 import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
+import { graphQLClient } from '../../../helpers/graphQLClient';
+import { teacher } from '../../../graphql/queries/treacher';
 
 const TeachersItem = ({ serverData }: ServerSideProps) => {
   const { dataPost }: ServerData = serverData;
@@ -30,7 +32,10 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    serverData.dataPost = await getPost(query.name);
+    // serverData.dataPost = await getPost(query.name);
+    const { posts } = await graphQLClient.request(teacher, { name: query.name });
+    const [post] = posts.nodes;
+    serverData.dataPost = post;
 
     return {
       props: {

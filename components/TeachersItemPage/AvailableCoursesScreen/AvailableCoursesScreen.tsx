@@ -7,7 +7,7 @@ import { configureAnchors } from 'react-scrollable-anchor';
 configureAnchors({ offset: -150, scrollDuration: 400 });
 
 export const AvailableCoursesScreen = ({ post }: { post: Post }) => {
-  const { courses = [] } = post?.acf || {};
+  const { courses = [] } = post?.teacherACF || {};
   return (
     <div className={classes.AvailableCoursesScreen}>
       <div className={classes.BgBigCircle} />

@@ -5,7 +5,7 @@ import classesCatalogPage from '../CoursesPage/CoursesPage.module.scss';
 import { TeachersList } from '../CommonComponents/TeachersList/TeachersList';
 
 export const TeachersPages = (props) => {
-  const { list } = props;
+  const { list = [] } = props;
 
   return (
     <Layout>
