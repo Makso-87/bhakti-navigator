@@ -154,7 +154,7 @@ export const getLinksList = (string: string) => {
       .map((item) => decodeUrl(item));
   }
 
-  return '';
+  return [];
 };
 
 export const slideDown = (element, speed = 400) => {
