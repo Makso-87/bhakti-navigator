@@ -74,7 +74,7 @@ export interface ServerData {
   dataMenuBlog?: Menu;
   dataMenuHeader?: Menu;
   dataMenuCatalog?: Menu;
-  error: any;
+  error?: any;
 }
 
 export interface ServerSideProps {
