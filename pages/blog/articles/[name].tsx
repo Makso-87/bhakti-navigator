@@ -22,11 +22,8 @@ export default ArticlesItem;
 export const getServerSideProps = async ({ query }) => {
   const serverData = {
     postName: query.name,
-    dataPages: [],
-    dataMedia: [],
-    dataPosts: [],
     dataPost: {},
-    dataCategories: [],
+    error: null,
   };
 
   try {
@@ -38,6 +35,8 @@ export const getServerSideProps = async ({ query }) => {
       },
     };
   } catch (e) {
+    serverData.error = JSON.stringify(e);
+
     return {
       props: {
         serverData,

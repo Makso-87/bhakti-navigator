@@ -25,10 +25,7 @@ export default CoursesItem;
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
     postName: query.name,
-    dataPages: [],
-    dataMedia: [],
     dataPost: {},
-    dataCategories: [],
     error: null,
   };
 
@@ -49,7 +46,6 @@ export const getServerSideProps = async ({ query, req }) => {
     return {
       props: {
         serverData,
-        // error: JSON.stringify(e),
       },
     };
   }

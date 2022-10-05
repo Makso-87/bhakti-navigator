@@ -6,11 +6,11 @@ import { ForWhom } from '../CommonComponents/ForWhom/ForWhom';
 import { Teachers } from '../CommonComponents/Teachers/Teachers';
 import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
-import { ServerData } from '../../interfaces/interfaces';
+import { Post, ServerData } from '../../interfaces/interfaces';
 import { ProjectCourses } from './ProjectCourses/ProjectCourses';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
-  const { projectACF, title } = dataPost;
+  const { projectACF, title }: Post = dataPost;
   const { courses = [], teachers = [], format, city, webSite, logo, for_whom } = projectACF;
 
   const mainScreenAttrs = {

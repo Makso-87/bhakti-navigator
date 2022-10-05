@@ -33,6 +33,7 @@ export default Materials;
 export const getServerSideProps = async ({ query, req }) => {
   const serverData = {
     dataPosts: {},
+    error: null,
   };
 
   try {
@@ -44,6 +45,8 @@ export const getServerSideProps = async ({ query, req }) => {
       },
     };
   } catch (e) {
+    serverData.error = JSON.stringify(e);
+
     return {
       props: {
         serverData,
