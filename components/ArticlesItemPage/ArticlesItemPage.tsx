@@ -10,30 +10,30 @@ import { Note } from './Note/Note';
 export const ArticlesItemPage = (props: ServerData) => {
   const { dataPost } = props;
   const article: Post = { ...dataPost };
-  const { id, title, acf = {} } = article;
+  const { id, title, articleACF } = article;
   const {
-    article_author = '',
-    article_main_image,
-    article_lead = '',
-    reading_time = '',
+    articleAuthor,
+    articleMainImage,
+    articleLead,
+    readingTime,
     themes,
-    content_part_1 = '',
-    content_part_2 = '',
-    content_part_3 = '',
-    content_part_4 = '',
-    content_part_5 = '',
-    quote_1 = '',
-    quote_2 = '',
-    note_1 = '',
-    note_2 = '',
-    article_sategory = '',
-  } = acf || {};
+    contentPart1,
+    contentPart2,
+    contentPart3,
+    contentPart4,
+    contentPart5,
+    quote1,
+    quote2,
+    note1,
+    note2,
+    articleSategory,
+  } = articleACF ?? {};
 
-  const pureContentPart1 = clearContentFromAttrs(content_part_1);
-  const pureContentPart2 = clearContentFromAttrs(content_part_2);
-  const pureContentPart3 = clearContentFromAttrs(content_part_3);
-  const pureContentPart4 = clearContentFromAttrs(content_part_4);
-  const pureContentPart5 = clearContentFromAttrs(content_part_5);
+  const pureContentPart1 = clearContentFromAttrs(contentPart1 ?? '');
+  const pureContentPart2 = clearContentFromAttrs(contentPart2 ?? '');
+  const pureContentPart3 = clearContentFromAttrs(contentPart3 ?? '');
+  const pureContentPart4 = clearContentFromAttrs(contentPart4 ?? '');
+  const pureContentPart5 = clearContentFromAttrs(contentPart5 ?? '');
 
   return (
     <Layout>
@@ -45,32 +45,32 @@ export const ArticlesItemPage = (props: ServerData) => {
             <div className={classes.Info}>
               <div className={classes.InfoItem}>
                 <div className={classes.Name}>Рубрика:</div>
-                <div className={classes.Value}>{article_sategory}</div>
+                <div className={classes.Value}>{articleSategory ?? ''}</div>
               </div>
 
               <div className={classes.InfoItem}>
                 <div className={classes.Name}>Время чтения:</div>
-                <div className={classes.Value}>{reading_time}</div>
+                <div className={classes.Value}>{readingTime ?? ''}</div>
               </div>
             </div>
 
-            {article_main_image ? (
+            {articleMainImage ? (
               <div className={classes.ImgContainer}>
-                <img src={article_main_image} alt='' />
+                <img src={articleMainImage ? articleMainImage.sourceUrl : ''} alt='' />
               </div>
             ) : null}
 
-            {article_author !== '' ? (
+            {articleAuthor !== '' ? (
               <div className={classes.Author}>
                 <div className={classes.Name}>Автор: </div>
-                <div className={classes.Value}>{article_author}</div>
+                <div className={classes.Value}>{articleAuthor ?? ''}</div>
               </div>
             ) : null}
 
-            {article_lead !== '' ? (
+            {articleLead ? (
               <div
                 className={classes.ArticleLead}
-                dangerouslySetInnerHTML={{ __html: clearContentFromAttrs(article_lead) }}
+                dangerouslySetInnerHTML={{ __html: clearContentFromAttrs(articleLead) }}
               />
             ) : null}
           </div>
@@ -78,29 +78,29 @@ export const ArticlesItemPage = (props: ServerData) => {
 
         <div className={classes.Middle}>
           <div className={classes.Content}>
-            {content_part_1 !== '' ? <MainContent content={pureContentPart1} /> : null}
+            {contentPart1 ? <MainContent content={pureContentPart1} /> : null}
 
-            {quote_1 !== '' ? <Quote content={quote_1} /> : null}
+            {quote1 ? <Quote content={quote1} /> : null}
 
-            {content_part_2 !== '' ? <MainContent content={pureContentPart2} /> : null}
+            {contentPart2 ? <MainContent content={pureContentPart2} /> : null}
 
-            {note_1 !== '' ? <Note content={note_1} /> : null}
+            {note1 ? <Note content={note1} /> : null}
 
-            {content_part_3 !== '' ? <MainContent content={pureContentPart3} /> : null}
+            {contentPart3 ? <MainContent content={pureContentPart3} /> : null}
 
-            {quote_2 !== '' ? <Quote content={quote_2} /> : null}
+            {quote2 ? <Quote content={quote2} /> : null}
 
-            {content_part_4 !== '' ? <MainContent content={pureContentPart4} /> : null}
+            {contentPart4 ? <MainContent content={pureContentPart4} /> : null}
 
-            {note_2 !== '' ? <Note content={note_2} /> : null}
+            {note2 ? <Note content={note2} /> : null}
 
-            {content_part_5 !== '' ? <MainContent content={pureContentPart5} /> : null}
+            {contentPart5 ? <MainContent content={pureContentPart5} /> : null}
           </div>
         </div>
 
         <div className={classes.Bottom}>
           <div className={classes.SiteWrap}>
-            <Tags tags={themes} />
+            <Tags tags={themes ?? []} />
           </div>
         </div>
       </div>

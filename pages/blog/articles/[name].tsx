@@ -2,6 +2,8 @@ import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { ArticlesItemPage } from '../../../components/ArticlesItemPage/ArticlesItemPage';
 import { getPost } from '../../../helpers/helpers';
+import { graphQLClient } from '../../../helpers/graphQLClient';
+import { article } from '../../../graphql/queries/article';
 
 const ArticlesItem = ({ serverData }: ServerSideProps) => {
   const { dataPost }: ServerData = serverData;
@@ -27,7 +29,10 @@ export const getServerSideProps = async ({ query }) => {
   };
 
   try {
-    serverData.dataPost = await getPost(query.name);
+    // serverData.dataPost = await getPost(query.name);
+    const { posts } = await graphQLClient.request(article, { name: query.name });
+    const [post] = posts.nodes;
+    serverData.dataPost = post;
 
     return {
       props: {
