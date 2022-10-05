@@ -14,8 +14,8 @@ export const Teachers = (props) => {
         <div className={classes.TeachersList}>
           {teachers.length
             ? teachers.map((item: Post) => {
-                const { title, id, link, acf } = item;
-                const { teacher_photo } = acf;
+                const { title, id, link, teacherACF } = item;
+                const { teacherPhoto } = teacherACF;
 
                 return (
                   <div key={id} className={classes.TeachersItem}>
@@ -25,7 +25,7 @@ export const Teachers = (props) => {
                           <div className={classes.ImgContainer}>
                             <div
                               className={classes.Img}
-                              style={{ backgroundImage: `url(${teacher_photo})` }}
+                              style={{ backgroundImage: `url(${teacherPhoto.sourceUrl})` }}
                             ></div>
                           </div>
 

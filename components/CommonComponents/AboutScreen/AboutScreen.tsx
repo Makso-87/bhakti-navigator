@@ -6,8 +6,8 @@ import { Post } from '../../../interfaces/interfaces';
 import { formatVideoUrl, getLinksList } from '../../../helpers/helpers';
 
 export const AboutScreen = ({ post }: { post: Post }) => {
-  const { acf } = post;
-  const { about = '', video = '', slide_1, slide_2, slide_3, slide_4, slide_5 } = acf || {};
+  const { projectACF } = post;
+  const { about = '', video = '', slide_1, slide_2, slide_3, slide_4, slide_5 } = projectACF || {};
 
   const gallery = [slide_1, slide_2, slide_3, slide_4, slide_5];
   const videoList = getLinksList(video);

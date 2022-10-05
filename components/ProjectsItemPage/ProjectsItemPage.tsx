@@ -10,15 +10,15 @@ import { ServerData } from '../../interfaces/interfaces';
 import { ProjectCourses } from './ProjectCourses/ProjectCourses';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
-  const { acf, title } = dataPost;
-  const { courses = [], teachers = [], format, city, site, logo, for_whom } = acf;
+  const { projectACF, title } = dataPost;
+  const { courses = [], teachers = [], format, city, webSite, logo, for_whom } = projectACF;
 
   const mainScreenAttrs = {
     title,
     format,
     city,
-    site,
-    logo,
+    site: webSite,
+    logo: logo.sourceUrl,
     for_whom,
   };
 

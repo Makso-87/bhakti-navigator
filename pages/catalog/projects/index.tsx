@@ -7,6 +7,8 @@ import {
   getPostsList,
 } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
+import { graphQLClient } from '../../../helpers/graphQLClient';
+import { projects } from '../../../graphql/queries/projects';
 
 const Projects = ({ serverData }: ServerSideProps) => {
   const { dataPosts, dataCategories }: ServerData = serverData;
@@ -16,8 +18,8 @@ const Projects = ({ serverData }: ServerSideProps) => {
   setSecondaryTabBar(true);
 
   const list = dataPosts.projects.map((item) => {
-    const { link, acf, title, id } = item;
-    const { format, city, site, logo } = acf;
+    const { link, projectACF, title, id } = item;
+    const { format, city, webSite, logo } = projectACF;
 
     return {
       id,
@@ -25,8 +27,8 @@ const Projects = ({ serverData }: ServerSideProps) => {
       link: getLink(link),
       format,
       city,
-      site,
-      logo,
+      site: webSite,
+      logo: logo.sourceUrl,
     };
   });
 
@@ -41,7 +43,11 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    serverData.dataPosts = { projects: await getPostsByCategory('projects') };
+    // serverData.dataPosts = { projects: await getPostsByCategory('projects') };
+    const { posts } = await graphQLClient.request(projects);
+    serverData.dataPosts = {
+      projects: posts.nodes,
+    };
 
     return {
       props: {
