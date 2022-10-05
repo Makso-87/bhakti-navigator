@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { getLink, getPostsByCategory } from '../../../helpers/helpers';
 import { RecordsPage } from '../../../components/RecordsPage/RecordsPage';
+import { graphQLClient } from '../../../helpers/graphQLClient';
+import { records } from '../../../graphql/queries/records';
 
 const Records = observer(({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
@@ -12,14 +14,14 @@ const Records = observer(({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
 
   const list = dataPosts.records.map((item) => {
-    const { title, acf, link, id } = item;
-    const { theme, bhakti_level, type, author } = acf;
+    const { title, recordACF, link, id } = item;
+    const { mainTheme, bhaktiLevel, type, author } = recordACF;
 
     return {
       id,
       title,
-      theme,
-      bhakti_level,
+      mainTheme,
+      bhaktiLevel,
       link: getLink(link),
       type,
       author,
@@ -36,7 +38,9 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    serverData.dataPosts = { records: await getPostsByCategory('records') };
+    // serverData.dataPosts = { records: await getPostsByCategory('records') };
+    const { posts } = await graphQLClient.request(records);
+    serverData.dataPosts = { records: posts.nodes };
 
     return {
       props: {

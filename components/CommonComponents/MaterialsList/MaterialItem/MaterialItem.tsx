@@ -28,15 +28,13 @@ export const MaterialItem = (props) => {
           <div className={classes.Info}>
             <div className={classes.InfoItem}>
               <div className={classes.InfoItemName}>Тема: </div>
-              <div className={classes.InfoItemValue}>
-                {mainTheme !== null ? mainTheme?.title : ''}
-              </div>
+              <div className={classes.InfoItemValue}>{mainTheme ? mainTheme?.title : ''}</div>
             </div>
           </div>
 
           <div className={classes.MaterialType} />
 
-          <Bookmarks bhaktiLevelsList={bhaktiLevel} />
+          {bhaktiLevel ? <Bookmarks bhaktiLevelsList={bhaktiLevel} /> : null}
         </div>
       </a>
     </div>

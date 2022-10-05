@@ -460,6 +460,8 @@ union Post_Recordacf_Author = Post
 
 union Post_Recordacf_BhaktiLevel = Post
 
+union Post_Recordacf_MainTheme = Post
+
 union Post_Recordacf_Themes = Post
 
 union Post_Teacheracf_Courses = Post
@@ -2602,6 +2604,7 @@ type Post_Recordacf implements AcfFieldGroup {
     downloadLink: String
     "The name of the ACF Field Group"
     fieldGroupName: String
+    mainTheme: Post_Recordacf_MainTheme
     "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
     onlineLink: String
     themes: [Post_Recordacf_Themes]
