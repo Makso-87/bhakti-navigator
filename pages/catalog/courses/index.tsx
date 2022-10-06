@@ -2,7 +2,6 @@ import { CoursesPage } from '../../../components/CoursesPage/CoursesPage';
 import pagesStore from '../../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
-import { getPostsByCategory } from '../../../helpers/helpers';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { courses } from '../../../graphql/queries/courses';
 
@@ -16,7 +15,7 @@ const Courses = observer(({ serverData }: ServerSideProps) => {
   return <CoursesPage list={dataPosts.courses} />;
 });
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async () => {
   const serverData = {
     dataPosts: {},
     error: null,

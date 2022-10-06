@@ -1,4 +1,3 @@
-import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { MaterialsItemPage } from '../../../components/MaterialsItemPage/MaterialsItemPage';
@@ -21,7 +20,7 @@ const MaterialsItem = ({ serverData }: ServerSideProps) => {
 
 export default MaterialsItem;
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async ({ query }) => {
   const serverData = {
     postName: query.name,
     dataPost: {},

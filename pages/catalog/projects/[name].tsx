@@ -1,6 +1,4 @@
 import { ProjectsItemPage } from '../../../components/ProjectsItemPage/ProjectsItemPage';
-import { useRouter } from 'next/router';
-import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { graphQLClient } from '../../../helpers/graphQLClient';
@@ -12,7 +10,6 @@ const ProjectItem = ({ serverData }: ServerSideProps) => {
   setCurrentPage('projects');
   setSecondaryTabBar(true);
   setCategory('Каталог');
-  const router = useRouter();
 
   const attrs = {
     dataPost,
@@ -23,7 +20,7 @@ const ProjectItem = ({ serverData }: ServerSideProps) => {
 
 export default ProjectItem;
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async ({ query }) => {
   const serverData = {
     postName: query.name,
     dataPost: {},

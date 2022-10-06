@@ -1,5 +1,4 @@
 import { CoursesItemPage } from '../../../components/CoursesItemPage/CoursesItemPage';
-import { getPost } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { graphQLClient } from '../../../helpers/graphQLClient';
@@ -22,7 +21,7 @@ const CoursesItem = ({ serverData }: ServerSideProps) => {
 
 export default CoursesItem;
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async ({ query }) => {
   const serverData = {
     postName: query.name,
     dataPost: {},

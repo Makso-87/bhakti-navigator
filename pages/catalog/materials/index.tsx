@@ -1,6 +1,6 @@
 import { MaterialsPage } from '../../../components/MaterialsPage/MaterialsPage';
 import pagesStore from '../../../store/pagesStore';
-import { getLink, getPostsByCategory } from '../../../helpers/helpers';
+import { getLink } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { materials } from '../../../graphql/queries/materials';
@@ -32,7 +32,7 @@ const Materials = ({ serverData }: ServerSideProps) => {
 
 export default Materials;
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async () => {
   const serverData = {
     dataPosts: {},
     error: null,

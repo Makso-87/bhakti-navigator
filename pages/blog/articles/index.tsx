@@ -2,7 +2,6 @@ import { BlogPage } from '../../../components/BlogPage/BlogPage';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
-import { getPostsByCategory } from '../../../helpers/helpers';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { articles } from '../../../graphql/queries/articles';
 
@@ -21,7 +20,7 @@ const Blog = observer(({ serverData }: ServerSideProps) => {
   return <BlogPage {...attrs} />;
 });
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async () => {
   const serverData = {
     dataPosts: {},
     error: null,

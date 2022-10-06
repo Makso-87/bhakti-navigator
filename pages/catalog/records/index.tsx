@@ -1,7 +1,7 @@
 import pagesStore from '../../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
-import { getLink, getPostsByCategory } from '../../../helpers/helpers';
+import { getLink } from '../../../helpers/helpers';
 import { RecordsPage } from '../../../components/RecordsPage/RecordsPage';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { records } from '../../../graphql/queries/records';
@@ -31,7 +31,7 @@ const Records = observer(({ serverData }: ServerSideProps) => {
   return <RecordsPage list={list} />;
 });
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async () => {
   const serverData = {
     dataPosts: {},
     error: null,

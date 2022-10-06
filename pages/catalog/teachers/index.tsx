@@ -1,6 +1,6 @@
 import { TeachersPages } from '../../../components/TeachersPages/TeachersPages';
 import pagesStore from '../../../store/pagesStore';
-import { getLink, getPostsByCategory } from '../../../helpers/helpers';
+import { getLink } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { teachers } from '../../../graphql/queries/treachers';
@@ -31,7 +31,7 @@ const Teachers = ({ serverData }: ServerSideProps) => {
 
 export default Teachers;
 
-export const getServerSideProps = async ({ query, req }) => {
+export const getServerSideProps = async () => {
   const serverData = {
     dataPosts: {},
     error: null,

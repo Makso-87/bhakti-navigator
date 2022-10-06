@@ -1,7 +1,6 @@
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import pagesStore from '../../../store/pagesStore';
 import { ArticlesItemPage } from '../../../components/ArticlesItemPage/ArticlesItemPage';
-import { getPost } from '../../../helpers/helpers';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { article } from '../../../graphql/queries/article';
 
