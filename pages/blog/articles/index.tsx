@@ -28,7 +28,6 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    // serverData.dataPosts = { articles: await getPostsByCategory('articles') };
     const { posts } = await graphQLClient.request(articles);
     serverData.dataPosts = { articles: posts.nodes };
 

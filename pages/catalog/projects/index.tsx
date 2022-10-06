@@ -44,7 +44,6 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    // serverData.dataPosts = { projects: await getPostsByCategory('projects') };
     const { posts } = await graphQLClient.request(projects);
     serverData.dataPosts = {
       projects: posts.nodes,

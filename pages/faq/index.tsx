@@ -2,6 +2,8 @@ import { FAQPage } from '../../components/FAQPage/FAQPage';
 import { getPostsByCategory } from '../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../interfaces/interfaces';
 import pagesStore from '../../store/pagesStore';
+import { graphQLClient } from '../../helpers/graphQLClient';
+import { faqList } from '../../graphql/queries/faqList';
 
 const Faq = ({ serverData }: ServerSideProps) => {
   const { dataPosts, dataCategories }: ServerData = serverData;
@@ -11,14 +13,14 @@ const Faq = ({ serverData }: ServerSideProps) => {
   setCategory('Вопросы и ответы');
 
   const list = dataPosts.faq.map((item) => {
-    const { title, acf } = item;
-    const { author, video_url, video_duration, preview_image } = acf;
+    const { title, faqACF } = item;
+    const { author, videoUrl, videoDuration, previewImage } = faqACF;
     return {
       title,
       author,
-      video_url,
-      video_duration,
-      imgUrl: preview_image,
+      videoUrl,
+      videoDuration,
+      imgUrl: previewImage.sourceUrl,
     };
   });
 
@@ -34,7 +36,8 @@ export const getServerSideProps = async ({ query, req }) => {
   };
 
   try {
-    serverData.dataPosts = { faq: await getPostsByCategory('faq') };
+    const { posts } = await graphQLClient.request(faqList);
+    serverData.dataPosts = { faq: posts.nodes };
 
     return {
       props: {
