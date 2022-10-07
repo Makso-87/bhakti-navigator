@@ -82,7 +82,7 @@ export interface ServerSideProps {
 }
 
 export interface ArticlesProps {
-  showMore: boolean;
+  showMore?: boolean;
   list: pairsFormattedPosts;
   tileMaxCount: number;
 }
