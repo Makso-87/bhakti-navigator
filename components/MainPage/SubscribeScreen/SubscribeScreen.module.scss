@@ -137,6 +137,11 @@
           background: #647db7;
           border-radius: 30px;
           padding: 0 20px;
+          @include transition;
+
+          &:hover {
+            background: #7d9eea;
+          }
 
           &:before {
             content: '';

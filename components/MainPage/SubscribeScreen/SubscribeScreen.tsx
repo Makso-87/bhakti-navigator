@@ -26,7 +26,7 @@ export const SubscribeScreen = () => {
           </div>
 
           <div className={classes.Telegram}>
-            <a href='https://t.me/+m7n1EqDg9YwxMzRi' target='_blank'>
+            <a href='https://t.me/+m7n1EqDg9YwxMzRi' target='_blank' rel='noreferrer'>
               Мы в Telegram
             </a>
           </div>
