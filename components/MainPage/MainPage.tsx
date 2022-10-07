@@ -23,8 +23,8 @@ export const MainPage = (props) => {
         <SortOutScreen {...attrs} />
         <FindScreen {...attrs} />
         <SelectScreen />
-        <HelpBanner customBgColor='#E6EAF1' />
         <ShrilaPrabhupadaBanner />
+        <HelpBanner customBgColor='#E6EAF1' />
         <SubscribeScreen />
       </div>
     </Layout>

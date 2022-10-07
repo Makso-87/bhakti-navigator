@@ -24,6 +24,12 @@ export const SubscribeScreen = () => {
               </label>
             </div>
           </div>
+
+          <div className={classes.Telegram}>
+            <a href='https://t.me/+m7n1EqDg9YwxMzRi' target='_blank'>
+              Мы в Telegram
+            </a>
+          </div>
         </form>
       </div>
     </div>

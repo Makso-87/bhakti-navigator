@@ -1,5 +1,5 @@
 import classes from './HelpBanner.module.scss';
-import testtostart from '../../../images/testtostart.png';
+import testToStart from '../../../images/testtostart.png';
 import cn from 'classnames';
 
 export const HelpBanner = (props) => {
@@ -19,12 +19,12 @@ export const HelpBanner = (props) => {
             </div>
 
             <div className={classes.Button}>
-              <a href='/navigator/page_of_test.php'>Пройти тест</a>
+              <a href='test'>Пройти тест</a>
             </div>
           </div>
 
           <div className={classes.RightSide}>
-            <div className={classes.Image} style={{ backgroundImage: `url(${testtostart.src})` }} />
+            <div className={classes.Image} style={{ backgroundImage: `url(${testToStart.src})` }} />
           </div>
         </div>
       </div>

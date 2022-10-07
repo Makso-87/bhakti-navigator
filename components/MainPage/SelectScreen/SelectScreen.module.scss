@@ -1,13 +1,13 @@
 @import '../../../css/styleVariables';
 
 .SelectScreen {
-  margin-bottom: 224px;
+  margin-bottom: 170px;
 
   h2 {
     font-weight: 800;
     font-size: 55px;
     line-height: 67px;
-    color: #C8D1E5;
+    color: #c8d1e5;
     margin-bottom: 30px;
   }
 
@@ -43,7 +43,7 @@
       line-height: 24px;
       margin-bottom: 54px;
       max-width: 540px;
-      color: #647DB7;
+      color: #647db7;
     }
 
     .Button a {
@@ -58,12 +58,12 @@
       line-height: 24px;
       font-weight: bold;
       color: #ffffff;
-      background: #647DB7;
+      background: #647db7;
       border-radius: 30px;
       box-shadow: 0 8px 18px rgba(171, 182, 211, 0.75);
 
       &:hover {
-        background: #7D9EEA;
+        background: #7d9eea;
       }
     }
   }

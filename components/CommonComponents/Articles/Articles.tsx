@@ -5,7 +5,7 @@ import { ArticlesProps, Post } from '../../../interfaces/interfaces';
 import { postPair } from '../../../types/types';
 import { ShowMore } from '../ShowMore/ShowMore';
 
-export const Articles = observer(({ list = [] }: ArticlesProps) => {
+export const Articles = observer(({ list = [], showMore = true }: ArticlesProps) => {
   return (
     <div className={classes.Articles}>
       {list.length
@@ -34,7 +34,7 @@ export const Articles = observer(({ list = [] }: ArticlesProps) => {
           })
         : null}
 
-      {list.length ? <ShowMore text='Показать еще' /> : null}
+      {list.length && showMore ? <ShowMore text='Показать еще' /> : null}
     </div>
   );
 });

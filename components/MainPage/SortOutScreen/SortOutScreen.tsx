@@ -3,13 +3,8 @@ import Link from 'next/link';
 import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 import { Articles } from '../../CommonComponents/Articles/Articles';
-import { Category, Page, Post, ServerData } from '../../../interfaces/interfaces';
-import {
-  getCategoryData,
-  getFormattedPosts,
-  getPageData,
-  getPostsList,
-} from '../../../helpers/helpers';
+import { ServerData } from '../../../interfaces/interfaces';
+import { getFormattedPosts } from '../../../helpers/helpers';
 import { observer } from 'mobx-react-lite';
 import { pairsFormattedPosts } from '../../../types/types';
 
@@ -26,6 +21,7 @@ export const SortOutScreen = observer((props) => {
   );
 
   const attrs = {
+    showMore: false,
     list: allowedPostsList,
     tileMaxCount: sort_out_screen_articles_number,
   };
@@ -38,7 +34,7 @@ export const SortOutScreen = observer((props) => {
 
           <div className={classes.AboutText}>
             В{' '}
-            <Link href={'/blog'}>
+            <Link href={'/blog/articles'}>
               <a>Блоге</a>
             </Link>{' '}
             вместе со старшими вайшнавами и духовными учителями мы пытаемся разобраться в тонкостях
