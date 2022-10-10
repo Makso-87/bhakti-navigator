@@ -2,10 +2,21 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 import classes from './QuestionForm.module.scss';
 import banner2Q from '../../../images/banner2-q.png';
+import { useContext, useRef } from 'react';
+import { PopupContext } from '../../../context/popupContext';
+import { lockSite } from '../../../helpers/helpers';
 
 configureAnchors({ offset: -84, scrollDuration: 400 });
 
 export const QuestionForm = () => {
+  const popupContextData = useContext(PopupContext);
+  const ref = useRef(null);
+
+  const onClick = () => {
+    lockSite();
+    popupContextData.setPopupQuestionForm({ state: true, ref });
+  };
+
   return (
     <ScrollableAnchor id='question-form'>
       <div className={classes.QuestionFormBlock}>
@@ -16,46 +27,31 @@ export const QuestionForm = () => {
             </div>
 
             <div className={classes.RightSide}>
-              <form action='#'>
-                <div className={classes.Title}>
-                  <div className={classes.StrongText}>
-                    Есть вопрос
-                    <br /> о духовной жизни?
-                  </div>
-                  <div className={classes.Text}>
-                    Некого спросить?
-                    <br /> Не можете найти ответ?
-                  </div>
-                  <div className={classes.MediumText}>Задайте его нам!</div>
+              <div className={classes.Title}>
+                <div className={classes.StrongText}>
+                  Есть вопрос
+                  <br /> о духовной жизни?
                 </div>
 
-                <div className={classes.TextAreaContainer}>
-                  <label htmlFor=''>Ваш вопрос</label>
-                  <textarea placeholder='Ваш вопрос' />
+                <div className={classes.Text}>
+                  Некого спросить?
+                  <br /> Не можете найти ответ?
                 </div>
 
-                <div className={classes.InputFields}>
-                  <div className={classes.InputContainer}>
-                    <label htmlFor='name'>Ваше имя</label>
-                    <input type='text' id='name' placeholder='Ваше имя' />
-                  </div>
+                <div className={classes.MediumText}>Задайте его нам!</div>
 
-                  <div className={classes.InputContainer}>
-                    <label htmlFor='email'>Email</label>
-                    <input type='text' id='email' placeholder='E-mail' />
-                  </div>
+                <div className={classes.Text}>
+                  Самые насущные вопросы мы зададим экспертам рубрики QA.
                 </div>
 
-                <div className={classes.CheckboxContainer}>
-                  <input type='checkbox' id='privacy-policy' />
-                  <label htmlFor='privacy-policy'>
-                    Я ознакомился (-лась) с политикой конфиденциальности и согласен (-сна) на
-                    обработку моих персональных данных
-                  </label>
+                <div className={classes.Text}>
+                  Следите за обновлениями в Телеграм и Youtube канале
                 </div>
 
-                <input type='submit' value='Отправить' />
-              </form>
+                <button onClick={onClick} className={classes.Button}>
+                  Задать вопрос
+                </button>
+              </div>
             </div>
           </div>
         </div>

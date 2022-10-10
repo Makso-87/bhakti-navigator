@@ -3,9 +3,7 @@ import Link from 'next/link';
 import classes from './Footer.module.scss';
 import bhaktiNavigatorLogo from '../../images/icons/bhakti-navigator-logo.png';
 import logoCoskr from '../../images/icons/logo-coskr.png';
-import insta from '../../images/icons/insta.svg';
 import telegram from '../../images/icons/telegram.png';
-import youtubeBlack from '../../images/icons/youtube-black.svg';
 import pagesStore from '../../store/pagesStore';
 
 export const Footer = () => {
@@ -46,25 +44,12 @@ export const Footer = () => {
 
             <div className={`${classes.Cell} ${classes.SecondCell}`}>
               <div className={classes.Text}>
-                Bhakti-navigator.ru - портал, созданный проектом «Гита-нагари» совместно с Отделом
-                вайшнавского образования ЦОСКР. Мы помогаем преданным разобраться в теме духовного
-                образования и наставничества для осознанного продвижения по пути бхакти.
+                Bhakti-navigator.ru - портал, созданный проектом «Гита-нагари» в сотрудничестве с
+                Отделом вайшнавского образования ЦОСКР. Мы помогаем преданным разобраться в теме
+                духовного образования и наставничества для осознанного продвижения по пути бхакти.
               </div>
 
               <div className={classes.Buttons}>
-                <div className={classes.Social}>
-                  <div className={classes.SocialItem}>
-                    <Link href='https://t.me/+m7n1EqDg9YwxMzRi'>
-                      <a target='_blank' rel='noreferrer'>
-                        <div
-                          className={classes.Img}
-                          style={{ backgroundImage: `url(${telegram.src})` }}
-                        />
-                      </a>
-                    </Link>
-                  </div>
-                </div>
-
                 <div className={classes.Donation}>
                   <Link href='#'>
                     <a>Поддержать проект</a>
@@ -139,6 +124,19 @@ export const Footer = () => {
                         </Link>
                       </li>
                     </ul>
+
+                    <div className={classes.Social}>
+                      <div className={classes.SocialItem}>
+                        <Link href='https://t.me/+m7n1EqDg9YwxMzRi'>
+                          <a target='_blank' rel='noreferrer'>
+                            <div
+                              className={classes.Img}
+                              style={{ backgroundImage: `url(${telegram.src})` }}
+                            />
+                          </a>
+                        </Link>
+                      </div>
+                    </div>
                   </div>
 
                   <div className={`${classes.BottomInfo} ${classes.Policy}`}>

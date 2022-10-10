@@ -8,11 +8,17 @@ export const PopupState = ({ children }) => {
     ref: null,
   });
 
+  const [popupQuestionForm, setPopupQuestionForm] = useState({
+    state: false,
+  });
+
   return (
     <PopupContext.Provider
       value={{
         popupVideo,
         setPopupVideo,
+        popupQuestionForm,
+        setPopupQuestionForm,
       }}
     >
       {children}

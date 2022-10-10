@@ -1,12 +1,15 @@
 import classes from './AnswerVideoOverlay.module.scss';
 import { PopupContext } from '../../../context/popupContext';
 import { useContext } from 'react';
+import { Close } from '../Close/Close';
+import { unlockSite } from '../../../helpers/helpers';
 
 export const AnswerVideoOverlay = (props) => {
   const { videoUrl, ref } = props;
   const popupContextData = useContext(PopupContext);
 
   const onClose = () => {
+    unlockSite();
     popupContextData.setPopupVideo({ state: false, link: '', ref: null });
   };
 
@@ -19,7 +22,7 @@ export const AnswerVideoOverlay = (props) => {
           allowFullScreen
         />
 
-        <div onClick={onClose} className={classes.Close} />
+        <Close onClick={onClose} />
       </div>
     </div>
   );

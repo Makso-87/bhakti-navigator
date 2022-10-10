@@ -13,7 +13,7 @@ export const FAQList = (props) => {
             const attrs = {
               title,
               author,
-              video_url: formatVideoUrl(videoUrl),
+              videoUrl: formatVideoUrl(videoUrl),
               videoDuration,
               imgUrl,
               index,

@@ -2,8 +2,6 @@ import { Category, Media, Page, Post } from '../interfaces/interfaces';
 import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
 import urlDecoding from './urlDecoding';
-import { string } from 'prop-types';
-import { DOMParser } from 'xmldom';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -303,4 +301,12 @@ export const slideUp = (element, speed = 400) => {
     element.style.marginTop = newMarginTop + 'px';
     element.style.marginBottom = newMarginBottom + 'px';
   }, 1);
+};
+
+export const lockSite = () => {
+  document.querySelector('body').classList.add('site-lock');
+};
+
+export const unlockSite = () => {
+  document.querySelector('body').classList.remove('site-lock');
 };

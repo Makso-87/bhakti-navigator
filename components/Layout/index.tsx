@@ -6,6 +6,7 @@ import bhaktiNavigatorLogo from '../../images/icons/bhakti-navigator-logo.png';
 import { useContext } from 'react';
 import { PopupContext } from '../../context/popupContext';
 import { AnswerVideoOverlay } from '../CommonComponents/AnswerVideoOverlay/AnswerVideoOverlay';
+import { QuestionPopupForm } from '../CommonComponents/QuestionPopupForm/QuestionPopupForm';
 
 export const Layout = (props) => {
   const { children } = props;
@@ -33,6 +34,15 @@ export const Layout = (props) => {
         {(state) => (
           <AnswerVideoOverlay className={state} videoUrl={popupContextData.popupVideo.link} />
         )}
+      </CSSTransition>
+
+      <CSSTransition
+        in={popupContextData?.popupQuestionForm.state}
+        timeout={400}
+        mountOnEnter={true}
+        unmountOnExit={true}
+      >
+        <QuestionPopupForm />
       </CSSTransition>
     </>
   );

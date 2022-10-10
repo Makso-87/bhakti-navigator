@@ -1,7 +1,7 @@
 @import '../../css/styleVariables';
 
 .Footer {
-  border-top: 1px solid #C4C4C4;
+  border-top: 1px solid #c4c4c4;
   margin: 0;
 
   &.FunctionalPage {
@@ -24,13 +24,42 @@
     max-width: 1440px;
   }
 
+  .Social {
+    display: flex;
+    margin: 25px 0 0;
+
+    .SocialItem {
+      margin-right: 16px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      .Img {
+        width: 44px;
+        height: 44px;
+        position: relative;
+        opacity: 0.65;
+        background: center center / cover;
+        @include transition;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
   .Top {
     .Row {
       display: flex;
       padding-right: 79px;
 
       .Cell {
-
         &.FirstCell {
           display: flex;
           flex-direction: column;
@@ -45,7 +74,7 @@
             display: flex;
 
             a {
-              Text-decoration: none;
+              text-decoration: none;
               margin: 0 20px 0 0;
 
               &:last-child {
@@ -74,7 +103,7 @@
           .Text {
             font-size: 18px;
             line-height: 28px;
-            margin-Bottom: 24px;
+            margin-bottom: 24px;
             max-width: 500px;
           }
 
@@ -84,50 +113,22 @@
             align-items: center;
             padding: 0 18px 0 0;
 
-            .Social {
-              display: flex;
-
-              .SocialItem {
-                margin-right: 16px;
-
-                &:last-child {
-                  margin-right: 0;
-                }
-
-                a {
-                  text-decoration: none;
-                }
-
-                .Img {
-                  width: 44px;
-                  height: 44px;
-                  position: relative;
-                  opacity: 0.65;
-                  background: center center / cover;
-
-                  &:hover {
-                    opacity: 1;
-                  }
-                }
-              }
-            }
-
             .Donation a {
               text-decoration: none;
               align-items: center;
               height: 53px;
               padding: 0 21px;
               display: inline-flex;
-              background: #FFFFFF;
+              background: #ffffff;
               border-radius: 24px;
-              border: 3px solid #647DB7;
+              border: 3px solid #647db7;
               font-weight: bold;
               font-size: 14px;
               line-height: 17px;
-              color: #647DB7;
+              color: #647db7;
 
               &:hover {
-                background: #647DB7;
+                background: #647db7;
                 color: #fff;
               }
             }
@@ -179,7 +180,7 @@
                       line-height: 24px;
 
                       &:hover {
-                        color: #ECE42F;
+                        color: #ece42f;
                       }
                     }
                   }
@@ -197,7 +198,7 @@
                   color: #3c3c3c;
 
                   &:hover {
-                    color: #ECE42F;
+                    color: #ece42f;
                   }
                 }
               }
@@ -206,11 +207,10 @@
         }
       }
     }
-
   }
 
   .Bottom {
-    background: #E2E7F1;
+    background: #e2e7f1;
     height: 52px;
     display: flex;
     align-items: center;
@@ -230,7 +230,8 @@
     }
 
     .ThirdCell .Links .LinksCell {
-      .List ul li a, .BottomInfo a {
+      .List ul li a,
+      .BottomInfo a {
         @include transition;
       }
     }

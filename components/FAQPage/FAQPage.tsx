@@ -90,12 +90,12 @@ export const FAQPage = ({ list }) => {
 
         <QuestionForm />
 
-        <div className={classes.InfoText}>
-          <div className={classes.Text}>
-            Самые насущные вопросы мы зададим экспертам рубрики QA. Следите за обновлениями на{' '}
-            <a href='#'>Youtube</a> канале{' '}
-          </div>
-        </div>
+        {/*<div className={classes.InfoText}>*/}
+        {/*  <div className={classes.Text}>*/}
+        {/*    Самые насущные вопросы мы зададим экспертам рубрики QA. Следите за обновлениями на{' '}*/}
+        {/*    <a href='#'>Youtube</a> канале{' '}*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     </Layout>
   );

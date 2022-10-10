@@ -146,7 +146,13 @@ export interface PopupVideo {
   link: string;
 }
 
+export interface PopupQuestionForm {
+  state: boolean;
+}
+
 export interface PopupContextProps {
-  popupVideo: PopupVideo;
-  setPopupVideo: ({ state, link, ref }: { state: any; link: string; ref: any }) => void;
+  popupVideo?: PopupVideo;
+  popupQuestionForm?: PopupQuestionForm;
+  setPopupVideo?: ({ state, link, ref }: { state: any; link: string; ref: any }) => void;
+  setPopupQuestionForm?: ({ state, ref }) => void;
 }

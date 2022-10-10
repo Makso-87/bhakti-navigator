@@ -1,19 +1,21 @@
 import classes from './FAQItem.module.scss';
 import { PopupContext } from '../../../../context/popupContext';
 import { useContext, useRef } from 'react';
+import { lockSite } from '../../../../helpers/helpers';
 
 export const FAQItem = (props) => {
-  const { video_url, imgUrl, index, title, author, video_duration } = props;
+  const { videoUrl, imgUrl, index, title, author, videoDuration } = props;
   const popupContextData = useContext(PopupContext);
   const ref = useRef(null);
 
   const onOpenVideoPopup = () => {
-    popupContextData.setPopupVideo({ state: true, link: video_url, ref });
+    lockSite();
+    popupContextData.setPopupVideo({ state: true, link: videoUrl, ref });
   };
 
   return (
     <>
-      <div onClick={onOpenVideoPopup} className={classes.TileImageItem} data-video-url={video_url}>
+      <div onClick={onOpenVideoPopup} className={classes.TileImageItem} data-video-url={videoUrl}>
         <figure>
           <div className={classes.ImgContainer}>
             <div className={classes.Img} style={{ backgroundImage: `url(${imgUrl})` }} />
@@ -32,7 +34,7 @@ export const FAQItem = (props) => {
 
               <div className={classes.InfoItem}>
                 <span className={classes.Name}>Продолжительность: </span>
-                <span className={classes.Value}>{video_duration}</span>
+                <span className={classes.Value}>{videoDuration}</span>
               </div>
             </div>
           </figcaption>
