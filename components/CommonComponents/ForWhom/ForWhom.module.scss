@@ -1,7 +1,7 @@
 @import '../../../css/styleVariables';
 
 .ForWhomScreen {
-  background: #404759;
+  //background: #404759;
   padding: 60px 0 60px;
 
   .SiteWrap {
@@ -13,7 +13,7 @@
     font-weight: 800;
     font-size: 55px;
     line-height: 67px;
-    color: #C8D1E5;
+    color: #c8d1e5;
     margin: 0 0 52px;
   }
 
@@ -28,7 +28,8 @@
       position: relative;
       margin: 40px 0 0;
 
-      &:nth-child(2), &:nth-child(1) {
+      &:nth-child(2),
+      &:nth-child(1) {
         margin: 0;
       }
 
@@ -55,13 +56,13 @@
           font-weight: 600;
           font-size: 22px;
           line-height: 27px;
-          color: #FFF;
+          //color: #FFF;
         }
 
         .Text {
           font-size: 18px;
           line-height: 26px;
-          color: #FFF;
+          //color: #FFF;
         }
       }
     }

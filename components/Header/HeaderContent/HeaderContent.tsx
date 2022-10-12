@@ -128,8 +128,10 @@ export const HeaderContent = ({ logo = false }) => {
         <div className={classes.SecondaryPagesTabContainer}>
           <ul className={classes.TabBar}>
             <li className={classes.TabBarItem}>
-              <Link href='/blog/articles'>
-                <a className={currentPage === 'articles' ? classes.Active : ''}>Статьи</a>
+              <Link href='/blog/points_above_i'>
+                <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">
+                  Точки над &laquo;i&raquo;
+                </a>
               </Link>
             </li>
 
@@ -146,10 +148,8 @@ export const HeaderContent = ({ logo = false }) => {
             </li>
 
             <li className={classes.TabBarItem}>
-              <Link href='/blog/points_above_i'>
-                <a className="<?= $blog_page == 'watching' ? 'active' : '' ?>">
-                  Точки над &laquo;i&raquo;
-                </a>
+              <Link href='/blog/articles'>
+                <a className={currentPage === 'articles' ? classes.Active : ''}>База знаний</a>
               </Link>
             </li>
           </ul>

@@ -58,6 +58,7 @@ export const course = gql`
           }
           themes {
             ... on Post {
+              id
               title
             }
           }
@@ -95,18 +96,23 @@ export const course = gql`
             }
           }
           slide1 {
+            id
             sourceUrl
           }
           slide2 {
+            id
             sourceUrl
           }
           slide3 {
+            id
             sourceUrl
           }
           slide4 {
+            id
             sourceUrl
           }
           slide5 {
+            id
             sourceUrl
           }
         }

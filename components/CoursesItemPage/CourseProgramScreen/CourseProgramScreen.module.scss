@@ -87,13 +87,13 @@
 
           .Number {
             position: absolute;
-            left: 16px;
+            left: 35px;
             top: 50%;
             transform: translateY(-50%);
 
             &:before {
               counter-increment: number 1;
-              content: '0' counter(number);
+              content: counter(number);
               font-weight: 800;
               font-size: 55px;
               line-height: 67px;

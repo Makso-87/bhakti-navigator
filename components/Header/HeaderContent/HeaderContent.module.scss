@@ -18,12 +18,12 @@
 
   &.FunctionalPage {
     left: 114px;
-    padding: 0 0 11px;
+    padding: 11px 0 11px;
     margin: 0 0 0 114px;
 
     .SiteWrap {
       max-width: none;
-      height: 84px;
+      height: 46px;
     }
 
     &.Popup {
@@ -97,7 +97,7 @@
             content: '';
             height: 2px;
             width: 0;
-            background: #647DB7;
+            background: #647db7;
             position: absolute;
             left: 0;
             bottom: -5px;
@@ -144,7 +144,6 @@
             position: relative;
           }
         }
-
 
         .SignUp {
           margin-left: 28px;
@@ -258,10 +257,11 @@
           display: block;
           font-size: 18px;
           line-height: 26px;
-          color: #647DB7;
+          color: #647db7;
           position: relative;
 
-          &:hover, &.Active {
+          &:hover,
+          &.Active {
             color: #121212;
           }
 

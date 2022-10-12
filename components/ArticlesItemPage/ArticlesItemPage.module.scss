@@ -28,6 +28,8 @@
       margin: 0 0 30px;
       .InfoItem {
         display: flex;
+        font-size: 16px;
+        line-height: 19px;
 
         .Name {
           font-weight: bold;
@@ -40,6 +42,9 @@
 
     .Author {
       display: flex;
+      font-size: 20px;
+      line-height: 23px;
+
       .Name {
         font-weight: bold;
         margin: 0 5px 0 0;

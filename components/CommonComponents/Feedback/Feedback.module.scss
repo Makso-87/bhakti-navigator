@@ -27,6 +27,8 @@
     display: flex;
     justify-content: center;
     max-width: 960px;
+    flex-direction: column;
+    align-items: center;
 
     .Text {
       margin: 0 20px;
@@ -66,8 +68,8 @@
         }
 
         &.Email {
-          width: 25px;
-          height: 20px;
+          width: 50px;
+          height: 40px;
 
           &:before {
             background-image: url(../../../images/icons/email-icon.svg);
@@ -75,8 +77,8 @@
         }
 
         &.Twitter {
-          width: 27px;
-          height: 21px;
+          width: 54px;
+          height: 42px;
 
           &:before {
             background-image: url(../../../images/icons/twitter-icon.svg);
@@ -84,8 +86,8 @@
         }
 
         &.Facebook {
-          width: 14px;
-          height: 24px;
+          width: 28px;
+          height: 48px;
 
           &:before {
             background-image: url(../../../images/icons/facebook-icon.svg);
@@ -93,8 +95,8 @@
         }
 
         &.Instagram {
-          width: 23px;
-          height: 23px;
+          width: 48px;
+          height: 48px;
 
           &:before {
             background-image: url(../../../images/icons/instagram-icon.svg);
@@ -102,8 +104,8 @@
         }
 
         &.Telegram {
-          width: 25px;
-          height: 25px;
+          width: 50px;
+          height: 50px;
 
           &:before {
             background-image: url(../../../images/icons/telegram_custom_color.svg);
@@ -111,8 +113,8 @@
         }
 
         &.Vkontakte {
-          width: 30px;
-          height: 30px;
+          width: 65px;
+          height: 65px;
 
           &:before {
             background-image: url(../../../images/icons/vk.svg);
@@ -120,8 +122,8 @@
         }
 
         &.Whatsapp {
-          width: 25px;
-          height: 25px;
+          width: 50px;
+          height: 50px;
 
           &:before {
             background-image: url(../../../images/icons/whatsapp_custom_color.svg);
@@ -129,8 +131,8 @@
         }
 
         &.Odnoklassniki {
-          width: 25px;
-          height: 25px;
+          width: 50px;
+          height: 50px;
 
           &:before {
             background-image: url(../../../images/icons/odnoklassniki.svg);
@@ -138,7 +140,7 @@
         }
 
         &.WebSite {
-          font-size: 16px;
+          font-size: 20px;
           line-height: 26px;
           text-decoration: none;
           font-weight: bold;

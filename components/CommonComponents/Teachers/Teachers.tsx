@@ -15,7 +15,7 @@ export const Teachers = (props) => {
           {teachers.length
             ? teachers.map((item: Post) => {
                 const { title, id, link, teacherACF } = item;
-                const { teacherPhoto } = teacherACF;
+                const { teacherPhoto, city } = teacherACF;
 
                 return (
                   <div key={id} className={classes.TeachersItem}>
@@ -31,7 +31,7 @@ export const Teachers = (props) => {
 
                           <figcaption>
                             <div className={classes.Name}>{title}</div>
-                            <div className={classes.Role}>преподаватель</div>
+                            <div className={classes.Role}>{city}</div>
                           </figcaption>
                         </figure>
                       </a>

@@ -61,18 +61,23 @@ export const teacher = gql`
           whatsapp
           canArrive
           slide1 {
+            id
             sourceUrl
           }
           slide2 {
+            id
             sourceUrl
           }
           slide3 {
+            id
             sourceUrl
           }
           slide4 {
+            id
             sourceUrl
           }
           slide5 {
+            id
             sourceUrl
           }
         }

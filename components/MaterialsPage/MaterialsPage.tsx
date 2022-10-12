@@ -20,7 +20,7 @@ export const MaterialsPage = (props) => {
               <MaterialsList list={list} />
 
               <div className={classes.ShowMore}>
-                <a href='#'>Больше курсов</a>
+                <a href='#'>Больше материалов</a>
               </div>
             </div>
 
