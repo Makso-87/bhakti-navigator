@@ -46,9 +46,9 @@ export const TeachersItemPage = ({ post }: { post: Post }) => {
         <AboutScreen post={post} />
         {courses?.length ? <AvailableCoursesScreen post={post} /> : null}
         {canArriveValue === 'yes' ? <TeacherNote /> : null}
-        <Recommendations />
         <BannerNote />
         <Feedback title='Контакты преподавателя' {...feedbackAttrs} />
+        <Recommendations />
       </div>
     </Layout>
   );
