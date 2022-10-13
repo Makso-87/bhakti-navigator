@@ -14,7 +14,6 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
   const {
     author = {},
     themes,
-    mainTheme,
     audioLink,
     onlineLink,
     description,
@@ -62,10 +61,10 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
 
                   {themes ? <Tags tags={themes} /> : null}
 
-                  <div className={classes.Theme}>
-                    <span className={classes.Name}>Тема: </span>
-                    <span className={classes.Value}>{mainTheme?.title}</span>
-                  </div>
+                  {/*<div className={classes.Theme}>*/}
+                  {/*  <span className={classes.Name}>Тема: </span>*/}
+                  {/*  <span className={classes.Value}>{mainTheme?.title}</span>*/}
+                  {/*</div>*/}
                 </div>
               </div>
 
@@ -97,8 +96,8 @@ export const MaterialsItemPage = ({ dataPost }: { dataPost: Post }) => {
           </div>
         </div>
 
-        <Recommendations />
         <BannerNote marginNone={true} />
+        <Recommendations />
       </div>
     </Layout>
   );
