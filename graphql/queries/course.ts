@@ -10,6 +10,7 @@ export const course = gql`
         courseACF {
           info
           about
+          quote
           price
           duration
           formatBriefing

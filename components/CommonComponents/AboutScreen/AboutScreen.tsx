@@ -1,15 +1,16 @@
 import classes from './AboutScreen.module.scss';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import slide1 from '../../../images/slide_1.jpg';
 import { Post } from '../../../interfaces/interfaces';
 import { formatVideoUrl, getLinksList } from '../../../helpers/helpers';
+import { Quote } from '../../ArticlesItemPage/Quote/Quote';
 
 export const AboutScreen = ({ post }: { post: Post }) => {
   const { projectACF, teacherACF, courseACF } = post;
   const {
     about = '',
     video = '',
+    quote,
     slide1,
     slide2,
     slide3,
@@ -60,6 +61,8 @@ export const AboutScreen = ({ post }: { post: Post }) => {
             </div>
           </div>
         </div>
+
+        {quote ? <Quote content={quote} className={classes.Quote} /> : null}
 
         {video ? (
           <div className={classes.MediaContainer}>

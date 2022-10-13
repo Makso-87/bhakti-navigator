@@ -99,15 +99,17 @@ export const TestPage = () => {
                 </p>
               </div>
 
-              <div className={classes.Video}>
-                <iframe
-                  width='1228'
-                  height='691'
-                  src='https://www.youtube.com/embed/sedJBhaCeGM'
-                  title='YouTube video player'
-                  allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
-                  allowFullScreen
-                />
+              <div className={classes.VideoContainer}>
+                <div className={classes.Video}>
+                  <iframe
+                    width='1228'
+                    height='691'
+                    src='https://www.youtube.com/embed/sedJBhaCeGM'
+                    title='YouTube video player'
+                    allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
+                    allowFullScreen
+                  />
+                </div>
               </div>
 
               <button className={classes.ButtonStartTest} onClick={() => setTestStarted(true)}>
