@@ -8,6 +8,7 @@ import { Feedback } from '../CommonComponents/Feedback/Feedback';
 import { BannerNote } from '../Banners/BannerNote/BannerNote';
 import { Post, ServerData } from '../../interfaces/interfaces';
 import { ProjectCourses } from './ProjectCourses/ProjectCourses';
+import { Recommendations } from '../CommonComponents/Recommendations/Recommendations';
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
   const { projectACF, title }: Post = dataPost;
@@ -32,6 +33,7 @@ export const ProjectsItemPage = ({ dataPost }: ServerData) => {
         <Teachers teachers={teachers} />
         <BannerNote />
         <Feedback title='Контакты организатора' name='Бхакти-центр' />
+        <Recommendations />
         {/*<? require_once($_SERVER["DOCUMENT_ROOT"] . '/navigator/include/for_whom_screen.php'); ?>*/}
 
         {/*<? require_once($_SERVER["DOCUMENT_ROOT"] . '/navigator/include/teachers_screen.php'); ?>*/}

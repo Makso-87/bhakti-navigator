@@ -50,6 +50,7 @@ export const project = gql`
               title
               link
               teacherACF {
+                city
                 teacherPhoto {
                   sourceUrl
                 }

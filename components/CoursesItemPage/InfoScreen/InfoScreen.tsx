@@ -1,4 +1,5 @@
 import classes from './InfoScreen.module.scss';
+import { clearContentFromAttrs } from '../../../helpers/helpers';
 
 export const InfoScreen = ({ text = '' }: { text?: string }) => {
   return (
@@ -7,7 +8,10 @@ export const InfoScreen = ({ text = '' }: { text?: string }) => {
         <div className={classes.Content}>
           <div className={classes.Icon} />
 
-          <div className={classes.Text} dangerouslySetInnerHTML={{ __html: text }} />
+          <div
+            className={classes.Text}
+            dangerouslySetInnerHTML={{ __html: clearContentFromAttrs(text) }}
+          />
         </div>
       </div>
     </div>

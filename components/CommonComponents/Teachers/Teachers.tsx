@@ -17,6 +17,8 @@ export const Teachers = (props) => {
                 const { title, id, link, teacherACF } = item;
                 const { teacherPhoto, city } = teacherACF;
 
+                console.log('имя', title, 'город', city);
+
                 return (
                   <div key={id} className={classes.TeachersItem}>
                     <Link href={getLink(link)}>

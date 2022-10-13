@@ -15,6 +15,7 @@
     justify-content: center;
     align-items: center;
     max-width: 1066px;
+    font-weight: 500;
 
     .Icon {
       width: 177px;
@@ -24,9 +25,20 @@
       margin: 0 139px 0 0;
     }
 
-    .Text p {
-      font-size: 20px;
-      line-height: 30px;
+    .Text {
+      p {
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      a {
+        color: #ff9776;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
   }
 }
