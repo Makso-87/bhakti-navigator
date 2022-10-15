@@ -40,12 +40,16 @@ export const QuestionForm = () => {
 
                 <div className={classes.MediumText}>Задайте его нам!</div>
 
-                <div className={classes.Text}>
-                  Самые насущные вопросы мы зададим экспертам рубрики QA.
+                <div className={classes.SmallTextContainer}>
+                  <div className={classes.TextSmall}>Самые насущные вопросы мы зададим</div>
+
+                  <div className={classes.TextSmall}>экспертам рубрики QA.</div>
                 </div>
 
-                <div className={classes.Text}>
-                  Следите за обновлениями в Телеграм и Youtube канале
+                <div className={classes.SmallTextContainer}>
+                  <div className={classes.TextSmall}>Следите за обновлениями в</div>
+
+                  <div className={classes.TextSmall}>Телеграм и Youtube канале</div>
                 </div>
 
                 <button onClick={onClick} className={classes.Button}>

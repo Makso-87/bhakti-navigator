@@ -59,6 +59,16 @@
         line-height: 30px;
         margin: 20px 0;
       }
+
+      .SmallTextContainer {
+        margin: 20px 0;
+
+        .TextSmall {
+          font-weight: 500;
+          font-size: 20px;
+          line-height: 25px;
+        }
+      }
     }
   }
 }
