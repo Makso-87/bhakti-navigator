@@ -6,7 +6,7 @@ import { graphQLClient } from '../helpers/graphQLClient';
 import { courses } from '../graphql/queries/courses';
 import { articles } from '../graphql/queries/articles';
 
-const Index = observer(({ serverData }: ServerSideProps) => {
+const Index = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { setCurrentPage, setCategory, setSecondaryTabBar } = pagesStore;
 
@@ -19,7 +19,7 @@ const Index = observer(({ serverData }: ServerSideProps) => {
   };
 
   return <MainPage {...attrs} />;
-});
+};
 
 export const getServerSideProps = async () => {
   const serverData = {

@@ -5,7 +5,7 @@ import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { courses } from '../../../graphql/queries/courses';
 
-const Courses = observer(({ serverData }: ServerSideProps) => {
+const Courses = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
   setCurrentPage('courses');
@@ -13,7 +13,7 @@ const Courses = observer(({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
 
   return <CoursesPage list={dataPosts.courses} />;
-});
+};
 
 export const getServerSideProps = async () => {
   const serverData = {

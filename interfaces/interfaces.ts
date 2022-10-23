@@ -1,6 +1,18 @@
 import { FormEventHandler, MouseEventHandler, ReactElement } from 'react';
 import { pairsFormattedPosts } from '../types/types';
 
+export interface User {
+  email: string;
+  firstName: string;
+  lastName: string;
+  avatar: string;
+  token: string;
+  city: string;
+  age: string;
+  inIskconSince: string;
+  spiritualName: string;
+}
+
 export interface Page {
   id: number;
   title: string;

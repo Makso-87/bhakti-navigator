@@ -9,8 +9,50 @@ import NextNProgress from 'nextjs-progressbar';
 import { PopupState } from '../context/popupState';
 import { ApolloProvider } from '@apollo/client';
 import { apolloClient } from '../helpers/apolloClient';
+import { useEffect } from 'react';
+import { graphQLClient } from '../helpers/graphQLClient';
+import { user } from '../graphql/queries/user';
+import UserStore from '../store/userStore';
+import { getCookie } from '../helpers/cookies';
 
 const App = ({ Component, pageProps }) => {
+  useEffect(() => {
+    const cookie = getCookie('authorization');
+    console.log('cookie', cookie, 'UserStore', UserStore);
+
+    if (UserStore.token === '' && cookie) {
+      graphQLClient
+        .request(user, {}, { authorization: `Bearer ${cookie}` })
+        .then(({ viewer }) => {
+          const d = viewer;
+
+          console.log(viewer);
+
+          if (viewer) {
+            const { email, firstName, lastName, avatar, userACF } = viewer;
+            const { city, age, inIskconSince, spiritualName } = userACF;
+
+            UserStore.setUserData({
+              email,
+              firstName,
+              lastName,
+              avatar: avatar.url,
+              token: viewer.jwtAuthToken,
+              city,
+              age,
+              inIskconSince,
+              spiritualName,
+            });
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    }
+  }, []);
+
+  console.log('app rendered');
+
   return (
     <ApolloProvider client={apolloClient}>
       <PopupState>

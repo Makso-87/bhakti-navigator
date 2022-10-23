@@ -1,5 +1,4 @@
 import { PersonalAccountPage } from '../../components/PersonalAccountPage/PersonalAccountPage';
-import dataStore from '../../store/dataStore';
 import pagesStore from '../../store/pagesStore';
 
 const PersonalAccount = (props) => {

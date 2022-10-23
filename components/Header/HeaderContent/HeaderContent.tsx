@@ -2,9 +2,12 @@ import Link from 'next/link';
 import classes from './HeaderContent.module.scss';
 import mainLogo from '../../../images/icons/bhakti-navigator-logo.png';
 import pagesStore from '../../../store/pagesStore';
+import UserStore from '../../../store/userStore';
+import { AccountData } from './AccountData/AccountData';
+import { observer } from 'mobx-react-lite';
 const logoUrl = mainLogo.src;
 
-export const HeaderContent = ({ logo = false }) => {
+export const HeaderContent = observer(({ logo = false }) => {
   const { category, secondaryTabBar, currentPage } = pagesStore;
 
   return (
@@ -58,21 +61,25 @@ export const HeaderContent = ({ logo = false }) => {
 
         <div className={classes.Right}>
           <div className={classes.Controls}>
-            <div className={classes.Buttons}>
-              <div className={classes.SearchTrigger} />
+            {UserStore.token === '' ? (
+              <div className={classes.Buttons}>
+                <div className={classes.SearchTrigger} />
 
-              <div className={classes.SignIn}>
-                <Link href='/authorization?auth=sign_in'>
-                  <a>Вход</a>
-                </Link>
-              </div>
+                <div className={classes.SignIn}>
+                  <Link href='/authorization?auth=sign_in'>
+                    <a>Вход</a>
+                  </Link>
+                </div>
 
-              <div className={classes.SignUp}>
-                <Link href='/authorization?auth=sign_up'>
-                  <a>Регистрация</a>
-                </Link>
+                <div className={classes.SignUp}>
+                  <Link href='/authorization?auth=sign_up'>
+                    <a>Регистрация</a>
+                  </Link>
+                </div>
               </div>
-            </div>
+            ) : (
+              <AccountData />
+            )}
           </div>
         </div>
 
@@ -157,4 +164,4 @@ export const HeaderContent = ({ logo = false }) => {
       ) : null}
     </>
   );
-};
+});

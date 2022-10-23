@@ -1202,6 +1202,34 @@ type HierarchicalContentNodeToParentContentNodeConnectionEdge {
     node: ContentNode
 }
 
+"The payload for the login mutation"
+type LoginPayload {
+    "JWT Token that can be used in future requests for Authentication"
+    authToken: String
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers."
+    refreshToken: String
+    "The user that was logged in"
+    user: User
+}
+
+"The payload for the loginWithCookies mutation"
+type LoginWithCookiesPayload {
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Login operation status"
+    status: String
+}
+
+"The payload for the logout mutation"
+type LogoutPayload {
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Logout operation status"
+    status: String
+}
+
 "File details for a Media Item"
 type MediaDetails {
     "The filename of the mediaItem"
@@ -2635,6 +2663,14 @@ type ReadingSettings {
     showOnFront: String
 }
 
+"The payload for the refreshJwtAuthToken mutation"
+type RefreshJwtAuthTokenPayload {
+    "JWT Token that can be used in future requests for Authentication"
+    authToken: String
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+}
+
 "The payload for the registerUser mutation"
 type RegisterUserPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
@@ -2748,6 +2784,26 @@ type RootMutation {
         "The count to increase"
         count: Int
     ): Int
+    "The payload for the login mutation"
+    login(
+        "Input for the login mutation"
+        input: LoginInput!
+    ): LoginPayload
+    "The payload for the loginWithCookies mutation"
+    loginWithCookies(
+        "Input for the loginWithCookies mutation"
+        input: LoginWithCookiesInput!
+    ): LoginWithCookiesPayload
+    "The payload for the logout mutation"
+    logout(
+        "Input for the logout mutation"
+        input: LogoutInput!
+    ): LogoutPayload
+    "The payload for the refreshJwtAuthToken mutation"
+    refreshJwtAuthToken(
+        "Input for the refreshJwtAuthToken mutation"
+        input: RefreshJwtAuthTokenInput!
+    ): RefreshJwtAuthTokenPayload
     "The payload for the registerUser mutation"
     registerUser(
         "Input for the registerUser mutation"
@@ -4058,10 +4114,20 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
     id: ID!
     "Whether the node is a Content Node"
     isContentNode: Boolean!
+    "Whether the JWT User secret has been revoked. If the secret has been revoked, auth tokens will not be issued until an admin, or user with proper capabilities re-issues a secret for the user."
+    isJwtAuthSecretRevoked: Boolean!
     "Whether the object is restricted from the current viewer"
     isRestricted: Boolean
     "Whether the node is a Term"
     isTermNode: Boolean!
+    "The expiration for the JWT Token for the user. If not set custom for the user, it will use the default sitewide expiration setting"
+    jwtAuthExpiration: String
+    "A JWT token that can be used in future requests for authentication/authorization"
+    jwtAuthToken: String
+    "A JWT token that can be used in future requests to get a refreshed jwtAuthToken. If the refresh token used in a request is revoked or otherwise invalid, a valid Auth token will NOT be issued in the response headers."
+    jwtRefreshToken: String
+    "A unique secret tied to the users JWT token that can be revoked or refreshed. Revoking the secret prevents JWT tokens from being issued to the user. Refreshing the token invalidates previously issued tokens, but allows new tokens to be issued."
+    jwtUserSecret: String
     "Last name of the user. This is equivalent to the WP_User-&gt;user_last_name property."
     lastName: String
     "The preferred language locale set for the user. Value derived from get_user_locale()."
@@ -4143,6 +4209,8 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
     uri: String
     "A website url that is associated with the user."
     url: String
+    "Added to the GraphQL Schema because the ACF Field Group &quot;Пользователь&quot; was set to Show in GraphQL."
+    userACF: User_Useracf
     "The Id of the user. Equivalent to WP_User-&gt;ID"
     userId: Int @deprecated(reason: "Deprecated in favor of the databaseId field")
     "Username for the user. This field is equivalent to WP_User-&gt;user_login."
@@ -4305,6 +4373,16 @@ type UserToUserRoleConnectionEdge {
     cursor: String
     "The item at the end of the edge"
     node: UserRole
+}
+
+"Field Group"
+type User_Useracf implements AcfFieldGroup {
+    age: String
+    city: String
+    "The name of the ACF Field Group"
+    fieldGroupName: String
+    inIskconSince: String
+    spiritualName: String
 }
 
 "Information about pagination in a connection."
@@ -5475,8 +5553,12 @@ input CreateUserInput {
     nickname: String
     "A string that contains the plain text password for the user."
     password: String
+    "If true, this will refresh the users JWT secret."
+    refreshJwtUserSecret: Boolean
     "The date the user registered. Format is Y-m-d H:i:s."
     registered: String
+    "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+    revokeJwtUserSecret: Boolean
     "A string for whether to enable the rich editor or not. False if not empty."
     richEditing: String
     "An array of roles to be assigned to the user."
@@ -5681,6 +5763,34 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
     status: PostStatusEnum
     "Title of the object"
     title: String
+}
+
+"Input for the login mutation"
+input LoginInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "The plain-text password for the user logging in."
+    password: String!
+    "The username used for login. Typically a unique or email address depending on specific configuration"
+    username: String!
+}
+
+"Input for the loginWithCookies mutation"
+input LoginWithCookiesInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Input your user/e-mail."
+    login: String!
+    "Input your password."
+    password: String!
+    "Whether to \"remember\" the user. Increases the time that the cookie will be kept. Default false."
+    rememberMe: Boolean
+}
+
+"Input for the logout mutation"
+input LogoutInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
 }
 
 "Arguments for filtering the MediaItemToCommentConnection connection"
@@ -6365,6 +6475,14 @@ input PostToTermNodeConnectionWhereArgs {
     updateTermMetaCache: Boolean
 }
 
+"Input for the refreshJwtAuthToken mutation"
+input RefreshJwtAuthTokenInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "A valid, previously issued JWT refresh token. If valid a new Auth token will be provided. If invalid, expired, revoked or otherwise invalid, a new AuthToken will not be provided."
+    jwtRefreshToken: String!
+}
+
 "Input for the registerUser mutation"
 input RegisterUserInput {
     "User's AOL IM account."
@@ -6391,8 +6509,12 @@ input RegisterUserInput {
     nickname: String
     "A string that contains the plain text password for the user."
     password: String
+    "If true, this will refresh the users JWT secret."
+    refreshJwtUserSecret: Boolean
     "The date the user registered. Format is Y-m-d H:i:s."
     registered: String
+    "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+    revokeJwtUserSecret: Boolean
     "A string for whether to enable the rich editor or not. False if not empty."
     richEditing: String
     "A string that contains the user's username."
@@ -7339,8 +7461,12 @@ input UpdateUserInput {
     nickname: String
     "A string that contains the plain text password for the user."
     password: String
+    "If true, this will refresh the users JWT secret."
+    refreshJwtUserSecret: Boolean
     "The date the user registered. Format is Y-m-d H:i:s."
     registered: String
+    "If true, this will revoke the users JWT secret. If false, this will unrevoke the JWT secret AND issue a new one. To revoke, the user must have proper capabilities to edit users JWT secrets."
+    revokeJwtUserSecret: Boolean
     "A string for whether to enable the rich editor or not. False if not empty."
     richEditing: String
     "An array of roles to be assigned to the user."

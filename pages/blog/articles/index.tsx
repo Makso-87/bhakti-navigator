@@ -5,7 +5,7 @@ import pagesStore from '../../../store/pagesStore';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { articles } from '../../../graphql/queries/articles';
 
-const Blog = observer(({ serverData }: ServerSideProps) => {
+const Blog = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
 
@@ -18,7 +18,7 @@ const Blog = observer(({ serverData }: ServerSideProps) => {
   };
 
   return <BlogPage {...attrs} />;
-});
+};
 
 export const getServerSideProps = async () => {
   const serverData = {

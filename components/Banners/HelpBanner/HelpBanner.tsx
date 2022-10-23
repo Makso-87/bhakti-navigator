@@ -3,13 +3,13 @@ import testToStart from '../../../images/testtostart.png';
 import cn from 'classnames';
 
 export const HelpBanner = (props) => {
-  const { marginBottomNone = false, customBgColor = '' } = props;
+  const { marginBottomNone = false } = props;
   const classesHelpBanner = cn(classes.HelpBanner, {
     [classes.MarginBottomNone]: marginBottomNone,
   });
 
   return (
-    <div className={classesHelpBanner} style={{ backgroundColor: customBgColor }}>
+    <div className={classesHelpBanner}>
       <div className={classes.SiteWrap}>
         <div className={classes.Content}>
           <div className={classes.LeftSide}>

@@ -2,8 +2,14 @@ import classes from './PersonalAccountPage.module.scss';
 import { Recommendations } from '../CommonComponents/Recommendations/Recommendations';
 import { QuestionForm } from '../CommonComponents/QuestionForm/QuestionForm';
 import { Layout } from '../Layout';
+import accountGirlFace from '../../images/account-girl-face.png';
+import UserStore from '../../store/userStore';
+import { Button } from '../CommonComponents/Button/Button';
+import { observer } from 'mobx-react-lite';
 
-export const PersonalAccountPage = (props) => {
+export const PersonalAccountPage = observer((props) => {
+  const { token } = UserStore;
+
   return (
     <Layout>
       <div className={classes.PersonalAccountPage}>
@@ -18,7 +24,7 @@ export const PersonalAccountPage = (props) => {
                     <label htmlFor='avatar'>
                       <div
                         className={classes.Img}
-                        style={{ backgroundImage: `url(./images/account-girl-face.png);` }}
+                        style={{ backgroundImage: accountGirlFace.src }}
                       />
                     </label>
                   </div>
@@ -159,4 +165,4 @@ export const PersonalAccountPage = (props) => {
       </div>
     </Layout>
   );
-};
+});

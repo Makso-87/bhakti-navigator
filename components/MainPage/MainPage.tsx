@@ -24,7 +24,7 @@ export const MainPage = (props) => {
         <FindScreen {...attrs} />
         <SelectScreen />
         <ShrilaPrabhupadaBanner />
-        <HelpBanner customBgColor='#E6EAF1' />
+        <HelpBanner />
         <SubscribeScreen />
       </div>
     </Layout>
