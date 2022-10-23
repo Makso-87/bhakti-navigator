@@ -21,6 +21,10 @@ export interface Page {
   acf: any;
 }
 
+export interface HeaderContentProps {
+  logo?: boolean;
+}
+
 export interface Media {
   id: number;
   date: string;

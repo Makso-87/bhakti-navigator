@@ -5,9 +5,10 @@ import pagesStore from '../../../store/pagesStore';
 import UserStore from '../../../store/userStore';
 import { AccountData } from './AccountData/AccountData';
 import { observer } from 'mobx-react-lite';
+import { HeaderContentProps } from '../../../interfaces/interfaces';
 const logoUrl = mainLogo.src;
 
-export const HeaderContent = observer(({ logo = false }) => {
+export const HeaderContent = observer(({ logo = false }: HeaderContentProps) => {
   const { category, secondaryTabBar, currentPage } = pagesStore;
 
   return (
