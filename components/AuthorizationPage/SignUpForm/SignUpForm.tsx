@@ -1,6 +1,6 @@
 import classes from './SignUpForm.module.scss';
 
-export const SignUpForm = ({ onFormDataInput, formData, onSignUp, changeAuthRout }) => {
+export const SignUpForm = ({ onFormDataInput, formData, onSignUp, changeAuthRout, error }) => {
   return (
     <form action='#' className={classes.FormSignUp}>
       <div className={classes.FormContent}>
@@ -19,6 +19,8 @@ export const SignUpForm = ({ onFormDataInput, formData, onSignUp, changeAuthRout
               onInput={onFormDataInput}
             />
           </div>
+
+          {!!error ? <div className={classes.ErrorsBlock}>{error}</div> : null}
 
           {/*<div className={`${classes.InputContainer} ${classes.Password}`}>*/}
           {/*  <input*/}

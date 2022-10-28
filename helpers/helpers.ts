@@ -310,3 +310,9 @@ export const lockSite = () => {
 export const unlockSite = () => {
   document.querySelector('body').classList.remove('site-lock');
 };
+
+export const getErrorMessageText = (error) => {
+  const [message] = error.message.split(':');
+  console.log('message', message);
+  return message;
+};

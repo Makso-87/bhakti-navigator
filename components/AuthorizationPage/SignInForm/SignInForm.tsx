@@ -1,6 +1,6 @@
 import classes from './SignInForm.module.scss';
 
-export const SignInForm = ({ onFormDataInput, onSignIn, formData, changeAuthRout }) => {
+export const SignInForm = ({ onFormDataInput, onSignIn, formData, changeAuthRout, error }) => {
   return (
     <form
       action='components/AuthorizationPage/SignInForm/SignInForm#'
@@ -30,6 +30,8 @@ export const SignInForm = ({ onFormDataInput, onSignIn, formData, changeAuthRout
             />
             <div className={classes.PasswordEye} />
           </div>
+
+          {!!error ? <div className={classes.ErrorsBlock}>{error}</div> : null}
 
           <div className={classes.RecoverPassword}>
             <a href='components/AuthorizationPage/SignInForm/SignInForm#'>Забыли пароль?</a>

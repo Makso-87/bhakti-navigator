@@ -63,6 +63,17 @@
           margin: 0 0 20px;
           text-align: center;
         }
+
+        h3 {
+          text-align: center;
+        }
+
+        button {
+          @include button;
+          display: flex;
+          border: none;
+          margin: 30px auto 0;
+        }
       }
 
       form {

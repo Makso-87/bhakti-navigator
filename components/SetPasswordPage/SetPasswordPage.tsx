@@ -4,11 +4,14 @@ import { useState } from 'react';
 import { graphQLClient } from '../../helpers/graphQLClient';
 import { resetUserPassword } from '../../graphql/mutations/resetUserPassword';
 import Link from 'next/link';
+import { getErrorMessageText } from '../../helpers/helpers';
+import { errors } from '../../helpers/errors';
 
 export const SetPasswordPage = () => {
   const router = useRouter();
   const { key = '', login = '' } = router.query;
   const [form, setForm] = useState({ password: '', confirm_password: '' });
+  const [error, setError] = useState<null | string>(null);
   const [successResetUserPassword, setSuccessResetUserPassword] = useState(false);
 
   const onFormDataInput = (event) => {
@@ -20,15 +23,21 @@ export const SetPasswordPage = () => {
   const onSetPassword = async (e) => {
     e.preventDefault();
 
-    const { resetUserPassword: newUserPassword } = await graphQLClient.request(resetUserPassword, {
-      input: {
-        key,
-        login,
-        password: form.password,
-      },
-    });
-
-    setSuccessResetUserPassword(!!newUserPassword?.user);
+    graphQLClient
+      .request(resetUserPassword, {
+        input: {
+          key,
+          login,
+          password: form.password,
+        },
+      })
+      .then(({ resetUserPassword: newUserPassword }) => {
+        setSuccessResetUserPassword(!!newUserPassword?.user);
+      })
+      .catch((e) => {
+        setError(errors[getErrorMessageText(e)]);
+        console.error(e);
+      });
   };
 
   console.log('key', key, 'login', login);
@@ -62,6 +71,13 @@ export const SetPasswordPage = () => {
                   />
                   <div className={classes.PasswordEye} />
                 </div>
+
+                {!!error ? (
+                  <div
+                    className={classes.ErrorsBlock}
+                    dangerouslySetInnerHTML={{ __html: error }}
+                  />
+                ) : null}
 
                 <button onClick={onSetPassword}>Установить пароль</button>
               </div>

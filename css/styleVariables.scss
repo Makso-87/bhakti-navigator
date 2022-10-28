@@ -157,6 +157,12 @@
         }
       }
 
+      .ErrorsBlock {
+        margin: 0 0 12px;
+        color: red;
+        text-align: right;
+      }
+
       .RecoverPassword {
         display: flex;
         justify-content: flex-end;
