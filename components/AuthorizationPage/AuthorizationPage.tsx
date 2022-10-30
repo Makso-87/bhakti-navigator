@@ -48,10 +48,11 @@ export const AuthorizationPage = () => {
     const { login } = result || {};
 
     if (login?.user) {
-      const { email, firstName, lastName, avatar, userACF } = login.user;
+      const { id, email, firstName, lastName, avatar, userACF } = login.user;
       const { city, age, inIskconSince, spiritualName } = userACF;
 
       UserStore.setUserData({
+        id,
         email,
         firstName,
         lastName,

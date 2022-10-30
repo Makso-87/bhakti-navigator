@@ -316,3 +316,8 @@ export const getErrorMessageText = (error) => {
   console.log('message', message);
   return message;
 };
+
+export const decodeUserId = (encodedId) => {
+  const [, value] = window.atob(encodedId).split(':');
+  return value;
+};

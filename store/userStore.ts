@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class UserStore {
+  id = '';
   email = '';
   firstName = '';
   lastName = '';
@@ -16,6 +17,7 @@ class UserStore {
   }
 
   setUserData = ({
+    id = '',
     email = '',
     firstName = '',
     lastName = '',
@@ -26,6 +28,7 @@ class UserStore {
     inIskconSince = '',
     spiritualName = '',
   }) => {
+    this.id = id;
     this.token = token;
     this.email = email;
     this.firstName = firstName;

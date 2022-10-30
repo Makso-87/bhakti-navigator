@@ -24,15 +24,12 @@ const App = ({ Component, pageProps }) => {
       graphQLClient
         .request(user, {}, { authorization: `Bearer ${cookie}` })
         .then(({ viewer }) => {
-          const d = viewer;
-
-          console.log(viewer);
-
           if (viewer) {
-            const { email, firstName, lastName, avatar, userACF } = viewer;
+            const { id, email, firstName, lastName, avatar, userACF } = viewer;
             const { city, age, inIskconSince, spiritualName } = userACF;
 
             UserStore.setUserData({
+              id,
               email,
               firstName,
               lastName,

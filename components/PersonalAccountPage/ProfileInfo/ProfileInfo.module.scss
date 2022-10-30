@@ -1,0 +1,201 @@
+@import '../../../css/styleVariables';
+
+.ProfileInfo {
+  margin: 0 0 120px;
+
+  .SiteWrap {
+    @include site-wrap;
+  }
+
+  .ProfileContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 369px;
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(52, 65, 96, 0.1);
+    border-radius: 25px;
+    padding: 0 157px;
+    position: relative;
+
+    .Content {
+      width: 100%;
+
+      form {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        position: relative;
+
+        .ProfilePhoto {
+          width: 226px;
+          height: 226px;
+          position: relative;
+          background: url(../../../images/account-default-photo.svg) no-repeat (center / contain);
+          margin: 0 90px 0 0;
+          flex-shrink: 0;
+
+          input {
+            display: none;
+          }
+
+          label {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+
+            .Img {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              top: 0;
+              left: 0;
+              background: no-repeat center / contain;
+              border-radius: 50%;
+            }
+          }
+        }
+
+        .ProfileData {
+          flex-grow: 1;
+          display: flex;
+
+          .ProfileDataLeft {
+            width: 63%;
+            padding: 0 75px 0 0;
+          }
+
+          .ProfileDataRight {
+            width: 37%;
+          }
+
+          .DataItem {
+            margin: 0 0 27px;
+            display: flex;
+
+            &:last-child {
+              margin: 0;
+            }
+
+            .Key {
+              font-size: 14px;
+              line-height: 24px;
+              display: flex;
+              align-items: center;
+              color: #6b6b6b;
+              margin: 0 15px 0 0;
+              white-space: nowrap;
+            }
+
+            .Value {
+              flex-grow: 1;
+
+              .Text {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 24px;
+                display: flex;
+                align-items: center;
+              }
+
+              &.Password .Text {
+                font-size: 39px;
+                line-height: 2px;
+              }
+
+              input {
+                width: 100%;
+                height: 24px;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                background: rgba(239, 241, 245, 0.61);
+                border: 0.3px solid #e6eaee;
+                box-sizing: border-box;
+                border-radius: 6px;
+                padding: 0 8px;
+
+                &:focus {
+                  background: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ProfileDelete {
+      position: absolute;
+      right: 31px;
+      bottom: 25px;
+      width: 24px;
+      height: 24px;
+      background: url(../../../images/icons/delete-account-icon.svg) no-repeat center;
+      cursor: pointer;
+    }
+
+    .Content {
+      .ProfileEdit {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 28px;
+        height: 28px;
+        background: url(../../../images/icons/edit-account-icon.svg) no-repeat center;
+        cursor: pointer;
+      }
+
+      .ProfileConfirm {
+        top: 0;
+        right: 0;
+        position: absolute;
+        display: flex;
+        //width: 28px;
+        //height: 28px;
+        cursor: pointer;
+
+        button {
+          display: block;
+          border: none;
+          //position: absolute;
+          width: 28px;
+          height: 28px;
+          top: 0;
+          left: 0;
+          cursor: pointer;
+
+          &.Confirm {
+            background: url(../../../images/icons/confirm-account-icon.svg) no-repeat center;
+            margin: 0 0 0 10px;
+          }
+
+          &.Cancel {
+            background: none;
+            position: relative;
+
+            &:before,
+            &:after {
+              content: '';
+              display: block;
+              position: absolute;
+              height: 2px;
+              width: 80%;
+              transform: translate(-50%, -50%) rotate(45deg);
+              background: #647db7;
+              left: 50%;
+              top: 50%;
+            }
+
+            &:after {
+              transform: translate(-50%, -50%) rotate(-45deg);
+            }
+          }
+        }
+      }
+    }
+  }
+}

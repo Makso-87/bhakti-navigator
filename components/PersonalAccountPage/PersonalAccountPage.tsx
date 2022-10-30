@@ -2,107 +2,26 @@ import classes from './PersonalAccountPage.module.scss';
 import { Recommendations } from '../CommonComponents/Recommendations/Recommendations';
 import { QuestionForm } from '../CommonComponents/QuestionForm/QuestionForm';
 import { Layout } from '../Layout';
-import accountGirlFace from '../../images/account-girl-face.png';
-import UserStore from '../../store/userStore';
-import { Button } from '../CommonComponents/Button/Button';
 import { observer } from 'mobx-react-lite';
+import { ProfileInfo } from './ProfileInfo/ProfileInfo';
+import userStore from '../../store/userStore';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const PersonalAccountPage = observer((props) => {
-  const { token } = UserStore;
+  const { token } = userStore;
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!token) {
+      router.push('/');
+    }
+  }, []);
 
   return (
     <Layout>
       <div className={classes.PersonalAccountPage}>
-        <div className={classes.ProfileInfo}>
-          <div className={classes.SiteWrap}>
-            <div className={classes.ProfileContainer}>
-              <div className={classes.Content}>
-                <form action='#'>
-                  <div className={classes.ProfilePhoto}>
-                    <input type='file' id='avatar' />
-
-                    <label htmlFor='avatar'>
-                      <div
-                        className={classes.Img}
-                        style={{ backgroundImage: accountGirlFace.src }}
-                      />
-                    </label>
-                  </div>
-
-                  <div className={classes.ProfileData}>
-                    <div className={classes.ProfileDataLeft}>
-                      <div className={`${classes.DataItem} ${classes.Name}`}>
-                        <div className={classes.Key}>Имя/Духовное имя</div>
-
-                        <div className={classes.Value}>
-                          <div className={classes.Text}>Кришнадаси д.д.</div>
-                          <input type='text' />
-                        </div>
-                      </div>
-
-                      <div className={`${classes.DataItem} ${classes.Email}`}>
-                        <div className={classes.Key}>Электронная почта</div>
-
-                        <div className={classes.Value}>
-                          <div className={classes.Text}>ekaterina@mail.ru</div>
-                          <input type='text' />
-                        </div>
-                      </div>
-
-                      <div className={`${classes.DataItem} ${classes.Name}`}>
-                        <div className={classes.Key}>Пароль</div>
-
-                        <div className={`${classes.Value} ${classes.Password}`}>
-                          <div className={classes.Text}>.............</div>
-                          <input type='password' />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className={classes.ProfileDataRight}>
-                      <div className={`${classes.DataItem} ${classes.City}`}>
-                        <div className={classes.Key}>Город</div>
-
-                        <div className={classes.Value}>
-                          <div className={classes.Text}>Москва</div>
-                          <input type='text' />
-                        </div>
-                      </div>
-
-                      <div className={`${classes.DataItem} ${classes.Age}`}>
-                        <div className={classes.Key}>Возраст</div>
-
-                        <div className={classes.Value}>
-                          <div className={classes.Text}>29</div>
-                          <input type='text' />
-                        </div>
-                      </div>
-
-                      <div className={`${classes.DataItem} ${classes.City}`}>
-                        <div className={classes.Key}>В ИСККОН с</div>
-
-                        <div className={classes.Value}>
-                          <div className={classes.Text}>2018</div>
-                          <input type='text' />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className={classes.ProfileEdit} />
-
-                  <div className={classes.ProfileConfirm}>
-                    <input type='submit' id='confirm-edit' />
-                    <label htmlFor='confirm-edit' />
-                  </div>
-                </form>
-              </div>
-
-              <div className={classes.ProfileDelete} />
-            </div>
-          </div>
-        </div>
-
+        <ProfileInfo />
         <div className={classes.TestResult}>
           <div className={classes.SiteWrap}>
             <div className={classes.Title}>Результаты теста</div>

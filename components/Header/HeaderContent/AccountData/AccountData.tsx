@@ -22,6 +22,7 @@ export const AccountData = observer(() => {
     removeCookie('authorization');
 
     UserStore.setUserData({
+      id: '',
       email: '',
       firstName: '',
       lastName: '',
