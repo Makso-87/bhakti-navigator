@@ -8,7 +8,6 @@ import { getCookie } from '../../../helpers/cookies';
 
 export const ProfileInfo = () => {
   const [editMode, setEditMode] = useState(false);
-  const [setDecodedId] = useState('');
   const { id, avatar, firstName, email, city, age, inIskconSince } = UserStore;
   const [form, setForm] = useState({
     name: firstName,
@@ -92,10 +91,6 @@ export const ProfileInfo = () => {
     setEditMode(false);
     setForm({ name: firstName, email, city, age, iskcon: inIskconSince });
   };
-
-  useEffect(() => {
-    setDecodedId(decodeUserId(id));
-  }, []);
 
   return (
     <div className={classes.ProfileInfo}>
