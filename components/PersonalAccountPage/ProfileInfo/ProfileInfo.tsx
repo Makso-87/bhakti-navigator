@@ -1,14 +1,15 @@
 import classes from './ProfileInfo.module.scss';
 import UserStore from '../../../store/userStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { updateUser } from '../../../graphql/mutations/updateUser';
-import { decodeUserId } from '../../../helpers/helpers';
-import apiFetch from '@wordpress/api-fetch';
+import { changeAcfByRestApi, decodeUserId } from '../../../helpers/helpers';
+import { getCookie } from '../../../helpers/cookies';
 
 export const ProfileInfo = () => {
   const [editMode, setEditMode] = useState(false);
-  const { id, avatar, firstName, email, city, age, inIskconSince, token } = UserStore;
+  const [setDecodedId] = useState('');
+  const { id, avatar, firstName, email, city, age, inIskconSince } = UserStore;
   const [form, setForm] = useState({
     name: firstName,
     email,
@@ -28,90 +29,73 @@ export const ProfileInfo = () => {
     setEditMode(true);
   };
 
-  const onProfileEditConfirm = () => {
-    const { setUserData, id, ...userData } = UserStore;
+  const changeDataByRestApi = async () => {
+    const result = await changeAcfByRestApi(id, {
+      city: form.city,
+      age: form.age,
+      in_iskcon_since: form.iskcon,
+    });
 
-    const decodedId = decodeUserId(id);
-    console.log('decodedId', decodedId);
+    const { city, age, in_iskcon_since } = result;
+    return { city, age, inIskconSince: in_iskcon_since };
+  };
 
-    const url = `https://bhaktinavigator.tmweb.ru/bhakti-navigator-wp/wp-json/wp/v2/users/${decodedId}?fields[city]=${form.city}&fields[age]=${form.age}&fields[city]=${form.city}&fields[inIskconSince]=${form.iskcon}`;
-    const data = {
-      acf: {
-        city: form.city,
-      },
-    };
-    const params = {
-      cache: 'no-cache',
-      method: 'PATCH',
-      credentials: 'omit',
-    };
+  const changeDataByGraphQl = async () => {
+    const cookie = getCookie('authorization');
 
-    apiFetch({
-      path: `https://bhaktinavigator.tmweb.ru/bhakti-navigator-wp/wp-json/wp/v2/users/${decodedId}`,
-      method: 'POST',
-      data: JSON.stringify(data),
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => {
-        console.log('update user', res);
+    return await graphQLClient
+      .request(
+        updateUser,
+        {
+          input: {
+            id,
+            firstName: form.name,
+          },
+        },
+        { authorization: `Bearer ${cookie}` }
+      )
+      .then(({ updateUser: updatedUser }) => {
+        const { firstName } = updatedUser?.user || {};
+        return { firstName };
       })
       .catch((e) => {
-        console.log('update error', e);
+        console.error(e);
       });
+  };
 
-    // fetch(url, {
-    //   cache: 'no-cache',
-    //   method: 'PATCH',
-    //   credentials: 'omit',
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //     // 'Content-Type': 'application/json; charset=UTF-8; application/x-www-form-urlencoded',
-    //     'Content-Type': 'application/json; charset=UTF-8;',
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log(data);
-    //   })
-    //   .catch((e) => {
-    //     console.log('update error', e);
-    //   });
+  const onProfileEditConfirm = async (e) => {
+    e.preventDefault();
+    const { setUserData, id, ...userData } = UserStore;
 
-    // graphQLClient
-    //   .request(updateUser, {
-    //     input: {
-    //       id,
-    //       firstName: form.name,
-    //       email: form.email,
-    //       userACF: {
-    //         city: form.city,
-    //         age: form.age,
-    //         inIskconSince: form.iskcon,
-    //       },
-    //     },
-    //   })
-    //   .then(({ updateUser: updatedUser }) => {
-    //     const { firstName, email, userACF } = updatedUser;
-    //     const { city, age, inIskconSince } = userACF;
-    //
-    //     UserStore.setUserData({ email, firstName, city, age, inIskconSince });
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+    let userDataRestApi = {};
+    let userDataGraphQl = {};
+
+    if (city !== form.city || age !== form.age || inIskconSince !== form.iskcon) {
+      userDataRestApi = { ...(await changeDataByRestApi()) };
+    }
+
+    if (firstName !== form.name || email !== form.email) {
+      userDataGraphQl = { ...(await changeDataByGraphQl()) };
+    }
+
+    UserStore.setUserData({
+      ...userData,
+      ...userDataGraphQl,
+      ...userDataRestApi,
+    });
 
     setEditMode(false);
   };
 
-  const onProfileEditCancel = () => {
+  const onProfileEditCancel = (e) => {
+    e.preventDefault();
     setEditMode(false);
     setForm({ name: firstName, email, city, age, iskcon: inIskconSince });
   };
+
+  useEffect(() => {
+    setDecodedId(decodeUserId(id));
+  }, []);
 
   return (
     <div className={classes.ProfileInfo}>
@@ -144,15 +128,15 @@ export const ProfileInfo = () => {
                     <div className={classes.Key}>Электронная почта</div>
 
                     <div className={classes.Value}>
-                      {!editMode ? <div className={classes.Text}>{email}</div> : null}
-                      {editMode ? (
-                        <input
-                          type='email'
-                          name='email'
-                          value={form.email}
-                          onInput={inputHandler}
-                        />
-                      ) : null}
+                      <div className={classes.Text}>{email}</div>
+                      {/*{editMode ? (*/}
+                      {/*  <input*/}
+                      {/*    type='email'*/}
+                      {/*    name='email'*/}
+                      {/*    value={form.email}*/}
+                      {/*    onInput={inputHandler}*/}
+                      {/*  />*/}
+                      {/*) : null}*/}
                     </div>
                   </div>
 

@@ -294,3 +294,16 @@
     }
   }
 }
+
+@mixin favorites {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  background: url('../images/icons/favorite.svg') no-repeat center / contain;
+
+  .Active {
+    background: url('../images/icons/favorite-filled.svg') no-repeat center / contain;
+  }
+}

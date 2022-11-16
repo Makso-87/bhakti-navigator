@@ -1,16 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const user = gql`
+export const userACF = gql`
   query user {
     viewer {
-      jwtAuthToken
-      id
-      email
-      firstName
-      lastName
-      avatar {
-        url
-      }
       userACF {
         city
         age

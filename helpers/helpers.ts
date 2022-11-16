@@ -2,6 +2,7 @@ import { Category, Media, Page, Post } from '../interfaces/interfaces';
 import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
 import urlDecoding from './urlDecoding';
+import apiFetch from '@wordpress/api-fetch';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -320,4 +321,45 @@ export const getErrorMessageText = (error) => {
 export const decodeUserId = (encodedId) => {
   const [, value] = window.atob(encodedId).split(':');
   return value;
+};
+
+export const changeAcfByRestApi = async (userId, fields) => {
+  const username = 'admin';
+  const pass = 'qs8o PA6l z72z M87e tIRG iXV1';
+  const token = window.btoa(`${username}:${pass}`);
+  const decodedId = decodeUserId(userId);
+  const url = `https://bhaktinavigator.tmweb.ru/bhakti-navigator-wp/wp-json/acf/v3/users/${decodedId}`;
+
+  const data = {
+    fields,
+  };
+
+  const { acf }: any = await apiFetch({
+    path: url,
+    cache: 'no-cache',
+    method: 'POST',
+    credentials: 'omit',
+    data,
+    headers: {
+      Authorization: `Basic ${token}`,
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then((res) => {
+      return res;
+    })
+    .catch((e) => {
+      console.log('update error', e);
+    });
+
+  return { ...acf };
+};
+
+export const decodeId = (id) => {
+  if (id) {
+    const [, decodedId] = window.atob(id).split(':');
+    return Number(decodedId);
+  }
+
+  return id;
 };

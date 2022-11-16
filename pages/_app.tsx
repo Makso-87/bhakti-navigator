@@ -26,7 +26,7 @@ const App = ({ Component, pageProps }) => {
         .then(({ viewer }) => {
           if (viewer) {
             const { id, email, firstName, lastName, avatar, userACF } = viewer;
-            const { city, age, inIskconSince, spiritualName } = userACF;
+            const { city, age, inIskconSince, spiritualName, favoriteCourses } = userACF;
 
             UserStore.setUserData({
               id,
@@ -39,6 +39,7 @@ const App = ({ Component, pageProps }) => {
               age,
               inIskconSince,
               spiritualName,
+              favoriteCourses,
             });
           }
         })

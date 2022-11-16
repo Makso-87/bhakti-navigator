@@ -192,6 +192,10 @@
       }
     }
 
+    .AddToFavourites {
+      @include favorites;
+    }
+
     a {
       display: flex;
       width: 100%;

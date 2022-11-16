@@ -9,7 +9,7 @@ export const CoursesList = (props) => {
     <div className={classes.Tile}>
       {list.length
         ? list.map((course, index) => {
-            const { title, courseACF, link } = course;
+            const { id, title, courseACF, link } = course;
             const {
               speaker = {},
               location,
@@ -19,6 +19,7 @@ export const CoursesList = (props) => {
             } = courseACF || {};
 
             const attrs = {
+              id,
               title,
               speaker: speaker?.title || '',
               location,

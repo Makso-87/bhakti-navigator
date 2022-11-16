@@ -420,6 +420,22 @@ union Post_Teacheracf_RecordCourses = Post
 
 union Post_Themeacf_BhaktiLevel = Post
 
+union User_Useracf_FavoriteCourses = Post
+
+"The payload for the addToWishlist mutation"
+type AddToWishlistPayload {
+    "True if the product is removed, false otherwise"
+    added: Boolean
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Description of the error"
+    error: String
+    "The Product id that was added"
+    productId: Int
+    "The Product ids in the wishlist"
+    wishlistProductIds: [Int]
+}
+
 "Avatars are profile images for users. WordPress by default uses the Gravatar service to host and fetch avatars from."
 type Avatar {
     "URL for the default image or a default type. Accepts &#039;404&#039; (return a 404 instead of a default image), &#039;retro&#039; (8bit), &#039;monsterid&#039; (monster), &#039;wavatar&#039; (cartoon face), &#039;indenticon&#039; (the &#039;quilt&#039;), &#039;mystery&#039;, &#039;mm&#039;, or &#039;mysteryman&#039; (The Oyster Man), &#039;blank&#039; (transparent GIF), or &#039;gravatar_default&#039; (the Gravatar logo)."
@@ -1160,6 +1176,38 @@ type GeneralSettings {
     url: String
 }
 
+"Header Type"
+type HCMSFooter {
+    "Copyright text"
+    copyrightText: String
+    "sidebarOne"
+    sidebarOne: String
+    "sidebarTwo"
+    sidebarTwo: String
+    "Social links"
+    socialLinks: [HCMSSocialLinks]
+}
+
+"Header Type"
+type HCMSHeader {
+    "favicon"
+    favicon: String
+    "Site logo URL"
+    siteLogoUrl: String
+    "Site tagline"
+    siteTagLine: String
+    "Site title"
+    siteTitle: String
+}
+
+"Social Links Type"
+type HCMSSocialLinks {
+    "Icon name"
+    iconName: String
+    "Icon url"
+    iconUrl: String
+}
+
 "Connection between the HierarchicalContentNode type and the ContentNode type"
 type HierarchicalContentNodeToContentNodeAncestorsConnection {
     "Edges for the HierarchicalContentNodeToContentNodeAncestorsConnection connection"
@@ -1666,6 +1714,8 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
     authorDatabaseId: Int
     "The globally unique identifier of the author of the node"
     authorId: ID
+    "bodyClasses"
+    bodyClasses: String
     "Connection between the HierarchicalContentNode type and the ContentNode type"
     children(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
@@ -1895,6 +1945,8 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
     authorId: ID
     "Added to the GraphQL Schema because the ACF Field Group &quot;Уровень преданного служения&quot; was set to Show in GraphQL."
     bhaktiLevelACF: Post_Bhaktilevelacf
+    "bodyClasses"
+    bodyClasses: String
     "Connection between the Post type and the category type"
     categories(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
@@ -1908,6 +1960,8 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
         "Arguments for filtering the connection"
         where: PostToCategoryConnectionWhereArgs
     ): PostToCategoryConnection
+    "Co Authors"
+    coAuthors: String
     "The number of comments. Even though WPGraphQL denotes this field as an integer, in WordPress this field should be saved as a numeric string for compatibility."
     commentCount: Int
     "Whether the comments are open or closed for this particular post."
@@ -2679,6 +2733,20 @@ type RegisterUserPayload {
     user: User
 }
 
+"The payload for the removeFromWishlist mutation"
+type RemoveFromWishlistPayload {
+    "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Description of the error"
+    error: String
+    "The Product id that was deleted"
+    productId: Int
+    "True if the product is removed, false otherwise"
+    removed: Boolean
+    "The Product ids in the wishlist"
+    wishlistProductIds: [Int]
+}
+
 "The payload for the resetUserPassword mutation"
 type ResetUserPasswordPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
@@ -2699,6 +2767,11 @@ type RestoreCommentPayload {
 
 "The root mutation"
 type RootMutation {
+    "The payload for the addToWishlist mutation"
+    addToWishlist(
+        "Input for the addToWishlist mutation"
+        input: AddToWishlistInput!
+    ): AddToWishlistPayload
     "The payload for the createCategory mutation"
     createCategory(
         "Input for the createCategory mutation"
@@ -2809,6 +2882,11 @@ type RootMutation {
         "Input for the registerUser mutation"
         input: RegisterUserInput!
     ): RegisterUserPayload
+    "The payload for the removeFromWishlist mutation"
+    removeFromWishlist(
+        "Input for the removeFromWishlist mutation"
+        input: RemoveFromWishlistInput!
+    ): RemoveFromWishlistPayload
     "The payload for the resetUserPassword mutation"
     resetUserPassword(
         "Input for the resetUserPassword mutation"
@@ -2961,6 +3039,10 @@ type RootQuery {
     discussionSettings: DiscussionSettings
     "Fields of the &#039;GeneralSettings&#039; settings group"
     generalSettings: GeneralSettings
+    "Get footer"
+    getFooter: HCMSFooter
+    "Get header"
+    getHeader: HCMSHeader
     "An object of the mediaItem Type. "
     mediaItem(
         "Whether to return the node as a preview instance"
@@ -3183,6 +3265,8 @@ type RootQuery {
         "Arguments for filtering the connection"
         where: RootQueryToContentRevisionUnionConnectionWhereArgs
     ): RootQueryToContentRevisionUnionConnection
+    "Shipping Zones"
+    shippingInfo: ShippingInfo
     "A 0bject"
     tag(
         "The globally unique identifier of the object."
@@ -3297,6 +3381,10 @@ type RootQuery {
     ): RootQueryToUserConnection
     "Returns the current user"
     viewer: User
+    "Countries"
+    wooCountries: WooCountries
+    "States"
+    wooStates(countryCode: String): WooStates
     "Fields of the &#039;WritingSettings&#039; settings group"
     writingSettings: WritingSettings
 }
@@ -3707,6 +3795,12 @@ type Settings {
     writingSettingsDefaultPostFormat: String
     "Settings of the the boolean Settings Group"
     writingSettingsUseSmilies: Boolean
+}
+
+"Shipping Zones Type"
+type ShippingInfo {
+    shippingZones: String
+    storePostCode: Int
 }
 
 "The tag type"
@@ -4379,6 +4473,7 @@ type UserToUserRoleConnectionEdge {
 type User_Useracf implements AcfFieldGroup {
     age: String
     city: String
+    favoriteCourses: [User_Useracf_FavoriteCourses]
     "The name of the ACF Field Group"
     fieldGroupName: String
     inIskconSince: String
@@ -4395,6 +4490,27 @@ type WPPageInfo {
     hasPreviousPage: Boolean!
     "When paginating backwards, the cursor to continue."
     startCursor: String
+}
+
+"Countries Type"
+type WooCountries {
+    billingCountries: [WooCountry]
+    shippingCountries: [WooCountry]
+}
+
+type WooCountry {
+    countryCode: String
+    countryName: String
+}
+
+type WooState {
+    stateCode: String
+    stateName: String
+}
+
+"States Type"
+type WooStates {
+    states: [WooState]
 }
 
 "The writing setting type"
@@ -4545,6 +4661,8 @@ enum MediaItemSizeEnum {
     MEDIUM
     "MediaItem with the medium_large size"
     MEDIUM_LARGE
+    "MediaItem with the post-thumbnail size"
+    POST_THUMBNAIL
     "MediaItem with the thumbnail size"
     THUMBNAIL
     "MediaItem with the 1536x1536 size"
@@ -4575,8 +4693,10 @@ enum MenuItemNodeIdTypeEnum {
 
 "Registered menu locations"
 enum MenuLocationEnum {
-    "Empty menu location"
-    EMPTY
+    "Put the menu in the hcms-menu-footer location"
+    HCMS_MENU_FOOTER
+    "Put the menu in the hcms-menu-header location"
+    HCMS_MENU_HEADER
 }
 
 "The Type of Identifier used to fetch a single node. Default is \"ID\". To be used along with the \"id\" field."
@@ -5043,6 +5163,14 @@ enum UsersConnectionSearchColumnEnum {
     NICENAME
     "The URL of the user\\s website."
     URL
+}
+
+"Input for the addToWishlist mutation"
+input AddToWishlistInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Product id"
+    productId: Int
 }
 
 "Arguments for filtering the CategoryToCategoryConnection connection"
@@ -6525,6 +6653,14 @@ input RegisterUserInput {
     yim: String
 }
 
+"Input for the removeFromWishlist mutation"
+input RemoveFromWishlistInput {
+    "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
+    clientMutationId: String
+    "Product id"
+    productId: Int
+}
+
 "Input for the resetUserPassword mutation"
 input ResetUserPasswordInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
@@ -6891,6 +7027,8 @@ input RootQueryToPostConnectionWhereArgs {
     nameIn: [String]
     "Specify IDs NOT to retrieve. If this is used in the same query as \"in\", it will be ignored"
     notIn: [ID]
+    "The ID of the post object to filter by"
+    onlySticky: Boolean
     "What paramater to use to order the objects by."
     orderby: [PostObjectsConnectionOrderbyInput]
     "Use ID to return only children. Use 0 to return only top-level items"

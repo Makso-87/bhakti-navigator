@@ -1,8 +1,11 @@
 import classes from './CourseItem.module.scss';
 import Link from 'next/link';
 import cn from 'classnames';
-import { getUniqBhakyiLevels } from '../../../../helpers/helpers';
+import { changeAcfByRestApi, decodeId, getUniqBhakyiLevels } from '../../../../helpers/helpers';
 import { Bookmarks } from '../../Bookmarks/Bookmarks';
+import userStore from '../../../../store/userStore';
+import { graphQLClient } from '../../../../helpers/graphQLClient';
+import { userACF } from '../../../../graphql/queries/userACF';
 
 export const CourseItem = (props) => {
   const { title, speaker, location, format, theme, bhaktiLevel, link, columnsCount = 3 } = props;
@@ -12,6 +15,38 @@ export const CourseItem = (props) => {
     [classes.Width50]: columnsCount === 2,
     [classes.Width33]: columnsCount === 3,
   });
+
+  const addToFavourites = async (e) => {
+    e.preventDefault();
+    const { id: userId, token } = userStore;
+
+    if (!!token) {
+      const decodedId = decodeId(props.id);
+      const { favoriteCourses, setUserData, ...userData } = userStore;
+      const ids = favoriteCourses.map((item) => decodeId(item.id));
+
+      const newFavoriteCourses = ids.includes(decodedId)
+        ? ids.filter((item) => item !== decodedId)
+        : [...ids, decodedId];
+
+      const { favorite_courses } =
+        (await changeAcfByRestApi(userId, {
+          favorite_courses: [...newFavoriteCourses],
+        })) || {};
+
+      if (favorite_courses) {
+        const { viewer } = await graphQLClient.request(
+          userACF,
+          {},
+          { authorization: `Bearer ${token}` }
+        );
+
+        const { favoriteCourses: updatedFavoriteCourses } = viewer.userACF;
+        console.log('updatedFavoriteCourses', updatedFavoriteCourses);
+        setUserData({ ...userData, favoriteCourses: updatedFavoriteCourses ?? [] });
+      }
+    }
+  };
 
   return (
     <div className={classesCell}>
@@ -43,6 +78,8 @@ export const CourseItem = (props) => {
             </div>
 
             <Bookmarks bhaktiLevelsList={bhaktiLevel} />
+
+            <div onClick={addToFavourites} className={classes.AddToFavourites} />
           </div>
         </a>
       </Link>

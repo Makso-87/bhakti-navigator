@@ -49,7 +49,7 @@ export const AuthorizationPage = () => {
 
     if (login?.user) {
       const { id, email, firstName, lastName, avatar, userACF } = login.user;
-      const { city, age, inIskconSince, spiritualName } = userACF;
+      const { city, age, inIskconSince, spiritualName, favoriteCourses } = userACF;
 
       UserStore.setUserData({
         id,
@@ -62,7 +62,10 @@ export const AuthorizationPage = () => {
         age,
         inIskconSince,
         spiritualName,
+        favoriteCourses: favoriteCourses ?? [],
       });
+
+      console.log('login result', result);
 
       setCookie('authorization', login.authToken);
       return await router.push(`/personal_account`);

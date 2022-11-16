@@ -11,6 +11,7 @@ class UserStore {
   age = '';
   inIskconSince = '';
   spiritualName = '';
+  favoriteCourses = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -27,6 +28,7 @@ class UserStore {
     age = '',
     inIskconSince = '',
     spiritualName = '',
+    favoriteCourses = [],
   }) => {
     this.id = id;
     this.token = token;
@@ -38,6 +40,7 @@ class UserStore {
     this.age = age;
     this.spiritualName = spiritualName;
     this.inIskconSince = inIskconSince;
+    this.favoriteCourses = [...favoriteCourses];
   };
 }
 

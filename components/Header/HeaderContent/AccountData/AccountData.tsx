@@ -32,6 +32,7 @@ export const AccountData = observer(() => {
       age: '',
       inIskconSince: '',
       spiritualName: '',
+      favoriteCourses: [],
     });
 
     if (PagesStore.currentPage === 'personal_account') {
