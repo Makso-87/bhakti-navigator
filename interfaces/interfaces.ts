@@ -49,11 +49,11 @@ export interface Nodes {
 }
 
 export interface Post {
-  id: number;
-  date: string;
-  slug: string;
-  link: string;
-  title: string;
+  id?: number;
+  date?: string;
+  slug?: string;
+  link?: string;
+  title?: string;
   acf?: any;
   faqACF?: any;
   themeACF?: any;
@@ -67,7 +67,7 @@ export interface Post {
   bhaktiLevelACF?: any;
   courseCategoryACF?: any;
   courseProgramItemACF?: any;
-  categories: Nodes;
+  categories?: Nodes;
 }
 
 export interface Article<Post> {
