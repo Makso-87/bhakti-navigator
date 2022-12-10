@@ -4,7 +4,8 @@ import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const MaterialItem = (props) => {
   const { id, title, link, author, mainTheme, type, bhaktiLevel } = props;
-  const [typeValue] = type;
+  const { title: typeName, materialsTypeACF } = type;
+  const { value: typeValue = '' } = materialsTypeACF || {};
 
   const classesGridItem = cn(classes.GridItem, {
     [classes.Book]: typeValue === 'text',

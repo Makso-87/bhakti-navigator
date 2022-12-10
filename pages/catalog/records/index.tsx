@@ -1,19 +1,29 @@
 import pagesStore from '../../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
-import { getLink } from '../../../helpers/helpers';
+import { getFilters, getLink } from '../../../helpers/helpers';
 import { RecordsPage } from '../../../components/RecordsPage/RecordsPage';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { records } from '../../../graphql/queries/records';
+import { filters } from '../../../graphql/queries/filters';
+import filtersStore from '../../../store/filtersStore';
+import { useEffect } from 'react';
 
 const Records = observer(({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
+  const { records = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  setCurrentPage('records');
-  setSecondaryTabBar(true);
-  setCategory('Каталог');
+  const { setFiltersList } = filtersStore;
+  const sortedFilters = getFilters(filters);
 
-  const list = dataPosts.records.map((item) => {
+  useEffect(() => {
+    setCurrentPage('records');
+    setSecondaryTabBar(true);
+    setCategory('Каталог');
+    setFiltersList({ ...sortedFilters });
+  }, []);
+
+  const list = records?.map((item) => {
     const { title, recordACF, link, id } = item;
     const { mainTheme, bhaktiLevel, type, author } = recordACF;
 
@@ -39,7 +49,12 @@ export const getServerSideProps = async () => {
 
   try {
     const { posts } = await graphQLClient.request(records);
-    serverData.dataPosts = { records: posts.nodes };
+    const { posts: postsFilters } = await graphQLClient.request(filters);
+
+    serverData.dataPosts = {
+      records: posts.nodes,
+      filters: postsFilters.nodes,
+    };
 
     return {
       props: {

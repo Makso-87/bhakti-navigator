@@ -26,7 +26,14 @@ export const project = gql`
                   }
                 }
                 location
-                format
+                format {
+                  ... on Post {
+                    id
+                    courseFormatACF {
+                      value
+                    }
+                  }
+                }
                 mainTheme {
                   ... on Post {
                     title

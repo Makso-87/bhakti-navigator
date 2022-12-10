@@ -3,21 +3,34 @@
 .Filters {
   display: flex;
   flex-direction: column;
-  align-self: flex-start;
-  padding: 27px 0 0;
-  width: 360px;
-  background: #F9FAFD;
-  box-shadow: 0 0 8px rgba(52, 65, 96, 0.1);
+  align-items: center;
 
-  .Title {
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 27px;
-    margin: 0 0 24px;
-    padding: 0 22px;
+  .Form {
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    padding: 27px 0 0;
+    width: 360px;
+    background: #f9fafd;
+    box-shadow: 0 0 8px rgba(52, 65, 96, 0.1);
+
+    .Title {
+      font-weight: 600;
+      font-size: 22px;
+      line-height: 27px;
+      margin: 0 0 24px;
+      padding: 0 22px;
+    }
+
+    .CategoriesList {
+      margin: 0;
+    }
   }
 
-  .CategoriesList {
-    margin: 0;
+  .Button {
+    @include button;
+
+    border: none;
+    margin: 30px 0 0;
   }
 }

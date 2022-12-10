@@ -49,7 +49,7 @@ export const CoursesItemPage = (props: ServerData) => {
         {teachers !== null ? <Teachers teachers={teachers} /> : null}
         <BannerNote />
         <Feedback {...feedBackAttrs} />
-        <InfoScreen text={info} />
+        {info ? <InfoScreen text={info} /> : null}
         <Recommendations />
       </div>
     </Layout>

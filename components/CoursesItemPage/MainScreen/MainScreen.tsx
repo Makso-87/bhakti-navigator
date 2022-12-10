@@ -19,12 +19,12 @@ export const MainScreen = (props) => {
     themes = [],
   } = courseACF || {};
   const linkToSpeakerPage = speaker ? getLink(speaker.link) : '#';
-  const [formatValue, formatLabel] = format;
+  const { courseFormatACF, title: formatTitle } = format;
   const [, priceLabel] = price;
 
   const formatClasses = cn(classes.Item, {
-    [classes.Online]: formatValue === 'online',
-    [classes.Live]: formatValue === 'live',
+    [classes.Online]: courseFormatACF.value === 'online',
+    [classes.Live]: courseFormatACF.value === 'live',
   });
 
   return (
@@ -52,7 +52,7 @@ export const MainScreen = (props) => {
                   Длительность обучения {duration}
                 </div>
 
-                <div className={formatClasses}>{formatLabel}</div>
+                <div className={formatClasses}>{formatTitle}</div>
               </div>
             </div>
           </div>

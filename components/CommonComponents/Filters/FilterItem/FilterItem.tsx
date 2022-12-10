@@ -31,12 +31,16 @@ export const FilterItem = (props: FilterItemProps) => {
 
       <div className={classes.ListContainer}>
         <ul>
-          {children.map((child, index) => {
-            return index !== children.length ? child : null;
-          })}
+          {!!children
+            ? children.map((child, index) => {
+                return index !== children.length ? child : null;
+              })
+            : null}
         </ul>
 
-        {<ul className={classes.Additional}>{children[children.length - 1].props.children}</ul>}
+        {!!children ? (
+          <ul className={classes.Additional}>{children[children.length - 1].props.children}</ul>
+        ) : null}
         {showMore ? <div className={classes.ShowMore}>{showMore}</div> : null}
       </div>
     </li>

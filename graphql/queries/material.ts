@@ -13,7 +13,13 @@ export const material = gql`
               title
             }
           }
-          type
+          type {
+            ... on Post {
+              materialsTypeACF {
+                value
+              }
+            }
+          }
           description
           downloadLink
           audioLink

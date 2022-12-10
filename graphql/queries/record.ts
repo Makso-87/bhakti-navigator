@@ -13,7 +13,14 @@ export const record = gql`
               title
             }
           }
-          type
+          type {
+            ... on Post {
+              id
+              materialsTypeACF {
+                value
+              }
+            }
+          }
           description
           downloadLink
           audioLink

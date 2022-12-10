@@ -1,24 +1,17 @@
 import { gql } from '@apollo/client';
 
-export const teacher = gql`
-  query teacher($name: String) {
-    posts(where: { name: $name }) {
+export const searchProjects = gql`
+  query searchProjects($search: String!) {
+    posts(first: 100, after: null, where: { search: $search, categoryName: "projects" }) {
       nodes {
         id
-        date
         title
-        slug
         link
-        teacherACF {
-          about
-          canArrive
+        projectACF {
+          format
           city
-          email
-          facebook
-          fieldGroupName
-          inIskconSince
-          video
-          teacherPhoto {
+          webSite
+          logo {
             sourceUrl
           }
           courses {
@@ -56,35 +49,6 @@ export const teacher = gql`
                 }
               }
             }
-          }
-          email
-          twitter
-          facebook
-          instagram
-          telegram
-          vkontakte
-          odnoklassniki
-          whatsapp
-          canArrive
-          slide1 {
-            id
-            sourceUrl
-          }
-          slide2 {
-            id
-            sourceUrl
-          }
-          slide3 {
-            id
-            sourceUrl
-          }
-          slide4 {
-            id
-            sourceUrl
-          }
-          slide5 {
-            id
-            sourceUrl
           }
         }
       }

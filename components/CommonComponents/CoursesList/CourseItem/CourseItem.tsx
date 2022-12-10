@@ -9,7 +9,6 @@ import { userACF } from '../../../../graphql/queries/userACF';
 
 export const CourseItem = (props) => {
   const { title, speaker, location, format, theme, bhaktiLevel, link, columnsCount = 3 } = props;
-  const [, formatLabel] = format || [];
 
   const classesCell = cn(classes.Cell, {
     [classes.Width50]: columnsCount === 2,
@@ -64,7 +63,7 @@ export const CourseItem = (props) => {
             <div className={classes.Info}>
               <div className={classes.InfoItem}>
                 <div className={classes.InfoItemName}>Формат:</div>
-                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{formatLabel}</div>
+                <div className={`${classes.InfoItemValue} ${classes.Online}`}>{format?.title}</div>
               </div>
 
               <div className={classes.InfoItem}>

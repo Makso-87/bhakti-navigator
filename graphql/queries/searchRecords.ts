@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
-export const records = gql`
-  query records {
-    posts(first: 100, where: { categoryName: "records" }) {
+export const searchRecords = gql`
+  query searchRecords($search: String!) {
+    posts(first: 100, after: null, where: { search: $search, categoryName: "records" }) {
       nodes {
         title
         link
@@ -24,7 +24,6 @@ export const records = gql`
           }
           type {
             ... on Post {
-              id
               materialsTypeACF {
                 value
               }

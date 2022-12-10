@@ -1,29 +1,29 @@
 import { gql } from '@apollo/client';
 
-export const materials = gql`
-  query materials {
-    posts(first: 100, where: { categoryName: "materials" }) {
+export const searchCourses = gql`
+  query searchCourses($search: String!) {
+    posts(first: 100, after: null, where: { search: $search, categoryName: "courses" }) {
       nodes {
+        id
         title
         link
-        id
-        materialACF {
-          author {
+        courseACF {
+          speaker {
             ... on Post {
               title
-            }
-          }
-          type {
-            ... on Post {
-              id
-              materialsTypeACF {
-                value
+              teacherACF {
+                teacherPhoto {
+                  sourceUrl
+                }
               }
             }
           }
-          themes {
+          location
+          format {
             ... on Post {
-              title
+              courseFormatACF {
+                value
+              }
             }
           }
           mainTheme {

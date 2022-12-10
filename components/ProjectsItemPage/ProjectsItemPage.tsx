@@ -12,14 +12,14 @@ import { Recommendations } from '../CommonComponents/Recommendations/Recommendat
 
 export const ProjectsItemPage = ({ dataPost }: ServerData) => {
   const { projectACF, title }: Post = dataPost;
-  const { courses = [], teachers = [], format, city, webSite, logo, for_whom } = projectACF;
+  const { courses = [], teachers = [], format, city, webSite, logo, for_whom } = projectACF || {};
 
   const mainScreenAttrs = {
     title,
     format,
     city,
     site: webSite,
-    logo: logo.sourceUrl,
+    logo: logo?.sourceUrl,
     for_whom,
   };
 

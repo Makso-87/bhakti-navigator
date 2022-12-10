@@ -44,6 +44,10 @@ export interface Category {
   parent: number;
 }
 
+export interface Nodes {
+  nodes: Post[];
+}
+
 export interface Post {
   id: number;
   date: string;
@@ -55,13 +59,15 @@ export interface Post {
   themeACF?: any;
   recordACF?: any;
   courseACF?: any;
+  serviceACF?: any;
   articleACF?: any;
   projectACF?: any;
   teacherACF?: any;
   materialACF?: any;
   bhaktiLevelACF?: any;
+  courseCategoryACF?: any;
   courseProgramItemACF?: any;
-  categories: Category[];
+  categories: Nodes;
 }
 
 export interface Article<Post> {
@@ -84,6 +90,7 @@ export interface ServerData {
     projects?: Post[];
     articles?: Post[];
     materials?: Post[];
+    filters?: Post[];
   };
   dataPost?: Post;
   dataCategories?: Category[];
@@ -120,7 +127,7 @@ export interface Menu {
 
 export interface TopSearchProps {
   placeholder?: string;
-  searchHandler?: FormEventHandler;
+  searchHandler?: (string) => void;
 }
 
 export interface FilterItemProps {
@@ -142,6 +149,9 @@ export interface FilterElementProps {
   elementType?: 'radio' | 'checkbox';
   location?: Location | false;
   text: string;
+  changeHandler: (event, type: string) => void;
+  // setClearValue: (value: boolean) => void;
+  // clearValue?: boolean;
 }
 
 export type QuestionVariants = {

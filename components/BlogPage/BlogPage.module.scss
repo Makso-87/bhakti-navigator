@@ -2,6 +2,12 @@
 .BlogPage {
   padding: 74px 0 0 114px;
 
+  .LoaderContainer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
   .SiteWrap {
     @include site-wrap;
     max-width: none;

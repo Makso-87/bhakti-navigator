@@ -3,6 +3,8 @@ import { pairsFormattedPosts } from '../types/types';
 import config from '../config/config';
 import urlDecoding from './urlDecoding';
 import apiFetch from '@wordpress/api-fetch';
+import has from 'lodash/has';
+import camelCase from 'lodash/camelCase';
 
 export const getPageData = (data: Page[], pageName: string): Page => {
   const [page]: Page[] = data.filter((item: Page) => item.slug === pageName);
@@ -362,4 +364,21 @@ export const decodeId = (id) => {
   }
 
   return id;
+};
+
+export const getFilters = (filters: Post[] = []) => {
+  if (!filters.length) {
+    return {};
+  }
+
+  return filters.reduce((acc: any, item) => {
+    const { categories } = item;
+    const [category] = categories.nodes;
+    const categoryName = camelCase(category.slug);
+
+    return {
+      ...acc,
+      [categoryName]: has(acc, categoryName) ? [...acc?.[categoryName], item] : [item],
+    };
+  }, {});
 };

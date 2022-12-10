@@ -7,15 +7,60 @@ import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import { FAQList } from '../CommonComponents/FAQList/FAQList';
 import { QuestionForm } from '../CommonComponents/QuestionForm/QuestionForm';
 import { Button } from '../CommonComponents/Button/Button';
+import { searchMaterials } from '../../graphql/queries/searchMaterials';
+import { getLink } from '../../helpers/helpers';
+import { useLazyQuery } from '@apollo/client';
+import { useState } from 'react';
+import { GraphQLErrors } from '@apollo/client/errors';
+import { searchFaq } from '../../graphql/queries/searchFaq';
+import { Preloader } from '../CommonComponents/Preloader/Preloader';
 
-export const FAQPage = ({ list }) => {
+export const FAQPage = (props) => {
+  const [list, setList] = useState([...(props.list ?? [])]);
+  const [error, setError] = useState<GraphQLErrors | string>([]);
+
+  const [fetchFaqList, { loading }] = useLazyQuery(searchFaq, {
+    notifyOnNetworkStatusChange: true,
+    onCompleted: ({ posts }) => {
+      if (posts.nodes.length) {
+        const newList = posts.nodes.map((item) => {
+          const { title, faqACF } = item;
+          const { author, videoUrl, videoDuration, previewImage } = faqACF;
+          return {
+            title,
+            author,
+            videoUrl,
+            videoDuration,
+            imgUrl: previewImage.sourceUrl,
+          };
+        });
+
+        setList([...newList]);
+      } else {
+        setList([]);
+      }
+    },
+    onError: (error) => {
+      setError(error.graphQLErrors ?? '');
+      console.error(error);
+    },
+  });
+
+  const onSearch = async (searchQuery: string) => {
+    await fetchFaqList({
+      variables: {
+        search: searchQuery,
+      },
+    });
+  };
+
   return (
     <Layout>
       <div className={classes.FaqPage}>
         <div className={classes.SiteWrap}>
           <div className={classes.Container}>
             <div className={classes.LeftSide}>
-              <TopSearch placeholder='Поиск по ответам' />
+              <TopSearch searchHandler={onSearch} placeholder='Поиск по ответам' />
 
               <div className={classes.Text}>
                 <p>
@@ -34,11 +79,19 @@ export const FAQPage = ({ list }) => {
                 simpleLink={true}
               />
 
-              <FAQList list={list} />
+              {loading ? (
+                <div className={classes.LoaderContainer}>
+                  <Preloader />
+                </div>
+              ) : (
+                <FAQList list={list} />
+              )}
 
-              <div className={classes.ShowMore}>
-                <a href='#'>Показать больше</a>
-              </div>
+              {!loading && list.length > 6 ? (
+                <div className={classes.ShowMore}>
+                  <a href='#'>Показать больше</a>
+                </div>
+              ) : null}
             </div>
 
             <div className={classes.RightSide}>

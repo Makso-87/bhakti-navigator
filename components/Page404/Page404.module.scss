@@ -1,0 +1,32 @@
+@import '../../css/styleVariables';
+
+.Page404 {
+  display: flex;
+  flex-grow: 1;
+  text-align: center;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+
+  .Title {
+    font-size: 50px;
+    line-height: 60px;
+    color: #647db7;
+    margin: 0 0 30px;
+  }
+
+  .Text {
+    font-size: 30px;
+    line-height: 40px;
+    color: #647db7;
+    font-weight: bold;
+    margin: 0 0 50px;
+  }
+
+  .Link {
+    @include button;
+    width: 400px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+}

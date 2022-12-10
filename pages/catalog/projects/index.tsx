@@ -12,20 +12,21 @@ const Projects = ({ serverData }: ServerSideProps) => {
   setCategory('Каталог');
   setSecondaryTabBar(true);
 
-  const list = dataPosts.projects.map((item) => {
-    const { link, projectACF, title, id } = item;
-    const { format, city, webSite, logo } = projectACF;
+  const list =
+    dataPosts?.projects?.map((item) => {
+      const { link, projectACF, title, id } = item;
+      const { format, city, webSite, logo } = projectACF;
 
-    return {
-      id,
-      title,
-      link: getLink(link),
-      format,
-      city,
-      site: webSite,
-      logo: logo.sourceUrl,
-    };
-  });
+      return {
+        id,
+        title,
+        link: getLink(link),
+        format,
+        city,
+        site: webSite,
+        logo: logo.sourceUrl,
+      };
+    }) || [];
 
   return <ProjectsPage list={list} />;
 };

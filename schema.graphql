@@ -376,11 +376,17 @@ union Post_Bhaktilevelacf_Themes = Post
 
 union Post_Courseacf_BhaktiLevel = Post
 
+union Post_Courseacf_CourseCategory = Post
+
 union Post_Courseacf_CourseProgram = Post
+
+union Post_Courseacf_Format = Post
 
 union Post_Courseacf_MainTheme = Post
 
 union Post_Courseacf_OrganizerProject = Post
+
+union Post_Courseacf_ServiceKind = Post
 
 union Post_Courseacf_Speaker = Post
 
@@ -398,6 +404,8 @@ union Post_Materialacf_MainTheme = Post
 
 union Post_Materialacf_Themes = Post
 
+union Post_Materialacf_Type = Post
+
 union Post_Projectacf_Courses = Post
 
 union Post_Projectacf_Director = Post
@@ -413,6 +421,8 @@ union Post_Recordacf_BhaktiLevel = Post
 union Post_Recordacf_MainTheme = Post
 
 union Post_Recordacf_Themes = Post
+
+union Post_Recordacf_Type = Post
 
 union Post_Teacheracf_Courses = Post
 
@@ -1990,6 +2000,10 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
     contentTypeName: String!
     "Added to the GraphQL Schema because the ACF Field Group &quot;Курс&quot; was set to Show in GraphQL."
     courseACF: Post_Courseacf
+    "Added to the GraphQL Schema because the ACF Field Group &quot;Категория курса&quot; was set to Show in GraphQL."
+    courseCategoryACF: Post_Coursecategoryacf
+    "Added to the GraphQL Schema because the ACF Field Group &quot;Формат курса&quot; was set to Show in GraphQL."
+    courseFormatACF: Post_Courseformatacf
     "Added to the GraphQL Schema because the ACF Field Group &quot;Пункт программы курса&quot; was set to Show in GraphQL."
     courseProgramItemACF: Post_Courseprogramitemacf
     "The unique resource identifier path"
@@ -2061,6 +2075,8 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
     link: String
     "Added to the GraphQL Schema because the ACF Field Group &quot;Материал&quot; was set to Show in GraphQL."
     materialACF: Post_Materialacf
+    "Added to the GraphQL Schema because the ACF Field Group &quot;Тип материала&quot; was set to Show in GraphQL."
+    materialsTypeACF: Post_Materialstypeacf
     "The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time."
     modified: String
     "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
@@ -2109,6 +2125,8 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
         "Arguments for filtering the connection"
         where: PostToRevisionConnectionWhereArgs
     ): PostToRevisionConnection
+    "Added to the GraphQL Schema because the ACF Field Group &quot;Вид служения&quot; was set to Show in GraphQL."
+    serviceACF: Post_Serviceacf
     "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
     slug: String
     "The current status of the object"
@@ -2504,6 +2522,7 @@ type Post_Courseacf implements AcfFieldGroup {
     about: String
     "Выберите уровни преданного служения, на которых преданным рекомендуется данный курс"
     bhaktiLevel: [Post_Courseacf_BhaktiLevel]
+    courseCategory: [Post_Courseacf_CourseCategory]
     courseProgram: [Post_Courseacf_CourseProgram]
     "Укажите длительность курса в занятиях, днях, месяцах, годах"
     duration: String
@@ -2513,7 +2532,7 @@ type Post_Courseacf implements AcfFieldGroup {
     "Укажите для кого подойдет курс. Каждую категорию необходимо добавлять на новую строку."
     forWhom: String
     "Укажите в каком формате проводится курс"
-    format: [String]
+    format: Post_Courseacf_Format
     "Кратко опишите формат проведения курса"
     formatBriefing: String
     "Добавьте дополнительную информацию о курсе. Для того, чтобы отделить абзацы оставляйте пустую строку между обзацами."
@@ -2528,6 +2547,7 @@ type Post_Courseacf implements AcfFieldGroup {
     price: [String]
     "Добавьте цитату, важную часть описания, котору седует выделить."
     quote: String
+    serviceKind: Post_Courseacf_ServiceKind
     slide1: MediaItem
     slide2: MediaItem
     slide3: MediaItem
@@ -2540,6 +2560,20 @@ type Post_Courseacf implements AcfFieldGroup {
     themes: [Post_Courseacf_Themes]
     "Добавьте ссылки на видео курса. Каждая ссылка должна быть на новой строке."
     video: String
+}
+
+"Field Group"
+type Post_Coursecategoryacf implements AcfFieldGroup {
+    "The name of the ACF Field Group"
+    fieldGroupName: String
+    value: String
+}
+
+"Field Group"
+type Post_Courseformatacf implements AcfFieldGroup {
+    "The name of the ACF Field Group"
+    fieldGroupName: String
+    value: String
 }
 
 "Field Group"
@@ -2585,7 +2619,14 @@ type Post_Materialacf implements AcfFieldGroup {
     "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
     onlineLink: String
     themes: [Post_Materialacf_Themes]
-    type: [String]
+    type: Post_Materialacf_Type
+}
+
+"Field Group"
+type Post_Materialstypeacf implements AcfFieldGroup {
+    "The name of the ACF Field Group"
+    fieldGroupName: String
+    value: String
 }
 
 "Field Group"
@@ -2642,7 +2683,15 @@ type Post_Recordacf implements AcfFieldGroup {
     "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
     onlineLink: String
     themes: [Post_Recordacf_Themes]
-    type: [String]
+    type: Post_Recordacf_Type
+}
+
+"Field Group"
+type Post_Serviceacf implements AcfFieldGroup {
+    "The name of the ACF Field Group"
+    fieldGroupName: String
+    "Введите название ярлыка для вида служения латинскимим буквами"
+    value: String
 }
 
 "Field Group"
@@ -3753,8 +3802,10 @@ type RootQueryToUserRoleConnectionEdge {
 type SendPasswordResetEmailPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
+    "Whether the mutation completed successfully. This does NOT necessarily mean that an email was sent."
+    success: Boolean
     "The user that the password reset email was sent to"
-    user: User
+    user: User @deprecated(reason: "This field will be removed in a future version of WPGraphQL")
 }
 
 "All of the registered settings"

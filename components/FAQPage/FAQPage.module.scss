@@ -13,6 +13,12 @@
   .Container {
     display: flex;
 
+    .LoaderContainer {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+
     .LeftSide {
       width: 65.666667%;
       display: flex;

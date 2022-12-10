@@ -50,7 +50,7 @@ export const ArticlesItemPage = (props: ServerData) => {
 
               <div className={classes.InfoItem}>
                 <div className={classes.Name}>Время чтения:</div>
-                <div className={classes.Value}>{readingTime ?? ''}</div>
+                <div className={classes.Value}>{readingTime ?? ''} мин.</div>
               </div>
             </div>
 

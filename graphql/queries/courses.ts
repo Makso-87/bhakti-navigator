@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 export const courses = gql`
   query courses {
-    posts(first: 100, where: { categoryName: "courses" }) {
+    posts(first: 1000, where: { categoryName: "courses" }) {
       nodes {
         id
         title
@@ -10,6 +10,7 @@ export const courses = gql`
         courseACF {
           speaker {
             ... on Post {
+              id
               title
               teacherACF {
                 teacherPhoto {
@@ -19,10 +20,24 @@ export const courses = gql`
             }
           }
           location
-          format
+          format {
+            ... on Post {
+              id
+              title
+              courseFormatACF {
+                value
+              }
+            }
+          }
           mainTheme {
             ... on Post {
+              id
               title
+            }
+          }
+          themes {
+            ... on Post {
+              id
             }
           }
           bhaktiLevel {
@@ -32,6 +47,16 @@ export const courses = gql`
               bhaktiLevelACF {
                 value
               }
+            }
+          }
+          courseCategory {
+            ... on Post {
+              id
+            }
+          }
+          serviceKind {
+            ... on Post {
+              id
             }
           }
         }

@@ -4,15 +4,30 @@ import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { courses } from '../../../graphql/queries/courses';
+import { filters } from '../../../graphql/queries/filters';
+import filtersStore from '../../../store/filtersStore';
+import { getFilters } from '../../../helpers/helpers';
+import { useEffect } from 'react';
 
 const Courses = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
+  const { courses = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  setCurrentPage('courses');
-  setSecondaryTabBar(true);
-  setCategory('Каталог');
+  const { setFiltersList } = filtersStore;
+  const sortedFilters = getFilters(filters);
 
-  return <CoursesPage list={dataPosts.courses} />;
+  useEffect(() => {
+    setCurrentPage('courses');
+    setSecondaryTabBar(true);
+    setCategory('Каталог');
+    setFiltersList({ ...sortedFilters });
+  }, []);
+
+  console.log('filters', filters);
+  console.log('sortedFilters', sortedFilters);
+  console.log('filtersStore', filtersStore);
+
+  return <CoursesPage list={courses} />;
 };
 
 export const getServerSideProps = async () => {
@@ -23,9 +38,11 @@ export const getServerSideProps = async () => {
 
   try {
     const { posts } = await graphQLClient.request(courses);
+    const { posts: postsFilters } = await graphQLClient.request(filters);
 
     serverData.dataPosts = {
       courses: posts.nodes,
+      filters: postsFilters.nodes,
     };
 
     return {

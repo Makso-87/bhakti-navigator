@@ -15,7 +15,15 @@ export const course = gql`
           duration
           formatBriefing
           location
-          format
+          format {
+            ... on Post {
+              id
+              title
+              courseFormatACF {
+                value
+              }
+            }
+          }
           video
           forWhom
           organizerExternal
