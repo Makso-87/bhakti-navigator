@@ -22,14 +22,14 @@ export const getCategoryData = (categories: Category[], categoryName): Category 
   return category;
 };
 
-export const getPostsList = (postsData: Post[], categoryId): Post[] => {
-  return postsData.filter((item: Post) => {
-    const { categories } = item;
-    const categoriesIds = categories.map((categoryItem) => categoryItem.id);
-
-    return categoriesIds.includes(categoryId);
-  });
-};
+// export const getPostsList = (postsData: Post[], categoryId): Post[] => {
+//   return postsData.filter((item: Post) => {
+//     const { categories } = item;
+//     const categoriesIds = categories.map((categoryItem) => categoryItem.id);
+//
+//     return categoriesIds.includes(categoryId);
+//   });
+// };
 
 export const getFormattedPosts = (posts: Post[]): pairsFormattedPosts => {
   const formatted = [];

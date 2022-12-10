@@ -3,7 +3,7 @@ import ScrollableAnchor from 'react-scrollable-anchor';
 import { configureAnchors } from 'react-scrollable-anchor';
 import classes from './FindScreen.module.scss';
 import { CoursesList } from '../../CommonComponents/CoursesList/CoursesList';
-import { getCategoryData, getPostsList } from '../../../helpers/helpers';
+// import { getCategoryData, getPostsList } from '../../../helpers/helpers';
 import { ServerData } from '../../../interfaces/interfaces';
 
 configureAnchors({ offset: -100, scrollDuration: 400 });
