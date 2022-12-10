@@ -3,15 +3,26 @@ import { ServerData, ServerSideProps } from '../../interfaces/interfaces';
 import pagesStore from '../../store/pagesStore';
 import { graphQLClient } from '../../helpers/graphQLClient';
 import { faqList } from '../../graphql/queries/faqList';
+import { filters } from '../../graphql/queries/filters';
+import filtersStore from '../../store/filtersStore';
+import { getFilters } from '../../helpers/helpers';
+import { useEffect } from 'react';
 
 const Faq = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
+  const { faq = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  setSecondaryTabBar(true);
-  setCurrentPage('faq');
-  setCategory('Вопросы и ответы');
+  const { setFiltersList } = filtersStore;
+  const sortedFilters = getFilters(filters);
 
-  const list = dataPosts.faq.map((item) => {
+  useEffect(() => {
+    setSecondaryTabBar(true);
+    setCurrentPage('faq');
+    setCategory('Вопросы и ответы');
+    setFiltersList({ ...sortedFilters });
+  }, []);
+
+  const list = faq?.map((item) => {
     const { title, faqACF } = item;
     const { author, videoUrl, videoDuration, previewImage } = faqACF;
     return {
@@ -36,7 +47,11 @@ export const getServerSideProps = async () => {
 
   try {
     const { posts } = await graphQLClient.request(faqList);
-    serverData.dataPosts = { faq: posts.nodes };
+    const { posts: postsFilters } = await graphQLClient.request(filters);
+    serverData.dataPosts = {
+      faq: posts.nodes,
+      filters: postsFilters.nodes,
+    };
 
     return {
       props: {

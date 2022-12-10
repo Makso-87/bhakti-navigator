@@ -14,10 +14,13 @@ import { useState } from 'react';
 import { GraphQLErrors } from '@apollo/client/errors';
 import { searchFaq } from '../../graphql/queries/searchFaq';
 import { Preloader } from '../CommonComponents/Preloader/Preloader';
+import pagesStore from '../../store/pagesStore';
+import { observer } from 'mobx-react-lite';
 
-export const FAQPage = (props) => {
+export const FAQPage = observer((props) => {
   const [list, setList] = useState([...(props.list ?? [])]);
   const [error, setError] = useState<GraphQLErrors | string>([]);
+  const place = pagesStore.currentPage;
 
   const [fetchFaqList, { loading }] = useLazyQuery(searchFaq, {
     notifyOnNetworkStatusChange: true,
@@ -52,6 +55,13 @@ export const FAQPage = (props) => {
         search: searchQuery,
       },
     });
+  };
+
+  const applyFilters = (filter) => {
+    // const filterKeys = Object.keys(filter);
+    // const filtered = filterPosts(props?.list, filter);
+    //
+    // setList(filterKeys.length ? [...filtered] : [...props?.list]);
   };
 
   return (
@@ -95,48 +105,7 @@ export const FAQPage = (props) => {
             </div>
 
             <div className={classes.RightSide}>
-              <Filters name='Фильтры'>
-                <FilterItem name='Тема'>
-                  <FilterElement name='theme' id='children' text='Воспитаение детей' />
-                  <FilterElement name='theme' id='shastri' text='Священные писания' />
-                  <FilterElement name='theme' id='sanskrit' text='Санскрит' />
-                  <FilterElement name='theme' id='varnashrama' text='Варнашрама' />
-                  <FilterElement name='theme' id='education' text='Образование' />
-                </FilterItem>
-
-                <FilterItem name='Преподаватель' showMore='Все преподаватели'>
-                  <FilterElement name='teacher' id='bvgm' text='Бхакти Вигьяна Госвами' />
-                  <FilterElement
-                    name='teacher'
-                    id='chaitanya-chandra-charan'
-                    text='Чайтанья Чандра Чаран дас'
-                  />
-                  <FilterElement name='teacher' id='tirtha-pavana' text='Тиртха-Павана дас' />
-                  <FilterElement name='teacher' id='vatsala' text='Ватсала дас' />
-                  <FilterElement name='teacher' id='jiva-goswami' text='Джива Госвами дас' />
-                  <FilterElement name='teacher' id='paramananda-pury' text='Парамананда Пури дас' />
-                  <FilterElement name='teacher' id='sarvagya' text='Сарвагья дас' />
-                  <FilterElement name='teacher' id='radha-prema' text='Радха Према деви даси' />
-                  <FilterElement name='teacher' id='thakur-haridas' text='Тхакур Харидас дас' />
-                  <FilterElement name='teacher' id='devakinanda' text='Девакинандана дас' />
-                  <FilterElement name='teacher' id='varshana' text='Варшана дас' />
-                  <FilterElement
-                    name='teacher'
-                    id='nityananda-charan'
-                    text='Нитьянанда Чаран дас'
-                  />
-
-                  <div>
-                    <FilterElement name='teacher' id='radhanatha-svami' text='Радхананатха Свами' />
-                    <FilterElement name='teacher' id='indradewmna-svami' text='Индрадьюмна Свами' />
-                    <FilterElement
-                      name='teacher'
-                      id='gopal-krishna-gosvami'
-                      text='Гопал Кришна Госвами'
-                    />
-                  </div>
-                </FilterItem>
-              </Filters>
+              <Filters name='Фильтры' place={place} applyFilters={applyFilters} />
             </div>
           </div>
         </div>
@@ -152,4 +121,4 @@ export const FAQPage = (props) => {
       </div>
     </Layout>
   );
-};
+});
