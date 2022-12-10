@@ -16,9 +16,10 @@ import { searchFaq } from '../../graphql/queries/searchFaq';
 import { Preloader } from '../CommonComponents/Preloader/Preloader';
 import pagesStore from '../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
+import { Post } from '../../interfaces/interfaces';
 
-export const FAQPage = observer((props) => {
-  const [list, setList] = useState([...(props.list ?? [])]);
+export const FAQPage = observer(({ list: faqList }: { list: Post[] }) => {
+  const [list, setList] = useState([...(faqList ?? [])]);
   const [error, setError] = useState<GraphQLErrors | string>([]);
   const place = pagesStore.currentPage;
 
