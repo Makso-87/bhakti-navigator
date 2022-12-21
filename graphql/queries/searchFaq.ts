@@ -9,7 +9,12 @@ export const searchFaq = gql`
         slug
         link
         faqACF {
-          author
+          author {
+            ... on Post {
+              id
+              title
+            }
+          }
           previewImage {
             sourceUrl
           }
