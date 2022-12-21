@@ -1,6 +1,5 @@
 import { CoursesPage } from '../../../components/CoursesPage/CoursesPage';
 import pagesStore from '../../../store/pagesStore';
-import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { courses } from '../../../graphql/queries/courses';

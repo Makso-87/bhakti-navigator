@@ -1,5 +1,4 @@
 import pagesStore from '../../../store/pagesStore';
-import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { getFilters } from '../../../helpers/helpers';
 import { RecordsPage } from '../../../components/RecordsPage/RecordsPage';
