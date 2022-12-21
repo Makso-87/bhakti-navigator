@@ -1,4 +1,4 @@
-import { FormEventHandler, MouseEventHandler, ReactElement } from 'react';
+import { MouseEventHandler, ReactElement } from 'react';
 import { pairsFormattedPosts } from '../types/types';
 
 export interface User {
@@ -132,9 +132,12 @@ export interface TopSearchProps {
 
 export interface FilterItemProps {
   name?: string;
+  label?: string;
   showMore?: string | boolean;
   children?: ReactElement[] | [ReactElement];
   elementsType?: 'radio' | 'checkbox';
+  filtersElements?: any[];
+  onChange?: (event, type: string) => void;
 }
 
 export interface Location {
@@ -146,12 +149,9 @@ export interface Location {
 export interface FilterElementProps {
   name: string;
   id: string;
-  elementType?: 'radio' | 'checkbox';
   location?: Location | false;
   text: string;
   changeHandler: (event, type: string) => void;
-  // setClearValue: (value: boolean) => void;
-  // clearValue?: boolean;
 }
 
 export type QuestionVariants = {

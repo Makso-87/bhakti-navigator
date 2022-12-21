@@ -1,14 +1,10 @@
 import { Layout } from '../Layout';
 import classes from './FAQPage.module.scss';
 import { Filters } from '../CommonComponents/Filters/Filters';
-import { FilterItem } from '../CommonComponents/Filters/FilterItem/FilterItem';
-import { FilterElement } from '../CommonComponents/Filters/FilterElement/FilterElement';
 import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import { FAQList } from '../CommonComponents/FAQList/FAQList';
 import { QuestionForm } from '../CommonComponents/QuestionForm/QuestionForm';
 import { Button } from '../CommonComponents/Button/Button';
-import { searchMaterials } from '../../graphql/queries/searchMaterials';
-import { getLink } from '../../helpers/helpers';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GraphQLErrors } from '@apollo/client/errors';
@@ -16,28 +12,25 @@ import { searchFaq } from '../../graphql/queries/searchFaq';
 import { Preloader } from '../CommonComponents/Preloader/Preloader';
 import pagesStore from '../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
-import { Post } from '../../interfaces/interfaces';
+import { filterPosts } from '../../helpers/filterPosts';
 
-export const FAQPage = observer(({ list: faqList }: { list: Post[] }) => {
-  const [list, setList] = useState([...(faqList ?? [])]);
+export const FAQPage = observer((props: any) => {
+  const [list, setList] = useState([...(props.list ?? [])]);
   const [error, setError] = useState<GraphQLErrors | string>([]);
   const place = pagesStore.currentPage;
+
+  const applyFilters = (filter) => {
+    const filterKeys = Object.keys(filter);
+    const filtered = filterPosts(props?.list, place);
+
+    setList(filterKeys.length ? [...filtered] : [...props?.list]);
+  };
 
   const [fetchFaqList, { loading }] = useLazyQuery(searchFaq, {
     notifyOnNetworkStatusChange: true,
     onCompleted: ({ posts }) => {
       if (posts.nodes.length) {
-        const newList = posts.nodes.map((item) => {
-          const { title, faqACF } = item;
-          const { author, videoUrl, videoDuration, previewImage } = faqACF;
-          return {
-            title,
-            author,
-            videoUrl,
-            videoDuration,
-            imgUrl: previewImage.sourceUrl,
-          };
-        });
+        const newList = filterPosts(posts.nodes, place);
 
         setList([...newList]);
       } else {
@@ -56,13 +49,6 @@ export const FAQPage = observer(({ list: faqList }: { list: Post[] }) => {
         search: searchQuery,
       },
     });
-  };
-
-  const applyFilters = (filter) => {
-    // const filterKeys = Object.keys(filter);
-    // const filtered = filterPosts(props?.list, filter);
-    //
-    // setList(filterKeys.length ? [...filtered] : [...props?.list]);
   };
 
   return (

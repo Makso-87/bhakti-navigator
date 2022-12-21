@@ -1,7 +1,7 @@
 import pagesStore from '../../../store/pagesStore';
 import { observer } from 'mobx-react-lite';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
-import { getFilters, getLink } from '../../../helpers/helpers';
+import { getFilters } from '../../../helpers/helpers';
 import { RecordsPage } from '../../../components/RecordsPage/RecordsPage';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { records } from '../../../graphql/queries/records';
@@ -18,27 +18,12 @@ const Records = observer(({ serverData }: ServerSideProps) => {
 
   useEffect(() => {
     setCurrentPage('records');
-    setSecondaryTabBar(true);
     setCategory('Каталог');
+    setSecondaryTabBar(true);
     setFiltersList({ ...sortedFilters });
   }, []);
 
-  const list = records?.map((item) => {
-    const { title, recordACF, link, id } = item;
-    const { mainTheme, bhaktiLevel, type, author } = recordACF;
-
-    return {
-      id,
-      title,
-      mainTheme,
-      bhaktiLevel,
-      link: getLink(link),
-      type,
-      author,
-    };
-  });
-
-  return <RecordsPage list={list} />;
+  return <RecordsPage list={records} />;
 });
 
 export const getServerSideProps = async () => {

@@ -11,6 +11,38 @@ interface AcfFieldGroup {
     fieldGroupName: String
 }
 
+"Connection to category Nodes"
+interface CategoryConnection {
+    "A list of edges (relational context) between RootQuery and connected category Nodes"
+    edges: [CategoryConnectionEdge!]!
+    "A list of connected category Nodes"
+    nodes: [Category!]!
+}
+
+"Edge between a Node and a connected category"
+interface CategoryConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected category Node"
+    node: Category!
+}
+
+"Connection to Comment Nodes"
+interface CommentConnection {
+    "A list of edges (relational context) between RootQuery and connected Comment Nodes"
+    edges: [CommentConnectionEdge!]!
+    "A list of connected Comment Nodes"
+    nodes: [Comment!]!
+}
+
+"Edge between a Node and a connected Comment"
+interface CommentConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Comment Node"
+    node: Comment!
+}
+
 "The author of a comment"
 interface Commenter {
     "Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument."
@@ -27,6 +59,22 @@ interface Commenter {
     name: String
     "The url of the author of a comment."
     url: String
+}
+
+"Edge between a Node and a connected Commenter"
+interface CommenterConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Commenter Node"
+    node: Commenter!
+}
+
+"A plural connection from one Node Type in the Graph to another Node Type, with support for relational data via &quot;edges&quot;."
+interface Connection {
+    "A list of edges (relational context) between connected nodes"
+    edges: [Edge!]!
+    "A list of connected nodes"
+    nodes: [Node!]!
 }
 
 "Nodes used to manage content"
@@ -103,16 +151,56 @@ interface ContentNode {
     uri: String
 }
 
+"Connection to ContentNode Nodes"
+interface ContentNodeConnection {
+    "A list of edges (relational context) between ContentType and connected ContentNode Nodes"
+    edges: [ContentNodeConnectionEdge!]!
+    "A list of connected ContentNode Nodes"
+    nodes: [ContentNode!]!
+}
+
+"Edge between a Node and a connected ContentNode"
+interface ContentNodeConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected ContentNode Node"
+    node: ContentNode!
+}
+
 "The template assigned to a node of content"
 interface ContentTemplate {
     "The name of the template"
     templateName: String
 }
 
+"Connection to ContentType Nodes"
+interface ContentTypeConnection {
+    "A list of edges (relational context) between RootQuery and connected ContentType Nodes"
+    edges: [ContentTypeConnectionEdge!]!
+    "A list of connected ContentType Nodes"
+    nodes: [ContentType!]!
+}
+
+"Edge between a Node and a connected ContentType"
+interface ContentTypeConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected ContentType Node"
+    node: ContentType!
+}
+
 "Object that can be identified with a Database ID"
 interface DatabaseIdentifier {
     "The unique identifier stored in the database"
     databaseId: Int!
+}
+
+"Relational context between connected nodes"
+interface Edge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected node"
+    node: Node!
 }
 
 "Asset enqueued by the CMS"
@@ -131,6 +219,38 @@ interface EnqueuedAsset {
     src: String
     "The version of the enqueued asset"
     version: String
+}
+
+"Connection to EnqueuedScript Nodes"
+interface EnqueuedScriptConnection {
+    "A list of edges (relational context) between ContentNode and connected EnqueuedScript Nodes"
+    edges: [EnqueuedScriptConnectionEdge!]!
+    "A list of connected EnqueuedScript Nodes"
+    nodes: [EnqueuedScript!]!
+}
+
+"Edge between a Node and a connected EnqueuedScript"
+interface EnqueuedScriptConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected EnqueuedScript Node"
+    node: EnqueuedScript!
+}
+
+"Connection to EnqueuedStylesheet Nodes"
+interface EnqueuedStylesheetConnection {
+    "A list of edges (relational context) between ContentNode and connected EnqueuedStylesheet Nodes"
+    edges: [EnqueuedStylesheetConnectionEdge!]!
+    "A list of connected EnqueuedStylesheet Nodes"
+    nodes: [EnqueuedStylesheet!]!
+}
+
+"Edge between a Node and a connected EnqueuedStylesheet"
+interface EnqueuedStylesheetConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected EnqueuedStylesheet Node"
+    node: EnqueuedStylesheet!
 }
 
 "Content node with hierarchical (parent/child) relationships"
@@ -161,8 +281,90 @@ interface HierarchicalContentNode {
         "Arguments for filtering the connection"
         where: HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs
     ): HierarchicalContentNodeToContentNodeChildrenConnection
+    "Connection between the ContentNode type and the ContentType type"
+    contentType: ContentNodeToContentTypeConnectionEdge
+    "The name of the Content Type the node belongs to"
+    contentTypeName: String!
+    "The unique identifier stored in the database"
+    databaseId: Int!
+    "Post publishing date."
+    date: String
+    "The publishing date set in GMT."
+    dateGmt: String
+    "The desired slug of the post"
+    desiredSlug: String
+    "If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds"
+    editingLockedBy: ContentNodeToEditLockConnectionEdge
+    "The RSS enclosure for the object"
+    enclosure: String
+    "Connection between the ContentNode type and the EnqueuedScript type"
+    enqueuedScripts(
+        "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
+        after: String,
+        "Cursor used along with the \"last\" argument to reference where in the dataset to get data"
+        before: String,
+        "The number of items to return after the referenced \"after\" cursor"
+        first: Int,
+        "The number of items to return before the referenced \"before\" cursor"
+        last: Int
+    ): ContentNodeToEnqueuedScriptConnection
+    "Connection between the ContentNode type and the EnqueuedStylesheet type"
+    enqueuedStylesheets(
+        "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
+        after: String,
+        "Cursor used along with the \"last\" argument to reference where in the dataset to get data"
+        before: String,
+        "The number of items to return after the referenced \"after\" cursor"
+        first: Int,
+        "The number of items to return before the referenced \"before\" cursor"
+        last: Int
+    ): ContentNodeToEnqueuedStylesheetConnection
+    "The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table."
+    guid: String
+    "The globally unique ID for the object"
+    id: ID!
+    "Whether the node is a Content Node"
+    isContentNode: Boolean!
+    "Whether the object is a node in the preview state"
+    isPreview: Boolean
+    "Whether the object is restricted from the current viewer"
+    isRestricted: Boolean
+    "Whether the node is a Term"
+    isTermNode: Boolean!
+    "The user that most recently edited the node"
+    lastEditedBy: ContentNodeToEditLastConnectionEdge
+    "The permalink of the post"
+    link: String
+    "The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time."
+    modified: String
+    "The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT."
+    modifiedGmt: String
     "The parent of the node. The parent object can be of various types"
     parent: HierarchicalContentNodeToParentContentNodeConnectionEdge
+    "Database id of the parent node"
+    parentDatabaseId: Int
+    "The globally unique identifier of the parent node."
+    parentId: ID
+    "The database id of the preview node"
+    previewRevisionDatabaseId: Int
+    "Whether the object is a node in the preview state"
+    previewRevisionId: ID
+    "The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table."
+    slug: String
+    "The current status of the object"
+    status: String
+    "The template assigned to a node of content"
+    template: ContentTemplate
+    "The unique resource identifier path"
+    uri: String
+}
+
+"Node with hierarchical (parent/child) relationships"
+interface HierarchicalNode {
+    "The unique identifier stored in the database"
+    databaseId: Int!
+    "The globally unique ID for the object"
+    id: ID!
     "Database id of the parent node"
     parentDatabaseId: Int
     "The globally unique identifier of the parent node."
@@ -171,20 +373,130 @@ interface HierarchicalContentNode {
 
 "Term node with hierarchical (parent/child) relationships"
 interface HierarchicalTermNode {
+    "The number of objects connected to the object"
+    count: Int
+    "The unique identifier stored in the database"
+    databaseId: Int!
+    "The description of the object"
+    description: String
+    "Connection between the TermNode type and the EnqueuedScript type"
+    enqueuedScripts(
+        "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
+        after: String,
+        "Cursor used along with the \"last\" argument to reference where in the dataset to get data"
+        before: String,
+        "The number of items to return after the referenced \"after\" cursor"
+        first: Int,
+        "The number of items to return before the referenced \"before\" cursor"
+        last: Int
+    ): TermNodeToEnqueuedScriptConnection
+    "Connection between the TermNode type and the EnqueuedStylesheet type"
+    enqueuedStylesheets(
+        "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
+        after: String,
+        "Cursor used along with the \"last\" argument to reference where in the dataset to get data"
+        before: String,
+        "The number of items to return after the referenced \"after\" cursor"
+        first: Int,
+        "The number of items to return before the referenced \"before\" cursor"
+        last: Int
+    ): TermNodeToEnqueuedStylesheetConnection
+    "The globally unique ID for the object"
+    id: ID!
+    "Whether the node is a Content Node"
+    isContentNode: Boolean!
+    "Whether the object is restricted from the current viewer"
+    isRestricted: Boolean
+    "Whether the node is a Term"
+    isTermNode: Boolean!
+    "The link to the term"
+    link: String
+    "The human friendly name of the object."
+    name: String
     "Database id of the parent node"
     parentDatabaseId: Int
     "The globally unique identifier of the parent node."
     parentId: ID
+    "An alphanumeric identifier for the object unique to its type."
+    slug: String
+    "The name of the taxonomy that the object is associated with"
+    taxonomyName: String
+    "The ID of the term group that this term object belongs to"
+    termGroupId: Int
+    "The taxonomy ID that the object is associated with"
+    termTaxonomyId: Int
+    "The unique resource identifier path"
+    uri: String
+}
+
+"Connection to mediaItem Nodes"
+interface MediaItemConnection {
+    "A list of edges (relational context) between RootQuery and connected mediaItem Nodes"
+    edges: [MediaItemConnectionEdge!]!
+    "A list of connected mediaItem Nodes"
+    nodes: [MediaItem!]!
+}
+
+"Edge between a Node and a connected mediaItem"
+interface MediaItemConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected mediaItem Node"
+    node: MediaItem!
+}
+
+"Connection to Menu Nodes"
+interface MenuConnection {
+    "A list of edges (relational context) between RootQuery and connected Menu Nodes"
+    edges: [MenuConnectionEdge!]!
+    "A list of connected Menu Nodes"
+    nodes: [Menu!]!
+}
+
+"Edge between a Node and a connected Menu"
+interface MenuConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Menu Node"
+    node: Menu!
+}
+
+"Connection to MenuItem Nodes"
+interface MenuItemConnection {
+    "A list of edges (relational context) between RootQuery and connected MenuItem Nodes"
+    edges: [MenuItemConnectionEdge!]!
+    "A list of connected MenuItem Nodes"
+    nodes: [MenuItem!]!
+}
+
+"Edge between a Node and a connected MenuItem"
+interface MenuItemConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected MenuItem Node"
+    node: MenuItem!
 }
 
 "Nodes that can be linked to as Menu Items"
 interface MenuItemLinkable {
-    "The unique resource identifier path"
+    "The unique identifier stored in the database"
     databaseId: Int!
     "The unique resource identifier path"
     id: ID!
+    "Whether the node is a Content Node"
+    isContentNode: Boolean!
+    "Whether the node is a Term"
+    isTermNode: Boolean!
     "The unique resource identifier path"
     uri: String
+}
+
+"Edge between a Node and a connected MenuItemLinkable"
+interface MenuItemLinkableConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected MenuItemLinkable Node"
+    node: MenuItemLinkable!
 }
 
 "An object with an ID"
@@ -298,6 +610,120 @@ interface NodeWithTrackbacks {
     toPing: [String]
 }
 
+"A singular connection from one Node to another, with support for relational data on the &quot;edge&quot; of the connection."
+interface OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected node"
+    node: Node!
+}
+
+"Connection to page Nodes"
+interface PageConnection {
+    "A list of edges (relational context) between RootQuery and connected page Nodes"
+    edges: [PageConnectionEdge!]!
+    "A list of connected page Nodes"
+    nodes: [Page!]!
+}
+
+"Edge between a Node and a connected page"
+interface PageConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected page Node"
+    node: Page!
+}
+
+"Connection to Plugin Nodes"
+interface PluginConnection {
+    "A list of edges (relational context) between RootQuery and connected Plugin Nodes"
+    edges: [PluginConnectionEdge!]!
+    "A list of connected Plugin Nodes"
+    nodes: [Plugin!]!
+}
+
+"Edge between a Node and a connected Plugin"
+interface PluginConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Plugin Node"
+    node: Plugin!
+}
+
+"Connection to post Nodes"
+interface PostConnection {
+    "A list of edges (relational context) between RootQuery and connected post Nodes"
+    edges: [PostConnectionEdge!]!
+    "A list of connected post Nodes"
+    nodes: [Post!]!
+}
+
+"Edge between a Node and a connected post"
+interface PostConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected post Node"
+    node: Post!
+}
+
+"Connection to postFormat Nodes"
+interface PostFormatConnection {
+    "A list of edges (relational context) between RootQuery and connected postFormat Nodes"
+    edges: [PostFormatConnectionEdge!]!
+    "A list of connected postFormat Nodes"
+    nodes: [PostFormat!]!
+}
+
+"Edge between a Node and a connected postFormat"
+interface PostFormatConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected postFormat Node"
+    node: PostFormat!
+}
+
+"Nodes that can be seen in a preview (unpublished) state."
+interface Previewable {
+    "Whether the object is a node in the preview state"
+    isPreview: Boolean
+    "The database id of the preview node"
+    previewRevisionDatabaseId: Int
+    "Whether the object is a node in the preview state"
+    previewRevisionId: ID
+}
+
+"Connection to tag Nodes"
+interface TagConnection {
+    "A list of edges (relational context) between RootQuery and connected tag Nodes"
+    edges: [TagConnectionEdge!]!
+    "A list of connected tag Nodes"
+    nodes: [Tag!]!
+}
+
+"Edge between a Node and a connected tag"
+interface TagConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected tag Node"
+    node: Tag!
+}
+
+"Connection to Taxonomy Nodes"
+interface TaxonomyConnection {
+    "A list of edges (relational context) between RootQuery and connected Taxonomy Nodes"
+    edges: [TaxonomyConnectionEdge!]!
+    "A list of connected Taxonomy Nodes"
+    nodes: [Taxonomy!]!
+}
+
+"Edge between a Node and a connected Taxonomy"
+interface TaxonomyConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Taxonomy Node"
+    node: Taxonomy!
+}
+
 "Terms are nodes within a Taxonomy, used to group and relate other nodes."
 interface TermNode {
     "The number of objects connected to the object"
@@ -352,6 +778,38 @@ interface TermNode {
     uri: String
 }
 
+"Connection to TermNode Nodes"
+interface TermNodeConnection {
+    "A list of edges (relational context) between RootQuery and connected TermNode Nodes"
+    edges: [TermNodeConnectionEdge!]!
+    "A list of connected TermNode Nodes"
+    nodes: [TermNode!]!
+}
+
+"Edge between a Node and a connected TermNode"
+interface TermNodeConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected TermNode Node"
+    node: TermNode!
+}
+
+"Connection to Theme Nodes"
+interface ThemeConnection {
+    "A list of edges (relational context) between RootQuery and connected Theme Nodes"
+    edges: [ThemeConnectionEdge!]!
+    "A list of connected Theme Nodes"
+    nodes: [Theme!]!
+}
+
+"Edge between a Node and a connected Theme"
+interface ThemeConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected Theme Node"
+    node: Theme!
+}
+
 "Any node that has a URI"
 interface UniformResourceIdentifiable {
     "The unique resource identifier path"
@@ -364,8 +822,37 @@ interface UniformResourceIdentifiable {
     uri: String
 }
 
-"A union of Content Node Types that support revisions"
-union ContentRevisionUnion = Page | Post
+"Connection to User Nodes"
+interface UserConnection {
+    "A list of edges (relational context) between RootQuery and connected User Nodes"
+    edges: [UserConnectionEdge!]!
+    "A list of connected User Nodes"
+    nodes: [User!]!
+}
+
+"Edge between a Node and a connected User"
+interface UserConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected User Node"
+    node: User!
+}
+
+"Connection to UserRole Nodes"
+interface UserRoleConnection {
+    "A list of edges (relational context) between RootQuery and connected UserRole Nodes"
+    edges: [UserRoleConnectionEdge!]!
+    "A list of connected UserRole Nodes"
+    nodes: [UserRole!]!
+}
+
+"Edge between a Node and a connected UserRole"
+interface UserRoleConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
+    "The connected UserRole Node"
+    node: UserRole!
+}
 
 "Deprecated in favor of MenuItemLinkeable Interface"
 union MenuItemObjectUnion = Category | Page | Post | Tag
@@ -396,15 +883,19 @@ union Post_Courseacf_Themes = Post
 
 union Post_Courseprogramitemacf_Course = Post
 
+union Post_Faqacf_Author = Post
+
+union Post_Faqacf_Themes = Post
+
 union Post_Materialacf_Author = Post
 
 union Post_Materialacf_BhaktiLevel = Post
 
 union Post_Materialacf_MainTheme = Post
 
-union Post_Materialacf_Themes = Post
+union Post_Materialacf_MaterialType = Post
 
-union Post_Materialacf_Type = Post
+union Post_Materialacf_Themes = Post
 
 union Post_Projectacf_Courses = Post
 
@@ -418,11 +909,13 @@ union Post_Recordacf_Author = Post
 
 union Post_Recordacf_BhaktiLevel = Post
 
+union Post_Recordacf_CourseCategory = Post
+
 union Post_Recordacf_MainTheme = Post
 
-union Post_Recordacf_Themes = Post
+union Post_Recordacf_MaterialType = Post
 
-union Post_Recordacf_Type = Post
+union Post_Recordacf_Themes = Post
 
 union Post_Teacheracf_Courses = Post
 
@@ -432,7 +925,7 @@ union Post_Themeacf_BhaktiLevel = Post
 
 union User_Useracf_FavoriteCourses = Post
 
-"The payload for the addToWishlist mutation"
+"The payload for the addToWishlist mutation."
 type AddToWishlistPayload {
     "True if the product is removed, false otherwise"
     added: Boolean
@@ -473,7 +966,7 @@ type Avatar {
 }
 
 "The category type"
-type Category implements DatabaseIdentifier & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable {
+type Category implements DatabaseIdentifier & HierarchicalNode & HierarchicalTermNode & MenuItemLinkable & Node & TermNode & UniformResourceIdentifiable {
     "The ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root)."
     ancestors(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
@@ -515,7 +1008,7 @@ type Category implements DatabaseIdentifier & HierarchicalTermNode & MenuItemLin
     ): CategoryToContentNodeConnection
     "The number of objects connected to the object"
     count: Int
-    "The unique resource identifier path"
+    "The unique identifier stored in the database"
     databaseId: Int!
     "The description of the object"
     description: String
@@ -587,87 +1080,91 @@ type Category implements DatabaseIdentifier & HierarchicalTermNode & MenuItemLin
 }
 
 "Connection between the Category type and the category type"
-type CategoryToAncestorsCategoryConnection {
+type CategoryToAncestorsCategoryConnection implements CategoryConnection & Connection {
     "Edges for the CategoryToAncestorsCategoryConnection connection"
-    edges: [CategoryToAncestorsCategoryConnectionEdge]
+    edges: [CategoryToAncestorsCategoryConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Category]
+    nodes: [Category!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type CategoryToAncestorsCategoryConnectionEdge {
+type CategoryToAncestorsCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Category
+    node: Category!
 }
 
 "Connection between the Category type and the category type"
-type CategoryToCategoryConnection {
+type CategoryToCategoryConnection implements CategoryConnection & Connection {
     "Edges for the CategoryToCategoryConnection connection"
-    edges: [CategoryToCategoryConnectionEdge]
+    edges: [CategoryToCategoryConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Category]
+    nodes: [Category!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type CategoryToCategoryConnectionEdge {
+type CategoryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Category
+    node: Category!
 }
 
 "Connection between the Category type and the ContentNode type"
-type CategoryToContentNodeConnection {
+type CategoryToContentNodeConnection implements Connection & ContentNodeConnection {
     "Edges for the CategoryToContentNodeConnection connection"
-    edges: [CategoryToContentNodeConnectionEdge]
+    edges: [CategoryToContentNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type CategoryToContentNodeConnectionEdge {
+type CategoryToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the Category type and the category type"
-type CategoryToParentCategoryConnectionEdge {
+type CategoryToParentCategoryConnectionEdge implements CategoryConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Category
+    node: Category!
 }
 
 "Connection between the Category type and the post type"
-type CategoryToPostConnection {
+type CategoryToPostConnection implements Connection & PostConnection {
     "Edges for the CategoryToPostConnection connection"
-    edges: [CategoryToPostConnectionEdge]
+    edges: [CategoryToPostConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type CategoryToPostConnectionEdge {
+type CategoryToPostConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
 }
 
 "Connection between the Category type and the Taxonomy type"
-type CategoryToTaxonomyConnectionEdge {
+type CategoryToTaxonomyConnectionEdge implements Edge & OneToOneConnection & TaxonomyConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Taxonomy
+    node: Taxonomy!
 }
 
 "A Comment object"
@@ -675,7 +1172,7 @@ type Comment implements DatabaseIdentifier & Node {
     "User agent used to post the comment. This field is equivalent to WP_Comment-&gt;comment_agent and the value matching the &quot;comment_agent&quot; column in SQL."
     agent: String
     "The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL."
-    approved: Boolean
+    approved: Boolean @deprecated(reason: "Deprecated in favor of the `status` field")
     "The author of the comment"
     author: CommentToCommenterConnectionEdge
     "IP address for the author. This field is equivalent to WP_Comment-&gt;comment_author_IP and the value matching the &quot;comment_author_IP&quot; column in SQL."
@@ -723,12 +1220,14 @@ type Comment implements DatabaseIdentifier & Node {
         "Arguments for filtering the connection"
         where: CommentToCommentConnectionWhereArgs
     ): CommentToCommentConnection
+    "The approval status of the comment. This field is equivalent to WP_Comment-&gt;comment_approved and the value matching the &quot;comment_approved&quot; column in SQL."
+    status: CommentStatusEnum
     "Type of comment. This field is equivalent to WP_Comment-&gt;comment_type and the value matching the &quot;comment_type&quot; column in SQL."
     type: String
 }
 
 "A Comment Author object"
-type CommentAuthor implements Commenter & Node {
+type CommentAuthor implements Commenter & DatabaseIdentifier & Node {
     "Avatar object for user. The avatar object can be retrieved in different sizes by specifying the size argument."
     avatar(
         "Whether to always show the default image, never the Gravatar. Default false"
@@ -738,7 +1237,7 @@ type CommentAuthor implements Commenter & Node {
         "The size attribute of the avatar field can be used to fetch avatars of different sizes. The value corresponds to the dimension in pixels to fetch. The default is 96 pixels."
         size: Int = 96
     ): Avatar
-    "Identifies the primary key from the database."
+    "The unique identifier stored in the database"
     databaseId: Int!
     "The email for the comment author"
     email: String
@@ -753,95 +1252,107 @@ type CommentAuthor implements Commenter & Node {
 }
 
 "Connection between the Comment type and the Comment type"
-type CommentToCommentConnection {
+type CommentToCommentConnection implements CommentConnection & Connection {
     "Edges for the CommentToCommentConnection connection"
-    edges: [CommentToCommentConnectionEdge]
+    edges: [CommentToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type CommentToCommentConnectionEdge {
+type CommentToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
+    node: Comment!
 }
 
 "Connection between the Comment type and the Commenter type"
-type CommentToCommenterConnectionEdge {
+type CommentToCommenterConnectionEdge implements CommenterConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Commenter
+    node: Commenter!
 }
 
 "Connection between the Comment type and the ContentNode type"
-type CommentToContentNodeConnectionEdge {
+type CommentToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the Comment type and the Comment type"
-type CommentToParentCommentConnectionEdge {
+type CommentToParentCommentConnectionEdge implements CommentConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Comment
+    node: Comment!
 }
 
 "Connection between the ContentNode type and the ContentType type"
-type ContentNodeToContentTypeConnectionEdge {
+type ContentNodeToContentTypeConnectionEdge implements ContentTypeConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: ContentType
+    node: ContentType!
 }
 
 "Connection between the ContentNode type and the User type"
-type ContentNodeToEditLastConnectionEdge {
+type ContentNodeToEditLastConnectionEdge implements Edge & OneToOneConnection & UserConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: User
+    node: User!
 }
 
 "Connection between the ContentNode type and the User type"
-type ContentNodeToEditLockConnectionEdge {
+type ContentNodeToEditLockConnectionEdge implements Edge & OneToOneConnection & UserConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The timestamp for when the node was last edited"
     lockTimestamp: String
     "The node of the connection, without the edges"
-    node: User
+    node: User!
 }
 
 "Connection between the ContentNode type and the EnqueuedScript type"
-type ContentNodeToEnqueuedScriptConnection {
+type ContentNodeToEnqueuedScriptConnection implements Connection & EnqueuedScriptConnection {
     "Edges for the ContentNodeToEnqueuedScriptConnection connection"
-    edges: [ContentNodeToEnqueuedScriptConnectionEdge]
+    edges: [ContentNodeToEnqueuedScriptConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedScript]
+    nodes: [EnqueuedScript!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type ContentNodeToEnqueuedScriptConnectionEdge {
+type ContentNodeToEnqueuedScriptConnectionEdge implements Edge & EnqueuedScriptConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedScript
+    node: EnqueuedScript!
 }
 
 "Connection between the ContentNode type and the EnqueuedStylesheet type"
-type ContentNodeToEnqueuedStylesheetConnection {
+type ContentNodeToEnqueuedStylesheetConnection implements Connection & EnqueuedStylesheetConnection {
     "Edges for the ContentNodeToEnqueuedStylesheetConnection connection"
-    edges: [ContentNodeToEnqueuedStylesheetConnectionEdge]
+    edges: [ContentNodeToEnqueuedStylesheetConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedStylesheet]
+    nodes: [EnqueuedStylesheet!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type ContentNodeToEnqueuedStylesheetConnectionEdge {
+type ContentNodeToEnqueuedStylesheetConnectionEdge implements Edge & EnqueuedStylesheetConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedStylesheet
+    node: EnqueuedStylesheet!
 }
 
 "An Post Type object"
@@ -933,42 +1444,42 @@ type ContentType implements Node & UniformResourceIdentifiable {
 }
 
 "Connection between the ContentType type and the ContentNode type"
-type ContentTypeToContentNodeConnection {
+type ContentTypeToContentNodeConnection implements Connection & ContentNodeConnection {
     "Edges for the ContentTypeToContentNodeConnection connection"
-    edges: [ContentTypeToContentNodeConnectionEdge]
+    edges: [ContentTypeToContentNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type ContentTypeToContentNodeConnectionEdge {
+type ContentTypeToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the ContentType type and the Taxonomy type"
-type ContentTypeToTaxonomyConnection {
+type ContentTypeToTaxonomyConnection implements Connection & TaxonomyConnection {
     "Edges for the ContentTypeToTaxonomyConnection connection"
-    edges: [ContentTypeToTaxonomyConnectionEdge]
+    edges: [ContentTypeToTaxonomyConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Taxonomy]
+    nodes: [Taxonomy!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type ContentTypeToTaxonomyConnectionEdge {
+type ContentTypeToTaxonomyConnectionEdge implements Edge & TaxonomyConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Taxonomy
+    node: Taxonomy!
 }
 
-"The payload for the createCategory mutation"
+"The payload for the createCategory mutation."
 type CreateCategoryPayload {
     "The created category"
     category: Category
@@ -976,7 +1487,7 @@ type CreateCategoryPayload {
     clientMutationId: String
 }
 
-"The payload for the createComment mutation"
+"The payload for the createComment mutation."
 type CreateCommentPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -986,7 +1497,7 @@ type CreateCommentPayload {
     success: Boolean
 }
 
-"The payload for the createMediaItem mutation"
+"The payload for the createMediaItem mutation."
 type CreateMediaItemPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -994,7 +1505,7 @@ type CreateMediaItemPayload {
     mediaItem: MediaItem
 }
 
-"The payload for the createPage mutation"
+"The payload for the createPage mutation."
 type CreatePagePayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1002,7 +1513,7 @@ type CreatePagePayload {
     page: Page
 }
 
-"The payload for the createPostFormat mutation"
+"The payload for the createPostFormat mutation."
 type CreatePostFormatPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1010,7 +1521,7 @@ type CreatePostFormatPayload {
     postFormat: PostFormat
 }
 
-"The payload for the createPost mutation"
+"The payload for the createPost mutation."
 type CreatePostPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1018,7 +1529,7 @@ type CreatePostPayload {
     post: Post
 }
 
-"The payload for the createTag mutation"
+"The payload for the createTag mutation."
 type CreateTagPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1026,7 +1537,7 @@ type CreateTagPayload {
     tag: Tag
 }
 
-"The payload for the createUser mutation"
+"The payload for the createUser mutation."
 type CreateUserPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1040,7 +1551,7 @@ type DefaultTemplate implements ContentTemplate {
     templateName: String
 }
 
-"The payload for the deleteCategory mutation"
+"The payload for the deleteCategory mutation."
 type DeleteCategoryPayload {
     "The deteted term object"
     category: Category
@@ -1050,7 +1561,7 @@ type DeleteCategoryPayload {
     deletedId: ID
 }
 
-"The payload for the deleteComment mutation"
+"The payload for the deleteComment mutation."
 type DeleteCommentPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1060,7 +1571,7 @@ type DeleteCommentPayload {
     deletedId: ID
 }
 
-"The payload for the deleteMediaItem mutation"
+"The payload for the deleteMediaItem mutation."
 type DeleteMediaItemPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1070,7 +1581,7 @@ type DeleteMediaItemPayload {
     mediaItem: MediaItem
 }
 
-"The payload for the deletePage mutation"
+"The payload for the deletePage mutation."
 type DeletePagePayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1080,7 +1591,7 @@ type DeletePagePayload {
     page: Page
 }
 
-"The payload for the deletePostFormat mutation"
+"The payload for the deletePostFormat mutation."
 type DeletePostFormatPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1090,7 +1601,7 @@ type DeletePostFormatPayload {
     postFormat: PostFormat
 }
 
-"The payload for the deletePost mutation"
+"The payload for the deletePost mutation."
 type DeletePostPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1100,7 +1611,7 @@ type DeletePostPayload {
     post: Post
 }
 
-"The payload for the deleteTag mutation"
+"The payload for the deleteTag mutation."
 type DeleteTagPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1110,7 +1621,7 @@ type DeleteTagPayload {
     tag: Tag
 }
 
-"The payload for the deleteUser mutation"
+"The payload for the deleteUser mutation."
 type DeleteUserPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1219,48 +1730,50 @@ type HCMSSocialLinks {
 }
 
 "Connection between the HierarchicalContentNode type and the ContentNode type"
-type HierarchicalContentNodeToContentNodeAncestorsConnection {
+type HierarchicalContentNodeToContentNodeAncestorsConnection implements Connection & ContentNodeConnection {
     "Edges for the HierarchicalContentNodeToContentNodeAncestorsConnection connection"
-    edges: [HierarchicalContentNodeToContentNodeAncestorsConnectionEdge]
+    edges: [HierarchicalContentNodeToContentNodeAncestorsConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge {
+type HierarchicalContentNodeToContentNodeAncestorsConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the HierarchicalContentNode type and the ContentNode type"
-type HierarchicalContentNodeToContentNodeChildrenConnection {
+type HierarchicalContentNodeToContentNodeChildrenConnection implements Connection & ContentNodeConnection {
     "Edges for the HierarchicalContentNodeToContentNodeChildrenConnection connection"
-    edges: [HierarchicalContentNodeToContentNodeChildrenConnectionEdge]
+    edges: [HierarchicalContentNodeToContentNodeChildrenConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type HierarchicalContentNodeToContentNodeChildrenConnectionEdge {
+type HierarchicalContentNodeToContentNodeChildrenConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the HierarchicalContentNode type and the ContentNode type"
-type HierarchicalContentNodeToParentContentNodeConnectionEdge {
+type HierarchicalContentNodeToParentContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: ContentNode
+    node: ContentNode!
 }
 
-"The payload for the login mutation"
+"The payload for the login mutation."
 type LoginPayload {
     "JWT Token that can be used in future requests for Authentication"
     authToken: String
@@ -1272,7 +1785,7 @@ type LoginPayload {
     user: User
 }
 
-"The payload for the loginWithCookies mutation"
+"The payload for the loginWithCookies mutation."
 type LoginWithCookiesPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1280,7 +1793,7 @@ type LoginWithCookiesPayload {
     status: String
 }
 
-"The payload for the logout mutation"
+"The payload for the logout mutation."
 type LogoutPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -1308,7 +1821,7 @@ type MediaDetails {
 }
 
 "The mediaItem type"
-type MediaItem implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & Node & NodeWithAuthor & NodeWithComments & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable {
+type MediaItem implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & Node & NodeWithAuthor & NodeWithComments & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable {
     "Alternative text to display when resource is not displayed"
     altText: String
     "Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root)."
@@ -1472,7 +1985,7 @@ type MediaItem implements ContentNode & DatabaseIdentifier & HierarchicalContent
     ): String
     "The current status of the object"
     status: String
-    "The template assigned to the node"
+    "The template assigned to a node of content"
     template: ContentTemplate
     "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
     title(
@@ -1512,21 +2025,21 @@ type MediaItemMeta {
 }
 
 "Connection between the MediaItem type and the Comment type"
-type MediaItemToCommentConnection {
+type MediaItemToCommentConnection implements CommentConnection & Connection {
     "Edges for the MediaItemToCommentConnection connection"
-    edges: [MediaItemToCommentConnectionEdge]
+    edges: [MediaItemToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type MediaItemToCommentConnectionEdge {
+type MediaItemToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
+    node: Comment!
 }
 
 "Details of an available size for a media item"
@@ -1638,73 +2151,83 @@ type MenuItem implements DatabaseIdentifier & Node {
 }
 
 "Connection between the MenuItem type and the Menu type"
-type MenuItemToMenuConnectionEdge {
+type MenuItemToMenuConnectionEdge implements Edge & MenuConnectionEdge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Menu
+    node: Menu!
 }
 
 "Connection between the MenuItem type and the MenuItem type"
-type MenuItemToMenuItemConnection {
+type MenuItemToMenuItemConnection implements Connection & MenuItemConnection {
     "Edges for the MenuItemToMenuItemConnection connection"
-    edges: [MenuItemToMenuItemConnectionEdge]
+    edges: [MenuItemToMenuItemConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [MenuItem]
+    nodes: [MenuItem!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type MenuItemToMenuItemConnectionEdge {
+type MenuItemToMenuItemConnectionEdge implements Edge & MenuItemConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: MenuItem
+    node: MenuItem!
 }
 
 "Connection between the MenuItem type and the MenuItemLinkable type"
-type MenuItemToMenuItemLinkableConnectionEdge {
+type MenuItemToMenuItemLinkableConnectionEdge implements Edge & MenuItemLinkableConnectionEdge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: MenuItemLinkable
+    node: MenuItemLinkable!
 }
 
 "Connection between the Menu type and the MenuItem type"
-type MenuToMenuItemConnection {
+type MenuToMenuItemConnection implements Connection & MenuItemConnection {
     "Edges for the MenuToMenuItemConnection connection"
-    edges: [MenuToMenuItemConnectionEdge]
+    edges: [MenuToMenuItemConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [MenuItem]
+    nodes: [MenuItem!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type MenuToMenuItemConnectionEdge {
+type MenuToMenuItemConnectionEdge implements Edge & MenuItemConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: MenuItem
+    node: MenuItem!
 }
 
 "Connection between the NodeWithAuthor type and the User type"
-type NodeWithAuthorToUserConnectionEdge {
+type NodeWithAuthorToUserConnectionEdge implements Edge & OneToOneConnection & UserConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: User
+    node: User!
 }
 
 "Connection between the NodeWithFeaturedImage type and the MediaItem type"
-type NodeWithFeaturedImageToMediaItemConnectionEdge {
+type NodeWithFeaturedImageToMediaItemConnectionEdge implements Edge & MediaItemConnectionEdge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: MediaItem
+    node: MediaItem!
 }
 
 "Connection between the NodeWithRevisions type and the ContentNode type"
-type NodeWithRevisionsToContentNodeConnectionEdge {
+type NodeWithRevisionsToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge & OneToOneConnection {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "The page type"
-type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & UniformResourceIdentifiable {
+type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode & HierarchicalNode & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithFeaturedImage & NodeWithPageAttributes & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & Previewable & UniformResourceIdentifiable {
     "Returns ancestors of the node. Default ordered as lowest (closest to the child) to highest (closest to the root)."
     ancestors(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
@@ -1765,7 +2288,7 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
     contentType: ContentNodeToContentTypeConnectionEdge
     "The name of the Content Type the node belongs to"
     contentTypeName: String!
-    "The unique resource identifier path"
+    "The unique identifier stored in the database"
     databaseId: Int!
     "Post publishing date."
     date: String
@@ -1868,7 +2391,7 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
     slug: String
     "The current status of the object"
     status: String
-    "The template assigned to the node"
+    "The template assigned to a node of content"
     template: ContentTemplate
     "The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made."
     title(
@@ -1880,45 +2403,47 @@ type Page implements ContentNode & DatabaseIdentifier & HierarchicalContentNode 
 }
 
 "Connection between the Page type and the Comment type"
-type PageToCommentConnection {
+type PageToCommentConnection implements CommentConnection & Connection {
     "Edges for the PageToCommentConnection connection"
-    edges: [PageToCommentConnectionEdge]
+    edges: [PageToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PageToCommentConnectionEdge {
+type PageToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
+    node: Comment!
 }
 
 "Connection between the Page type and the page type"
-type PageToPreviewConnectionEdge {
+type PageToPreviewConnectionEdge implements Edge & OneToOneConnection & PageConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Page
+    node: Page!
 }
 
 "Connection between the Page type and the page type"
-type PageToRevisionConnection {
+type PageToRevisionConnection implements Connection & PageConnection {
     "Edges for the PageToRevisionConnection connection"
-    edges: [PageToRevisionConnectionEdge]
+    edges: [PageToRevisionConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Page]
+    nodes: [Page!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PageToRevisionConnectionEdge {
+type PageToRevisionConnectionEdge implements Edge & PageConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Page
+    node: Page!
 }
 
 "An plugin object"
@@ -1944,7 +2469,7 @@ type Plugin implements Node {
 }
 
 "The post type"
-type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & UniformResourceIdentifiable {
+type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node & NodeWithAuthor & NodeWithComments & NodeWithContentEditor & NodeWithExcerpt & NodeWithFeaturedImage & NodeWithRevisions & NodeWithTemplate & NodeWithTitle & NodeWithTrackbacks & Previewable & UniformResourceIdentifiable {
     "Added to the GraphQL Schema because the ACF Field Group &quot;Статья&quot; was set to Show in GraphQL."
     articleACF: Post_Articleacf
     "Connection between the NodeWithAuthor type and the User type"
@@ -2006,7 +2531,7 @@ type Post implements ContentNode & DatabaseIdentifier & MenuItemLinkable & Node 
     courseFormatACF: Post_Courseformatacf
     "Added to the GraphQL Schema because the ACF Field Group &quot;Пункт программы курса&quot; was set to Show in GraphQL."
     courseProgramItemACF: Post_Courseprogramitemacf
-    "The unique resource identifier path"
+    "The unique identifier stored in the database"
     databaseId: Int!
     "Post publishing date."
     date: String
@@ -2259,159 +2784,163 @@ type PostFormat implements DatabaseIdentifier & Node & TermNode & UniformResourc
 }
 
 "Connection between the PostFormat type and the ContentNode type"
-type PostFormatToContentNodeConnection {
+type PostFormatToContentNodeConnection implements Connection & ContentNodeConnection {
     "Edges for the PostFormatToContentNodeConnection connection"
-    edges: [PostFormatToContentNodeConnectionEdge]
+    edges: [PostFormatToContentNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostFormatToContentNodeConnectionEdge {
+type PostFormatToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the PostFormat type and the post type"
-type PostFormatToPostConnection {
+type PostFormatToPostConnection implements Connection & PostConnection {
     "Edges for the PostFormatToPostConnection connection"
-    edges: [PostFormatToPostConnectionEdge]
+    edges: [PostFormatToPostConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostFormatToPostConnectionEdge {
+type PostFormatToPostConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
 }
 
 "Connection between the PostFormat type and the Taxonomy type"
-type PostFormatToTaxonomyConnectionEdge {
+type PostFormatToTaxonomyConnectionEdge implements Edge & OneToOneConnection & TaxonomyConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Taxonomy
+    node: Taxonomy!
 }
 
 "Connection between the Post type and the category type"
-type PostToCategoryConnection {
+type PostToCategoryConnection implements CategoryConnection & Connection {
     "Edges for the PostToCategoryConnection connection"
-    edges: [PostToCategoryConnectionEdge]
+    edges: [PostToCategoryConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Category]
+    nodes: [Category!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToCategoryConnectionEdge {
+type PostToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Category
+    node: Category!
 }
 
 "Connection between the Post type and the Comment type"
-type PostToCommentConnection {
+type PostToCommentConnection implements CommentConnection & Connection {
     "Edges for the PostToCommentConnection connection"
-    edges: [PostToCommentConnectionEdge]
+    edges: [PostToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToCommentConnectionEdge {
+type PostToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
+    node: Comment!
 }
 
 "Connection between the Post type and the postFormat type"
-type PostToPostFormatConnection {
+type PostToPostFormatConnection implements Connection & PostFormatConnection {
     "Edges for the PostToPostFormatConnection connection"
-    edges: [PostToPostFormatConnectionEdge]
+    edges: [PostToPostFormatConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [PostFormat]
+    nodes: [PostFormat!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToPostFormatConnectionEdge {
+type PostToPostFormatConnectionEdge implements Edge & PostFormatConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: PostFormat
+    node: PostFormat!
 }
 
 "Connection between the Post type and the post type"
-type PostToPreviewConnectionEdge {
+type PostToPreviewConnectionEdge implements Edge & OneToOneConnection & PostConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Post
+    node: Post!
 }
 
 "Connection between the Post type and the post type"
-type PostToRevisionConnection {
+type PostToRevisionConnection implements Connection & PostConnection {
     "Edges for the PostToRevisionConnection connection"
-    edges: [PostToRevisionConnectionEdge]
+    edges: [PostToRevisionConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToRevisionConnectionEdge {
+type PostToRevisionConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
 }
 
 "Connection between the Post type and the tag type"
-type PostToTagConnection {
+type PostToTagConnection implements Connection & TagConnection {
     "Edges for the PostToTagConnection connection"
-    edges: [PostToTagConnectionEdge]
+    edges: [PostToTagConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Tag]
+    nodes: [Tag!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToTagConnectionEdge {
+type PostToTagConnectionEdge implements Edge & TagConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Tag
+    node: Tag!
 }
 
 "Connection between the Post type and the TermNode type"
-type PostToTermNodeConnection {
+type PostToTermNodeConnection implements Connection & TermNodeConnection {
     "Edges for the PostToTermNodeConnection connection"
-    edges: [PostToTermNodeConnectionEdge]
+    edges: [PostToTermNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [TermNode]
+    nodes: [TermNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type PostToTermNodeConnectionEdge {
+type PostToTermNodeConnectionEdge implements Edge & TermNodeConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: TermNode
+    node: TermNode!
 }
 
 "Details for labels of the PostType"
@@ -2591,11 +3120,12 @@ type Post_Courseprogramitemacf implements AcfFieldGroup {
 "Field Group"
 type Post_Faqacf implements AcfFieldGroup {
     "Укажите имя автора"
-    author: String
+    author: Post_Faqacf_Author
     "The name of the ACF Field Group"
     fieldGroupName: String
     "Добавьте изображение для превью"
     previewImage: MediaItem
+    themes: [Post_Faqacf_Themes]
     "Укажите продолжительность видео"
     videoDuration: String
     "Укажите сылку на видео"
@@ -2616,10 +3146,10 @@ type Post_Materialacf implements AcfFieldGroup {
     "The name of the ACF Field Group"
     fieldGroupName: String
     mainTheme: Post_Materialacf_MainTheme
+    materialType: Post_Materialacf_MaterialType
     "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
     onlineLink: String
     themes: [Post_Materialacf_Themes]
-    type: Post_Materialacf_Type
 }
 
 "Field Group"
@@ -2673,6 +3203,7 @@ type Post_Recordacf implements AcfFieldGroup {
     author: Post_Recordacf_Author
     "Введите уровень преданного служения, на котором преданным рекомендуется данный материал"
     bhaktiLevel: [Post_Recordacf_BhaktiLevel]
+    courseCategory: [Post_Recordacf_CourseCategory]
     "Добавьте описание курса"
     description: String
     "Добавьте ссылку на скачивание курса"
@@ -2680,10 +3211,10 @@ type Post_Recordacf implements AcfFieldGroup {
     "The name of the ACF Field Group"
     fieldGroupName: String
     mainTheme: Post_Recordacf_MainTheme
+    materialType: Post_Recordacf_MaterialType
     "Добавьте ссылки на видеоролики. Каждая ссылка должна быть на новой строке."
     onlineLink: String
     themes: [Post_Recordacf_Themes]
-    type: Post_Recordacf_Type
 }
 
 "Field Group"
@@ -2766,7 +3297,7 @@ type ReadingSettings {
     showOnFront: String
 }
 
-"The payload for the refreshJwtAuthToken mutation"
+"The payload for the refreshJwtAuthToken mutation."
 type RefreshJwtAuthTokenPayload {
     "JWT Token that can be used in future requests for Authentication"
     authToken: String
@@ -2774,7 +3305,7 @@ type RefreshJwtAuthTokenPayload {
     clientMutationId: String
 }
 
-"The payload for the registerUser mutation"
+"The payload for the registerUser mutation."
 type RegisterUserPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -2782,7 +3313,7 @@ type RegisterUserPayload {
     user: User
 }
 
-"The payload for the removeFromWishlist mutation"
+"The payload for the removeFromWishlist mutation."
 type RemoveFromWishlistPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -2796,7 +3327,7 @@ type RemoveFromWishlistPayload {
     wishlistProductIds: [Int]
 }
 
-"The payload for the resetUserPassword mutation"
+"The payload for the resetUserPassword mutation."
 type ResetUserPasswordPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -2804,7 +3335,7 @@ type ResetUserPasswordPayload {
     user: User
 }
 
-"The payload for the restoreComment mutation"
+"The payload for the restoreComment mutation."
 type RestoreCommentPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -2816,87 +3347,87 @@ type RestoreCommentPayload {
 
 "The root mutation"
 type RootMutation {
-    "The payload for the addToWishlist mutation"
+    "The addToWishlist mutation"
     addToWishlist(
         "Input for the addToWishlist mutation"
         input: AddToWishlistInput!
     ): AddToWishlistPayload
-    "The payload for the createCategory mutation"
+    "The createCategory mutation"
     createCategory(
         "Input for the createCategory mutation"
         input: CreateCategoryInput!
     ): CreateCategoryPayload
-    "The payload for the createComment mutation"
+    "The createComment mutation"
     createComment(
         "Input for the createComment mutation"
         input: CreateCommentInput!
     ): CreateCommentPayload
-    "The payload for the createMediaItem mutation"
+    "The createMediaItem mutation"
     createMediaItem(
         "Input for the createMediaItem mutation"
         input: CreateMediaItemInput!
     ): CreateMediaItemPayload
-    "The payload for the createPage mutation"
+    "The createPage mutation"
     createPage(
         "Input for the createPage mutation"
         input: CreatePageInput!
     ): CreatePagePayload
-    "The payload for the createPost mutation"
+    "The createPost mutation"
     createPost(
         "Input for the createPost mutation"
         input: CreatePostInput!
     ): CreatePostPayload
-    "The payload for the createPostFormat mutation"
+    "The createPostFormat mutation"
     createPostFormat(
         "Input for the createPostFormat mutation"
         input: CreatePostFormatInput!
     ): CreatePostFormatPayload
-    "The payload for the createTag mutation"
+    "The createTag mutation"
     createTag(
         "Input for the createTag mutation"
         input: CreateTagInput!
     ): CreateTagPayload
-    "The payload for the createUser mutation"
+    "The createUser mutation"
     createUser(
         "Input for the createUser mutation"
         input: CreateUserInput!
     ): CreateUserPayload
-    "The payload for the deleteCategory mutation"
+    "The deleteCategory mutation"
     deleteCategory(
         "Input for the deleteCategory mutation"
         input: DeleteCategoryInput!
     ): DeleteCategoryPayload
-    "The payload for the deleteComment mutation"
+    "The deleteComment mutation"
     deleteComment(
         "Input for the deleteComment mutation"
         input: DeleteCommentInput!
     ): DeleteCommentPayload
-    "The payload for the deleteMediaItem mutation"
+    "The deleteMediaItem mutation"
     deleteMediaItem(
         "Input for the deleteMediaItem mutation"
         input: DeleteMediaItemInput!
     ): DeleteMediaItemPayload
-    "The payload for the deletePage mutation"
+    "The deletePage mutation"
     deletePage(
         "Input for the deletePage mutation"
         input: DeletePageInput!
     ): DeletePagePayload
-    "The payload for the deletePost mutation"
+    "The deletePost mutation"
     deletePost(
         "Input for the deletePost mutation"
         input: DeletePostInput!
     ): DeletePostPayload
-    "The payload for the deletePostFormat mutation"
+    "The deletePostFormat mutation"
     deletePostFormat(
         "Input for the deletePostFormat mutation"
         input: DeletePostFormatInput!
     ): DeletePostFormatPayload
-    "The payload for the deleteTag mutation"
+    "The deleteTag mutation"
     deleteTag(
         "Input for the deleteTag mutation"
         input: DeleteTagInput!
     ): DeleteTagPayload
-    "The payload for the deleteUser mutation"
+    "The deleteUser mutation"
     deleteUser(
         "Input for the deleteUser mutation"
         input: DeleteUserInput!
@@ -2906,92 +3437,92 @@ type RootMutation {
         "The count to increase"
         count: Int
     ): Int
-    "The payload for the login mutation"
+    "Login a user. Request for an authToken and User details in response"
     login(
         "Input for the login mutation"
         input: LoginInput!
     ): LoginPayload
-    "The payload for the loginWithCookies mutation"
+    "The loginWithCookies mutation"
     loginWithCookies(
         "Input for the loginWithCookies mutation"
         input: LoginWithCookiesInput!
     ): LoginWithCookiesPayload
-    "The payload for the logout mutation"
+    "The logout mutation"
     logout(
         "Input for the logout mutation"
         input: LogoutInput!
     ): LogoutPayload
-    "The payload for the refreshJwtAuthToken mutation"
+    "Use a valid JWT Refresh token to retrieve a new JWT Auth Token"
     refreshJwtAuthToken(
         "Input for the refreshJwtAuthToken mutation"
         input: RefreshJwtAuthTokenInput!
     ): RefreshJwtAuthTokenPayload
-    "The payload for the registerUser mutation"
+    "The registerUser mutation"
     registerUser(
         "Input for the registerUser mutation"
         input: RegisterUserInput!
     ): RegisterUserPayload
-    "The payload for the removeFromWishlist mutation"
+    "The removeFromWishlist mutation"
     removeFromWishlist(
         "Input for the removeFromWishlist mutation"
         input: RemoveFromWishlistInput!
     ): RemoveFromWishlistPayload
-    "The payload for the resetUserPassword mutation"
+    "The resetUserPassword mutation"
     resetUserPassword(
         "Input for the resetUserPassword mutation"
         input: ResetUserPasswordInput!
     ): ResetUserPasswordPayload
-    "The payload for the restoreComment mutation"
+    "The restoreComment mutation"
     restoreComment(
         "Input for the restoreComment mutation"
         input: RestoreCommentInput!
     ): RestoreCommentPayload
-    "The payload for the sendPasswordResetEmail mutation"
+    "Send password reset email to user"
     sendPasswordResetEmail(
         "Input for the sendPasswordResetEmail mutation"
         input: SendPasswordResetEmailInput!
     ): SendPasswordResetEmailPayload
-    "The payload for the UpdateCategory mutation"
+    "The updateCategory mutation"
     updateCategory(
-        "Input for the UpdateCategory mutation"
+        "Input for the updateCategory mutation"
         input: UpdateCategoryInput!
     ): UpdateCategoryPayload
-    "The payload for the updateComment mutation"
+    "The updateComment mutation"
     updateComment(
         "Input for the updateComment mutation"
         input: UpdateCommentInput!
     ): UpdateCommentPayload
-    "The payload for the updateMediaItem mutation"
+    "The updateMediaItem mutation"
     updateMediaItem(
         "Input for the updateMediaItem mutation"
         input: UpdateMediaItemInput!
     ): UpdateMediaItemPayload
-    "The payload for the updatePage mutation"
+    "The updatePage mutation"
     updatePage(
         "Input for the updatePage mutation"
         input: UpdatePageInput!
     ): UpdatePagePayload
-    "The payload for the updatePost mutation"
+    "The updatePost mutation"
     updatePost(
         "Input for the updatePost mutation"
         input: UpdatePostInput!
     ): UpdatePostPayload
-    "The payload for the UpdatePostFormat mutation"
+    "The updatePostFormat mutation"
     updatePostFormat(
-        "Input for the UpdatePostFormat mutation"
+        "Input for the updatePostFormat mutation"
         input: UpdatePostFormatInput!
     ): UpdatePostFormatPayload
-    "The payload for the updateSettings mutation"
+    "The updateSettings mutation"
     updateSettings(
         "Input for the updateSettings mutation"
         input: UpdateSettingsInput!
     ): UpdateSettingsPayload
-    "The payload for the UpdateTag mutation"
+    "The updateTag mutation"
     updateTag(
-        "Input for the UpdateTag mutation"
+        "Input for the updateTag mutation"
         input: UpdateTagInput!
     ): UpdateTagPayload
-    "The payload for the updateUser mutation"
+    "The updateUser mutation"
     updateUser(
         "Input for the updateUser mutation"
         input: UpdateUserInput!
@@ -3301,7 +3832,7 @@ type RootQuery {
         "The number of items to return before the referenced \"before\" cursor"
         last: Int
     ): RootQueryToEnqueuedStylesheetConnection
-    "Connection between the RootQuery type and the ContentRevisionUnion type"
+    "Connection between the RootQuery type and the ContentNode type"
     revisions(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
         after: String,
@@ -3312,8 +3843,8 @@ type RootQuery {
         "The number of items to return before the referenced \"before\" cursor"
         last: Int,
         "Arguments for filtering the connection"
-        where: RootQueryToContentRevisionUnionConnectionWhereArgs
-    ): RootQueryToContentRevisionUnionConnection
+        where: RootQueryToRevisionsConnectionWhereArgs
+    ): RootQueryToRevisionsConnection
     "Shipping Zones"
     shippingInfo: ShippingInfo
     "A 0bject"
@@ -3439,366 +3970,366 @@ type RootQuery {
 }
 
 "Connection between the RootQuery type and the category type"
-type RootQueryToCategoryConnection {
+type RootQueryToCategoryConnection implements CategoryConnection & Connection {
     "Edges for the RootQueryToCategoryConnection connection"
-    edges: [RootQueryToCategoryConnectionEdge]
+    edges: [RootQueryToCategoryConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Category]
+    nodes: [Category!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToCategoryConnectionEdge {
+type RootQueryToCategoryConnectionEdge implements CategoryConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Category
+    node: Category!
 }
 
 "Connection between the RootQuery type and the Comment type"
-type RootQueryToCommentConnection {
+type RootQueryToCommentConnection implements CommentConnection & Connection {
     "Edges for the RootQueryToCommentConnection connection"
-    edges: [RootQueryToCommentConnectionEdge]
+    edges: [RootQueryToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToCommentConnectionEdge {
+type RootQueryToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
+    node: Comment!
 }
 
 "Connection between the RootQuery type and the ContentNode type"
-type RootQueryToContentNodeConnection {
+type RootQueryToContentNodeConnection implements Connection & ContentNodeConnection {
     "Edges for the RootQueryToContentNodeConnection connection"
-    edges: [RootQueryToContentNodeConnectionEdge]
+    edges: [RootQueryToContentNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToContentNodeConnectionEdge {
+type RootQueryToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
-}
-
-"Connection between the RootQuery type and the ContentRevisionUnion type"
-type RootQueryToContentRevisionUnionConnection {
-    "Edges for the RootQueryToContentRevisionUnionConnection connection"
-    edges: [RootQueryToContentRevisionUnionConnectionEdge]
-    "The nodes of the connection, without the edges"
-    nodes: [ContentRevisionUnion]
-    "Information about pagination in a connection."
-    pageInfo: WPPageInfo
-}
-
-"An edge in a connection"
-type RootQueryToContentRevisionUnionConnectionEdge {
-    "A cursor for use in pagination"
-    cursor: String
-    "The item at the end of the edge"
-    node: ContentRevisionUnion
+    node: ContentNode!
 }
 
 "Connection between the RootQuery type and the ContentType type"
-type RootQueryToContentTypeConnection {
+type RootQueryToContentTypeConnection implements Connection & ContentTypeConnection {
     "Edges for the RootQueryToContentTypeConnection connection"
-    edges: [RootQueryToContentTypeConnectionEdge]
+    edges: [RootQueryToContentTypeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentType]
+    nodes: [ContentType!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToContentTypeConnectionEdge {
+type RootQueryToContentTypeConnectionEdge implements ContentTypeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentType
+    node: ContentType!
 }
 
 "Connection between the RootQuery type and the EnqueuedScript type"
-type RootQueryToEnqueuedScriptConnection {
+type RootQueryToEnqueuedScriptConnection implements Connection & EnqueuedScriptConnection {
     "Edges for the RootQueryToEnqueuedScriptConnection connection"
-    edges: [RootQueryToEnqueuedScriptConnectionEdge]
+    edges: [RootQueryToEnqueuedScriptConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedScript]
+    nodes: [EnqueuedScript!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToEnqueuedScriptConnectionEdge {
+type RootQueryToEnqueuedScriptConnectionEdge implements Edge & EnqueuedScriptConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedScript
+    node: EnqueuedScript!
 }
 
 "Connection between the RootQuery type and the EnqueuedStylesheet type"
-type RootQueryToEnqueuedStylesheetConnection {
+type RootQueryToEnqueuedStylesheetConnection implements Connection & EnqueuedStylesheetConnection {
     "Edges for the RootQueryToEnqueuedStylesheetConnection connection"
-    edges: [RootQueryToEnqueuedStylesheetConnectionEdge]
+    edges: [RootQueryToEnqueuedStylesheetConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedStylesheet]
+    nodes: [EnqueuedStylesheet!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToEnqueuedStylesheetConnectionEdge {
+type RootQueryToEnqueuedStylesheetConnectionEdge implements Edge & EnqueuedStylesheetConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedStylesheet
+    node: EnqueuedStylesheet!
 }
 
 "Connection between the RootQuery type and the mediaItem type"
-type RootQueryToMediaItemConnection {
+type RootQueryToMediaItemConnection implements Connection & MediaItemConnection {
     "Edges for the RootQueryToMediaItemConnection connection"
-    edges: [RootQueryToMediaItemConnectionEdge]
+    edges: [RootQueryToMediaItemConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [MediaItem]
+    nodes: [MediaItem!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToMediaItemConnectionEdge {
+type RootQueryToMediaItemConnectionEdge implements Edge & MediaItemConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: MediaItem
+    node: MediaItem!
 }
 
 "Connection between the RootQuery type and the Menu type"
-type RootQueryToMenuConnection {
+type RootQueryToMenuConnection implements Connection & MenuConnection {
     "Edges for the RootQueryToMenuConnection connection"
-    edges: [RootQueryToMenuConnectionEdge]
+    edges: [RootQueryToMenuConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Menu]
+    nodes: [Menu!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToMenuConnectionEdge {
+type RootQueryToMenuConnectionEdge implements Edge & MenuConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Menu
+    node: Menu!
 }
 
 "Connection between the RootQuery type and the MenuItem type"
-type RootQueryToMenuItemConnection {
+type RootQueryToMenuItemConnection implements Connection & MenuItemConnection {
     "Edges for the RootQueryToMenuItemConnection connection"
-    edges: [RootQueryToMenuItemConnectionEdge]
+    edges: [RootQueryToMenuItemConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [MenuItem]
+    nodes: [MenuItem!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToMenuItemConnectionEdge {
+type RootQueryToMenuItemConnectionEdge implements Edge & MenuItemConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: MenuItem
+    node: MenuItem!
 }
 
 "Connection between the RootQuery type and the page type"
-type RootQueryToPageConnection {
+type RootQueryToPageConnection implements Connection & PageConnection {
     "Edges for the RootQueryToPageConnection connection"
-    edges: [RootQueryToPageConnectionEdge]
+    edges: [RootQueryToPageConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Page]
+    nodes: [Page!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToPageConnectionEdge {
+type RootQueryToPageConnectionEdge implements Edge & PageConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Page
+    node: Page!
 }
 
 "Connection between the RootQuery type and the Plugin type"
-type RootQueryToPluginConnection {
+type RootQueryToPluginConnection implements Connection & PluginConnection {
     "Edges for the RootQueryToPluginConnection connection"
-    edges: [RootQueryToPluginConnectionEdge]
+    edges: [RootQueryToPluginConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Plugin]
+    nodes: [Plugin!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToPluginConnectionEdge {
+type RootQueryToPluginConnectionEdge implements Edge & PluginConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Plugin
+    node: Plugin!
 }
 
 "Connection between the RootQuery type and the post type"
-type RootQueryToPostConnection {
+type RootQueryToPostConnection implements Connection & PostConnection {
     "Edges for the RootQueryToPostConnection connection"
-    edges: [RootQueryToPostConnectionEdge]
+    edges: [RootQueryToPostConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToPostConnectionEdge {
+type RootQueryToPostConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
 }
 
 "Connection between the RootQuery type and the postFormat type"
-type RootQueryToPostFormatConnection {
+type RootQueryToPostFormatConnection implements Connection & PostFormatConnection {
     "Edges for the RootQueryToPostFormatConnection connection"
-    edges: [RootQueryToPostFormatConnectionEdge]
+    edges: [RootQueryToPostFormatConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [PostFormat]
+    nodes: [PostFormat!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToPostFormatConnectionEdge {
+type RootQueryToPostFormatConnectionEdge implements Edge & PostFormatConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: PostFormat
+    node: PostFormat!
+}
+
+"Connection between the RootQuery type and the ContentNode type"
+type RootQueryToRevisionsConnection implements Connection & ContentNodeConnection {
+    "Edges for the RootQueryToRevisionsConnection connection"
+    edges: [RootQueryToRevisionsConnectionEdge!]!
+    "The nodes of the connection, without the edges"
+    nodes: [ContentNode!]!
+    "Information about pagination in a connection."
+    pageInfo: WPPageInfo
+}
+
+"An edge in a connection"
+type RootQueryToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge {
+    "A cursor for use in pagination"
+    cursor: String
+    "The item at the end of the edge"
+    node: ContentNode!
 }
 
 "Connection between the RootQuery type and the tag type"
-type RootQueryToTagConnection {
+type RootQueryToTagConnection implements Connection & TagConnection {
     "Edges for the RootQueryToTagConnection connection"
-    edges: [RootQueryToTagConnectionEdge]
+    edges: [RootQueryToTagConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Tag]
+    nodes: [Tag!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToTagConnectionEdge {
+type RootQueryToTagConnectionEdge implements Edge & TagConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Tag
+    node: Tag!
 }
 
 "Connection between the RootQuery type and the Taxonomy type"
-type RootQueryToTaxonomyConnection {
+type RootQueryToTaxonomyConnection implements Connection & TaxonomyConnection {
     "Edges for the RootQueryToTaxonomyConnection connection"
-    edges: [RootQueryToTaxonomyConnectionEdge]
+    edges: [RootQueryToTaxonomyConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Taxonomy]
+    nodes: [Taxonomy!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToTaxonomyConnectionEdge {
+type RootQueryToTaxonomyConnectionEdge implements Edge & TaxonomyConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Taxonomy
+    node: Taxonomy!
 }
 
 "Connection between the RootQuery type and the TermNode type"
-type RootQueryToTermNodeConnection {
+type RootQueryToTermNodeConnection implements Connection & TermNodeConnection {
     "Edges for the RootQueryToTermNodeConnection connection"
-    edges: [RootQueryToTermNodeConnectionEdge]
+    edges: [RootQueryToTermNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [TermNode]
+    nodes: [TermNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToTermNodeConnectionEdge {
+type RootQueryToTermNodeConnectionEdge implements Edge & TermNodeConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: TermNode
+    node: TermNode!
 }
 
 "Connection between the RootQuery type and the Theme type"
-type RootQueryToThemeConnection {
+type RootQueryToThemeConnection implements Connection & ThemeConnection {
     "Edges for the RootQueryToThemeConnection connection"
-    edges: [RootQueryToThemeConnectionEdge]
+    edges: [RootQueryToThemeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Theme]
+    nodes: [Theme!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToThemeConnectionEdge {
+type RootQueryToThemeConnectionEdge implements Edge & ThemeConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Theme
+    node: Theme!
 }
 
 "Connection between the RootQuery type and the User type"
-type RootQueryToUserConnection {
+type RootQueryToUserConnection implements Connection & UserConnection {
     "Edges for the RootQueryToUserConnection connection"
-    edges: [RootQueryToUserConnectionEdge]
+    edges: [RootQueryToUserConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [User]
+    nodes: [User!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToUserConnectionEdge {
+type RootQueryToUserConnectionEdge implements Edge & UserConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: User
+    node: User!
 }
 
 "Connection between the RootQuery type and the UserRole type"
-type RootQueryToUserRoleConnection {
+type RootQueryToUserRoleConnection implements Connection & UserRoleConnection {
     "Edges for the RootQueryToUserRoleConnection connection"
-    edges: [RootQueryToUserRoleConnectionEdge]
+    edges: [RootQueryToUserRoleConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [UserRole]
+    nodes: [UserRole!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type RootQueryToUserRoleConnectionEdge {
+type RootQueryToUserRoleConnectionEdge implements Edge & UserRoleConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: UserRole
+    node: UserRole!
 }
 
-"The payload for the sendPasswordResetEmail mutation"
+"The payload for the sendPasswordResetEmail mutation."
 type SendPasswordResetEmailPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -3871,7 +4402,7 @@ type Tag implements DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Un
     ): TagToContentNodeConnection
     "The number of objects connected to the object"
     count: Int
-    "The unique resource identifier path"
+    "The unique identifier stored in the database"
     databaseId: Int!
     "The description of the object"
     description: String
@@ -3939,45 +4470,47 @@ type Tag implements DatabaseIdentifier & MenuItemLinkable & Node & TermNode & Un
 }
 
 "Connection between the Tag type and the ContentNode type"
-type TagToContentNodeConnection {
+type TagToContentNodeConnection implements Connection & ContentNodeConnection {
     "Edges for the TagToContentNodeConnection connection"
-    edges: [TagToContentNodeConnectionEdge]
+    edges: [TagToContentNodeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentNode]
+    nodes: [ContentNode!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type TagToContentNodeConnectionEdge {
+type TagToContentNodeConnectionEdge implements ContentNodeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentNode
+    node: ContentNode!
 }
 
 "Connection between the Tag type and the post type"
-type TagToPostConnection {
+type TagToPostConnection implements Connection & PostConnection {
     "Edges for the TagToPostConnection connection"
-    edges: [TagToPostConnectionEdge]
+    edges: [TagToPostConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type TagToPostConnectionEdge {
+type TagToPostConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
 }
 
 "Connection between the Tag type and the Taxonomy type"
-type TagToTaxonomyConnectionEdge {
+type TagToTaxonomyConnectionEdge implements Edge & OneToOneConnection & TaxonomyConnectionEdge {
+    "Opaque reference to the nodes position in the connection. Value can be used with pagination args."
+    cursor: String
     "The node of the connection, without the edges"
-    node: Taxonomy
+    node: Taxonomy!
 }
 
 "A taxonomy object"
@@ -4034,57 +4567,57 @@ type Taxonomy implements Node {
 }
 
 "Connection between the Taxonomy type and the ContentType type"
-type TaxonomyToContentTypeConnection {
+type TaxonomyToContentTypeConnection implements Connection & ContentTypeConnection {
     "Edges for the TaxonomyToContentTypeConnection connection"
-    edges: [TaxonomyToContentTypeConnectionEdge]
+    edges: [TaxonomyToContentTypeConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [ContentType]
+    nodes: [ContentType!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type TaxonomyToContentTypeConnectionEdge {
+type TaxonomyToContentTypeConnectionEdge implements ContentTypeConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: ContentType
+    node: ContentType!
 }
 
 "Connection between the TermNode type and the EnqueuedScript type"
-type TermNodeToEnqueuedScriptConnection {
+type TermNodeToEnqueuedScriptConnection implements Connection & EnqueuedScriptConnection {
     "Edges for the TermNodeToEnqueuedScriptConnection connection"
-    edges: [TermNodeToEnqueuedScriptConnectionEdge]
+    edges: [TermNodeToEnqueuedScriptConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedScript]
+    nodes: [EnqueuedScript!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type TermNodeToEnqueuedScriptConnectionEdge {
+type TermNodeToEnqueuedScriptConnectionEdge implements Edge & EnqueuedScriptConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedScript
+    node: EnqueuedScript!
 }
 
 "Connection between the TermNode type and the EnqueuedStylesheet type"
-type TermNodeToEnqueuedStylesheetConnection {
+type TermNodeToEnqueuedStylesheetConnection implements Connection & EnqueuedStylesheetConnection {
     "Edges for the TermNodeToEnqueuedStylesheetConnection connection"
-    edges: [TermNodeToEnqueuedStylesheetConnectionEdge]
+    edges: [TermNodeToEnqueuedStylesheetConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedStylesheet]
+    nodes: [EnqueuedStylesheet!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type TermNodeToEnqueuedStylesheetConnectionEdge {
+type TermNodeToEnqueuedStylesheetConnectionEdge implements Edge & EnqueuedStylesheetConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedStylesheet
+    node: EnqueuedStylesheet!
 }
 
 "A theme object"
@@ -4113,7 +4646,7 @@ type Theme implements Node {
     version: String
 }
 
-"The payload for the UpdateCategory mutation"
+"The payload for the updateCategory mutation."
 type UpdateCategoryPayload {
     "The created category"
     category: Category
@@ -4121,7 +4654,7 @@ type UpdateCategoryPayload {
     clientMutationId: String
 }
 
-"The payload for the updateComment mutation"
+"The payload for the updateComment mutation."
 type UpdateCommentPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4131,7 +4664,7 @@ type UpdateCommentPayload {
     success: Boolean
 }
 
-"The payload for the updateMediaItem mutation"
+"The payload for the updateMediaItem mutation."
 type UpdateMediaItemPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4139,7 +4672,7 @@ type UpdateMediaItemPayload {
     mediaItem: MediaItem
 }
 
-"The payload for the updatePage mutation"
+"The payload for the updatePage mutation."
 type UpdatePagePayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4147,7 +4680,7 @@ type UpdatePagePayload {
     page: Page
 }
 
-"The payload for the UpdatePostFormat mutation"
+"The payload for the updatePostFormat mutation."
 type UpdatePostFormatPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4155,7 +4688,7 @@ type UpdatePostFormatPayload {
     postFormat: PostFormat
 }
 
-"The payload for the updatePost mutation"
+"The payload for the updatePost mutation."
 type UpdatePostPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4163,7 +4696,7 @@ type UpdatePostPayload {
     post: Post
 }
 
-"The payload for the updateSettings mutation"
+"The payload for the updateSettings mutation."
 type UpdateSettingsPayload {
     "Update all settings."
     allSettings: Settings
@@ -4179,7 +4712,7 @@ type UpdateSettingsPayload {
     writingSettings: WritingSettings
 }
 
-"The payload for the UpdateTag mutation"
+"The payload for the updateTag mutation."
 type UpdateTagPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4187,7 +4720,7 @@ type UpdateTagPayload {
     tag: Tag
 }
 
-"The payload for the updateUser mutation"
+"The payload for the updateUser mutation."
 type UpdateUserPayload {
     "If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -4335,8 +4868,8 @@ type User implements Commenter & DatabaseIdentifier & Node & UniformResourceIden
         "The number of items to return before the referenced \"before\" cursor"
         last: Int,
         "Arguments for filtering the connection"
-        where: UserToContentRevisionUnionConnectionWhereArgs
-    ): UserToContentRevisionUnionConnection
+        where: UserToRevisionsConnectionWhereArgs
+    ): UserToRevisionsConnection
     "Connection between the User type and the UserRole type"
     roles(
         "Cursor used along with the \"first\" argument to reference where in the dataset to get data"
@@ -4377,147 +4910,147 @@ type UserRole implements Node {
 }
 
 "Connection between the User type and the Comment type"
-type UserToCommentConnection {
+type UserToCommentConnection implements CommentConnection & Connection {
     "Edges for the UserToCommentConnection connection"
-    edges: [UserToCommentConnectionEdge]
+    edges: [UserToCommentConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Comment]
+    nodes: [Comment!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToCommentConnectionEdge {
+type UserToCommentConnectionEdge implements CommentConnectionEdge & Edge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Comment
-}
-
-"Connection between the User type and the ContentRevisionUnion type"
-type UserToContentRevisionUnionConnection {
-    "Edges for the UserToContentRevisionUnionConnection connection"
-    edges: [UserToContentRevisionUnionConnectionEdge]
-    "The nodes of the connection, without the edges"
-    nodes: [ContentRevisionUnion]
-    "Information about pagination in a connection."
-    pageInfo: WPPageInfo
-}
-
-"An edge in a connection"
-type UserToContentRevisionUnionConnectionEdge {
-    "A cursor for use in pagination"
-    cursor: String
-    "The item at the end of the edge"
-    node: ContentRevisionUnion
+    node: Comment!
 }
 
 "Connection between the User type and the EnqueuedScript type"
-type UserToEnqueuedScriptConnection {
+type UserToEnqueuedScriptConnection implements Connection & EnqueuedScriptConnection {
     "Edges for the UserToEnqueuedScriptConnection connection"
-    edges: [UserToEnqueuedScriptConnectionEdge]
+    edges: [UserToEnqueuedScriptConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedScript]
+    nodes: [EnqueuedScript!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToEnqueuedScriptConnectionEdge {
+type UserToEnqueuedScriptConnectionEdge implements Edge & EnqueuedScriptConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedScript
+    node: EnqueuedScript!
 }
 
 "Connection between the User type and the EnqueuedStylesheet type"
-type UserToEnqueuedStylesheetConnection {
+type UserToEnqueuedStylesheetConnection implements Connection & EnqueuedStylesheetConnection {
     "Edges for the UserToEnqueuedStylesheetConnection connection"
-    edges: [UserToEnqueuedStylesheetConnectionEdge]
+    edges: [UserToEnqueuedStylesheetConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [EnqueuedStylesheet]
+    nodes: [EnqueuedStylesheet!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToEnqueuedStylesheetConnectionEdge {
+type UserToEnqueuedStylesheetConnectionEdge implements Edge & EnqueuedStylesheetConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: EnqueuedStylesheet
+    node: EnqueuedStylesheet!
 }
 
 "Connection between the User type and the mediaItem type"
-type UserToMediaItemConnection {
+type UserToMediaItemConnection implements Connection & MediaItemConnection {
     "Edges for the UserToMediaItemConnection connection"
-    edges: [UserToMediaItemConnectionEdge]
+    edges: [UserToMediaItemConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [MediaItem]
+    nodes: [MediaItem!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToMediaItemConnectionEdge {
+type UserToMediaItemConnectionEdge implements Edge & MediaItemConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: MediaItem
+    node: MediaItem!
 }
 
 "Connection between the User type and the page type"
-type UserToPageConnection {
+type UserToPageConnection implements Connection & PageConnection {
     "Edges for the UserToPageConnection connection"
-    edges: [UserToPageConnectionEdge]
+    edges: [UserToPageConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Page]
+    nodes: [Page!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToPageConnectionEdge {
+type UserToPageConnectionEdge implements Edge & PageConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Page
+    node: Page!
 }
 
 "Connection between the User type and the post type"
-type UserToPostConnection {
+type UserToPostConnection implements Connection & PostConnection {
     "Edges for the UserToPostConnection connection"
-    edges: [UserToPostConnectionEdge]
+    edges: [UserToPostConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [Post]
+    nodes: [Post!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToPostConnectionEdge {
+type UserToPostConnectionEdge implements Edge & PostConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: Post
+    node: Post!
+}
+
+"Connection between the User type and the ContentNode type"
+type UserToRevisionsConnection implements Connection & ContentNodeConnection {
+    "Edges for the UserToRevisionsConnection connection"
+    edges: [UserToRevisionsConnectionEdge!]!
+    "The nodes of the connection, without the edges"
+    nodes: [ContentNode!]!
+    "Information about pagination in a connection."
+    pageInfo: WPPageInfo
+}
+
+"An edge in a connection"
+type UserToRevisionsConnectionEdge implements ContentNodeConnectionEdge & Edge {
+    "A cursor for use in pagination"
+    cursor: String
+    "The item at the end of the edge"
+    node: ContentNode!
 }
 
 "Connection between the User type and the UserRole type"
-type UserToUserRoleConnection {
+type UserToUserRoleConnection implements Connection & UserRoleConnection {
     "Edges for the UserToUserRoleConnection connection"
-    edges: [UserToUserRoleConnectionEdge]
+    edges: [UserToUserRoleConnectionEdge!]!
     "The nodes of the connection, without the edges"
-    nodes: [UserRole]
+    nodes: [UserRole!]!
     "Information about pagination in a connection."
     pageInfo: WPPageInfo
 }
 
 "An edge in a connection"
-type UserToUserRoleConnectionEdge {
+type UserToUserRoleConnectionEdge implements Edge & UserRoleConnectionEdge {
     "A cursor for use in pagination"
     cursor: String
     "The item at the end of the edge"
-    node: UserRole
+    node: UserRole!
 }
 
 "Field Group"
@@ -4608,11 +5141,23 @@ enum CommentNodeIdTypeEnum {
     ID
 }
 
+"The status of the comment object."
+enum CommentStatusEnum {
+    "Comments with the Одобрен status"
+    APPROVE
+    "Comments with the Не одобрен status"
+    HOLD
+    "Comments with the Спам status"
+    SPAM
+    "Comments with the Удалён status"
+    TRASH
+}
+
 "Options for ordering the connection"
 enum CommentsConnectionOrderbyEnum {
     "Order by browser user agent of the commenter."
     COMMENT_AGENT
-    "Order by true/false approval of the comment."
+    "Order by approval status of the comment."
     COMMENT_APPROVED
     "Order by name of the comment author."
     COMMENT_AUTHOR
@@ -5216,7 +5761,7 @@ enum UsersConnectionSearchColumnEnum {
     URL
 }
 
-"Input for the addToWishlist mutation"
+"Input for the addToWishlist mutation."
 input AddToWishlistInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5540,7 +6085,7 @@ input ContentTypeToContentNodeConnectionWhereArgs {
     title: String
 }
 
-"Input for the createCategory mutation"
+"Input for the createCategory mutation."
 input CreateCategoryInput {
     "The slug that the category will be an alias of"
     aliasOf: String
@@ -5556,7 +6101,7 @@ input CreateCategoryInput {
     slug: String
 }
 
-"Input for the createComment mutation"
+"Input for the createComment mutation."
 input CreateCommentInput {
     "The approval status of the comment."
     approved: String
@@ -5576,11 +6121,13 @@ input CreateCommentInput {
     date: String
     "Parent comment ID of current comment."
     parent: ID
+    "The approval status of the comment"
+    status: CommentStatusEnum
     "Type of comment."
     type: String
 }
 
-"Input for the createMediaItem mutation"
+"Input for the createMediaItem mutation."
 input CreateMediaItemInput {
     "Alternative text to display when mediaItem is not displayed"
     altText: String
@@ -5614,7 +6161,7 @@ input CreateMediaItemInput {
     title: String
 }
 
-"Input for the createPage mutation"
+"Input for the createPage mutation."
 input CreatePageInput {
     "The userId to assign as the author of the object"
     authorId: ID
@@ -5640,7 +6187,7 @@ input CreatePageInput {
     title: String
 }
 
-"Input for the createPostFormat mutation"
+"Input for the createPostFormat mutation."
 input CreatePostFormatInput {
     "The slug that the post_format will be an alias of"
     aliasOf: String
@@ -5654,7 +6201,7 @@ input CreatePostFormatInput {
     slug: String
 }
 
-"Input for the createPost mutation"
+"Input for the createPost mutation."
 input CreatePostInput {
     "The userId to assign as the author of the object"
     authorId: ID
@@ -5692,7 +6239,7 @@ input CreatePostInput {
     toPing: [String]
 }
 
-"Input for the createTag mutation"
+"Input for the createTag mutation."
 input CreateTagInput {
     "The slug that the post_tag will be an alias of"
     aliasOf: String
@@ -5706,7 +6253,7 @@ input CreateTagInput {
     slug: String
 }
 
-"Input for the createUser mutation"
+"Input for the createUser mutation."
 input CreateUserInput {
     "User's AOL IM account."
     aim: String
@@ -5790,7 +6337,7 @@ input DateQueryInput {
     year: Int
 }
 
-"Input for the deleteCategory mutation"
+"Input for the deleteCategory mutation."
 input DeleteCategoryInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5798,7 +6345,7 @@ input DeleteCategoryInput {
     id: ID!
 }
 
-"Input for the deleteComment mutation"
+"Input for the deleteComment mutation."
 input DeleteCommentInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5808,7 +6355,7 @@ input DeleteCommentInput {
     id: ID!
 }
 
-"Input for the deleteMediaItem mutation"
+"Input for the deleteMediaItem mutation."
 input DeleteMediaItemInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5818,7 +6365,7 @@ input DeleteMediaItemInput {
     id: ID!
 }
 
-"Input for the deletePage mutation"
+"Input for the deletePage mutation."
 input DeletePageInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5828,7 +6375,7 @@ input DeletePageInput {
     id: ID!
 }
 
-"Input for the deletePostFormat mutation"
+"Input for the deletePostFormat mutation."
 input DeletePostFormatInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5836,7 +6383,7 @@ input DeletePostFormatInput {
     id: ID!
 }
 
-"Input for the deletePost mutation"
+"Input for the deletePost mutation."
 input DeletePostInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5846,7 +6393,7 @@ input DeletePostInput {
     id: ID!
 }
 
-"Input for the deleteTag mutation"
+"Input for the deleteTag mutation."
 input DeleteTagInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5854,7 +6401,7 @@ input DeleteTagInput {
     id: ID!
 }
 
-"Input for the deleteUser mutation"
+"Input for the deleteUser mutation."
 input DeleteUserInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5944,7 +6491,7 @@ input HierarchicalContentNodeToContentNodeChildrenConnectionWhereArgs {
     title: String
 }
 
-"Input for the login mutation"
+"Input for the login mutation."
 input LoginInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5954,7 +6501,7 @@ input LoginInput {
     username: String!
 }
 
-"Input for the loginWithCookies mutation"
+"Input for the loginWithCookies mutation."
 input LoginWithCookiesInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -5966,7 +6513,7 @@ input LoginWithCookiesInput {
     rememberMe: Boolean
 }
 
-"Input for the logout mutation"
+"Input for the logout mutation."
 input LogoutInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -6654,7 +7201,7 @@ input PostToTermNodeConnectionWhereArgs {
     updateTermMetaCache: Boolean
 }
 
-"Input for the refreshJwtAuthToken mutation"
+"Input for the refreshJwtAuthToken mutation."
 input RefreshJwtAuthTokenInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -6662,7 +7209,7 @@ input RefreshJwtAuthTokenInput {
     jwtRefreshToken: String!
 }
 
-"Input for the registerUser mutation"
+"Input for the registerUser mutation."
 input RegisterUserInput {
     "User's AOL IM account."
     aim: String
@@ -6704,7 +7251,7 @@ input RegisterUserInput {
     yim: String
 }
 
-"Input for the removeFromWishlist mutation"
+"Input for the removeFromWishlist mutation."
 input RemoveFromWishlistInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -6712,7 +7259,7 @@ input RemoveFromWishlistInput {
     productId: Int
 }
 
-"Input for the resetUserPassword mutation"
+"Input for the resetUserPassword mutation."
 input ResetUserPasswordInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -6724,7 +7271,7 @@ input ResetUserPasswordInput {
     password: String
 }
 
-"Input for the restoreComment mutation"
+"Input for the restoreComment mutation."
 input RestoreCommentInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -6842,46 +7389,6 @@ input RootQueryToCommentConnectionWhereArgs {
 
 "Arguments for filtering the RootQueryToContentNodeConnection connection"
 input RootQueryToContentNodeConnectionWhereArgs {
-    "The Types of content to filter"
-    contentTypes: [ContentTypeEnum]
-    "Filter the connection based on dates"
-    dateQuery: DateQueryInput
-    "True for objects with passwords; False for objects without passwords; null for all objects with or without passwords"
-    hasPassword: Boolean
-    "Specific database ID of the object"
-    id: Int
-    "Array of IDs for the objects to retrieve"
-    in: [ID]
-    "Get objects with a specific mimeType property"
-    mimeType: MimeTypeEnum
-    "Slug / post_name of the object"
-    name: String
-    "Specify objects to retrieve. Use slugs"
-    nameIn: [String]
-    "Specify IDs NOT to retrieve. If this is used in the same query as \"in\", it will be ignored"
-    notIn: [ID]
-    "What paramater to use to order the objects by."
-    orderby: [PostObjectsConnectionOrderbyInput]
-    "Use ID to return only children. Use 0 to return only top-level items"
-    parent: ID
-    "Specify objects whose parent is in an array"
-    parentIn: [ID]
-    "Specify posts whose parent is not in an array"
-    parentNotIn: [ID]
-    "Show posts with a specific password."
-    password: String
-    "Show Posts based on a keyword search"
-    search: String
-    "Retrieve posts where post status is in an array."
-    stati: [PostStatusEnum]
-    "Show posts with a specific status."
-    status: PostStatusEnum
-    "Title of the object"
-    title: String
-}
-
-"Arguments for filtering the RootQueryToContentRevisionUnionConnection connection"
-input RootQueryToContentRevisionUnionConnectionWhereArgs {
     "The Types of content to filter"
     contentTypes: [ContentTypeEnum]
     "Filter the connection based on dates"
@@ -7158,6 +7665,46 @@ input RootQueryToPostFormatConnectionWhereArgs {
     updateTermMetaCache: Boolean
 }
 
+"Arguments for filtering the RootQueryToRevisionsConnection connection"
+input RootQueryToRevisionsConnectionWhereArgs {
+    "The Types of content to filter"
+    contentTypes: [ContentTypeEnum]
+    "Filter the connection based on dates"
+    dateQuery: DateQueryInput
+    "True for objects with passwords; False for objects without passwords; null for all objects with or without passwords"
+    hasPassword: Boolean
+    "Specific database ID of the object"
+    id: Int
+    "Array of IDs for the objects to retrieve"
+    in: [ID]
+    "Get objects with a specific mimeType property"
+    mimeType: MimeTypeEnum
+    "Slug / post_name of the object"
+    name: String
+    "Specify objects to retrieve. Use slugs"
+    nameIn: [String]
+    "Specify IDs NOT to retrieve. If this is used in the same query as \"in\", it will be ignored"
+    notIn: [ID]
+    "What paramater to use to order the objects by."
+    orderby: [PostObjectsConnectionOrderbyInput]
+    "Use ID to return only children. Use 0 to return only top-level items"
+    parent: ID
+    "Specify objects whose parent is in an array"
+    parentIn: [ID]
+    "Specify posts whose parent is not in an array"
+    parentNotIn: [ID]
+    "Show posts with a specific password."
+    password: String
+    "Show Posts based on a keyword search"
+    search: String
+    "Retrieve posts where post status is in an array."
+    stati: [PostStatusEnum]
+    "Show posts with a specific status."
+    status: PostStatusEnum
+    "Title of the object"
+    title: String
+}
+
 "Arguments for filtering the RootQueryToTagConnection connection"
 input RootQueryToTagConnectionWhereArgs {
     "Unique cache key to be produced when this query is stored in an object cache. Default is 'core'."
@@ -7286,7 +7833,7 @@ input RootQueryToUserConnectionWhereArgs {
     searchColumns: [UsersConnectionSearchColumnEnum]
 }
 
-"Input for the sendPasswordResetEmail mutation"
+"Input for the sendPasswordResetEmail mutation."
 input SendPasswordResetEmailInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -7400,7 +7947,7 @@ input TagToPostConnectionWhereArgs {
     title: String
 }
 
-"Input for the UpdateCategory mutation"
+"Input for the updateCategory mutation."
 input UpdateCategoryInput {
     "The slug that the category will be an alias of"
     aliasOf: String
@@ -7418,7 +7965,7 @@ input UpdateCategoryInput {
     slug: String
 }
 
-"Input for the updateComment mutation"
+"Input for the updateComment mutation."
 input UpdateCommentInput {
     "The approval status of the comment."
     approved: String
@@ -7440,11 +7987,13 @@ input UpdateCommentInput {
     id: ID!
     "Parent comment ID of current comment."
     parent: ID
+    "The approval status of the comment"
+    status: CommentStatusEnum
     "Type of comment."
     type: String
 }
 
-"Input for the updateMediaItem mutation"
+"Input for the updateMediaItem mutation."
 input UpdateMediaItemInput {
     "Alternative text to display when mediaItem is not displayed"
     altText: String
@@ -7480,7 +8029,7 @@ input UpdateMediaItemInput {
     title: String
 }
 
-"Input for the updatePage mutation"
+"Input for the updatePage mutation."
 input UpdatePageInput {
     "The userId to assign as the author of the object"
     authorId: ID
@@ -7508,7 +8057,7 @@ input UpdatePageInput {
     title: String
 }
 
-"Input for the UpdatePostFormat mutation"
+"Input for the updatePostFormat mutation."
 input UpdatePostFormatInput {
     "The slug that the post_format will be an alias of"
     aliasOf: String
@@ -7524,7 +8073,7 @@ input UpdatePostFormatInput {
     slug: String
 }
 
-"Input for the updatePost mutation"
+"Input for the updatePost mutation."
 input UpdatePostInput {
     "The userId to assign as the author of the object"
     authorId: ID
@@ -7564,7 +8113,7 @@ input UpdatePostInput {
     toPing: [String]
 }
 
-"Input for the updateSettings mutation"
+"Input for the updateSettings mutation."
 input UpdateSettingsInput {
     "This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions."
     clientMutationId: String
@@ -7606,7 +8155,7 @@ input UpdateSettingsInput {
     writingSettingsUseSmilies: Boolean
 }
 
-"Input for the UpdateTag mutation"
+"Input for the updateTag mutation."
 input UpdateTagInput {
     "The slug that the post_tag will be an alias of"
     aliasOf: String
@@ -7622,7 +8171,7 @@ input UpdateTagInput {
     slug: String
 }
 
-"Input for the updateUser mutation"
+"Input for the updateUser mutation."
 input UpdateUserInput {
     "User's AOL IM account."
     aim: String
@@ -7726,46 +8275,6 @@ input UserToCommentConnectionWhereArgs {
     status: String
     "Include comments for a specific user ID."
     userId: ID
-}
-
-"Arguments for filtering the UserToContentRevisionUnionConnection connection"
-input UserToContentRevisionUnionConnectionWhereArgs {
-    "The Types of content to filter"
-    contentTypes: [ContentTypeEnum]
-    "Filter the connection based on dates"
-    dateQuery: DateQueryInput
-    "True for objects with passwords; False for objects without passwords; null for all objects with or without passwords"
-    hasPassword: Boolean
-    "Specific database ID of the object"
-    id: Int
-    "Array of IDs for the objects to retrieve"
-    in: [ID]
-    "Get objects with a specific mimeType property"
-    mimeType: MimeTypeEnum
-    "Slug / post_name of the object"
-    name: String
-    "Specify objects to retrieve. Use slugs"
-    nameIn: [String]
-    "Specify IDs NOT to retrieve. If this is used in the same query as \"in\", it will be ignored"
-    notIn: [ID]
-    "What paramater to use to order the objects by."
-    orderby: [PostObjectsConnectionOrderbyInput]
-    "Use ID to return only children. Use 0 to return only top-level items"
-    parent: ID
-    "Specify objects whose parent is in an array"
-    parentIn: [ID]
-    "Specify posts whose parent is not in an array"
-    parentNotIn: [ID]
-    "Show posts with a specific password."
-    password: String
-    "Show Posts based on a keyword search"
-    search: String
-    "Retrieve posts where post status is in an array."
-    stati: [PostStatusEnum]
-    "Show posts with a specific status."
-    status: PostStatusEnum
-    "Title of the object"
-    title: String
 }
 
 "Arguments for filtering the UserToMediaItemConnection connection"
@@ -7922,6 +8431,46 @@ input UserToPostConnectionWhereArgs {
     tagSlugAnd: [String]
     "Array of tag slugs, used to include objects in ANY specified tags"
     tagSlugIn: [String]
+    "Title of the object"
+    title: String
+}
+
+"Arguments for filtering the UserToRevisionsConnection connection"
+input UserToRevisionsConnectionWhereArgs {
+    "The Types of content to filter"
+    contentTypes: [ContentTypeEnum]
+    "Filter the connection based on dates"
+    dateQuery: DateQueryInput
+    "True for objects with passwords; False for objects without passwords; null for all objects with or without passwords"
+    hasPassword: Boolean
+    "Specific database ID of the object"
+    id: Int
+    "Array of IDs for the objects to retrieve"
+    in: [ID]
+    "Get objects with a specific mimeType property"
+    mimeType: MimeTypeEnum
+    "Slug / post_name of the object"
+    name: String
+    "Specify objects to retrieve. Use slugs"
+    nameIn: [String]
+    "Specify IDs NOT to retrieve. If this is used in the same query as \"in\", it will be ignored"
+    notIn: [ID]
+    "What paramater to use to order the objects by."
+    orderby: [PostObjectsConnectionOrderbyInput]
+    "Use ID to return only children. Use 0 to return only top-level items"
+    parent: ID
+    "Specify objects whose parent is in an array"
+    parentIn: [ID]
+    "Specify posts whose parent is not in an array"
+    parentNotIn: [ID]
+    "Show posts with a specific password."
+    password: String
+    "Show Posts based on a keyword search"
+    search: String
+    "Retrieve posts where post status is in an array."
+    stati: [PostStatusEnum]
+    "Show posts with a specific status."
+    status: PostStatusEnum
     "Title of the object"
     title: String
 }

@@ -29,7 +29,7 @@ export const FAQItem = (props) => {
             <div className={classes.Info}>
               <div className={classes.InfoItem}>
                 <span className={classes.Name}>Автор: </span>
-                <span className={classes.Value}>{author}</span>
+                <span className={classes.Value}>{author.title}</span>
               </div>
 
               <div className={classes.InfoItem}>

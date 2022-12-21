@@ -9,12 +9,23 @@ export const faqList = gql`
         slug
         link
         faqACF {
-          author
+          author {
+            ... on Post {
+              id
+              title
+            }
+          }
           previewImage {
             sourceUrl
           }
           videoDuration
           videoUrl
+          themes {
+            ... on Post {
+              id
+              title
+            }
+          }
         }
       }
     }

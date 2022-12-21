@@ -3,8 +3,8 @@ import cn from 'classnames';
 import { Bookmarks } from '../../Bookmarks/Bookmarks';
 
 export const MaterialItem = (props) => {
-  const { id, title, link, author, mainTheme, type, bhaktiLevel } = props;
-  const { title: typeName, materialsTypeACF } = type;
+  const { id, title, link, author, mainTheme, materialType, bhaktiLevel } = props;
+  const { title: typeName, materialsTypeACF } = materialType ?? {};
   const { value: typeValue = '' } = materialsTypeACF || {};
 
   const classesGridItem = cn(classes.GridItem, {

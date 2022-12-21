@@ -1,5 +1,6 @@
 import classes from './MaterialsList.module.scss';
 import { MaterialItem } from './MaterialItem/MaterialItem';
+import { getLink } from '../../../helpers/helpers';
 
 export const MaterialsList = (props) => {
   const { list = [] } = props;
@@ -7,14 +8,16 @@ export const MaterialsList = (props) => {
     <div className={classes.Grid}>
       {list.length
         ? list.map((item) => {
-            const { id, title, link, author, mainTheme, type, bhaktiLevel } = item;
+            const { title, recordACF, materialACF, link, id } = item;
+            const { mainTheme, bhaktiLevel, materialType, author } = recordACF || materialACF;
+
             const attrs = {
               id,
               title,
-              link,
+              link: getLink(link),
               author,
               mainTheme,
-              type,
+              materialType,
               bhaktiLevel,
             };
 

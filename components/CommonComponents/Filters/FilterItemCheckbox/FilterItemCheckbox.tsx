@@ -1,10 +1,11 @@
-import classes from './FilterItem.module.scss';
+import classes from './FilterItemCheckbox.module.scss';
 import { FilterItemProps } from '../../../../interfaces/interfaces';
 import { useEffect, useRef } from 'react';
 import { slideDown, slideUp } from '../../../../helpers/helpers';
+import { FilterCheckboxElement } from '../FilterCheckboxElement/FilterCheckboxElement';
 
-export const FilterItem = (props: FilterItemProps) => {
-  const { showMore = false, children, name = 'Группа' } = props;
+export const FilterItemCheckbox = (props: FilterItemProps) => {
+  const { showMore = false, name, label = 'Группа', filtersElements, onChange } = props;
   const ref = useRef<HTMLLIElement>();
 
   useEffect(() => {
@@ -26,21 +27,31 @@ export const FilterItem = (props: FilterItemProps) => {
   return (
     <li ref={ref} className={classes.FilterItem}>
       <a className={classes.Trigger} href='#'>
-        {name}
+        {label}
       </a>
 
       <div className={classes.ListContainer}>
         <ul>
-          {!!children
-            ? children.map((child, index) => {
-                return index !== children.length ? child : null;
+          {filtersElements?.length
+            ? filtersElements.map((element) => {
+                const { title, id } = element;
+
+                return (
+                  <FilterCheckboxElement
+                    key={id}
+                    changeHandler={onChange}
+                    name={name}
+                    id={id}
+                    text={title}
+                  />
+                );
               })
             : null}
         </ul>
 
-        {!!children ? (
-          <ul className={classes.Additional}>{children[children.length - 1].props.children}</ul>
-        ) : null}
+        {/*{!!filtersElements?.length ? (*/}
+        {/*  <ul className={classes.Additional}>{children[children.length - 1].props.children}</ul>*/}
+        {/*) : null}*/}
         {showMore ? <div className={classes.ShowMore}>{showMore}</div> : null}
       </div>
     </li>

@@ -1,5 +1,5 @@
 import { FAQPage } from '../../components/FAQPage/FAQPage';
-import { Post, ServerData, ServerSideProps } from '../../interfaces/interfaces';
+import { ServerData, ServerSideProps } from '../../interfaces/interfaces';
 import pagesStore from '../../store/pagesStore';
 import { graphQLClient } from '../../helpers/graphQLClient';
 import { faqList } from '../../graphql/queries/faqList';
@@ -22,19 +22,7 @@ const Faq = ({ serverData }: ServerSideProps) => {
     setFiltersList({ ...sortedFilters });
   }, []);
 
-  const list: Post[] = faq?.map((item) => {
-    const { title, faqACF } = item;
-    const { author, videoUrl, videoDuration, previewImage } = faqACF;
-    return {
-      title,
-      author,
-      videoUrl,
-      videoDuration,
-      imgUrl: previewImage.sourceUrl,
-    };
-  });
-
-  return <FAQPage list={list} />;
+  return <FAQPage list={faq} />;
 };
 
 export default Faq;

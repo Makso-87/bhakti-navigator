@@ -13,7 +13,7 @@ export const record = gql`
               title
             }
           }
-          type {
+          materialType {
             ... on Post {
               id
               materialsTypeACF {

@@ -22,7 +22,7 @@ export const records = gql`
               }
             }
           }
-          type {
+          materialType {
             ... on Post {
               id
               materialsTypeACF {
@@ -32,7 +32,18 @@ export const records = gql`
           }
           author {
             ... on Post {
+              id
               title
+            }
+          }
+          themes {
+            ... on Post {
+              id
+            }
+          }
+          courseCategory {
+            ... on Post {
+              id
             }
           }
         }

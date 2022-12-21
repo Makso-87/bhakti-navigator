@@ -1,6 +1,6 @@
 import { MaterialsPage } from '../../../components/MaterialsPage/MaterialsPage';
 import pagesStore from '../../../store/pagesStore';
-import { getFilters, getLink } from '../../../helpers/helpers';
+import { getFilters } from '../../../helpers/helpers';
 import { ServerData, ServerSideProps } from '../../../interfaces/interfaces';
 import { graphQLClient } from '../../../helpers/graphQLClient';
 import { materials } from '../../../graphql/queries/materials';
@@ -22,23 +22,11 @@ const Materials = ({ serverData }: ServerSideProps) => {
     setFiltersList({ ...sortedFilters });
   }, []);
 
-  const list =
-    materials?.map((item) => {
-      const { title, link, materialACF, id } = item;
-      const { author, mainTheme, type, bhaktiLevel } = materialACF;
+  console.log('filters', filters);
+  console.log('sortedFilters', sortedFilters);
+  console.log('filtersStore', filtersStore);
 
-      return {
-        id,
-        title,
-        link: getLink(link),
-        author,
-        mainTheme,
-        type,
-        bhaktiLevel,
-      };
-    }) || [];
-
-  return <MaterialsPage list={list} />;
+  return <MaterialsPage list={materials} />;
 };
 
 export default Materials;

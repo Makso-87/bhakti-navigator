@@ -233,7 +233,7 @@ export const getWebsiteName = (string: string) => {
   return hostname;
 };
 
-export const getUniqBhakyiLevels = (bhaktiLevels) => {
+export const getUniqBhakyiLevels = (bhaktiLevels = []) => {
   const bhaktiLevelsWithoutBhadjanaKriya = bhaktiLevels.filter(
     (item) => !item?.bhaktiLevelACF?.value?.includes('bhadjana_kriya')
   );

@@ -1,51 +1,79 @@
 import classes from './Filters.module.scss';
 import filtersStore from '../../../store/filtersStore';
 import { filtersFields } from '../../../helpers/filterSets';
-import { FilterItem } from './FilterItem/FilterItem';
-import { FilterElement } from './FilterElement/FilterElement';
-import { useState } from 'react';
+import { FilterItemCheckbox } from './FilterItemCheckbox/FilterItemCheckbox';
 import has from 'lodash/has';
 import omit from 'lodash/omit';
+import { observer } from 'mobx-react-lite';
+import { FilterItemRadio } from './FilterItemRadio/FilterItemRadio';
 
-export const Filters = (props) => {
-  const [form, setForm] = useState({});
-  const [clearFilters, setClearFilters] = useState(false);
+export const Filters = observer((props: any) => {
   const { name, place, applyFilters } = props;
   const filtersSet = filtersFields[place] || [];
+  const { filter, setFilter, setResetFilters } = filtersStore;
+
+  const filterElementsMapping = {
+    checkbox: (item) => {
+      const { name, label } = item;
+      const filterElementsList = filtersStore[name];
+
+      return (
+        <FilterItemCheckbox
+          name={name}
+          label={label}
+          key={name}
+          onChange={onChange}
+          filtersElements={filterElementsList}
+        />
+      );
+    },
+    radio: (item) => {
+      const { name, label } = item;
+      const filterElementsList = filtersStore[name];
+
+      return (
+        <FilterItemRadio
+          name={name}
+          label={label}
+          key={name}
+          onChange={onChange}
+          filtersElements={filterElementsList}
+        />
+      );
+    },
+  };
 
   const onChange = (e, type) => {
     const { name, id } = e.target;
 
-    if (has(form, [name]) && type === 'checkbox') {
-      const value = form[name].list.includes(id)
-        ? form[name].list.filter((item) => item !== id)
-        : [...form[name].list, id];
+    if (has(filter, [name]) && type === 'checkbox') {
+      const value = filter[name].list.includes(id)
+        ? filter[name].list.filter((item) => item !== id)
+        : [...filter[name].list, id];
 
       if (!value.length) {
-        setForm({ ...omit(form, name) });
+        setFilter({ ...omit(filter, name) });
         return;
       }
 
-      setForm({ ...form, [name]: { type, list: value } });
+      setFilter({ ...filter, [name]: { type, list: value } });
     } else {
       const value = [id];
 
-      setForm({ ...form, [name]: { type, list: value } });
+      setFilter({ ...filter, [name]: { type, list: value } });
     }
   };
 
   const onFiltersApplyClick = (e) => {
     e.preventDefault();
-    applyFilters({ ...form });
-    filtersStore.setFilter({ ...form });
+    applyFilters({ ...filter });
   };
 
   const onResetFiltersClick = (e) => {
     e.preventDefault();
-    setForm({});
     applyFilters({});
-    filtersStore.setFilter({});
-    // setClearFilters(true);
+    setFilter({});
+    setResetFilters(true);
   };
 
   return (
@@ -56,35 +84,13 @@ export const Filters = (props) => {
         <ul className={classes.CategoriesList}>
           {filtersSet.length
             ? filtersSet.map((item) => {
-                const { name, label, type } = item;
-                const filterElementsList = filtersStore[name];
-
-                return (
-                  <FilterItem name={label} key={name}>
-                    {filterElementsList?.length
-                      ? filterElementsList.map((element) => {
-                          const { title, id } = element;
-
-                          return (
-                            <FilterElement
-                              key={id}
-                              changeHandler={onChange}
-                              name={name}
-                              id={id}
-                              text={title}
-                              elementType={type}
-                            />
-                          );
-                        })
-                      : null}
-                  </FilterItem>
-                );
+                return filterElementsMapping[item.type](item);
               })
             : null}
         </ul>
       </form>
 
-      {Object.keys(form).length ? (
+      {Object.keys(filtersStore.filter).length ? (
         <>
           <button onClick={onFiltersApplyClick} className={classes.Button}>
             Применить фильтры
@@ -97,4 +103,4 @@ export const Filters = (props) => {
       ) : null}
     </div>
   );
-};
+});

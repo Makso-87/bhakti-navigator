@@ -13,7 +13,7 @@ export const material = gql`
               title
             }
           }
-          type {
+          materialType {
             ... on Post {
               materialsTypeACF {
                 value

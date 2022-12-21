@@ -25,7 +25,13 @@ export const userACF = gql`
                 }
               }
               location
-              format
+              format {
+                ... on Post {
+                  courseFormatACF {
+                    value
+                  }
+                }
+              }
               mainTheme {
                 ... on Post {
                   title

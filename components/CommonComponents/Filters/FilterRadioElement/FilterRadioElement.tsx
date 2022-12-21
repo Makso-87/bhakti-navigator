@@ -1,22 +1,28 @@
-import classes from './FilterElement.module.scss';
-import { FilterElementProps } from '../../../../interfaces/interfaces';
-import { useState } from 'react';
+import classes from './FilterRadioElement.module.scss';
+import filtersStore from '../../../../store/filtersStore';
 
-export const FilterElement = (props: FilterElementProps) => {
+export const FilterRadioElement = (props) => {
   const {
     location = false,
     name,
     id,
     text = 'Элемент',
-    elementType = 'radio',
     changeHandler,
+    currentValue,
+    setCurrentValue,
   } = props;
 
-  const [checked, setChecked] = useState(false);
+  if (filtersStore.resetFilters) {
+    setCurrentValue('');
+  }
 
   const onChange = (e) => {
-    changeHandler(e, elementType);
-    setChecked(!checked);
+    changeHandler(e, 'radio');
+    setCurrentValue(e.target.value);
+
+    if (filtersStore.resetFilters) {
+      filtersStore.setResetFilters(false);
+    }
   };
 
   return (
@@ -24,10 +30,11 @@ export const FilterElement = (props: FilterElementProps) => {
       <div className={classes.InputItem}>
         <input
           onChange={(e) => onChange(e)}
+          value={id}
           name={name}
-          type={elementType}
+          type='radio'
           id={id}
-          checked={checked}
+          checked={currentValue === id}
         />
 
         <label htmlFor={id}>{text}</label>

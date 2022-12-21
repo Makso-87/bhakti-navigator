@@ -1,8 +1,9 @@
 import classes from './CoursesList.module.scss';
 import { CourseItem } from './CourseItem/CourseItem';
 import { getLink } from '../../../helpers/helpers';
+import { observer } from 'mobx-react-lite';
 
-export const CoursesList = (props) => {
+export const CoursesList = observer((props: any) => {
   const { columnsCount, list = [] } = props;
 
   return (
@@ -35,4 +36,4 @@ export const CoursesList = (props) => {
         : null}
     </div>
   );
-};
+});

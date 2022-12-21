@@ -1,0 +1,64 @@
+.InputItem {
+  input {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+    position: relative;
+    padding: 0 0 0 27px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  input + label {
+    &:before {
+      content: '';
+      display: block;
+      left: 0;
+      top: 4px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      border: 1px solid #647db7;
+      box-sizing: border-box;
+      position: absolute;
+    }
+
+    &:after {
+      opacity: 0;
+      content: '';
+      display: block;
+      left: 4px;
+      top: 8px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #647db7;
+      box-sizing: border-box;
+      position: absolute;
+    }
+  }
+
+  input:checked + label:after {
+    opacity: 1;
+  }
+}
+
+.Location {
+  display: none;
+  padding: 0 0 0 27px;
+  margin: 14px 0 0;
+
+  &.Active {
+    display: block;
+  }
+
+  select {
+    padding: 7px 12px;
+    font-size: 14px;
+    border: none;
+    line-height: 24px;
+  }
+}

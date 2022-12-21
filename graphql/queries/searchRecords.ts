@@ -22,8 +22,9 @@ export const searchRecords = gql`
               }
             }
           }
-          type {
+          materialType {
             ... on Post {
+              id
               materialsTypeACF {
                 value
               }
@@ -31,6 +32,13 @@ export const searchRecords = gql`
           }
           author {
             ... on Post {
+              id
+              title
+            }
+          }
+          themes {
+            ... on Post {
+              id
               title
             }
           }

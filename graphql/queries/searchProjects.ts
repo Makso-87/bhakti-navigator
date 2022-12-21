@@ -22,12 +22,14 @@ export const searchProjects = gql`
               courseACF {
                 speaker {
                   ... on Post {
+                    id
                     title
                   }
                 }
                 location
                 format {
                   ... on Post {
+                    id
                     courseFormatACF {
                       value
                     }

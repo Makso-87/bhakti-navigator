@@ -10,6 +10,7 @@ export const searchCourses = gql`
         courseACF {
           speaker {
             ... on Post {
+              id
               title
               teacherACF {
                 teacherPhoto {
@@ -21,14 +22,35 @@ export const searchCourses = gql`
           location
           format {
             ... on Post {
+              id
               courseFormatACF {
                 value
               }
             }
           }
+          courseCategory {
+            ... on Post {
+              id
+            }
+          }
           mainTheme {
             ... on Post {
               title
+            }
+          }
+          themes {
+            ... on Post {
+              id
+            }
+          }
+          courseCategory {
+            ... on Post {
+              id
+            }
+          }
+          serviceKind {
+            ... on Post {
+              id
             }
           }
           bhaktiLevel {

@@ -10,11 +10,13 @@ export const searchMaterials = gql`
         materialACF {
           author {
             ... on Post {
+              id
               title
             }
           }
-          type {
+          materialType {
             ... on Post {
+              id
               materialsTypeACF {
                 value
               }
@@ -22,6 +24,7 @@ export const searchMaterials = gql`
           }
           themes {
             ... on Post {
+              id
               title
             }
           }

@@ -4,37 +4,32 @@ import { TopSearch } from '../CommonComponents/TopSearch/TopSearch';
 import { MaterialsList } from '../CommonComponents/MaterialsList/MaterialsList';
 import { Filters } from '../CommonComponents/Filters/Filters';
 import { HelpBanner } from '../Banners/HelpBanner/HelpBanner';
-import { getLink } from '../../helpers/helpers';
 import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GraphQLErrors } from '@apollo/client/errors';
 import { searchMaterials } from '../../graphql/queries/searchMaterials';
 import { Preloader } from '../CommonComponents/Preloader/Preloader';
 import pagesStore from '../../store/pagesStore';
+import { filterPosts } from '../../helpers/filterPosts';
+import { observer } from 'mobx-react-lite';
 
-export const MaterialsPage = (props) => {
+export const MaterialsPage = observer((props: any) => {
   const [list, setList] = useState([...(props.list ?? [])]);
   const [error, setError] = useState<GraphQLErrors | string>([]);
   const place = pagesStore.currentPage;
+
+  const applyFilters = (filter) => {
+    const filterKeys = Object.keys(filter);
+    const filtered = filterPosts(props?.list, place);
+
+    setList(filterKeys.length ? [...filtered] : [...props?.list]);
+  };
 
   const [fetchMaterials, { loading }] = useLazyQuery(searchMaterials, {
     notifyOnNetworkStatusChange: true,
     onCompleted: ({ posts }) => {
       if (posts.nodes.length) {
-        const newList = posts.nodes.map((item) => {
-          const { title, link, materialACF, id } = item;
-          const { author, mainTheme, type, bhaktiLevel } = materialACF;
-
-          return {
-            id,
-            title,
-            link: getLink(link),
-            author,
-            mainTheme,
-            type,
-            bhaktiLevel,
-          };
-        });
+        const newList = filterPosts(posts.nodes, place);
 
         setList([...newList]);
       } else {
@@ -53,12 +48,6 @@ export const MaterialsPage = (props) => {
         search: searchQuery,
       },
     });
-  };
-
-  const applyFilters = (filter) => {
-    // const filterKeys = Object.keys(filter);
-    // const filtered = filterPosts(props?.list, filter);
-    // setList(filterKeys.length ? [...filtered] : [...props?.list]);
   };
 
   return (
@@ -94,4 +83,4 @@ export const MaterialsPage = (props) => {
       </div>
     </Layout>
   );
-};
+});

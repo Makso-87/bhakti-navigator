@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx';
+import has from 'lodash/has';
 
 class FiltersStore {
   constructor() {
@@ -6,6 +7,7 @@ class FiltersStore {
   }
 
   filter = {};
+  resetFilters = false;
 
   courseCategory: [] = [];
   themes: [] = [];
@@ -13,7 +15,7 @@ class FiltersStore {
   serviceKind: [] = [];
   teachers: [] = [];
   format: [] = [];
-  types: [] = [];
+  materialType: [] = [];
 
   setFiltersList = ({
     courseCategory = [],
@@ -22,7 +24,7 @@ class FiltersStore {
     serviceKind = [],
     teachers = [],
     format = [],
-    types = [],
+    materialType = [],
   }: {
     courseCategory: [];
     themes: [];
@@ -30,7 +32,7 @@ class FiltersStore {
     serviceKind: [];
     teachers: [];
     format: [];
-    types: [];
+    materialType: [];
   }) => {
     this.courseCategory = courseCategory;
     this.themes = themes;
@@ -38,12 +40,37 @@ class FiltersStore {
     this.serviceKind = serviceKind;
     this.teachers = teachers;
     this.format = format;
-    this.types = types;
+    this.materialType = materialType;
   };
 
   setFilter = (filter) => {
     console.log('filter set!');
     this.filter = { ...filter };
+  };
+
+  setResetFilters = (value: boolean) => {
+    this.resetFilters = value;
+  };
+
+  getFiltersSortedByType = () => {
+    const { filter } = this;
+    const filterKeys = Object.keys(filter);
+    return filterKeys.reduce((acc, item) => {
+      const filterItem = filter[item];
+      filterItem.name = item;
+
+      if (has(acc, filterItem.type)) {
+        return {
+          ...acc,
+          [filterItem.type]: [...acc[filterItem.type], filterItem],
+        };
+      }
+
+      return {
+        ...acc,
+        [filterItem.type]: [filterItem],
+      };
+    }, {});
   };
 }
 

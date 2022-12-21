@@ -12,36 +12,7 @@
     line-height: 20px;
   }
 
-  input[type='radio'] + label {
-    &:before {
-      content: '';
-      display: block;
-      left: 0;
-      top: 4px;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      border: 1px solid #647db7;
-      box-sizing: border-box;
-      position: absolute;
-    }
-
-    &:after {
-      opacity: 0;
-      content: '';
-      display: block;
-      left: 4px;
-      top: 8px;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #647db7;
-      box-sizing: border-box;
-      position: absolute;
-    }
-  }
-
-  input[type='checkbox'] + label {
+  input + label {
     &:before {
       content: '';
       display: block;
@@ -70,8 +41,7 @@
     }
   }
 
-  input[type='checkbox']:checked + label:after,
-  input[type='radio']:checked + label:after {
+  input:checked + label:after {
     opacity: 1;
   }
 }

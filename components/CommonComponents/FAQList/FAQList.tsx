@@ -9,15 +9,17 @@ export const FAQList = (props) => {
     <div className={classes.Grid}>
       {list.length
         ? list.map((item, index) => {
-            const { title, author, videoUrl, videoDuration, imgUrl } = item;
+            const { title, faqACF } = item;
+            const { author, videoUrl, videoDuration, previewImage } = faqACF;
             const attrs = {
               title,
               author,
               videoUrl: formatVideoUrl(videoUrl),
               videoDuration,
-              imgUrl,
+              imgUrl: previewImage.sourceUrl,
               index,
             };
+
             return (
               <div key={index} className={classes.Cell}>
                 <FAQItem {...attrs} />
