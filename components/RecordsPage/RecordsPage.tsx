@@ -11,8 +11,9 @@ import { GraphQLErrors } from '@apollo/client/errors';
 import { Preloader } from '../CommonComponents/Preloader/Preloader';
 import pagesStore from '../../store/pagesStore';
 import { filterPosts } from '../../helpers/filterPosts';
+import { observer } from 'mobx-react-lite';
 
-export const RecordsPage = (props) => {
+export const RecordsPage = observer((props: any) => {
   const [list, setList] = useState([...(props.list ?? [])]);
   const [error, setError] = useState<GraphQLErrors | string>([]);
   const place = pagesStore.currentPage;
@@ -81,4 +82,4 @@ export const RecordsPage = (props) => {
       </div>
     </Layout>
   );
-};
+});

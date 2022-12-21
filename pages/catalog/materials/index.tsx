@@ -12,7 +12,7 @@ const Materials = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { materials = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  const { setFiltersList } = filtersStore;
+  const { setFiltersList, setFilter } = filtersStore;
   const sortedFilters = getFilters(filters);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Materials = ({ serverData }: ServerSideProps) => {
     setCategory('Каталог');
     setSecondaryTabBar(true);
     setFiltersList({ ...sortedFilters });
+    setFilter({});
   }, []);
 
   console.log('filters', filters);

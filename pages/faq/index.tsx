@@ -12,7 +12,7 @@ const Faq = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { faq = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  const { setFiltersList } = filtersStore;
+  const { setFiltersList, setFilter } = filtersStore;
   const sortedFilters = getFilters(filters);
 
   useEffect(() => {
@@ -20,6 +20,7 @@ const Faq = ({ serverData }: ServerSideProps) => {
     setCurrentPage('faq');
     setCategory('Вопросы и ответы');
     setFiltersList({ ...sortedFilters });
+    setFilter({});
   }, []);
 
   return <FAQPage list={faq} />;

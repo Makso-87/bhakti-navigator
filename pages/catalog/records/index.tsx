@@ -9,11 +9,11 @@ import { filters } from '../../../graphql/queries/filters';
 import filtersStore from '../../../store/filtersStore';
 import { useEffect } from 'react';
 
-const Records = observer(({ serverData }: ServerSideProps) => {
+const Records = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { records = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  const { setFiltersList } = filtersStore;
+  const { setFiltersList, setFilter } = filtersStore;
   const sortedFilters = getFilters(filters);
 
   useEffect(() => {
@@ -21,10 +21,11 @@ const Records = observer(({ serverData }: ServerSideProps) => {
     setCategory('Каталог');
     setSecondaryTabBar(true);
     setFiltersList({ ...sortedFilters });
+    setFilter({});
   }, []);
 
   return <RecordsPage list={records} />;
-});
+};
 
 export const getServerSideProps = async () => {
   const serverData = {

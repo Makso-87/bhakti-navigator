@@ -44,7 +44,6 @@ class FiltersStore {
   };
 
   setFilter = (filter) => {
-    console.log('filter set!');
     this.filter = { ...filter };
   };
 

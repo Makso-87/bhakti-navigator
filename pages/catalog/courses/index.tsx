@@ -13,7 +13,7 @@ const Courses = ({ serverData }: ServerSideProps) => {
   const { dataPosts }: ServerData = serverData;
   const { courses = [], filters = [] } = dataPosts;
   const { setSecondaryTabBar, setCategory, setCurrentPage } = pagesStore;
-  const { setFiltersList } = filtersStore;
+  const { setFiltersList, setFilter } = filtersStore;
   const sortedFilters = getFilters(filters);
 
   useEffect(() => {
@@ -21,6 +21,7 @@ const Courses = ({ serverData }: ServerSideProps) => {
     setSecondaryTabBar(true);
     setCategory('Каталог');
     setFiltersList({ ...sortedFilters });
+    setFilter({});
   }, []);
 
   console.log('filters', filters);
