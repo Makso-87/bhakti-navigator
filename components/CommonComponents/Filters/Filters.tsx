@@ -88,19 +88,19 @@ export const Filters = observer((props: any) => {
               })
             : null}
         </ul>
+
+        {Object.keys(filtersStore.filter).length ? (
+          <div className={classes.ButtonsContainer}>
+            <button onClick={onFiltersApplyClick} className={classes.Button}>
+              Применить фильтры
+            </button>
+
+            <button onClick={onResetFiltersClick} className={classes.Button}>
+              Сбросить все фильтры
+            </button>
+          </div>
+        ) : null}
       </form>
-
-      {Object.keys(filtersStore.filter).length ? (
-        <>
-          <button onClick={onFiltersApplyClick} className={classes.Button}>
-            Применить фильтры
-          </button>
-
-          <button onClick={onResetFiltersClick} className={classes.Button}>
-            Сбросить все фильтры
-          </button>
-        </>
-      ) : null}
     </div>
   );
 });
